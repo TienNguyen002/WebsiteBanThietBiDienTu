@@ -16,17 +16,17 @@ namespace Core.Entities
         //Mã người dùng thêm vào giỏ hàng
         public int CustomerId { get; set; }
 
-        //Mã đơn hàng
-        public int OrderId { get; set; }
-
         //Giỏ hàng của người dùng
         public Customer Customer { get; set; }
 
-        //Danh sách sản phẩm
-        public IList<Product> Products { get; set; }
+        //Mã đơn hàng
+        public int? OrderId { get; set; }
 
         //Đơn hàng
-        public Order Order { get; set; }
+        public Order? Order { get; set; }
+
+        //Danh sách sản phẩm
+        public IList<Product> Products { get; set; }
 
         //Tổng giá
         public int TotalPrice { get; set; }

@@ -19,8 +19,11 @@ namespace Core.Entities
         //Mã định danh
         public string UrlSlug { get; set; }
 
-        //Giá
-        public int Price { get; set; }
+        //Giá hiện tại
+        public int? Price { get; set; }
+
+        //Giá gốc
+        public int OrPrice { get; set; }
 
         //Mã cấu hình
         public int ConfigurationId { get; set; }

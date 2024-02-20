@@ -14,7 +14,7 @@ namespace Core.Entities
         public int Id { get; set; }
 
         //Mã danh mục thông số
-        public int SpecificationId { get; set; }
+        public int SpecificationCategoryId { get; set; }
 
         //Danh mục thông số
         public SpecificationCategory SpecificationCategory { get; set; }

@@ -19,8 +19,11 @@ namespace Core.Entities
         //Mã định danh
         public string UrlSlug { get; set; }
 
-        //Giá sản phẩm
-        public int Price { get; set; }
+        //Giá hiện tại sản phẩm
+        public int? Price { get; set; }
+
+        //Giá gốc
+        public int OrPrice { get; set; }
 
         //Mã sản phẩm
         public int ProductId { get; set; }

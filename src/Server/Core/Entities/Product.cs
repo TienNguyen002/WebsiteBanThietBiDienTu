@@ -31,11 +31,11 @@ namespace Core.Entities
         //Tình trạng
         public bool Status { get; set; }
 
-        //Giá 
-        public int Price { get; set; }
+        //Giá hiện tại
+        public int? Price { get; set; }
 
-        //Giá khuyến mãi
-        public int PromotionPrice { get; set; }
+        //Giá gốc
+        public int OrPrice { get; set; }
 
         //Mã danh mục
         public int CategoryId { get; set; }
@@ -60,5 +60,14 @@ namespace Core.Entities
 
         //Danh sách thông số kỹ thuật
         public IList<Specification> Specifications { get; set; }
+
+        //Mã nhân viên thêm hàng
+        public int StaffId { get; set; }
+
+        //Nhân viên thêm hàng
+        public Staff Staff { get; set; }
+
+        //Số lượng thêm
+        public int AddAmount { get; set; }
     }
 }
