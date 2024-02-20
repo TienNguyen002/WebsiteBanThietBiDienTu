@@ -13,8 +13,17 @@ namespace Core.Entities
         //Mã đơn hàng
         public int Id { get; set; }
 
-        //Mã người đặt
-        public int CustomerId { get; set; }
+        //Họ tên người đặt
+        public string CustomerName { get; set; }
+
+        //Địa chỉ
+        public string Address { get; set; }
+
+        //SĐT
+        public string Phone { get; set; }
+
+        //Email
+        public string Email { get; set; }
 
         //Mã giỏ hàng
         public int CartId { get; set; }
@@ -22,10 +31,13 @@ namespace Core.Entities
         //Ngày đặt hàng
         public DateTime DateOrder { get; set; }
 
-        //Người đặt
-        public Customer Customer { get; set; }
-
         //Giỏ hàng
         public Cart Cart { get; set; }
+
+        //Mã tình trạng
+        public int StatusId { get; set; } 
+
+        //Tình trạng
+        public Status Status { get; set; }
     }
 }

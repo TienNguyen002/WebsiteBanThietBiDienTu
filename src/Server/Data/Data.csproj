@@ -10,11 +10,4 @@
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Contexts\" />
-    <Folder Include="Mappings\" />
-    <Folder Include="Migrations\" />
-    <Folder Include="Seeders\" />
-  </ItemGroup>
-
 </Project>

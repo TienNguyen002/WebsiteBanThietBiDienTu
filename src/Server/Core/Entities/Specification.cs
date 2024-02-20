@@ -13,8 +13,11 @@ namespace Core.Entities
         //Mã thông số
         public int Id { get; set; }
 
-        //Tên thông số
-        public string Name { get; set; }
+        //Mã danh mục thông số
+        public int SpecificationId { get; set; }
+
+        //Danh mục thông số
+        public SpecificationCategory SpecificationCategory { get; set; }
 
         //Chi tiết thông số
         public string Details { get; set; }
