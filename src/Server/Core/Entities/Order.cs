@@ -1,6 +1,7 @@
 ﻿using Core.Contracts;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,7 @@ namespace Core.Entities
         public string Email { get; set; }
 
         //Mã giỏ hàng
+        [ForeignKey("Cart")]
         public int CartId { get; set; }
 
         //Ngày đặt hàng

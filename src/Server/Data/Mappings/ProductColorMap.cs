@@ -28,11 +28,11 @@ namespace Data.Mappings
             builder.Property(p => p.OrPrice)
                 .IsRequired();
 
-            builder.HasOne(c => c.Configuration)
-                .WithMany(p => p.Colors)
-                .HasForeignKey(c => c.ConfigurationId)
-                .HasConstraintName("FK_Configurations_ProductColors")
-                .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(p => p.Product)
+                 .WithMany(c => c.Colors)
+                 .HasForeignKey(p => p.ProductId)
+                 .HasConstraintName("FK_Products_Colors")
+                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

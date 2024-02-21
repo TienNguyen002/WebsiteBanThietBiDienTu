@@ -26,9 +26,9 @@ namespace Core.Entities
         public int OrPrice { get; set; }
 
         //Mã cấu hình
-        public int ConfigurationId { get; set; }
+        public int ProductId { get; set; }
 
         //Cấu hình
-        public Configuration Configuration { get; set; }
+        public Product Product { get; set; }
     }
 }

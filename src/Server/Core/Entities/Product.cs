@@ -43,8 +43,8 @@ namespace Core.Entities
         //Danh mục
         public Category Category { get; set; }
 
-        //Danh sách cấu hình
-        public IList<Configuration> Configurations { get; set; }
+        //Danh sách màu
+        public IList<ProductColor> Colors { get; set; }
 
         //Danh sách Ảnh
         public IList<Image> Images { get; set; }
