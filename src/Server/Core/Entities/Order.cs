@@ -26,15 +26,17 @@ namespace Core.Entities
         //Email
         public string Email { get; set; }
 
-        //Mã giỏ hàng
-        [ForeignKey("Cart")]
-        public int CartId { get; set; }
-
         //Ngày đặt hàng
         public DateTime DateOrder { get; set; }
 
-        //Giỏ hàng
-        public Cart Cart { get; set; }
+        //Danh sách sản phẩm
+        public IList<Product> Products { get; set; }
+
+        //Tổng số lượng sản phẩm
+        public int Quantity { get; set; }
+
+        //Tổng tiền
+        public int TotalPrice { get; set; }
 
         //Mã tình trạng
         public int StatusId { get; set; } 

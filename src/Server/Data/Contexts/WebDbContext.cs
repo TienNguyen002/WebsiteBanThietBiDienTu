@@ -12,7 +12,6 @@ namespace Data.Contexts
 {
     public class WebDbContext : DbContext
     {
-        public DbSet<Cart> Carts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Customer> Customers { get; set; }

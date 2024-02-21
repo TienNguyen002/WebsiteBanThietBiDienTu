@@ -32,6 +32,10 @@ namespace Data.Mappings
             builder.Property(o => o.DateOrder)
                 .HasColumnType("datetime");
 
+            builder.Property(o => o.Quantity);
+
+            builder.Property(o => o.TotalPrice);
+
             builder.HasOne(s => s.Status)
                 .WithMany(o => o.Orders)
                 .HasForeignKey(s => s.StatusId)

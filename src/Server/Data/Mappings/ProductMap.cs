@@ -26,6 +26,9 @@ namespace Data.Mappings
             builder.Property(p => p.Description) 
                 .IsRequired();
 
+            builder.Property(p => p.ImageUrl)
+                .HasMaxLength(1000);
+
             builder.Property(p => p.Tag)
                 .IsRequired();
 
@@ -62,6 +65,12 @@ namespace Data.Mappings
                 .WithMany(p => p.Products)
                 .HasForeignKey(s => s.StaffId)
                 .HasConstraintName("FK_Staffs_Products")
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(o => o.Order)
+                .WithMany(p => p.Products)
+                .HasForeignKey(s => s.OrderId)
+                .HasConstraintName("FK_Orders_Products")
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

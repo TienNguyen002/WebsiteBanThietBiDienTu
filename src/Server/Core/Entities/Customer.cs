@@ -28,9 +28,6 @@ namespace Core.Entities
         //Mật khẩu
         public string Password { get; set; }
 
-        //Danh sách giỏ hàng
-        public IList<Cart> Carts { get; set; }
-
         //Danh sách bình luận
         public IList<Comment> Comments { get; set; }
     }

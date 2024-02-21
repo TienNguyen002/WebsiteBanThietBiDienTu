@@ -19,6 +19,9 @@ namespace Core.Entities
         //Mã định danh
         public string UrlSlug { get; set; }
 
+        //Hình ảnh chính của sản phẩm
+        public string ImageUrl { get; set; }
+
         //Mô tả
         public string Description { get; set; }
 
@@ -60,6 +63,12 @@ namespace Core.Entities
 
         //Danh sách thông số kỹ thuật
         public IList<Specification> Specifications { get; set; }
+
+        //Mã đơn hàng
+        public int OrderId { get; set; }
+
+        //Đơn hàng
+        public Order Order { get; set; }
 
         //Mã nhân viên thêm hàng
         public int StaffId { get; set; }

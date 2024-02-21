@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(WebDbContext))]
-    [Migration("20240221030242_InitialCreate")]
+    [Migration("20240221083141_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -38,33 +38,6 @@ namespace Data.Migrations
                     b.HasIndex("TrademarksId");
 
                     b.ToTable("CategoryTrademark");
-                });
-
-            modelBuilder.Entity("Core.Entities.Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("TotalPrice")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Core.Entities.Category", b =>
@@ -175,9 +148,6 @@ namespace Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<string>("CustomerName")
                         .HasColumnType("nvarchar(max)");
 
@@ -190,13 +160,16 @@ namespace Data.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
                     b.Property<int>("StatusId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("TotalPrice")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CartId")
-                        .IsUnique();
+                    b.HasKey("Id");
 
                     b.HasIndex("StatusId");
 
@@ -217,19 +190,22 @@ namespace Data.Migrations
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("OrPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
                     b.Property<int?>("Price")
@@ -252,9 +228,9 @@ namespace Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CartId");
-
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("OrderId");
 
                     b.HasIndex("StaffId");
 
@@ -429,17 +405,6 @@ namespace Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Core.Entities.Cart", b =>
-                {
-                    b.HasOne("Core.Entities.Customer", "Customer")
-                        .WithMany("Carts")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
-                });
-
             modelBuilder.Entity("Core.Entities.Comment", b =>
                 {
                     b.HasOne("Core.Entities.Customer", "Customer")
@@ -472,32 +437,26 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Order", b =>
                 {
-                    b.HasOne("Core.Entities.Cart", "Cart")
-                        .WithOne("Order")
-                        .HasForeignKey("Core.Entities.Order", "CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Core.Entities.Status", "Status")
                         .WithMany("Orders")
                         .HasForeignKey("StatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Cart");
-
                     b.Navigation("Status");
                 });
 
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
-                    b.HasOne("Core.Entities.Cart", null)
-                        .WithMany("Products")
-                        .HasForeignKey("CartId");
-
                     b.HasOne("Core.Entities.Category", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Order", "Order")
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -514,6 +473,8 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("Order");
 
                     b.Navigation("Staff");
 
@@ -557,13 +518,6 @@ namespace Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Core.Entities.Cart", b =>
-                {
-                    b.Navigation("Order");
-
-                    b.Navigation("Products");
-                });
-
             modelBuilder.Entity("Core.Entities.Category", b =>
                 {
                     b.Navigation("Products");
@@ -571,9 +525,12 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Customer", b =>
                 {
-                    b.Navigation("Carts");
-
                     b.Navigation("Comments");
+                });
+
+            modelBuilder.Entity("Core.Entities.Order", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Core.Entities.Product", b =>
