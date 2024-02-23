@@ -72,6 +72,10 @@ namespace Data.Mappings
                 .HasForeignKey(s => s.OrderId)
                 .HasConstraintName("FK_Orders_Products")
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(c => c.Colors)
+                .WithMany(p => p.Products)
+                .UsingEntity(sp => sp.ToTable("ProductColors"));
         }
     }
 }

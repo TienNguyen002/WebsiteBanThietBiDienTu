@@ -247,21 +247,10 @@ namespace Data.Migrations
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
                     b.Property<string>("UrlSlug")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductColors");
                 });
@@ -372,6 +361,21 @@ namespace Data.Migrations
                     b.ToTable("Trademarks");
                 });
 
+            modelBuilder.Entity("ProductProductColor", b =>
+                {
+                    b.Property<int>("ColorsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ColorsId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("ProductProductColor");
+                });
+
             modelBuilder.Entity("ProductSpecification", b =>
                 {
                     b.Property<int>("ProductsId")
@@ -478,17 +482,6 @@ namespace Data.Migrations
                     b.Navigation("Trademark");
                 });
 
-            modelBuilder.Entity("Core.Entities.ProductColor", b =>
-                {
-                    b.HasOne("Core.Entities.Product", "Product")
-                        .WithMany("Colors")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Core.Entities.Specification", b =>
                 {
                     b.HasOne("Core.Entities.SpecificationCategory", "SpecificationCategory")
@@ -498,6 +491,21 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("SpecificationCategory");
+                });
+
+            modelBuilder.Entity("ProductProductColor", b =>
+                {
+                    b.HasOne("Core.Entities.ProductColor", null)
+                        .WithMany()
+                        .HasForeignKey("ColorsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProductSpecification", b =>
@@ -532,8 +540,6 @@ namespace Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
-                    b.Navigation("Colors");
-
                     b.Navigation("Comments");
 
                     b.Navigation("Images");
