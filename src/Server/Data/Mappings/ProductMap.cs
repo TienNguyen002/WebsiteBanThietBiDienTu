@@ -42,8 +42,6 @@ namespace Data.Mappings
 
             builder.Property(p => p.OrPrice)
                 .IsRequired();
-
-            builder.Property(p => p.AddAmount);
             
             builder.HasOne(c => c.Category)
                 .WithMany(p => p.Products)
@@ -61,21 +59,13 @@ namespace Data.Mappings
                 .WithMany(p => p.Products)
                 .UsingEntity(sp => sp.ToTable("ProductSpecifications"));
 
-            builder.HasOne(s => s.Staff)
+            builder.HasMany(o => o.Order)
                 .WithMany(p => p.Products)
-                .HasForeignKey(s => s.StaffId)
-                .HasConstraintName("FK_Staffs_Products")
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasOne(o => o.Order)
-                .WithMany(p => p.Products)
-                .HasForeignKey(s => s.OrderId)
-                .HasConstraintName("FK_Orders_Products")
-                .OnDelete(DeleteBehavior.Cascade);
+                .UsingEntity(sp => sp.ToTable("ProductOrders"));
 
             builder.HasMany(c => c.Colors)
                 .WithMany(p => p.Products)
-                .UsingEntity(sp => sp.ToTable("ProductColors"));
+                .UsingEntity(sp => sp.ToTable("ProductProductColors"));
         }
     }
 }

@@ -27,7 +27,5 @@ namespace Core.Entities
 
         //Mật khẩu
         public string Password { get; set; }
-
-        public IList<Product> Products { get; set; }
     }
 }

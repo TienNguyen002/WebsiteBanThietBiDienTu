@@ -181,9 +181,6 @@ namespace Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AddAmount")
-                        .HasColumnType("int");
-
                     b.Property<int>("Amount")
                         .HasColumnType("int");
 
@@ -202,13 +199,7 @@ namespace Data.Migrations
                     b.Property<int>("OrPrice")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StaffId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Status")
@@ -226,10 +217,6 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("StaffId");
 
                     b.HasIndex("TrademarkId");
 
@@ -361,6 +348,21 @@ namespace Data.Migrations
                     b.ToTable("Trademarks");
                 });
 
+            modelBuilder.Entity("OrderProduct", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId", "ProductsId");
+
+                    b.HasIndex("ProductsId");
+
+                    b.ToTable("OrderProduct");
+                });
+
             modelBuilder.Entity("ProductProductColor", b =>
                 {
                     b.Property<int>("ColorsId")
@@ -455,18 +457,6 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Order", "Order")
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Entities.Staff", "Staff")
-                        .WithMany("Products")
-                        .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Core.Entities.Trademark", "Trademark")
                         .WithMany("Products")
                         .HasForeignKey("TrademarkId")
@@ -474,10 +464,6 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Staff");
 
                     b.Navigation("Trademark");
                 });
@@ -491,6 +477,21 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("SpecificationCategory");
+                });
+
+            modelBuilder.Entity("OrderProduct", b =>
+                {
+                    b.HasOne("Core.Entities.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProductProductColor", b =>
@@ -533,11 +534,6 @@ namespace Data.Migrations
                     b.Navigation("Comments");
                 });
 
-            modelBuilder.Entity("Core.Entities.Order", b =>
-                {
-                    b.Navigation("Products");
-                });
-
             modelBuilder.Entity("Core.Entities.Product", b =>
                 {
                     b.Navigation("Comments");
@@ -548,11 +544,6 @@ namespace Data.Migrations
             modelBuilder.Entity("Core.Entities.SpecificationCategory", b =>
                 {
                     b.Navigation("Specifications");
-                });
-
-            modelBuilder.Entity("Core.Entities.Staff", b =>
-                {
-                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Core.Entities.Status", b =>

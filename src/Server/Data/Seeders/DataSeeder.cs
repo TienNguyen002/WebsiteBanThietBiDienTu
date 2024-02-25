@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Data.Contexts;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,6 +98,16 @@ namespace Data.Seeders
                     UrlSlug = "tv"
                 },
             };
+            var categoryAdd = new List<Category>();
+            foreach (var item in categories)
+            {
+                if (!_dbContext.Categories.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    categoryAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(categoryAdd);
+            _dbContext.SaveChanges();
             return categories;
         }
 
@@ -114,6 +125,8 @@ namespace Data.Seeders
                     CreatedDate = DateTime.Now,
                 }
             };
+            _dbContext.AddRange(comments);
+            _dbContext.SaveChanges();
             return comments;
         }
 
@@ -138,6 +151,16 @@ namespace Data.Seeders
                     Password = "password",
                 },
             };
+            var customerAdd = new List<Customer>();
+            foreach (var item in customers)
+            {
+                if (!_dbContext.Customers.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    customerAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(customerAdd);
+            _dbContext.SaveChanges();
             return customers;
         }
 
@@ -170,6 +193,8 @@ namespace Data.Seeders
                     Status = statuses[0]
                 }
             };
+            _dbContext.AddRange(orders);
+            _dbContext.SaveChanges();
             return orders;
         }
 
@@ -254,6 +279,16 @@ namespace Data.Seeders
                     },
                 }
             };
+            var productAdd = new List<Product>();
+            foreach (var item in products)
+            {
+                if (!_dbContext.Products.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    productAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(productAdd);
+            _dbContext.SaveChanges();
             return products;
         }
 
@@ -282,6 +317,16 @@ namespace Data.Seeders
                     UrlSlug = "titan-xanh",
                 },
             };
+            var colorAdd = new List<ProductColor>();
+            foreach (var item in colors)
+            {
+                if (!_dbContext.ProductColors.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    colorAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(colorAdd);
+            _dbContext.SaveChanges();
             return colors;
         }
 
@@ -305,6 +350,8 @@ namespace Data.Seeders
                     SpecificationCategory = speCategories[2],
                 }
             };
+            _dbContext.AddRange(specifications);
+            _dbContext.SaveChanges();
             return specifications;
         }
 
@@ -328,6 +375,16 @@ namespace Data.Seeders
                     UrlSlug = "do-phan-giai-man-hinh"
                 }
             };
+            var speCategoryAdd = new List<SpecificationCategory>();
+            foreach (var item in speCategories)
+            {
+                if (!_dbContext.SpecificationCategories.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    speCategoryAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(speCategoryAdd);
+            _dbContext.SaveChanges();
             return speCategories;
         }
 
@@ -360,6 +417,16 @@ namespace Data.Seeders
                     Password = "password",
                 },
             };
+            var staffAdd = new List<Staff>();
+            foreach (var item in staffs)
+            {
+                if (!_dbContext.Staffs.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    staffAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(staffAdd);
+            _dbContext.SaveChanges();
             return staffs;
         }
 
@@ -388,6 +455,16 @@ namespace Data.Seeders
                     UrlSlug = "thanh-cong",
                 },
             };
+            var statusAdd = new List<Status>();
+            foreach (var item in status)
+            {
+                if (!_dbContext.Status.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    statusAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(statusAdd);
+            _dbContext.SaveChanges();
             return status;
         }
 
@@ -423,6 +500,16 @@ namespace Data.Seeders
                     },
                 },
             };
+            var trademarkAdd = new List<Trademark>();
+            foreach (var item in trademarks)
+            {
+                if (!_dbContext.Trademarks.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    trademarkAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(trademarkAdd);
+            _dbContext.SaveChanges();
             return trademarks;
         }
     }

@@ -64,19 +64,7 @@ namespace Core.Entities
         //Danh sách thông số kỹ thuật
         public IList<Specification> Specifications { get; set; }
 
-        //Mã đơn hàng
-        public int OrderId { get; set; }
-
-        //Đơn hàng
-        public Order Order { get; set; }
-
-        //Mã nhân viên thêm hàng
-        public int StaffId { get; set; }
-
-        //Nhân viên thêm hàng
-        public Staff Staff { get; set; }
-
-        //Số lượng thêm
-        public int AddAmount { get; set; }
+        //Danh sách Đơn hàng
+        public IList<Order> Order { get; set; }
     }
 }
