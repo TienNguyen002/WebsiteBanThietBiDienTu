@@ -22,7 +22,7 @@ namespace Services.Apps.Categories
             _memoryCache = memoryCache;
         }
 
-        public async Task<IList<CategoryItems>> GetAllCategoriesAsync(CancellationToken cancellationToken = default)
+        public async Task<IList<CategoryItems>> GetAllCategoryAsync(CancellationToken cancellationToken = default)
         {
             IQueryable<Category> categories = _dbContext.Set<Category>();
             return await categories
@@ -34,6 +34,77 @@ namespace Services.Apps.Categories
                     UrlSlug = c.UrlSlug
                 })
                 .ToListAsync(cancellationToken);
+        }
+
+        public async Task<bool> IsCategoryExistBySlugAsync(
+            int id,
+            string slug,
+            CancellationToken cancellationToken = default)
+        {
+            return await _dbContext.Set<Category>()
+                .AnyAsync(c => c.Id != id && c.UrlSlug == slug, cancellationToken);
+        }
+
+        public async Task<Category> GetCategoryByIdAsync(
+            int id,
+            bool includeDetails = false,
+            CancellationToken cancellationToken = default)
+        {
+            if(!includeDetails)
+            {
+                return await _dbContext.Set<Category>().FindAsync(id);
+            }
+            return await _dbContext.Set<Category>()
+                .Include(c => c.Trademarks)
+                .Include(c => c.Products)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<Category> GetCategoryBySlugAsync(
+            string slug,
+            bool includeDetails = false,
+            CancellationToken cancellationToken = default)
+        {
+            if (!includeDetails)
+            {
+                return await _dbContext.Set<Category>().Where(c => c.UrlSlug == slug)
+                    .FirstOrDefaultAsync(cancellationToken);
+            }
+            return await _dbContext.Set<Category>()
+                .Include(c => c.Trademarks)
+                .Include(c => c.Products)
+                .Where(c => c.UrlSlug == slug)
+                .FirstOrDefaultAsync(cancellationToken);
+        }
+
+        public async Task<bool> AddOrUpdateCategoryAsync(Category category, CancellationToken cancellationToken = default)
+        {
+            if (category.Id > 0)
+            {
+                _dbContext.Update(category);
+            }
+            else
+            {
+                _dbContext.Add(category);
+            }
+            return await _dbContext.SaveChangesAsync(cancellationToken) > 0;
+        }
+
+        public async Task<bool> DeleteCategoryByIdAsync(int id, CancellationToken cancellationToken = default)
+        {
+            var categoryToDelete = await _dbContext.Set<Category>()
+                .Include(c => c.Trademarks)
+                .Include(c => c.Products)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync(cancellationToken);
+            if (categoryToDelete == null)
+            {
+                return false;
+            }
+            _dbContext.Remove(categoryToDelete);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return true;
         }
     }
 }
