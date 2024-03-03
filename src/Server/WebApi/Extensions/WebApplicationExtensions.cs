@@ -4,6 +4,7 @@ using Data.Seeders;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
 using Services.Apps.Categories;
+using Services.Apps.Comments;
 using Services.Media;
 using Services.Timing;
 
@@ -25,6 +26,7 @@ namespace WebApi.Extensions
             builder.Services.AddScoped<IMediaManager, LocalFileSystemMediaManager>();
             builder.Services.AddScoped<IDataSeeder, DataSeeder>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
             return builder;
         }

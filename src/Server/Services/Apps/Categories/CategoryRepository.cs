@@ -13,18 +13,18 @@ namespace Services.Apps.Categories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly WebDbContext _dbContext;
+        private readonly WebDbContext _context;
         private readonly IMemoryCache _memoryCache;
 
         public CategoryRepository(WebDbContext dbContext, IMemoryCache memoryCache)
         {
-            _dbContext = dbContext;
+            _context = dbContext;
             _memoryCache = memoryCache;
         }
 
         public async Task<IList<CategoryItems>> GetAllCategoryAsync(CancellationToken cancellationToken = default)
         {
-            IQueryable<Category> categories = _dbContext.Set<Category>();
+            IQueryable<Category> categories = _context.Set<Category>();
             return await categories
                 .OrderBy(c => c.Id)
                 .Select(c => new CategoryItems()
@@ -41,7 +41,7 @@ namespace Services.Apps.Categories
             string slug,
             CancellationToken cancellationToken = default)
         {
-            return await _dbContext.Set<Category>()
+            return await _context.Set<Category>()
                 .AnyAsync(c => c.Id != id && c.UrlSlug == slug, cancellationToken);
         }
 
@@ -52,9 +52,9 @@ namespace Services.Apps.Categories
         {
             if(!includeDetails)
             {
-                return await _dbContext.Set<Category>().FindAsync(id);
+                return await _context.Set<Category>().FindAsync(id);
             }
-            return await _dbContext.Set<Category>()
+            return await _context.Set<Category>()
                 .Include(c => c.Trademarks)
                 .Include(c => c.Products)
                 .Where(c => c.Id == id)
@@ -68,10 +68,10 @@ namespace Services.Apps.Categories
         {
             if (!includeDetails)
             {
-                return await _dbContext.Set<Category>().Where(c => c.UrlSlug == slug)
+                return await _context.Set<Category>().Where(c => c.UrlSlug == slug)
                     .FirstOrDefaultAsync(cancellationToken);
             }
-            return await _dbContext.Set<Category>()
+            return await _context.Set<Category>()
                 .Include(c => c.Trademarks)
                 .Include(c => c.Products)
                 .Where(c => c.UrlSlug == slug)
@@ -82,18 +82,18 @@ namespace Services.Apps.Categories
         {
             if (category.Id > 0)
             {
-                _dbContext.Update(category);
+                _context.Update(category);
             }
             else
             {
-                _dbContext.Add(category);
+                _context.Add(category);
             }
-            return await _dbContext.SaveChangesAsync(cancellationToken) > 0;
+            return await _context.SaveChangesAsync(cancellationToken) > 0;
         }
 
         public async Task<bool> DeleteCategoryByIdAsync(int id, CancellationToken cancellationToken = default)
         {
-            var categoryToDelete = await _dbContext.Set<Category>()
+            var categoryToDelete = await _context.Set<Category>()
                 .Include(c => c.Trademarks)
                 .Include(c => c.Products)
                 .Where(c => c.Id == id)
@@ -102,8 +102,8 @@ namespace Services.Apps.Categories
             {
                 return false;
             }
-            _dbContext.Remove(categoryToDelete);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            _context.Remove(categoryToDelete);
+            await _context.SaveChangesAsync(cancellationToken);
             return true;
         }
     }
