@@ -41,6 +41,12 @@ namespace Data.Mappings
                 .HasForeignKey(s => s.StatusId)
                 .HasConstraintName("FK_Status_Orders")
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(c => c.Cart)
+                .WithMany(o => o.Orders)
+                .HasForeignKey(c => c.CartId)
+                .HasConstraintName("FK_Carts_Orders")
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

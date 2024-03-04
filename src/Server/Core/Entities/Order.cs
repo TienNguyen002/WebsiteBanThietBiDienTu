@@ -29,8 +29,11 @@ namespace Core.Entities
         //Ngày đặt hàng
         public DateTime DateOrder { get; set; }
 
-        //Danh sách sản phẩm
-        public IList<Product> Products { get; set; }
+        //Mã giỏ hàng
+        public int CartId { get; set; }
+
+        //Giỏ hàng
+        public Cart Cart { get; set; }
 
         //Tổng số lượng sản phẩm
         public int Quantity { get; set; }

@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Data\Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Apps\Trademarks\" />
+    <Folder Include="Apps\Statuses\" />
+    <Folder Include="Apps\Staffs\" />
+  </ItemGroup>
+
 </Project>

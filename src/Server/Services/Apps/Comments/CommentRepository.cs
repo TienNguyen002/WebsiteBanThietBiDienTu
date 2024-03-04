@@ -24,14 +24,14 @@ namespace Services.Apps.Comments
         public async Task<IList<CommentItems>> GetCommentsAsync(CancellationToken cancellationToken = default)
         {
             IQueryable<Comment> comments = _context.Set<Comment>()
-                .Include(c => c.Customer)
+                .Include(c => c.User)
                 .Include(p => p.Product);
             return await comments
                 .OrderBy(c => c.Id)
                 .Select(c => new CommentItems()
                 {
                     Id = c.Id,
-                    CustomerName = c.Customer.Name,
+                    CustomerName = c.User.Name,
                     ProductUrlSlug = c.Product.UrlSlug,
                     Detail = c.Detail,
                     CreateDate = c.CreatedDate,
@@ -39,27 +39,24 @@ namespace Services.Apps.Comments
                 .ToListAsync();
         }
 
-        public async Task<IList<CommentItems>> GetCommentsByProductSlugAsync(string slug, CancellationToken cancellationToken = default)
+        public async Task<Comment> GetCommentsByProductSlugAsync(string slug, bool includeDetails = false, CancellationToken cancellationToken = default)
         {
-            IQueryable<Comment> comments = _context.Set<Comment>()
-                .Include(c => c.Customer)
-                .Include(p => p.Product);
-            return await comments
-                .Where(c => c.Product.UrlSlug == slug)  
-                .OrderBy(c => c.Id)
-                .Select(c => new CommentItems()
-                {
-                    Id = c.Id,
-                    CustomerName = c.Customer.Name,
-                    Detail = c.Detail,
-                    CreateDate = c.CreatedDate,
-                })
-                .ToListAsync();
+            if (!includeDetails)
+            {
+                return await _context.Set<Comment>()
+                    .Where(c => c.Product.UrlSlug == slug)
+                    .FirstOrDefaultAsync(cancellationToken);
+            }
+            return await _context.Set<Comment>()
+                .Include(c => c.User)
+                .Include(p => p.Product)
+                .Where(c => c.Product.UrlSlug == slug)
+                .FirstOrDefaultAsync(cancellationToken);
         }
 
         public async Task<bool> AddCommentAsync(Comment comment, string productSlug, CancellationToken cancellationToken = default)
         {
-            var product = await _context.Set<Product>()
+            var product = await _context.Set<Variant>()
                 .Where(p => p.UrlSlug == productSlug)
                 .FirstOrDefaultAsync();
             comment.ProductId = product.Id;
@@ -70,7 +67,7 @@ namespace Services.Apps.Comments
         public async Task<bool> DeleteCommentByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             var commentToDelete = await _context.Set<Comment>()
-                .Include(c => c.Customer)
+                .Include(c => c.User)
                 .Include(p => p.Product)
                 .Where(t => t.Id == id)
                 .FirstOrDefaultAsync(cancellationToken);

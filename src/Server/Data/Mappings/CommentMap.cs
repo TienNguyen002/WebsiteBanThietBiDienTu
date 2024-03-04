@@ -21,10 +21,10 @@ namespace Data.Mappings
             builder.Property(c => c.CreatedDate)
                 .HasColumnType("datetime");
 
-            builder.HasOne(c => c.Customer)
+            builder.HasOne(c => c.User)
                 .WithMany(c => c.Comments)
-                .HasForeignKey(c => c.CustomerId)
-                .HasConstraintName("FK_Comments_Customers")
+                .HasForeignKey(c => c.UserId)
+                .HasConstraintName("FK_Comments_Users")
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(c => c.Product)

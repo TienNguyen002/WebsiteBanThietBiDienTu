@@ -12,7 +12,7 @@ namespace Services.Apps.Comments
     {
         Task<IList<CommentItems>> GetCommentsAsync(CancellationToken cancellationToken = default);
 
-        Task<IList<CommentItems>> GetCommentsByProductSlugAsync(string slug, CancellationToken cancellationToken = default);
+        Task<Comment> GetCommentsByProductSlugAsync(string slug, bool includeDetails = false, CancellationToken cancellationToken = default);
 
         Task<bool> AddCommentAsync(Comment comment, string productSlug, CancellationToken cancellationToken = default);
 

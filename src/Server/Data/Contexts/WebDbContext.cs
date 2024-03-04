@@ -12,18 +12,20 @@ namespace Data.Contexts
 {
     public class WebDbContext : DbContext
     {
+        public DbSet<Cart> Carts { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Color> Colors { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<ProductColor> ProductColors{ get; set; }
+        public DbSet<Variant> Variants { get; set; }
         public DbSet<Specification> Specifications{ get; set; }
         public DbSet<SpecificationCategory> SpecificationCategories{ get; set; }
-        public DbSet<Staff> Staffs { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<Trademark> Trademarks { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         public WebDbContext() { }
         public WebDbContext(DbContextOptions<WebDbContext> options) : base(options) { }
@@ -36,7 +38,6 @@ namespace Data.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfigurationsFromAssembly(typeof().Assembly);
         }
     }
 }

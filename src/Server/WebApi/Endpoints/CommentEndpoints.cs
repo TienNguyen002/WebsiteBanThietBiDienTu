@@ -66,7 +66,7 @@ namespace WebApi.Endpoints
                 Detail = model.Detail,
                 CreatedDate = DateTime.Now,
                 ProductId = model.ProductId,
-                CustomerId = model.CustomerId,
+                UserId = model.CustomerId,
             };
             await commentRepository.AddCommentAsync(comment, slug);
             return Results.Ok(ApiResponse.Success(
