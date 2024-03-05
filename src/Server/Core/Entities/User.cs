@@ -37,9 +37,6 @@ namespace Core.Entities
         //Danh sách giỏ hàng
         public IList<Cart> Carts { get; set; }
 
-        //Danh sách đơn hàng
-        public IList<Order> Orders { get; set; }
-
         //Mã vai trò
         public int? RoleId { get; set; }
         

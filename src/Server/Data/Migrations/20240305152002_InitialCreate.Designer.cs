@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(WebDbContext))]
-    [Migration("20240304160652_InitialCreate")]
+    [Migration("20240305152002_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -25,19 +25,19 @@ namespace Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("CartVariant", b =>
+            modelBuilder.Entity("CartProduct", b =>
                 {
                     b.Property<int>("CartsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VariantsId")
+                    b.Property<int>("ProductsId")
                         .HasColumnType("int");
 
-                    b.HasKey("CartsId", "VariantsId");
+                    b.HasKey("CartsId", "ProductsId");
 
-                    b.HasIndex("VariantsId");
+                    b.HasIndex("ProductsId");
 
-                    b.ToTable("CartVariant");
+                    b.ToTable("CartProduct");
                 });
 
             modelBuilder.Entity("CategoryTrademark", b =>
@@ -55,19 +55,19 @@ namespace Data.Migrations
                     b.ToTable("CategoryTrademark");
                 });
 
-            modelBuilder.Entity("ColorVariant", b =>
+            modelBuilder.Entity("ColorProduct", b =>
                 {
                     b.Property<int>("ColorsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VariantsId")
+                    b.Property<int>("ProductsId")
                         .HasColumnType("int");
 
-                    b.HasKey("ColorsId", "VariantsId");
+                    b.HasKey("ColorsId", "ProductsId");
 
-                    b.HasIndex("VariantsId");
+                    b.HasIndex("ProductsId");
 
-                    b.ToTable("ColorVariant");
+                    b.ToTable("ColorProduct");
                 });
 
             modelBuilder.Entity("Core.Entities.Cart", b =>
@@ -214,16 +214,11 @@ namespace Data.Migrations
                     b.Property<int>("TotalPrice")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
 
                     b.HasIndex("StatusId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -235,6 +230,9 @@ namespace Data.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Amount")
+                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -257,6 +255,9 @@ namespace Data.Migrations
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TrademarkId")
                         .HasColumnType("int");
 
@@ -266,6 +267,8 @@ namespace Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("TagId");
 
                     b.HasIndex("TrademarkId");
 
@@ -350,6 +353,25 @@ namespace Data.Migrations
                     b.ToTable("Status");
                 });
 
+            modelBuilder.Entity("Core.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UrlSlug")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tags");
+                });
+
             modelBuilder.Entity("Core.Entities.Trademark", b =>
                 {
                     b.Property<int>("Id")
@@ -405,58 +427,22 @@ namespace Data.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Core.Entities.Variant", b =>
+            modelBuilder.Entity("ProductSpecification", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("ProductsId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("OrPrice")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Price")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("UrlSlug")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Variants");
-                });
-
-            modelBuilder.Entity("SpecificationVariant", b =>
-                {
                     b.Property<int>("SpecificationsId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VariantsId")
-                        .HasColumnType("int");
+                    b.HasKey("ProductsId", "SpecificationsId");
 
-                    b.HasKey("SpecificationsId", "VariantsId");
+                    b.HasIndex("SpecificationsId");
 
-                    b.HasIndex("VariantsId");
-
-                    b.ToTable("SpecificationVariant");
+                    b.ToTable("ProductSpecification");
                 });
 
-            modelBuilder.Entity("CartVariant", b =>
+            modelBuilder.Entity("CartProduct", b =>
                 {
                     b.HasOne("Core.Entities.Cart", null)
                         .WithMany()
@@ -464,9 +450,9 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Variant", null)
+                    b.HasOne("Core.Entities.Product", null)
                         .WithMany()
-                        .HasForeignKey("VariantsId")
+                        .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -486,7 +472,7 @@ namespace Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ColorVariant", b =>
+            modelBuilder.Entity("ColorProduct", b =>
                 {
                     b.HasOne("Core.Entities.Color", null)
                         .WithMany()
@@ -494,9 +480,9 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.Variant", null)
+                    b.HasOne("Core.Entities.Product", null)
                         .WithMany()
-                        .HasForeignKey("VariantsId")
+                        .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -556,10 +542,6 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.User", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId");
-
                     b.Navigation("Cart");
 
                     b.Navigation("Status");
@@ -573,6 +555,12 @@ namespace Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Core.Entities.Tag", "Tag")
+                        .WithMany("Products")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Core.Entities.Trademark", "Trademark")
                         .WithMany("Products")
                         .HasForeignKey("TrademarkId")
@@ -580,6 +568,8 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("Tag");
 
                     b.Navigation("Trademark");
                 });
@@ -604,28 +594,17 @@ namespace Data.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("Core.Entities.Variant", b =>
+            modelBuilder.Entity("ProductSpecification", b =>
                 {
-                    b.HasOne("Core.Entities.Product", "Product")
-                        .WithMany("Variants")
-                        .HasForeignKey("ProductId")
+                    b.HasOne("Core.Entities.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("SpecificationVariant", b =>
-                {
                     b.HasOne("Core.Entities.Specification", null)
                         .WithMany()
                         .HasForeignKey("SpecificationsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Core.Entities.Variant", null)
-                        .WithMany()
-                        .HasForeignKey("VariantsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -645,8 +624,6 @@ namespace Data.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Images");
-
-                    b.Navigation("Variants");
                 });
 
             modelBuilder.Entity("Core.Entities.Role", b =>
@@ -664,6 +641,11 @@ namespace Data.Migrations
                     b.Navigation("Orders");
                 });
 
+            modelBuilder.Entity("Core.Entities.Tag", b =>
+                {
+                    b.Navigation("Products");
+                });
+
             modelBuilder.Entity("Core.Entities.Trademark", b =>
                 {
                     b.Navigation("Products");
@@ -674,8 +656,6 @@ namespace Data.Migrations
                     b.Navigation("Carts");
 
                     b.Navigation("Comments");
-
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

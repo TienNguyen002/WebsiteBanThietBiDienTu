@@ -23,6 +23,6 @@ namespace Core.Entities
         public string Details { get; set; }
 
         //Danh sách sản phẩm
-        public IList<Variant> Variants { get; set; }
+        public IList<Product> Products { get; set; }
     }
 }

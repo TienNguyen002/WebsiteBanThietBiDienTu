@@ -42,9 +42,7 @@
   <ItemGroup>
     <Folder Include="Models\Trademark\" />
     <Folder Include="Models\Status\" />
-    <Folder Include="Models\Staff\" />
     <Folder Include="Validations\Customer\" />
-    <Folder Include="Validations\Staff\" />
     <Folder Include="Validations\Status\" />
     <Folder Include="Validations\Trademark\" />
   </ItemGroup>

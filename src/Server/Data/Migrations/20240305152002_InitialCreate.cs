@@ -82,6 +82,20 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UrlSlug = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Trademarks",
                 columns: table => new
                 {
@@ -173,6 +187,8 @@ namespace Data.Migrations
                     UrlSlug = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TagId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     Price = table.Column<int>(type: "int", nullable: true),
                     OrPrice = table.Column<int>(type: "int", nullable: false),
@@ -186,6 +202,12 @@ namespace Data.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_Tags_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -212,6 +234,30 @@ namespace Data.Migrations
                         name: "FK_Carts_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ColorProduct",
+                columns: table => new
+                {
+                    ColorsId = table.Column<int>(type: "int", nullable: false),
+                    ProductsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ColorProduct", x => new { x.ColorsId, x.ProductsId });
+                    table.ForeignKey(
+                        name: "FK_ColorProduct_Colors_ColorsId",
+                        column: x => x.ColorsId,
+                        principalTable: "Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ColorProduct_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -265,25 +311,48 @@ namespace Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Variants",
+                name: "ProductSpecification",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UrlSlug = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Amount = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<bool>(type: "bit", nullable: false),
-                    Price = table.Column<int>(type: "int", nullable: true),
-                    OrPrice = table.Column<int>(type: "int", nullable: false),
-                    ProductId = table.Column<int>(type: "int", nullable: false)
+                    ProductsId = table.Column<int>(type: "int", nullable: false),
+                    SpecificationsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Variants", x => x.Id);
+                    table.PrimaryKey("PK_ProductSpecification", x => new { x.ProductsId, x.SpecificationsId });
                     table.ForeignKey(
-                        name: "FK_Variants_Products_ProductId",
-                        column: x => x.ProductId,
+                        name: "FK_ProductSpecification_Products_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProductSpecification_Specifications_SpecificationsId",
+                        column: x => x.SpecificationsId,
+                        principalTable: "Specifications",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartProduct",
+                columns: table => new
+                {
+                    CartsId = table.Column<int>(type: "int", nullable: false),
+                    ProductsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartProduct", x => new { x.CartsId, x.ProductsId });
+                    table.ForeignKey(
+                        name: "FK_CartProduct_Carts_CartsId",
+                        column: x => x.CartsId,
+                        principalTable: "Carts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartProduct_Products_ProductsId",
+                        column: x => x.ProductsId,
                         principalTable: "Products",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -303,8 +372,7 @@ namespace Data.Migrations
                     CartId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<int>(type: "int", nullable: false),
-                    StatusId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: true)
+                    StatusId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -321,84 +389,12 @@ namespace Data.Migrations
                         principalTable: "Status",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Orders_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "CartVariant",
-                columns: table => new
-                {
-                    CartsId = table.Column<int>(type: "int", nullable: false),
-                    VariantsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CartVariant", x => new { x.CartsId, x.VariantsId });
-                    table.ForeignKey(
-                        name: "FK_CartVariant_Carts_CartsId",
-                        column: x => x.CartsId,
-                        principalTable: "Carts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CartVariant_Variants_VariantsId",
-                        column: x => x.VariantsId,
-                        principalTable: "Variants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ColorVariant",
-                columns: table => new
-                {
-                    ColorsId = table.Column<int>(type: "int", nullable: false),
-                    VariantsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ColorVariant", x => new { x.ColorsId, x.VariantsId });
-                    table.ForeignKey(
-                        name: "FK_ColorVariant_Colors_ColorsId",
-                        column: x => x.ColorsId,
-                        principalTable: "Colors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ColorVariant_Variants_VariantsId",
-                        column: x => x.VariantsId,
-                        principalTable: "Variants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SpecificationVariant",
-                columns: table => new
-                {
-                    SpecificationsId = table.Column<int>(type: "int", nullable: false),
-                    VariantsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SpecificationVariant", x => new { x.SpecificationsId, x.VariantsId });
-                    table.ForeignKey(
-                        name: "FK_SpecificationVariant_Specifications_SpecificationsId",
-                        column: x => x.SpecificationsId,
-                        principalTable: "Specifications",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_SpecificationVariant_Variants_VariantsId",
-                        column: x => x.VariantsId,
-                        principalTable: "Variants",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_CartProduct_ProductsId",
+                table: "CartProduct",
+                column: "ProductsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carts_UserId",
@@ -406,19 +402,14 @@ namespace Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CartVariant_VariantsId",
-                table: "CartVariant",
-                column: "VariantsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_CategoryTrademark_TrademarksId",
                 table: "CategoryTrademark",
                 column: "TrademarksId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ColorVariant_VariantsId",
-                table: "ColorVariant",
-                column: "VariantsId");
+                name: "IX_ColorProduct_ProductsId",
+                table: "ColorProduct",
+                column: "ProductsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Comments_ProductId",
@@ -446,14 +437,14 @@ namespace Data.Migrations
                 column: "StatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_UserId",
-                table: "Orders",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_CategoryId",
                 table: "Products",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_TagId",
+                table: "Products",
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_TrademarkId",
@@ -461,37 +452,32 @@ namespace Data.Migrations
                 column: "TrademarkId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ProductSpecification_SpecificationsId",
+                table: "ProductSpecification",
+                column: "SpecificationsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Specifications_SpecificationCategoryId",
                 table: "Specifications",
                 column: "SpecificationCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SpecificationVariant_VariantsId",
-                table: "SpecificationVariant",
-                column: "VariantsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Users_RoleId",
                 table: "Users",
                 column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Variants_ProductId",
-                table: "Variants",
-                column: "ProductId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CartVariant");
+                name: "CartProduct");
 
             migrationBuilder.DropTable(
                 name: "CategoryTrademark");
 
             migrationBuilder.DropTable(
-                name: "ColorVariant");
+                name: "ColorProduct");
 
             migrationBuilder.DropTable(
                 name: "Comments");
@@ -503,7 +489,7 @@ namespace Data.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "SpecificationVariant");
+                name: "ProductSpecification");
 
             migrationBuilder.DropTable(
                 name: "Colors");
@@ -515,28 +501,28 @@ namespace Data.Migrations
                 name: "Status");
 
             migrationBuilder.DropTable(
-                name: "Specifications");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Variants");
+                name: "Specifications");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
-                name: "SpecificationCategories");
-
-            migrationBuilder.DropTable(
-                name: "Products");
-
-            migrationBuilder.DropTable(
-                name: "Roles");
-
-            migrationBuilder.DropTable(
                 name: "Categories");
 
             migrationBuilder.DropTable(
+                name: "Tags");
+
+            migrationBuilder.DropTable(
                 name: "Trademarks");
+
+            migrationBuilder.DropTable(
+                name: "SpecificationCategories");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
         }
     }
 }

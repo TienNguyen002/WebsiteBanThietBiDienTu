@@ -19,7 +19,7 @@ namespace Data.Contexts
         public DbSet<Image> Images { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Variant> Variants { get; set; }
+        public DbSet<Tag> Tags { get; set; }
         public DbSet<Specification> Specifications{ get; set; }
         public DbSet<SpecificationCategory> SpecificationCategories{ get; set; }
         public DbSet<Status> Status { get; set; }

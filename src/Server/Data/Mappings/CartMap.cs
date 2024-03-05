@@ -24,7 +24,7 @@ namespace Data.Mappings
                 .WithMany(c => c.Carts)
                 .HasForeignKey(c => c.UserId)
                 .HasConstraintName("FK_Users_Carts")
-                .OnDelete(DeleteBehavior.Cascade); ;
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

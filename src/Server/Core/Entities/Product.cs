@@ -25,6 +25,15 @@ namespace Core.Entities
         //Mô tả
         public string Description { get; set; }
 
+        //Mã tag
+        public int TagId { get; set; }
+
+        //Tag
+        public Tag Tag { get; set; }
+
+        //Số lượng trong kho
+        public int Amount { get; set; }
+
         //Tình trạng
         public bool Status { get; set; }
 
@@ -52,7 +61,13 @@ namespace Core.Entities
         //Danh sách bình luận
         public IList<Comment> Comments { get; set; }
 
-        //Danh sách thuộc tính
-        public IList<Variant> Variants { get; set; }
+        //Danh sách màu
+        public IList<Color> Colors { get; set; }
+
+        //Danh sách thông số kỹ thuật
+        public IList<Specification> Specifications { get; set; }
+
+        //Danh sách giỏ hàng
+        public IList<Cart> Carts { get; set; }
     }
 }

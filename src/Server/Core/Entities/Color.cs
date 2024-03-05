@@ -20,6 +20,6 @@ namespace Core.Entities
         public string UrlSlug { get; set; }
 
         //Danh sách sản phẩm
-        public IList<Variant> Variants { get; set; }
+        public IList<Product> Products { get; set; }
     }
 }

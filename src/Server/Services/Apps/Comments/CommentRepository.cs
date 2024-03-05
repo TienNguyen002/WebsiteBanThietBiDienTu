@@ -56,7 +56,7 @@ namespace Services.Apps.Comments
 
         public async Task<bool> AddCommentAsync(Comment comment, string productSlug, CancellationToken cancellationToken = default)
         {
-            var product = await _context.Set<Variant>()
+            var product = await _context.Set<Product>()
                 .Where(p => p.UrlSlug == productSlug)
                 .FirstOrDefaultAsync();
             comment.ProductId = product.Id;

@@ -23,7 +23,7 @@ namespace Core.Entities
         public IList<Order> Orders { get; set; }
 
         //Danh sách sản phẩm
-        public IList<Variant> Variants { get; set; }
+        public IList<Product> Products { get; set; }
 
         //Tình trạng giỏ hàng
         public bool Status { get; set; }
