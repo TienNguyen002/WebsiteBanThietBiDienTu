@@ -29,9 +29,6 @@ namespace Data.Mappings
             builder.Property(p => p.ImageUrl)
                 .HasMaxLength(1000);
 
-            builder.Property(p => p.Tag)
-                .IsRequired();
-
             builder.Property(p => p.Amount)
                 .HasMaxLength(500);
 
@@ -55,17 +52,23 @@ namespace Data.Mappings
                 .HasConstraintName("FK_Trademarks_Products")
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.HasOne(t => t.Tag)
+                .WithMany(p => p.Products)
+                .HasForeignKey(t => t.TagId)
+                .HasConstraintName("FK_Tags_Products")
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.HasMany(s => s.Specifications)
                 .WithMany(p => p.Products)
                 .UsingEntity(sp => sp.ToTable("ProductSpecifications"));
 
-            builder.HasMany(o => o.Order)
-                .WithMany(p => p.Products)
-                .UsingEntity(sp => sp.ToTable("ProductOrders"));
-
             builder.HasMany(c => c.Colors)
                 .WithMany(p => p.Products)
-                .UsingEntity(sp => sp.ToTable("ProductProductColors"));
+                .UsingEntity(sp => sp.ToTable("ProductColors"));
+
+            builder.HasMany(c => c.Carts)
+                .WithMany(p => p.Products)
+                .UsingEntity(sp => sp.ToTable("ProductOrders"));
         }
     }
 }

@@ -2,6 +2,7 @@
 using Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,17 +26,40 @@ namespace Data.Seeders
             if (_dbContext.Products.Any()) return;
 
             var categories = AddCategories();
-            var speCategories = AddSpeCategories();
-            var statuses = AddStatus();
             var colors = AddColors();
-            var customers = AddCustomers();
             var images = AddImages();
-            var staffs = AddStaffs();
-            var trademarks = AddTrademarks(categories);
+            var statuses = AddStatuses();
+            var roles = AddRoles();
+            var speCategories = AddSpeCategories();
+            var tags = AddTags();
+
             var specifications = AddSpecifications(speCategories);
-            var products = AddProducts(categories, trademarks, colors, specifications, staffs);
-            var orders = AddOrders(products, statuses);
-            var comments = AddComments(products, customers);
+            var users = AddUsers(roles);
+            var trademarks = AddTrademarks(categories);
+            var products = AddProducts(categories, trademarks, colors, specifications, tags);
+            var carts = AddCarts(users, products);
+            var comments = AddComments(products, users);
+            var orders = AddOrders(carts, statuses);
+        }
+
+        private IList<Cart> AddCarts(
+            IList<User> users,
+            IList<Product> products)
+        {
+            var carts = new List<Cart>()
+            {
+                new()
+                {
+                    User = users[0],
+                    Products = new List<Product>()
+                    {
+                        products[0],
+                        products[1]
+                    },
+                    Status = false,
+                },
+            };
+            return carts;
         }
 
         private IList<Category> AddCategories()
@@ -111,15 +135,53 @@ namespace Data.Seeders
             return categories;
         }
 
+        private IList<Color> AddColors()
+        {
+            var colors = new List<Color>()
+            {
+                new()
+                {
+                    Name = "Titan đen",
+                    UrlSlug = "titan-den",
+                },
+                new()
+                {
+                    Name = "Titan trắng",
+                    UrlSlug = "titan-trang",
+                },
+                new()
+                {
+                    Name = "Titan tự nhiên",
+                    UrlSlug = "titan-tu-nhien",
+                },
+                new()
+                {
+                    Name = "Titan xanh",
+                    UrlSlug = "titan-xanh",
+                },
+            };
+            var colorAdd = new List<Color>();
+            foreach (var item in colors)
+            {
+                if (!_dbContext.Colors.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    colorAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(colorAdd);
+            _dbContext.SaveChanges();
+            return colors;
+        }
+
         private IList<Comment> AddComments(
             IList<Product> products,
-            IList<Customer> customers)
+            IList<User> users)
         {
             var comments = new List<Comment>()
             {
                 new()
                 {
-                    Customer = customers[0],
+                    User = users[0],
                     Product = products[0],
                     Detail = "Em rất thích sản phẩm này",
                     CreatedDate = DateTime.Now,
@@ -130,40 +192,6 @@ namespace Data.Seeders
             return comments;
         }
 
-        private IList<Customer> AddCustomers()
-        {
-            var customers = new List<Customer>()
-            {
-                new()
-                {
-                    Name = "Trần Thái Linh",
-                    UrlSlug = "tran-thai-linh",
-                    Email = "tranthailinh09@gmail.com",
-                    Phone = "0876157866",
-                    Password = "password",
-                },
-                new()
-                {
-                    Name = "Nguyễn Văn Thuận",
-                    UrlSlug = "nguyen-van-thuan",
-                    Email = "nguyenvanthuan112@gmail.com",
-                    Phone = "0963457114",
-                    Password = "password",
-                },
-            };
-            var customerAdd = new List<Customer>();
-            foreach (var item in customers)
-            {
-                if (!_dbContext.Customers.Any(s => s.UrlSlug == item.UrlSlug))
-                {
-                    customerAdd.Add(item);
-                }
-            }
-            _dbContext.AddRange(customerAdd);
-            _dbContext.SaveChanges();
-            return customers;
-        }
-
         private IList<Image> AddImages()
         {
             var images = new List<Image>();
@@ -171,7 +199,7 @@ namespace Data.Seeders
         }
 
         private IList<Order> AddOrders(
-            IList<Product> products,
+            IList<Cart> carts,
             IList<Status> statuses)
         {
             var orders = new List<Order>()
@@ -183,11 +211,7 @@ namespace Data.Seeders
                     Phone = "0876157866",
                     Email = "tranthailinh09@gmail.com",
                     DateOrder = DateTime.Now,
-                    Products = new List<Product>()
-                    {
-                        products[0],
-                        products[1]
-                    },
+                    Cart = carts[0],
                     Quantity = 2,
                     TotalPrice = 70180000,
                     Status = statuses[0]
@@ -201,9 +225,9 @@ namespace Data.Seeders
         private IList<Product> AddProducts(
             IList<Category> categories,
             IList<Trademark> trademarks,
-            IList<ProductColor> colors,
+            IList<Color> colors,
             IList<Specification> specifications,
-            IList<Staff> staffs)
+            IList<Tag> tags)
         {
             var products = new List<Product>()
             {
@@ -212,14 +236,13 @@ namespace Data.Seeders
                     Name = "iPhone 15 Pro Max 256GB | Chính hãng VN/A",
                     UrlSlug = "iphone-15-pro-max-256gb",
                     Description = "ĐẶC ĐIỂM NỔI BẬT\r\nThiết kế khung viền từ titan chuẩn hàng không vũ trụ - Cực nhẹ, bền cùng viền cạnh mỏng cầm nắm thoải mái\r\nHiệu năng Pro chiến game thả ga - Chip A17 Pro mang lại hiệu năng đồ họa vô cùng sống động và chân thực\r\nThoả sức sáng tạo và quay phim chuyên nghiệp - Cụm 3 camera sau đến 48MP và nhiều chế độ tiên tiến\r\nNút tác vụ mới giúp nhanh chóng kích hoạt tính năng yêu thích của bạn\r\niPhone 15 Pro Max thiết kế mới với chất liệu titan chuẩn hàng không vũ trụ bền bỉ, trọng lượng nhẹ, đồng thời trang bị nút Action và cổng sạc USB-C tiêu chuẩn giúp nâng cao tốc độ sạc. Khả năng chụp ảnh đỉnh cao của iPhone 15 bản Pro Max đến từ camera chính 48MP, camera UltraWide 12MP và camera telephoto có khả năng zoom quang học đến 5x. Bên cạnh đó, iPhone 15 ProMax sử dụng chip A17 Pro mới mạnh mẽ. Xem thêm chi tiết những điểm nổi bật của sản phẩm qua thông tin sau!",
-                    Tag = "iphone-15-pro-max",
                     Amount = 50,
                     Status = true,
                     Price = 31390000,
                     OrPrice = 34990000,
                     Category = categories[0],
                     Trademark = trademarks[0],
-                    Colors = new List<ProductColor>()
+                    Colors = new List<Color>()
                     {
                         colors[0],
                         colors[1],
@@ -232,20 +255,20 @@ namespace Data.Seeders
                         specifications[1],
                         specifications[2],
                     },
+                    Tag = tags[0],
                 },
                 new()
                 {
                     Name = "iPhone 15 Pro Max 512GB | Chính hãng VN/A",
                     UrlSlug = "iphone-15-pro-max-512gb",
                     Description = "ĐẶC ĐIỂM NỔI BẬT\r\nThiết kế khung viền từ titan chuẩn hàng không vũ trụ - Cực nhẹ, bền cùng viền cạnh mỏng cầm nắm thoải mái\r\nHiệu năng Pro chiến game thả ga - Chip A17 Pro mang lại hiệu năng đồ họa vô cùng sống động và chân thực\r\nThoả sức sáng tạo và quay phim chuyên nghiệp - Cụm 3 camera sau đến 48MP và nhiều chế độ tiên tiến\r\nNút tác vụ mới giúp nhanh chóng kích hoạt tính năng yêu thích của bạn\r\niPhone 15 Pro Max thiết kế mới với chất liệu titan chuẩn hàng không vũ trụ bền bỉ, trọng lượng nhẹ, đồng thời trang bị nút Action và cổng sạc USB-C tiêu chuẩn giúp nâng cao tốc độ sạc. Khả năng chụp ảnh đỉnh cao của iPhone 15 bản Pro Max đến từ camera chính 48MP, camera UltraWide 12MP và camera telephoto có khả năng zoom quang học đến 5x. Bên cạnh đó, iPhone 15 ProMax sử dụng chip A17 Pro mới mạnh mẽ. Xem thêm chi tiết những điểm nổi bật của sản phẩm qua thông tin sau!",
-                    Tag = "iphone-15-pro-max",
                     Amount = 50,
                     Status = true,
-                    Price = 38790000,
-                    OrPrice = 40990000,
+                    Price = 31390000,
+                    OrPrice = 34990000,
                     Category = categories[0],
                     Trademark = trademarks[0],
-                    Colors = new List<ProductColor>()
+                    Colors = new List<Color>()
                     {
                         colors[0],
                         colors[1],
@@ -258,26 +281,34 @@ namespace Data.Seeders
                         specifications[1],
                         specifications[2],
                     },
+                    Tag = tags[0],
                 },
                 new()
                 {
                     Name = "iPhone 15 Pro Max 1TB | Chính hãng VN/A",
                     UrlSlug = "iphone-15-pro-max-1tb",
                     Description = "ĐẶC ĐIỂM NỔI BẬT\r\nThiết kế khung viền từ titan chuẩn hàng không vũ trụ - Cực nhẹ, bền cùng viền cạnh mỏng cầm nắm thoải mái\r\nHiệu năng Pro chiến game thả ga - Chip A17 Pro mang lại hiệu năng đồ họa vô cùng sống động và chân thực\r\nThoả sức sáng tạo và quay phim chuyên nghiệp - Cụm 3 camera sau đến 48MP và nhiều chế độ tiên tiến\r\nNút tác vụ mới giúp nhanh chóng kích hoạt tính năng yêu thích của bạn\r\niPhone 15 Pro Max thiết kế mới với chất liệu titan chuẩn hàng không vũ trụ bền bỉ, trọng lượng nhẹ, đồng thời trang bị nút Action và cổng sạc USB-C tiêu chuẩn giúp nâng cao tốc độ sạc. Khả năng chụp ảnh đỉnh cao của iPhone 15 bản Pro Max đến từ camera chính 48MP, camera UltraWide 12MP và camera telephoto có khả năng zoom quang học đến 5x. Bên cạnh đó, iPhone 15 ProMax sử dụng chip A17 Pro mới mạnh mẽ. Xem thêm chi tiết những điểm nổi bật của sản phẩm qua thông tin sau!",
-                    Tag = "iphone-15-pro-max",
                     Amount = 50,
                     Status = true,
-                    Price = 44990000,
-                    OrPrice = 46990000,
+                    Price = 31390000,
+                    OrPrice = 34990000,
                     Category = categories[0],
                     Trademark = trademarks[0],
+                    Colors = new List<Color>()
+                    {
+                        colors[0],
+                        colors[1],
+                        colors[2],
+                        colors[3],
+                    },
                     Specifications = new List<Specification>()
                     {
                         specifications[0],
                         specifications[1],
                         specifications[2],
                     },
-                }
+                    Tag = tags[0],
+                },
             };
             var productAdd = new List<Product>();
             foreach (var item in products)
@@ -292,42 +323,32 @@ namespace Data.Seeders
             return products;
         }
 
-        private IList<ProductColor> AddColors()
+        private IList<Role> AddRoles()
         {
-            var colors = new List<ProductColor>()
+            var roles = new List<Role>()
             {
                 new()
                 {
-                    Color = "Titan đen",
-                    UrlSlug = "titan-den",
+                    Name = "User",
+                    UrlSlug = "user",
                 },
                 new()
                 {
-                    Color = "Titan trắng",
-                    UrlSlug = "titan-trang",
-                },
-                new()
-                {
-                    Color = "Titan tự nhiên",
-                    UrlSlug = "titan-tu-nhien",
-                },
-                new()
-                {
-                    Color = "Titan xanh",
-                    UrlSlug = "titan-xanh",
+                    Name = "Admin",
+                    UrlSlug = "admin",
                 },
             };
-            var colorAdd = new List<ProductColor>();
-            foreach (var item in colors)
+            var roleAdd = new List<Role>();
+            foreach (var item in roles)
             {
-                if (!_dbContext.ProductColors.Any(s => s.UrlSlug == item.UrlSlug))
-                {
-                    colorAdd.Add(item);
+                if (!_dbContext.Roles.Any(s => s.UrlSlug == item.UrlSlug))
+                { 
+                    roleAdd.Add(item);
                 }
             }
-            _dbContext.AddRange(colorAdd);
+            _dbContext.AddRange(roleAdd);
             _dbContext.SaveChanges();
-            return colors;
+            return roles;
         }
 
         private IList<Specification> AddSpecifications(IList<SpecificationCategory> speCategories)
@@ -388,49 +409,7 @@ namespace Data.Seeders
             return speCategories;
         }
 
-        private IList<Staff> AddStaffs()
-        {
-            var staffs = new List<Staff>()
-            {
-                new()
-                {
-                    Name = "Nguyễn Hoàng Nhật Tiến",
-                    UrlSlug = "nguyen-hoang-nhat-tien",
-                    Email = "2015749@dlu.edu.vn",
-                    Phone = "0819104319",
-                    Password = "password",
-                },
-                new()
-                {
-                    Name = "Trần Trung Hiếu",
-                    UrlSlug = "tran-trung-hieu",
-                    Email = "2011382@dlu.edu.vn",
-                    Phone = "0869820809",
-                    Password = "password",
-                },
-                new()
-                {
-                    Name = "Nguyễn Ngọc Minh Tiến",
-                    UrlSlug = "nguyen-ngoc-minh-tien",
-                    Email = "2015840@dlu.edu.vn",
-                    Phone = "0868103447",
-                    Password = "password",
-                },
-            };
-            var staffAdd = new List<Staff>();
-            foreach (var item in staffs)
-            {
-                if (!_dbContext.Staffs.Any(s => s.UrlSlug == item.UrlSlug))
-                {
-                    staffAdd.Add(item);
-                }
-            }
-            _dbContext.AddRange(staffAdd);
-            _dbContext.SaveChanges();
-            return staffs;
-        }
-
-        private IList<Status> AddStatus()
+        private IList<Status> AddStatuses()
         {
             var status = new List<Status>()
             {
@@ -511,6 +490,98 @@ namespace Data.Seeders
             _dbContext.AddRange(trademarkAdd);
             _dbContext.SaveChanges();
             return trademarks;
+        }
+
+        private IList<User> AddUsers(
+            IList<Role> roles)
+        {
+            var users = new List<User>()
+            {
+                new()
+                {
+                    Name = "Trần Thái Linh",
+                    UrlSlug = "tran-thai-linh",
+                    Email = "tranthailinh09@gmail.com",
+                    Phone = "0876157866",
+                    Password = "password",
+                    Address = "123 A",
+                    Role = roles[0],
+                },
+                new()
+                {
+                    Name = "Nguyễn Văn Thuận",
+                    UrlSlug = "nguyen-van-thuan",
+                    Email = "nguyenvanthuan112@gmail.com",
+                    Phone = "0963457114",
+                    Password = "password",
+                    Address = "123 A",
+                    Role = roles[0],
+                },
+                new()
+                {
+                    Name = "Nguyễn Hoàng Nhật Tiến",
+                    UrlSlug = "nguyen-hoang-nhat-tien",
+                    Email = "2015749@dlu.edu.vn",
+                    Phone = "0819104319",
+                    Password = "password",
+                    Address = "123 A",
+                    Role = roles[1],
+                },
+                new()
+                {
+                    Name = "Trần Trung Hiếu",
+                    UrlSlug = "tran-trung-hieu",
+                    Email = "2011382@dlu.edu.vn",
+                    Phone = "0869820809",
+                    Password = "password",
+                    Address = "123 A",
+                    Role = roles[1],
+                },
+                new()
+                {
+                    Name = "Nguyễn Ngọc Minh Tiến",
+                    UrlSlug = "nguyen-ngoc-minh-tien",
+                    Email = "2015840@dlu.edu.vn",
+                    Phone = "0868103447",
+                    Password = "password",
+                    Address = "123 A",
+                    Role = roles[1],
+                },
+            };
+            var userAdd = new List<User>();
+            foreach (var item in users)
+            {
+                if (!_dbContext.Users.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    userAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(userAdd);
+            _dbContext.SaveChanges();
+            return users;
+        }
+
+        private IList<Tag> AddTags()
+        {
+            var tags = new List<Tag>()
+            {
+                new()
+                {
+                    Name = "IPhone 15 Pro Max",
+                    UrlSlug = "iphone-15-pro-max",
+                },
+            };
+            var tagAdd = new List<Tag>();
+            foreach (var item in tags)
+            {
+                if (!_dbContext.Tags.Any(s => s.UrlSlug == item.UrlSlug))
+                {
+                    tagAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(tagAdd);
+            _dbContext.SaveChanges();
+            return tags;
         }
     }
 }

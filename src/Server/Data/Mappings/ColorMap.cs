@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Data.Mappings
 {
-    public class ProductColorMap : IEntityTypeConfiguration<ProductColor>
+    public class ColorMap : IEntityTypeConfiguration<Color>
     {
-        public void Configure(EntityTypeBuilder<ProductColor> builder)
+        public void Configure(EntityTypeBuilder<Color> builder)
         {
-            builder.ToTable("ProductColors");
+            builder.ToTable("Colors");
 
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.Color)
+            builder.Property(p => p.Name)
                 .IsRequired();
 
             builder.Property(p => p.UrlSlug)

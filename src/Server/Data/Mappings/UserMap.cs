@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Data.Mappings
 {
-    public class CustomerMap : IEntityTypeConfiguration<Customer>
+    public class UserMap : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Customer> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("Customers");
+            builder.ToTable("Users");
 
             builder.HasKey(c => c.Id);
 
@@ -29,9 +29,18 @@ namespace Data.Mappings
             builder.Property(c => c.Phone)
                 .IsRequired();
 
+            builder.Property(c => c.Address)
+                .IsRequired();
+
             builder.Property(c => c.Password)
                 .IsRequired()
                 .HasMaxLength(16);
+
+            builder.HasOne(r => r.Role)
+                .WithMany(u => u.Users)
+                .HasForeignKey(r => r.RoleId)
+                .HasConstraintName("FK_Roles_Users")
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

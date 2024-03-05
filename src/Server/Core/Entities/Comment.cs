@@ -14,10 +14,10 @@ namespace Core.Entities
         public int Id { get; set; }
 
         //Mã người bình luận
-        public int CustomerId { get; set; }
+        public int UserId { get; set; }
 
         //Người bình luận
-        public Customer Customer { get; set; }
+        public User User { get; set; }
 
         //Mã thiết bị bình luận
         public int ProductId { get; set; }

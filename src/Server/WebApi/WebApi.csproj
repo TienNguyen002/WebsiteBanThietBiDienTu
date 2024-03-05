@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\uploads\files\.gitkeep" />
+    <Content Remove="wwwroot\uploads\images\.gitkeep" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\uploads\files\.gitkeep" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Carter" Version="7.2.0" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
@@ -26,9 +35,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="wwwroot\uploads\files\" />
-    <Folder Include="wwwroot\uploads\images\" />
+    <None Include="wwwroot\uploads\files\.gitkeep" />
+    <None Include="wwwroot\uploads\images\.gitkeep" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\Trademark\" />
+    <Folder Include="Models\Status\" />
+    <Folder Include="Validations\Customer\" />
+    <Folder Include="Validations\Status\" />
+    <Folder Include="Validations\Trademark\" />
   </ItemGroup>
 
 </Project>

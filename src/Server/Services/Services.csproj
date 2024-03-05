@@ -7,12 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SlugGenerator" Version="2.0.2" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Core\Core.csproj" />
     <ProjectReference Include="..\Data\Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Apps\Trademarks\" />
+    <Folder Include="Apps\Statuses\" />
   </ItemGroup>
 
 </Project>

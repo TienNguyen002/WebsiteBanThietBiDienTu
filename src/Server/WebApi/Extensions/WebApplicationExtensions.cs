@@ -3,6 +3,9 @@ using Data.Contexts;
 using Data.Seeders;
 using Microsoft.EntityFrameworkCore;
 using NLog.Web;
+using Services.Apps.Categories;
+using Services.Apps.Comments;
+using Services.Apps.Customers;
 using Services.Media;
 using Services.Timing;
 
@@ -23,6 +26,9 @@ namespace WebApi.Extensions
             builder.Services.AddScoped<ITimeProvider, LocalTimeProvider>();
             builder.Services.AddScoped<IMediaManager, LocalFileSystemMediaManager>();
             builder.Services.AddScoped<IDataSeeder, DataSeeder>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             return builder;
         }

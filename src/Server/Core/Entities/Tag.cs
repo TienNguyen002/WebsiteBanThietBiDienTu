@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    //Màu sản phẩm
-    public class ProductColor : IEntity
+    //Tag sản phẩm
+    public class Tag : IEntity
     {
-        //Mã màu sản phẩm
+        //Mã tag
         public int Id { get; set; }
 
-        //Màu sản phẩm
-        public string Color { get; set; }
+        //Tên tag
+        public string Name { get; set; }  
 
-        //Mã định danh
+        //Mã định danh Tag
         public string UrlSlug { get; set; }
 
         //Danh sách sản phẩm
