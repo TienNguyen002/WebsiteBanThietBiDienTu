@@ -39,12 +39,4 @@
     <None Include="wwwroot\uploads\images\.gitkeep" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Trademark\" />
-    <Folder Include="Models\Status\" />
-    <Folder Include="Validations\Customer\" />
-    <Folder Include="Validations\Status\" />
-    <Folder Include="Validations\Trademark\" />
-  </ItemGroup>
-
 </Project>

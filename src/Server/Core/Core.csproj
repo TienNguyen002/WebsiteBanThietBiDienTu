@@ -6,9 +6,4 @@
     <Nullable>disable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="DTO\Trademark\" />
-    <Folder Include="DTO\Status\" />
-  </ItemGroup>
-
 </Project>

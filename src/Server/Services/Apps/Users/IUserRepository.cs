@@ -10,8 +10,14 @@ namespace Services.Apps.Customers
 {
     public interface IUserRepository
     {
-        Task<IList<UserItems>> GetCustomersAsync(CancellationToken cancellationToken = default);
+        //Lấy ds người dùng
+        Task<IList<UserItems>> GetUsersAsync(CancellationToken cancellationToken = default);
 
-        Task<User> GetCustomerBySlugAsync(string slug, bool includeDetails = false, CancellationToken cancellationToken = default);
+        //Lấy người dùng bằng slug
+        Task<User> GetUserBySlugAsync(string slug, bool includeDetails = false, CancellationToken cancellationToken = default);
+
+        //Tạo tài khoản
+
+        //Đổi mật khẩu
     }
 }

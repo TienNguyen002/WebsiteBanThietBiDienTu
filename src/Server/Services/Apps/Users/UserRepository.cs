@@ -19,11 +19,12 @@ namespace Services.Apps.Customers
             _context = dbContext;
         }
 
-        public async Task<IList<UserItems>> GetCustomersAsync(CancellationToken cancellationToken = default)
+        public async Task<IList<UserItems>> GetUsersAsync(CancellationToken cancellationToken = default)
         {
-            IQueryable<User> customers = _context.Set<User>()
-                .Include(c => c.Comments);
-            return await customers
+            IQueryable<User> users = _context.Set<User>()
+                .Include(c => c.Comments)
+                .Include(r => r.Role);
+            return await users
                 .OrderBy(c => c.Id)
                 .Select(c => new UserItems()
                 {
@@ -36,7 +37,7 @@ namespace Services.Apps.Customers
                 .ToListAsync();
         }
 
-        public async Task<User> GetCustomerBySlugAsync(string slug, bool includeDetails = false, CancellationToken cancellationToken = default)
+        public async Task<User> GetUserBySlugAsync(string slug, bool includeDetails = false, CancellationToken cancellationToken = default)
         {
             if (!includeDetails)
             {
@@ -46,6 +47,7 @@ namespace Services.Apps.Customers
             }
             return await _context.Set<User>()
                 .Include(c => c.Comments)
+                .Include(r => r.Role)
                 .Where(c => c.UrlSlug == slug)
                 .FirstOrDefaultAsync(cancellationToken);
         }
