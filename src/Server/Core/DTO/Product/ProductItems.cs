@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Core.DTO.Product
 {
-    internal class ProductItems
+    public class ProductItems
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
     }
 }

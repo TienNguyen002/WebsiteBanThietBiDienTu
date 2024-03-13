@@ -65,6 +65,7 @@ namespace Services.Apps.Trademarks
         {
             return await _context.Set<Trademark>()
                 .Include(t => t.Categories)
+                .Include(t => t.Products)
                 .Where(t => t.Id == id)
                 .FirstOrDefaultAsync(cancellationToken);
         }
@@ -73,6 +74,7 @@ namespace Services.Apps.Trademarks
         {
             return await _context.Set<Trademark>()
                 .Include(t => t.Categories)
+                .Include(t => t.Products)
                 .Where(t => t.UrlSlug.Contains(slug))
                 .FirstOrDefaultAsync(cancellationToken);
         }

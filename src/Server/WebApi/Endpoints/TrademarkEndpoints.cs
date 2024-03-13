@@ -17,7 +17,7 @@ namespace WebApi.Endpoints
 
             routeGroupBuilder.MapGet("/", GetAllTrademark)
                 .WithName("GetAllTrademark")
-                .Produces<ApiResponse<PaginationResult<Trademark>>>();
+                .Produces<ApiResponse<PaginationResult<TrademarkDto>>>();
 
             routeGroupBuilder.MapGet("/{id:int}", GetTrademarkById)
                   .WithName("GetTrademarkById")
