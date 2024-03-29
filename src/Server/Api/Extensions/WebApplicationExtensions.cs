@@ -1,5 +1,10 @@
 ﻿using Application.Media;
+using Application.Services;
+using Domain.Interfaces;
+using Domain.Interfaces.Repositories;
+using Domain.Interfaces.Services;
 using Infrastructure.Contexts;
+using Infrastructure.Repositories;
 using Infrastructure.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -20,20 +25,13 @@ namespace Api.Extensions
 
             builder.Services.AddScoped<IMediaManager, LocalFileSystemMediaManager>();
             builder.Services.AddScoped<IDataSeeder, DataSeeder>();
-            //builder.Services.AddScoped<ICartRepository, CartRepository>();
-            //builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
-            //builder.Services.AddScoped<IColorRepository, ColorRepository>();
-            //builder.Services.AddScoped<ICommentRepository, CommentRepository>();
-            //builder.Services.AddScoped<IImageRepository, ImageRepository>();
-            //builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-            //builder.Services.AddScoped<IProductRepository, ProductRepository>();
-            //builder.Services.AddScoped<IRoleRepository, RoleRepository>();
-            //builder.Services.AddScoped<ISpecificationRepository, SpecificationRepository>();
-            //builder.Services.AddScoped<ISpecificationCategoryRepository, SpecificationCategoryRepository>();
-            //builder.Services.AddScoped<IStatusRepository, StatusRepository>();
-            //builder.Services.AddScoped<ITagRepository, TagRepository>();
-            //builder.Services.AddScoped<ITrademarkRepository, TrademarkRepository>();
-            //builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IBranchRepository, BranchRepository>();
+            builder.Services.AddScoped<IBranchService, BranchService>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IColorRepository, ColorRepository>();
+            builder.Services.AddScoped<IColorService, ColorService>();
 
             return builder;
         }

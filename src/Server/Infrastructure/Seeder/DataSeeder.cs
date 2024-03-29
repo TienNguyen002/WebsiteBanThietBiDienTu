@@ -28,7 +28,7 @@ namespace Infrastructure.Seeders
             var users = AddUsers(roles);
             var products = AddProducts(categories, branches, colors, tags);
             var discounts = AddDiscounts(products);
-            var images = AddImages();
+            var images = AddImages(products);
             var comments = AddComments(products, users);
             var orders = AddOrders(users, statuses);
             var orderItems = AddOrderItems(products, orders);
@@ -165,9 +165,36 @@ namespace Infrastructure.Seeders
             return comments;
         }
 
-        private IList<Image> AddImages()
+        private IList<Image> AddImages(IList<Product> products)
         {
-            var images = new List<Image>();
+            var images = new List<Image>()
+            {
+                new()
+                {
+                    ImageUrl = "Hinh 1",
+                    Product = products[0],
+                },
+                new()
+                {
+                    ImageUrl = "Hinh 2",
+                    Product = products[0],
+                },
+                new()
+                {
+                    ImageUrl = "Hinh 3",
+                    Product = products[0],
+                }
+            };
+            var imageAdd = new List<Image>();
+            foreach (var item in images)
+            {
+                if (!_dbContext.Images.Any(s => s.ImageUrl == item.ImageUrl))
+                {
+                    imageAdd.Add(item);
+                }
+            }
+            _dbContext.AddRange(imageAdd);
+            _dbContext.SaveChanges();
             return images;
         }
 
