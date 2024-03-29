@@ -26,7 +26,7 @@ namespace Api.Controllers
         /// </summary>
         /// <returns> List Of Categories </returns>
         [HttpGet("all")]
-        public async Task<ActionResult<IList<ColorDTO>>> GetAllCategories()
+        public async Task<ActionResult<IList<CategoryDTO>>> GetAllCategories()
         {
             var categories = await _service.GetAllCategories();
             if(categories == null)
@@ -42,7 +42,7 @@ namespace Api.Controllers
         /// <param name="id"> Id Of Category want to get </param>
         /// <returns> Get Category By Id </returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<ColorDTO>> GetCategoryById(int id)
+        public async Task<ActionResult<CategoryDTO>> GetCategoryById(int id)
         {
             var category = await _service.GetCategoryById(id);
             if (category == null)
@@ -58,7 +58,7 @@ namespace Api.Controllers
         /// <param name="slug"> UrlSlug want to get Category </param>
         /// <returns> Category With UrlSlug want to get </returns>
         [HttpGet("bySlug/{slug}")]
-        public async Task<ActionResult<ColorDTO>> GetCategoryBySlug(string slug)
+        public async Task<ActionResult<CategoryDTO>> GetCategoryBySlug(string slug)
         {
             var category = await _service.GetCategoryBySlug(slug);
             if (category == null)
@@ -74,7 +74,7 @@ namespace Api.Controllers
         /// <param name="model"> Model to add/update </param>
         /// <returns> Added/Updated Category </returns>
         [HttpPost]
-        public async Task<ActionResult<ColorDTO>> AddOrUpdateCategory([FromForm] ColorEditModel model)
+        public async Task<ActionResult<CategoryDTO>> AddOrUpdateCategory([FromForm] ColorEditModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace Api.Controllers
             {
                 return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
             }
-            var result = _mapper.Map<ColorDTO>(model);
+            var result = _mapper.Map<CategoryDTO>(model);
             return Ok(ApiResponse.Success(result));
         }
 

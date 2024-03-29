@@ -58,10 +58,10 @@ namespace Application.Services
         /// </summary>
         /// <returns> List Of Categories </returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public async Task<IList<ColorDTO>> GetAllCategories()
+        public async Task<IList<CategoryDTO>> GetAllCategories()
         {
             var categories = await _repository.GetAll();
-            return _mapper.Map<IList<ColorDTO>>(categories);
+            return _mapper.Map<IList<CategoryDTO>>(categories);
         }
 
         /// <summary>
@@ -70,10 +70,10 @@ namespace Application.Services
         /// <param name="id"> Id Of Category want to get </param>
         /// <returns> Get Category By Id </returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public async Task<ColorDTO> GetCategoryById(int id)
+        public async Task<CategoryDTO> GetCategoryById(int id)
         {
             var category = await _repository.GetById(id);
-            return _mapper.Map<ColorDTO>(category);
+            return _mapper.Map<CategoryDTO>(category);
         }
 
         /// <summary>
@@ -82,10 +82,10 @@ namespace Application.Services
         /// <param name="slug"> UrlSlug want to get Category </param>
         /// <returns> Category With UrlSlug want to get </returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public async Task<ColorDTO> GetCategoryBySlug(string slug)
+        public async Task<CategoryDTO> GetCategoryBySlug(string slug)
         {
             var category = await _repository.GetCategoryBySlug(slug);
-            return _mapper.Map<ColorDTO>(category);
+            return _mapper.Map<CategoryDTO>(category);
         }
     }
 }

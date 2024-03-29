@@ -32,6 +32,8 @@ namespace Api.Extensions
             builder.Services.AddScoped<ICategoryService, CategoryService>();
             builder.Services.AddScoped<IColorRepository, ColorRepository>();
             builder.Services.AddScoped<IColorService, ColorService>();
+            builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
+            builder.Services.AddScoped<IDiscountService, DiscountService>();
 
             return builder;
         }

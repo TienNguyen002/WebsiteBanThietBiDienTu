@@ -74,7 +74,7 @@ namespace Api.Controllers
         /// <param name="model"> Model to add/update </param>
         /// <returns> Added/Updated Color </returns>
         [HttpPost]
-        public async Task<ActionResult<ColorDTO>> AddOrUpdateColor([FromForm] ColorEditModel model)
+        public async Task<ActionResult<ColorDTO>> AddOrUpdateColor([FromForm] DiscountEditModel model)
         {
             if (!ModelState.IsValid)
             {

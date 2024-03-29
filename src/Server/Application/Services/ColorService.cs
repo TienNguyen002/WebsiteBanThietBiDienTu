@@ -26,7 +26,7 @@ namespace Application.Services
         /// <param name="model"> Model to add/update </param>
         /// <returns> Added/Updated Color </returns>
         /// <exception cref="Exception"></exception>
-        public async Task<bool> AddOrUpdateColor(ColorEditModel model)
+        public async Task<bool> AddOrUpdateColor(DiscountEditModel model)
         {
             var color = model.Id > 0 ? await _repository.GetById(model.Id) : null;
             if (color == null)
