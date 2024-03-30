@@ -74,7 +74,7 @@ namespace Api.Controllers
         /// <param name="model"> Model to add/update </param>
         /// <returns> Added/Updated Category </returns>
         [HttpPost]
-        public async Task<ActionResult<CategoryDTO>> AddOrUpdateCategory([FromForm] ColorEditModel model)
+        public async Task<ActionResult<CategoryDTO>> AddOrUpdateCategory([FromForm] CategoryEditModel model)
         {
             if (!ModelState.IsValid)
             {

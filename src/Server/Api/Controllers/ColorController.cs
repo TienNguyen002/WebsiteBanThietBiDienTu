@@ -1,4 +1,5 @@
 ﻿using Api.Response;
+using Domain.DTO.Category;
 using Domain.DTO.Color;
 using Domain.Interfaces.Services;
 using MapsterMapper;
@@ -74,7 +75,7 @@ namespace Api.Controllers
         /// <param name="model"> Model to add/update </param>
         /// <returns> Added/Updated Color </returns>
         [HttpPost]
-        public async Task<ActionResult<ColorDTO>> AddOrUpdateColor([FromForm] DiscountEditModel model)
+        public async Task<ActionResult<ColorDTO>> AddOrUpdateColor([FromForm] ColorEditModel model)
         {
             if (!ModelState.IsValid)
             {

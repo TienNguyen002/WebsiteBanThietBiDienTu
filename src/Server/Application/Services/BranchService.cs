@@ -60,7 +60,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<IList<BranchDTO>> GetAllBranches()
         {
-            var branches = await _repository.GetAll();
+            var branches = await _repository.GetAllWithInclude(b => b.Products);
             return _mapper.Map<IList<BranchDTO>>(branches);
         }
 
@@ -72,7 +72,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<BranchDTO> GetBranchById(int id)
         {
-            var branch = await _repository.GetById(id);
+            var branch = await _repository.GetByIdWithInclude(id, b => b.Products);
             return _mapper.Map<BranchDTO>(branch);
         }
 

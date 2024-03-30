@@ -7,7 +7,7 @@ namespace Domain.Interfaces.Services
         Task<IList<CategoryDTO>> GetAllCategories();
         Task<CategoryDTO> GetCategoryById(int id);
         Task<CategoryDTO> GetCategoryBySlug(string slug);
-        Task<bool> AddOrUpdateCategory(ColorEditModel model);
+        Task<bool> AddOrUpdateCategory(CategoryEditModel model);
         Task<bool> DeleteCategory(int id);
     }
 }

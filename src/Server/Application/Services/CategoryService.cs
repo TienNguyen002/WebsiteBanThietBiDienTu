@@ -26,7 +26,7 @@ namespace Application.Services
         /// <param name="model"> Model to add/update </param>
         /// <returns> Added/Updated Category </returns>
         /// <exception cref="Exception"></exception>
-        public async Task<bool> AddOrUpdateCategory(ColorEditModel model)
+        public async Task<bool> AddOrUpdateCategory(CategoryEditModel model)
         {
             var category = model.Id > 0 ? await _repository.GetById(model.Id) : null;
             if (category == null)
@@ -60,7 +60,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<IList<CategoryDTO>> GetAllCategories()
         {
-            var categories = await _repository.GetAll();
+            var categories = await _repository.GetAllWithInclude(c => c.Products);
             return _mapper.Map<IList<CategoryDTO>>(categories);
         }
 
@@ -72,7 +72,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<CategoryDTO> GetCategoryById(int id)
         {
-            var category = await _repository.GetById(id);
+            var category = await _repository.GetByIdWithInclude(id, c => c.Products);
             return _mapper.Map<CategoryDTO>(category);
         }
 

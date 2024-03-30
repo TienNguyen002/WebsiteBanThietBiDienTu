@@ -61,7 +61,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<IList<DiscountDTO>> GetAllDiscounts()
         {
-            var discounts = await _repository.GetAll();
+            var discounts = await _repository.GetAllWithInclude(d => d.Product);
             return _mapper.Map<IList<DiscountDTO>>(discounts);
         }
 
@@ -73,7 +73,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<DiscountDTO> GetDiscountById(int id)
         {
-            var discount = await _repository.GetById(id);
+            var discount = await _repository.GetByIdWithInclude(id, d => d.Product);
             return _mapper.Map<DiscountDTO>(discount);
         }
     }

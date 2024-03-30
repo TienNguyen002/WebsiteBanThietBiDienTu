@@ -1,4 +1,5 @@
-﻿using Domain.DTO.Color;
+﻿using Domain.DTO.Category;
+using Domain.DTO.Color;
 using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
@@ -26,7 +27,7 @@ namespace Application.Services
         /// <param name="model"> Model to add/update </param>
         /// <returns> Added/Updated Color </returns>
         /// <exception cref="Exception"></exception>
-        public async Task<bool> AddOrUpdateColor(DiscountEditModel model)
+        public async Task<bool> AddOrUpdateColor(ColorEditModel model)
         {
             var color = model.Id > 0 ? await _repository.GetById(model.Id) : null;
             if (color == null)
@@ -60,7 +61,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<IList<ColorDTO>> GetAllColors()
         {
-            var colors = await _repository.GetAll();
+            var colors = await _repository.GetAllWithInclude(c => c.Products);
             return _mapper.Map<IList<ColorDTO>>(colors);
         }
 
@@ -72,7 +73,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<ColorDTO> GetColorById(int id)
         {
-            var color = await _repository.GetById(id);
+            var color = await _repository.GetByIdWithInclude(id, c => c.Products);
             return _mapper.Map<ColorDTO>(color);
         }
 

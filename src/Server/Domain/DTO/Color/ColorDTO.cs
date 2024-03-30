@@ -7,6 +7,6 @@ namespace Domain.DTO.Color
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string UrlSlug { get; set; } = null!;
-        public IList<ProductDTO> Product { get; set; } = new List<ProductDTO>();
+        public IList<ProductDTO> Products { get; set; } = new List<ProductDTO>();
     }
 }

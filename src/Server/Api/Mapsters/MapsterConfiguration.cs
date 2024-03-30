@@ -1,4 +1,9 @@
-﻿using Mapster;
+﻿using Domain.DTO.Branch;
+using Domain.DTO.Category;
+using Domain.DTO.Discount;
+using Domain.DTO.Product;
+using Domain.Entities;
+using Mapster;
 
 namespace Api.Mapsters
 {
@@ -6,14 +11,12 @@ namespace Api.Mapsters
     {
         public void Register(TypeAdapterConfig config)
         {
-            //config.NewConfig<Product, ProductDto>();
+            //config.NewConfig<Branch, BranchDTO>();
 
-            //config.NewConfig<Color, ColorDto>();
+            //config.NewConfig<Category, CategoryDTO>();
 
-            //config.NewConfig<Order, OrderDto>()
-            //    .Map(desc => desc.Cart, src => src.Cart);
+            //config.NewConfig<Branch, BranchDTO>();
 
-            //config.NewConfig<Tag, TagDto>();
         }
     }
 }
