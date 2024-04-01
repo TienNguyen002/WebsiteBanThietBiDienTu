@@ -150,7 +150,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("StartDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 3, 28, 9, 12, 9, 126, DateTimeKind.Local).AddTicks(1542));
+                        .HasDefaultValue(new DateTime(2024, 4, 1, 9, 16, 0, 848, DateTimeKind.Local).AddTicks(4999));
 
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
@@ -198,6 +198,9 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("DateOrder")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("PaymentMethodId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
@@ -211,6 +214,8 @@ namespace Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PaymentMethodId");
 
                     b.HasIndex("StatusId");
 
@@ -264,12 +269,7 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("PaymentMethods", (string)null);
                 });
@@ -505,6 +505,13 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
+                    b.HasOne("Domain.Entities.PaymentMethod", "PaymentMethod")
+                        .WithMany("Orders")
+                        .HasForeignKey("PaymentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Orders_PaymentMethods");
+
                     b.HasOne("Domain.Entities.Status", "Status")
                         .WithMany("Orders")
                         .HasForeignKey("StatusId")
@@ -518,6 +525,8 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("FK_Users_Orders");
+
+                    b.Navigation("PaymentMethod");
 
                     b.Navigation("Status");
 
@@ -543,18 +552,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
-                });
-
-            modelBuilder.Entity("Domain.Entities.PaymentMethod", b =>
-                {
-                    b.HasOne("Domain.Entities.Order", "Order")
-                        .WithMany("PaymentMethods")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_PaymentMethods_Orders");
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
@@ -612,8 +609,11 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
                     b.Navigation("OrderItems");
+                });
 
-                    b.Navigation("PaymentMethods");
+            modelBuilder.Entity("Domain.Entities.PaymentMethod", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>

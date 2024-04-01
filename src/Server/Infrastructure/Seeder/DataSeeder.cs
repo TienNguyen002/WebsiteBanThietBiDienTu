@@ -24,15 +24,15 @@ namespace Infrastructure.Seeders
             var roles = AddRoles();
             var tags = AddTags();
             var branches = AddBranches();
+            var paymentMethods = AddPaymentMethods();
 
             var users = AddUsers(roles);
             var products = AddProducts(categories, branches, colors, tags);
             var discounts = AddDiscounts(products);
             var images = AddImages(products);
             var comments = AddComments(products, users);
-            var orders = AddOrders(users, statuses);
+            var orders = AddOrders(users, paymentMethods, statuses);
             var orderItems = AddOrderItems(products, orders);
-            var paymentMethods = AddPaymentMethods(orders);
         }
 
         private IList<Category> AddCategories()
@@ -200,6 +200,7 @@ namespace Infrastructure.Seeders
 
         private IList<Order> AddOrders(
             IList<User> users,
+            IList<PaymentMethod> paymentMethods,
             IList<Status> statuses)
         {
             var orders = new List<Order>()
@@ -210,7 +211,8 @@ namespace Infrastructure.Seeders
                     DateOrder = DateTime.Now,
                     Quantity = 2,
                     TotalPrice = 70180000,
-                    Status = statuses[0]
+                    Status = statuses[0],
+                    PaymentMethod = paymentMethods[0]
                 }
             };
             _dbContext.AddRange(orders);
@@ -537,7 +539,7 @@ namespace Infrastructure.Seeders
             return orderItems;
         }
 
-        private IList<PaymentMethod> AddPaymentMethods(IList<Order> orders)
+        private IList<PaymentMethod> AddPaymentMethods()
         {
             var paymentMethods = new List<PaymentMethod>()
             {
@@ -545,13 +547,11 @@ namespace Infrastructure.Seeders
                 {
                     Name = "QR Pay",
                     Description = "Thanh toán bằng QR",
-                    Order = orders[0],
                 },
                 new()
                 {
                     Name = "Thanh toán trực tiếp",
                     Description = "Thanh toán trực tiếp khi nhận hàng",
-                    Order = orders[0]
                 },
             };
             var paymentMethodAdd = new List<PaymentMethod>();

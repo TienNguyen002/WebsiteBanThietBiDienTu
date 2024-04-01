@@ -22,12 +22,6 @@ namespace Infrastructure.Mapping
 
             builder.Property(p => p.Description)
                 .IsRequired();
-
-            builder.HasOne(p => p.Order)
-                .WithMany(o => o.PaymentMethods)
-                .HasForeignKey(p => p.OrderId)
-                .HasConstraintName("FK_PaymentMethods_Orders")
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

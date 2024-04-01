@@ -34,6 +34,8 @@ namespace Api.Extensions
             builder.Services.AddScoped<IColorService, ColorService>();
             builder.Services.AddScoped<IDiscountRepository, DiscountRepository>();
             builder.Services.AddScoped<IDiscountService, DiscountService>();
+            builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+            builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
 
             return builder;
         }

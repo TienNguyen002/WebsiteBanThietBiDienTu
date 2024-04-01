@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories
         /// <summary>
         /// Add Branch If Model Has No Id / Update Branch If Model Has Id
         /// </summary>
-        /// <param name="item"> Model to add/update </param>
+        /// <param name="branch"> Model to add/update </param>
         /// <returns> Added/Updated Branch </returns>
         /// <exception cref="Exception"></exception>
         public async Task<bool> AddOrUpdateBranch(Branch branch)

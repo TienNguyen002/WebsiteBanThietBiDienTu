@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories
         /// <summary>
         /// Add Category If Model Has No Id / Update Category If Model Has Id
         /// </summary>
-        /// <param name="item"> Model to add/update </param>
+        /// <param name="category"> Model to add/update </param>
         /// <returns> Added/Updated Category </returns>
         /// <exception cref="Exception"></exception>
         public async Task<bool> AddOrUpdateCategory(Category category)

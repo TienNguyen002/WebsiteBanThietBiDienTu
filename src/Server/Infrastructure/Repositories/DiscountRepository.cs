@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories
         /// <summary>
         /// Add Discount If Model Has No Id / Update Discount If Model Has Id
         /// </summary>
-        /// <param name="item"> Model to add/update </param>
+        /// <param name="discount"> Model to add/update </param>
         /// <returns> Added/Updated Discount </returns>
         /// <exception cref="Exception"></exception>
         public async Task<bool> AddDiscount(Discount discount)

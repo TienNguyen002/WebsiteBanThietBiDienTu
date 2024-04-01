@@ -29,10 +29,13 @@ namespace Domain.Entities
         //Người dùng
         public User? User { get; set; }
 
+        //Mã phương thức
+        public int PaymentMethodId { get; set; }
+
+        //Phương thức
+        public PaymentMethod? PaymentMethod { get; set; }
+
         //Danh sách sản phẩm
         public IList<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
-
-        //Danh sách phương thức
-        public IList<PaymentMethod> PaymentMethods { get; set; } = new List<PaymentMethod>();
     }
 }

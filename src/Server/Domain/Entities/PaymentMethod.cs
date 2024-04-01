@@ -19,10 +19,7 @@ namespace Domain.Entities
         //Mô tả
         public string Description { get; set; } = null!;
 
-        //Mã đơn hàng
-        public int OrderId { get; set; }
-
-        //Đơn hàng
-        public Order? Order { get; set; }
+        //Danh sách đơn hàng
+        public IList<Order> Orders { get; set; } = new List<Order>();
     }
 }

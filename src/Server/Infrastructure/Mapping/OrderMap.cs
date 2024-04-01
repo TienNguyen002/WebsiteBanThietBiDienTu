@@ -31,6 +31,12 @@ namespace Infrastructure.Mappings
                 .HasForeignKey(o => o.UserId)
                 .HasConstraintName("FK_Users_Orders")
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(o => o.PaymentMethod)
+                .WithMany(p => p.Orders)
+                .HasForeignKey(o => o.PaymentMethodId)
+                .HasConstraintName("FK_Orders_PaymentMethods")
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Infrastructure.Repositories
         /// <summary>
         /// Add Color If Model Has No Id / Update Color If Model Has Id
         /// </summary>
-        /// <param name="item"> Model to add/update </param>
+        /// <param name="color"> Model to add/update </param>
         /// <returns> Added/Updated Color </returns>
         /// <exception cref="Exception"></exception>
         public async Task<bool> AddOrUpdateColor(Color color)

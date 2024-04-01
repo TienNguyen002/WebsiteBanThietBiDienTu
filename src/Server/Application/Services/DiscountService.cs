@@ -4,7 +4,6 @@ using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using MapsterMapper;
-using SlugGenerator;
 
 namespace Application.Services
 {
