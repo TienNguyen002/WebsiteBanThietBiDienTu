@@ -1,11 +1,12 @@
-﻿using Domain.Interfaces.Repositories;
+﻿using Domain.Contracts;
+using Domain.Interfaces.Repositories;
 using Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
         protected readonly DeviceWebDbContext _context;
 
@@ -81,7 +82,7 @@ namespace Infrastructure.Repositories
                     query = query.Include(includeProperty);
                 }
             }
-            return await query.FirstOrDefaultAsync();
+            return await query.FirstOrDefaultAsync(e => e.Id == id);
         }
     }
 }
