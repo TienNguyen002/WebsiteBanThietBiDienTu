@@ -1,0 +1,697 @@
+2024-03-28 09:05:25.833 +07:00 [WRN] No store type was specified for the decimal property 'DiscountPrice' on entity type 'Discount'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:05:25.857 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:05:25.857 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'OrderItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:05:25.857 +07:00 [WRN] No store type was specified for the decimal property 'OrPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:05:25.858 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:05:25.980 +07:00 [WRN] No store type was specified for the decimal property 'DiscountPrice' on entity type 'Discount'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:05:25.981 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:05:25.981 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'OrderItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:05:25.981 +07:00 [WRN] No store type was specified for the decimal property 'OrPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:05:25.982 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:08:43.592 +07:00 [WRN] No store type was specified for the decimal property 'DiscountPrice' on entity type 'Discount'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:08:43.612 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:08:43.613 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'OrderItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:08:43.613 +07:00 [WRN] No store type was specified for the decimal property 'OrPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:08:43.613 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:08:43.722 +07:00 [WRN] No store type was specified for the decimal property 'DiscountPrice' on entity type 'Discount'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:08:43.723 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:08:43.723 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'OrderItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:08:43.723 +07:00 [WRN] No store type was specified for the decimal property 'OrPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:08:43.723 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:09:41.156 +07:00 [WRN] No store type was specified for the decimal property 'DiscountPrice' on entity type 'Discount'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:09:41.183 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:09:41.184 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'OrderItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:09:41.184 +07:00 [WRN] No store type was specified for the decimal property 'OrPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:09:41.184 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:09:41.306 +07:00 [WRN] No store type was specified for the decimal property 'DiscountPrice' on entity type 'Discount'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:09:41.307 +07:00 [WRN] No store type was specified for the decimal property 'TotalPrice' on entity type 'Order'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:09:41.307 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'OrderItem'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:09:41.308 +07:00 [WRN] No store type was specified for the decimal property 'OrPrice' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:09:41.308 +07:00 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Product'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2024-03-28 09:12:20.618 +07:00 [INF] Executed DbCommand (145ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+CREATE DATABASE [DeviceWeb];
+2024-03-28 09:12:20.673 +07:00 [INF] Executed DbCommand (34ms) [Parameters=[], CommandType='"Text"', CommandTimeout='60']
+IF SERVERPROPERTY('EngineEdition') <> 5
+BEGIN
+    ALTER DATABASE [DeviceWeb] SET READ_COMMITTED_SNAPSHOT ON;
+END;
+2024-03-28 09:12:20.686 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-03-28 09:12:20.726 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [__EFMigrationsHistory] (
+    [MigrationId] nvarchar(150) NOT NULL,
+    [ProductVersion] nvarchar(32) NOT NULL,
+    CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+);
+2024-03-28 09:12:20.727 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-03-28 09:12:20.735 +07:00 [INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2024-03-28 09:12:20.738 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2024-03-28 09:12:20.747 +07:00 [INF] Applying migration '20240328021209_InitialCreate'.
+2024-03-28 09:12:20.788 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Branches] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NOT NULL,
+    [UrlSlug] nvarchar(max) NOT NULL,
+    CONSTRAINT [PK_Branches] PRIMARY KEY ([Id])
+);
+2024-03-28 09:12:20.789 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Categories] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NOT NULL,
+    [UrlSlug] nvarchar(max) NOT NULL,
+    CONSTRAINT [PK_Categories] PRIMARY KEY ([Id])
+);
+2024-03-28 09:12:20.790 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Colors] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NOT NULL,
+    [UrlSlug] nvarchar(max) NOT NULL,
+    CONSTRAINT [PK_Colors] PRIMARY KEY ([Id])
+);
+2024-03-28 09:12:20.791 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Roles] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NOT NULL,
+    [UrlSlug] nvarchar(max) NOT NULL,
+    CONSTRAINT [PK_Roles] PRIMARY KEY ([Id])
+);
+2024-03-28 09:12:20.792 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Statuses] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NOT NULL,
+    [UrlSlug] nvarchar(max) NOT NULL,
+    CONSTRAINT [PK_Statuses] PRIMARY KEY ([Id])
+);
+2024-03-28 09:12:20.892 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Tags] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NOT NULL,
+    [UrlSlug] nvarchar(max) NOT NULL,
+    CONSTRAINT [PK_Tags] PRIMARY KEY ([Id])
+);
+2024-03-28 09:12:20.893 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Users] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NOT NULL,
+    [UrlSlug] nvarchar(max) NOT NULL,
+    [Email] nvarchar(max) NOT NULL,
+    [Phone] nvarchar(max) NOT NULL,
+    [Password] nvarchar(16) NOT NULL,
+    [Address] nvarchar(max) NOT NULL,
+    [RoleId] int NOT NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Roles_Users] FOREIGN KEY ([RoleId]) REFERENCES [Roles] ([Id]) ON DELETE CASCADE
+);
+2024-03-28 09:12:20.895 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Products] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NOT NULL,
+    [UrlSlug] nvarchar(max) NOT NULL,
+    [ImageUrl] nvarchar(1000) NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [Specification] nvarchar(max) NOT NULL,
+    [Amount] int NOT NULL,
+    [Status] bit NOT NULL DEFAULT CAST(1 AS bit),
+    [Price] decimal(18,2) NOT NULL,
+    [OrPrice] decimal(18,2) NOT NULL,
+    [CategoryId] int NOT NULL,
+    [BranchId] int NOT NULL,
+    [TagId] int NOT NULL,
+    CONSTRAINT [PK_Products] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Branches_Products] FOREIGN KEY ([BranchId]) REFERENCES [Branches] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Categories_Products] FOREIGN KEY ([CategoryId]) REFERENCES [Categories] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Tags_Products] FOREIGN KEY ([TagId]) REFERENCES [Tags] ([Id]) ON DELETE CASCADE
+);
+2024-03-28 09:12:21.135 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Orders] (
+    [Id] int NOT NULL IDENTITY,
+    [DateOrder] datetime NOT NULL,
+    [Quantity] int NOT NULL,
+    [TotalPrice] decimal(18,2) NOT NULL,
+    [StatusId] int NOT NULL,
+    [UserId] int NOT NULL,
+    CONSTRAINT [PK_Orders] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Statuses_Orders] FOREIGN KEY ([StatusId]) REFERENCES [Statuses] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Users_Orders] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
+);
+2024-03-28 09:12:21.372 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Comments] (
+    [Id] int NOT NULL IDENTITY,
+    [Detail] nvarchar(max) NOT NULL,
+    [CommentDate] datetime NOT NULL,
+    [ProductId] int NOT NULL,
+    [UserId] int NOT NULL,
+    CONSTRAINT [PK_Comments] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Comments_Products] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Comments_Users] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION
+);
+2024-03-28 09:12:21.374 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Discounts] (
+    [Id] int NOT NULL IDENTITY,
+    [DiscountPrice] decimal(18,2) NOT NULL,
+    [StartDate] datetime NOT NULL DEFAULT '2024-03-28T09:12:09.126',
+    [EndDate] datetime NOT NULL,
+    [Status] bit NOT NULL DEFAULT CAST(1 AS bit),
+    [ProductId] int NOT NULL,
+    CONSTRAINT [PK_Discounts] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Discounts_Products] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE
+);
+2024-03-28 09:12:21.595 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Images] (
+    [Id] int NOT NULL IDENTITY,
+    [ImageUrl] nvarchar(1000) NOT NULL,
+    [ProductId] int NOT NULL,
+    CONSTRAINT [PK_Images] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Images_Products] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE
+);
+2024-03-28 09:12:21.596 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [ProductColors] (
+    [ColorsId] int NOT NULL,
+    [ProductsId] int NOT NULL,
+    CONSTRAINT [PK_ProductColors] PRIMARY KEY ([ColorsId], [ProductsId]),
+    CONSTRAINT [FK_ProductColors_Colors_ColorsId] FOREIGN KEY ([ColorsId]) REFERENCES [Colors] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_ProductColors_Products_ProductsId] FOREIGN KEY ([ProductsId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE
+);
+2024-03-28 09:12:21.597 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [OrderItems] (
+    [Id] int NOT NULL IDENTITY,
+    [OrderId] int NOT NULL,
+    [ProductId] int NOT NULL,
+    [Quantity] int NOT NULL,
+    [Price] decimal(18,2) NOT NULL,
+    CONSTRAINT [PK_OrderItems] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_OrderItems_Orders] FOREIGN KEY ([OrderId]) REFERENCES [Orders] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_OrderItems_Products] FOREIGN KEY ([ProductId]) REFERENCES [Products] ([Id]) ON DELETE CASCADE
+);
+2024-03-28 09:12:21.785 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [PaymentMethods] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NOT NULL,
+    [OrderId] int NOT NULL,
+    CONSTRAINT [PK_PaymentMethods] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_PaymentMethods_Orders] FOREIGN KEY ([OrderId]) REFERENCES [Orders] ([Id]) ON DELETE CASCADE
+);
+2024-03-28 09:12:21.786 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Comments_ProductId] ON [Comments] ([ProductId]);
+2024-03-28 09:12:21.786 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Comments_UserId] ON [Comments] ([UserId]);
+2024-03-28 09:12:21.787 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Discounts_ProductId] ON [Discounts] ([ProductId]);
+2024-03-28 09:12:21.961 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Images_ProductId] ON [Images] ([ProductId]);
+2024-03-28 09:12:21.961 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_OrderItems_OrderId] ON [OrderItems] ([OrderId]);
+2024-03-28 09:12:21.962 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_OrderItems_ProductId] ON [OrderItems] ([ProductId]);
+2024-03-28 09:12:21.962 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Orders_StatusId] ON [Orders] ([StatusId]);
+2024-03-28 09:12:21.963 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Orders_UserId] ON [Orders] ([UserId]);
+2024-03-28 09:12:21.963 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_PaymentMethods_OrderId] ON [PaymentMethods] ([OrderId]);
+2024-03-28 09:12:21.964 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_ProductColors_ProductsId] ON [ProductColors] ([ProductsId]);
+2024-03-28 09:12:22.143 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Products_BranchId] ON [Products] ([BranchId]);
+2024-03-28 09:12:22.144 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Products_CategoryId] ON [Products] ([CategoryId]);
+2024-03-28 09:12:22.144 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Products_TagId] ON [Products] ([TagId]);
+2024-03-28 09:12:22.144 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Users_RoleId] ON [Users] ([RoleId]);
+2024-03-28 09:12:22.145 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20240328021209_InitialCreate', N'8.0.3');
+2024-03-28 09:12:54.996 +07:00 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2024-03-28 09:12:55.046 +07:00 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+IF EXISTS
+    (SELECT *
+     FROM [sys].[objects] o
+     WHERE [o].[type] = 'U'
+     AND [o].[is_ms_shipped] = 0
+     AND NOT EXISTS (SELECT *
+         FROM [sys].[extended_properties] AS [ep]
+         WHERE [ep].[major_id] = [o].[object_id]
+             AND [ep].[minor_id] = 0
+             AND [ep].[class] = 1
+             AND [ep].[name] = N'microsoft_database_tools_support'
+    )
+)
+SELECT 1 ELSE SELECT 0
+2024-03-28 09:12:55.147 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Products] AS [p]) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.218 +07:00 [INF] Executed DbCommand (50ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.222 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.223 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.224 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.225 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.226 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.227 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.229 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.230 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.231 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.232 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Categories] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.305 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (Size = 4000), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (Size = 4000), @p18='?' (Size = 4000), @p19='?' (Size = 4000), @p20='?' (Size = 4000), @p21='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [Categories] USING (
+VALUES (@p0, @p1, 0),
+(@p2, @p3, 1),
+(@p4, @p5, 2),
+(@p6, @p7, 3),
+(@p8, @p9, 4),
+(@p10, @p11, 5),
+(@p12, @p13, 6),
+(@p14, @p15, 7),
+(@p16, @p17, 8),
+(@p18, @p19, 9),
+(@p20, @p21, 10)) AS i ([Name], [UrlSlug], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Name], [UrlSlug])
+VALUES (i.[Name], i.[UrlSlug])
+OUTPUT INSERTED.[Id], i._Position;
+2024-03-28 09:12:55.320 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Colors] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.321 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Colors] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.323 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Colors] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.324 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Colors] AS [c]
+        WHERE [c].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.335 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [Colors] USING (
+VALUES (@p0, @p1, 0),
+(@p2, @p3, 1),
+(@p4, @p5, 2),
+(@p6, @p7, 3)) AS i ([Name], [UrlSlug], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Name], [UrlSlug])
+VALUES (i.[Name], i.[UrlSlug])
+OUTPUT INSERTED.[Id], i._Position;
+2024-03-28 09:12:55.339 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Statuses] AS [s]
+        WHERE [s].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.341 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Statuses] AS [s]
+        WHERE [s].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.342 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Statuses] AS [s]
+        WHERE [s].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.343 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Statuses] AS [s]
+        WHERE [s].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.356 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [Statuses] USING (
+VALUES (@p0, @p1, 0),
+(@p2, @p3, 1),
+(@p4, @p5, 2),
+(@p6, @p7, 3)) AS i ([Name], [UrlSlug], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Name], [UrlSlug])
+VALUES (i.[Name], i.[UrlSlug])
+OUTPUT INSERTED.[Id], i._Position;
+2024-03-28 09:12:55.361 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Roles] AS [r]
+        WHERE [r].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.363 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Roles] AS [r]
+        WHERE [r].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.372 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [Roles] USING (
+VALUES (@p0, @p1, 0),
+(@p2, @p3, 1)) AS i ([Name], [UrlSlug], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Name], [UrlSlug])
+VALUES (i.[Name], i.[UrlSlug])
+OUTPUT INSERTED.[Id], i._Position;
+2024-03-28 09:12:55.376 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Tags] AS [t]
+        WHERE [t].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.386 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Tags] ([Name], [UrlSlug])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1);
+2024-03-28 09:12:55.390 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Branches] AS [b]
+        WHERE [b].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.392 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Branches] AS [b]
+        WHERE [b].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.401 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [Branches] USING (
+VALUES (@p0, @p1, 0),
+(@p2, @p3, 1)) AS i ([Name], [UrlSlug], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Name], [UrlSlug])
+VALUES (i.[Name], i.[UrlSlug])
+OUTPUT INSERTED.[Id], i._Position;
+2024-03-28 09:12:55.406 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.407 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.408 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.409 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.410 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Users] AS [u]
+        WHERE [u].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.435 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 16), @p4='?' (Size = 4000), @p5='?' (DbType = Int32), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000), @p10='?' (Size = 16), @p11='?' (Size = 4000), @p12='?' (DbType = Int32), @p13='?' (Size = 4000), @p14='?' (Size = 4000), @p15='?' (Size = 4000), @p16='?' (Size = 4000), @p17='?' (Size = 16), @p18='?' (Size = 4000), @p19='?' (DbType = Int32), @p20='?' (Size = 4000), @p21='?' (Size = 4000), @p22='?' (Size = 4000), @p23='?' (Size = 4000), @p24='?' (Size = 16), @p25='?' (Size = 4000), @p26='?' (DbType = Int32), @p27='?' (Size = 4000), @p28='?' (Size = 4000), @p29='?' (Size = 4000), @p30='?' (Size = 4000), @p31='?' (Size = 16), @p32='?' (Size = 4000), @p33='?' (DbType = Int32), @p34='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [Users] USING (
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, 0),
+(@p7, @p8, @p9, @p10, @p11, @p12, @p13, 1),
+(@p14, @p15, @p16, @p17, @p18, @p19, @p20, 2),
+(@p21, @p22, @p23, @p24, @p25, @p26, @p27, 3),
+(@p28, @p29, @p30, @p31, @p32, @p33, @p34, 4)) AS i ([Address], [Email], [Name], [Password], [Phone], [RoleId], [UrlSlug], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Address], [Email], [Name], [Password], [Phone], [RoleId], [UrlSlug])
+VALUES (i.[Address], i.[Email], i.[Name], i.[Password], i.[Phone], i.[RoleId], i.[UrlSlug])
+OUTPUT INSERTED.[Id], i._Position;
+2024-03-28 09:12:55.442 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Products] AS [p]
+        WHERE [p].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.443 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Products] AS [p]
+        WHERE [p].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.445 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_UrlSlug_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Products] AS [p]
+        WHERE [p].[UrlSlug] = @__item_UrlSlug_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.500 +07:00 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p4='?' (Size = 1000), @p5='?' (Size = 4000), @p6='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p7='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p8='?' (Size = 4000), @p9='?' (DbType = Int32), @p10='?' (Size = 4000), @p11='?' (DbType = Int32), @p12='?' (DbType = Int32), @p13='?' (DbType = Int32), @p14='?' (Size = 4000), @p15='?' (Size = 1000), @p16='?' (Size = 4000), @p17='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p18='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p19='?' (Size = 4000), @p20='?' (DbType = Int32), @p21='?' (Size = 4000), @p22='?' (DbType = Int32), @p23='?' (DbType = Int32), @p24='?' (DbType = Int32), @p25='?' (Size = 4000), @p26='?' (Size = 1000), @p27='?' (Size = 4000), @p28='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p29='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p30='?' (Size = 4000), @p31='?' (DbType = Int32), @p32='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [Products] USING (
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, 0),
+(@p11, @p12, @p13, @p14, @p15, @p16, @p17, @p18, @p19, @p20, @p21, 1),
+(@p22, @p23, @p24, @p25, @p26, @p27, @p28, @p29, @p30, @p31, @p32, 2)) AS i ([Amount], [BranchId], [CategoryId], [Description], [ImageUrl], [Name], [OrPrice], [Price], [Specification], [TagId], [UrlSlug], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Amount], [BranchId], [CategoryId], [Description], [ImageUrl], [Name], [OrPrice], [Price], [Specification], [TagId], [UrlSlug])
+VALUES (i.[Amount], i.[BranchId], i.[CategoryId], i.[Description], i.[ImageUrl], i.[Name], i.[OrPrice], i.[Price], i.[Specification], i.[TagId], i.[UrlSlug])
+OUTPUT INSERTED.[Id], INSERTED.[Status], i._Position;
+2024-03-28 09:12:55.508 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@p33='?' (DbType = Int32), @p34='?' (DbType = Int32), @p35='?' (DbType = Int32), @p36='?' (DbType = Int32), @p37='?' (DbType = Int32), @p38='?' (DbType = Int32), @p39='?' (DbType = Int32), @p40='?' (DbType = Int32), @p41='?' (DbType = Int32), @p42='?' (DbType = Int32), @p43='?' (DbType = Int32), @p44='?' (DbType = Int32), @p45='?' (DbType = Int32), @p46='?' (DbType = Int32), @p47='?' (DbType = Int32), @p48='?' (DbType = Int32), @p49='?' (DbType = Int32), @p50='?' (DbType = Int32), @p51='?' (DbType = Int32), @p52='?' (DbType = Int32), @p53='?' (DbType = Int32), @p54='?' (DbType = Int32), @p55='?' (DbType = Int32), @p56='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [ProductColors] ([ColorsId], [ProductsId])
+VALUES (@p33, @p34),
+(@p35, @p36),
+(@p37, @p38),
+(@p39, @p40),
+(@p41, @p42),
+(@p43, @p44),
+(@p45, @p46),
+(@p47, @p48),
+(@p49, @p50),
+(@p51, @p52),
+(@p53, @p54),
+(@p55, @p56);
+2024-03-28 09:12:55.516 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__item_Id_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Discounts] AS [d]
+        WHERE [d].[Id] = @__item_Id_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.531 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p1='?' (DbType = DateTime), @p2='?' (DbType = Int32), @p3='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Discounts] ([DiscountPrice], [EndDate], [ProductId], [StartDate])
+OUTPUT INSERTED.[Id], INSERTED.[Status]
+VALUES (@p0, @p1, @p2, @p3);
+2024-03-28 09:12:55.544 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Comments] ([CommentDate], [Detail], [ProductId], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3);
+2024-03-28 09:12:55.560 +07:00 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = DateTime), @p1='?' (DbType = Int32), @p2='?' (DbType = Int32), @p3='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p4='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Orders] ([DateOrder], [Quantity], [StatusId], [TotalPrice], [UserId])
+OUTPUT INSERTED.[Id]
+VALUES (@p0, @p1, @p2, @p3, @p4);
+2024-03-28 09:12:55.576 +07:00 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p2='?' (DbType = Int32), @p3='?' (DbType = Int32), @p4='?' (DbType = Int32), @p5='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p6='?' (DbType = Int32), @p7='?' (DbType = Int32), @p8='?' (DbType = Int32), @p9='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p10='?' (DbType = Int32), @p11='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [OrderItems] USING (
+VALUES (@p0, @p1, @p2, @p3, 0),
+(@p4, @p5, @p6, @p7, 1),
+(@p8, @p9, @p10, @p11, 2)) AS i ([OrderId], [Price], [ProductId], [Quantity], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([OrderId], [Price], [ProductId], [Quantity])
+VALUES (i.[OrderId], i.[Price], i.[ProductId], i.[Quantity])
+OUTPUT INSERTED.[Id], i._Position;
+2024-03-28 09:12:55.582 +07:00 [INF] Executed DbCommand (1ms) [Parameters=[@__item_Name_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [PaymentMethods] AS [p]
+        WHERE [p].[Name] = @__item_Name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.583 +07:00 [INF] Executed DbCommand (0ms) [Parameters=[@__item_Name_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [PaymentMethods] AS [p]
+        WHERE [p].[Name] = @__item_Name_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2024-03-28 09:12:55.594 +07:00 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (DbType = Int32), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+MERGE [PaymentMethods] USING (
+VALUES (@p0, @p1, @p2, 0),
+(@p3, @p4, @p5, 1)) AS i ([Description], [Name], [OrderId], _Position) ON 1=0
+WHEN NOT MATCHED THEN
+INSERT ([Description], [Name], [OrderId])
+VALUES (i.[Description], i.[Name], i.[OrderId])
+OUTPUT INSERTED.[Id], i._Position;
+2024-03-28 09:12:55.636 +07:00 [INF] No action descriptors found. This may indicate an incorrectly configured application or missing application parts. To learn more, visit https://aka.ms/aspnet/mvc/app-parts
+2024-03-28 09:12:55.709 +07:00 [INF] Now listening on: https://localhost:7249
+2024-03-28 09:12:55.709 +07:00 [INF] Now listening on: http://localhost:5002
+2024-03-28 09:12:55.727 +07:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-03-28 09:12:55.728 +07:00 [INF] Hosting environment: Development
+2024-03-28 09:12:55.728 +07:00 [INF] Content root path: D:\Year4-Term2\DATN\DoAnTotNghiep_WebsiteBanThietBiDienTu\src\Server\Api
+2024-03-28 09:12:57.348 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7249/swagger/index.html - null null
+2024-03-28 09:12:57.457 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7249/swagger/index.html - 200 null text/html;charset=utf-8 111.0453ms
+2024-03-28 09:12:57.479 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7249/_framework/aspnetcore-browser-refresh.js - null null
+2024-03-28 09:12:57.483 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7249/_framework/aspnetcore-browser-refresh.js - 200 13742 application/javascript; charset=utf-8 4.0839ms
+2024-03-28 09:12:57.571 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7249/_vs/browserLink - null null
+2024-03-28 09:12:57.602 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7249/_vs/browserLink - 200 null text/javascript; charset=UTF-8 30.881ms
+2024-03-28 09:12:57.652 +07:00 [INF] Request starting HTTP/2 GET https://localhost:7249/swagger/v1/swagger.json - null null
+2024-03-28 09:12:57.663 +07:00 [INF] Request finished HTTP/2 GET https://localhost:7249/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 11.582ms

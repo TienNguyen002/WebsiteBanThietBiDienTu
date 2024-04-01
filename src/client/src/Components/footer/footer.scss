@@ -1,0 +1,17 @@
+.footer {
+  &-top {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+  }
+  &-bot {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    &-social {
+      display: flex;
+      gap: 50px;
+      justify-content: center;
+    }
+  }
+}
