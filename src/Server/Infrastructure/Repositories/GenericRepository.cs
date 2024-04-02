@@ -44,12 +44,9 @@ namespace Infrastructure.Repositories
         public async Task<IList<T>> GetAllWithInclude(params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _context.Set<T>();
-            if (includeProperties != null)
+            foreach (var includeProperty in includeProperties)
             {
-                foreach (var includeProperty in includeProperties)
-                {
-                    query = query.Include(includeProperty);
-                }
+                query = query.Include(includeProperty);
             }
             return await query.ToListAsync();
         }
@@ -75,12 +72,9 @@ namespace Infrastructure.Repositories
         public async Task<T> GetByIdWithInclude(int id, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> query = _context.Set<T>();
-            if (includeProperties != null)
+            foreach (var includeProperty in includeProperties)
             {
-                foreach (var includeProperty in includeProperties)
-                {
-                    query = query.Include(includeProperty);
-                }
+                query = query.Include(includeProperty);
             }
             return await query.FirstOrDefaultAsync(e => e.Id == id);
         }

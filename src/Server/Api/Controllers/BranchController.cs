@@ -2,6 +2,7 @@
 using Domain.DTO.Branch;
 using Domain.Interfaces.Services;
 using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
