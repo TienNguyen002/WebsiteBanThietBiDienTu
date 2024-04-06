@@ -10,32 +10,6 @@ namespace Infrastructure.Repositories
         public ColorRepository(DeviceWebDbContext context) : base(context) { }
 
         /// <summary>
-        /// Add Color If Model Has No Id / Update Color If Model Has Id
-        /// </summary>
-        /// <param name="color"> Model to add/update </param>
-        /// <returns> Added/Updated Color </returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<bool> AddOrUpdateColor(Color color)
-        {
-            try
-            {
-                if (color.Id > 0)
-                {
-                    _context.Update(color);
-                }
-                else
-                {
-                    _context.Add(color);
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Delete Color By Id
         /// </summary>
         /// <param name="id"> Id Of Color want to delete </param>

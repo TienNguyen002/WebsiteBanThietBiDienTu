@@ -35,7 +35,7 @@ namespace Application.Services
             }
             category.Name = model.Name;
             category.UrlSlug = model.Name.GenerateSlug();
-            await _repository.AddOrUpdateCategory(category);
+            await _repository.AddOrUpdate(category);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
         }

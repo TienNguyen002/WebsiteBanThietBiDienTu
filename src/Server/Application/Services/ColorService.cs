@@ -36,7 +36,7 @@ namespace Application.Services
             }
             color.Name = model.Name;
             color.UrlSlug = model.Name.GenerateSlug();
-            await _repository.AddOrUpdateColor(color);
+            await _repository.AddOrUpdate(color);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
         }

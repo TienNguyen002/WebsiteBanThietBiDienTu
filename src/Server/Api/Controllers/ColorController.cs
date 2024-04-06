@@ -1,5 +1,4 @@
 ﻿using Api.Response;
-using Domain.DTO.Category;
 using Domain.DTO.Color;
 using Domain.Interfaces.Services;
 using MapsterMapper;

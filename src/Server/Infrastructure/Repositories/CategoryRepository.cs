@@ -10,32 +10,6 @@ namespace Infrastructure.Repositories
         public CategoryRepository(DeviceWebDbContext context) : base(context) { }
 
         /// <summary>
-        /// Add Category If Model Has No Id / Update Category If Model Has Id
-        /// </summary>
-        /// <param name="category"> Model to add/update </param>
-        /// <returns> Added/Updated Category </returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<bool> AddOrUpdateCategory(Category category)
-        {
-            try
-            {
-                if (category.Id > 0)
-                {
-                    _context.Update(category);
-                }
-                else
-                {
-                    _context.Add(category);
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Delete Category By Id
         /// </summary>
         /// <param name="id"> Id Of Category want to delete </param>

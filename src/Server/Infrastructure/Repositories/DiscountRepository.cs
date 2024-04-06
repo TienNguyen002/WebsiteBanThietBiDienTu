@@ -10,25 +10,6 @@ namespace Infrastructure.Repositories
         public DiscountRepository(DeviceWebDbContext context) : base(context) { }
 
         /// <summary>
-        /// Add Discount
-        /// </summary>
-        /// <param name="discount"> Model to add </param>
-        /// <returns> Added Discount </returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<bool> AddDiscount(Discount discount)
-        {
-            try
-            {
-                _context.Add(discount);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Delete Discount By Id
         /// </summary>
         /// <param name="id"> Id Of Discount want to delete </param>

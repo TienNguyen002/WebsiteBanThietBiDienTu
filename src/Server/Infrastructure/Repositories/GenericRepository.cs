@@ -1,4 +1,5 @@
 ﻿using Domain.Contracts;
+using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
@@ -21,9 +22,43 @@ namespace Infrastructure.Repositories
         /// <param name="entity"> Entity in DB </param>
         /// <returns> Added Entity </returns>
         /// <exception cref="Exception"></exception>
-        public async Task Add(T entity)
+        public async Task<bool> Add(T entity)
         {
-            await _context.Set<T>().AddAsync(entity);
+            try
+            {
+                _context.Add(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Add Entity If Model Has No Id / Update Entity If Model Has Id
+        /// </summary>
+        /// <param name="entity"> Model to add/update </param>
+        /// <returns> Added/Updated Entity </returns>
+        /// <exception cref="Exception"></exception>
+        public async Task<bool> AddOrUpdate(T entity)
+        {
+            try
+            {
+                if (entity.Id > 0)
+                {
+                    _context.Update(entity);
+                }
+                else
+                {
+                    _context.Add(entity);
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         /// <summary>

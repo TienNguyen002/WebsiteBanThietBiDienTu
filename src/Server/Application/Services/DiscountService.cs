@@ -35,7 +35,7 @@ namespace Application.Services
                 ProductId = model.ProductId,
                 Status = true,
             };
-            await _repository.AddDiscount(discount);
+            await _repository.Add(discount);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
         }

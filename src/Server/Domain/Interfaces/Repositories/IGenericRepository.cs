@@ -8,6 +8,7 @@ namespace Domain.Interfaces.Repositories
         Task<T> GetByIdWithInclude(int id, params Expression<Func<T, object>>[] includeProperties);
         Task<IList<T>> GetAll();
         Task<IList<T>> GetAllWithInclude(params Expression<Func<T, object>>[] includeProperties);
-        Task Add(T entity);
+        Task<bool> Add(T entity);
+        Task<bool> AddOrUpdate(T entity);
     }
 }

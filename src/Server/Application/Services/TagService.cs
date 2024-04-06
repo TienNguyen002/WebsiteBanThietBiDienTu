@@ -35,7 +35,7 @@ namespace Application.Services
             }
             tag.Name = model.Name;
             tag.UrlSlug = model.Name.GenerateSlug();
-            await _repository.AddTag(tag);
+            await _repository.Add(tag);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
         }

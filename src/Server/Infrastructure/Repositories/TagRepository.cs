@@ -10,25 +10,6 @@ namespace Infrastructure.Repositories
         public TagRepository(DeviceWebDbContext context) : base(context) { }
 
         /// <summary>
-        /// Add Tag
-        /// </summary>
-        /// <param name="tag"> Model to add </param>
-        /// <returns> Added Tag </returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<bool> AddTag(Tag tag)
-        {
-            try
-            {
-                _context.Add(tag);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Delete Tag By Id
         /// </summary>
         /// <param name="id"> Id Of Tag want to delete </param>

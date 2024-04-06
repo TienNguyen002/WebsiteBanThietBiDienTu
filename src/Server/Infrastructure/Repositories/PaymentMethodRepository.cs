@@ -10,25 +10,6 @@ namespace Infrastructure.Repositories
         public PaymentMethodRepository(DeviceWebDbContext context) : base(context) { }
 
         /// <summary>
-        /// Add Payment
-        /// </summary>
-        /// <param name="paymentMethod"> Model to add </param>
-        /// <returns> Added Payment Method </returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<bool> AddPaymentMethod(PaymentMethod paymentMethod)
-        {
-            try
-            {
-                _context.Add(paymentMethod);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Delete Payment Method By Id
         /// </summary>
         /// <param name="id"> Id Of PaymentMethod want to delete </param>

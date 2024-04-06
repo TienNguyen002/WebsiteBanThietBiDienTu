@@ -35,7 +35,7 @@ namespace Application.Services
             }
             branch.Name = model.Name;
             branch.UrlSlug = model.Name.GenerateSlug();
-            await _repository.AddOrUpdateBranch(branch);
+            await _repository.AddOrUpdate(branch);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
         }

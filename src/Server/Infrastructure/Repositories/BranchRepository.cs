@@ -10,32 +10,6 @@ namespace Infrastructure.Repositories
         public BranchRepository(DeviceWebDbContext context) : base(context) { }
 
         /// <summary>
-        /// Add Branch If Model Has No Id / Update Branch If Model Has Id
-        /// </summary>
-        /// <param name="branch"> Model to add/update </param>
-        /// <returns> Added/Updated Branch </returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<bool> AddOrUpdateBranch(Branch branch)
-        {
-            try
-            {
-                if(branch.Id > 0)
-                {
-                    _context.Update(branch);
-                }
-                else
-                {
-                    _context.Add(branch);
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Delete Branch By Id
         /// </summary>
         /// <param name="id"> Id Of Branch want to delete </param>
