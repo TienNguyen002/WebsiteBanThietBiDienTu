@@ -10,23 +10,16 @@ namespace Infrastructure.Repositories
         public DiscountRepository(DeviceWebDbContext context) : base(context) { }
 
         /// <summary>
-        /// Add Discount If Model Has No Id / Update Discount If Model Has Id
+        /// Add Discount
         /// </summary>
-        /// <param name="discount"> Model to add/update </param>
-        /// <returns> Added/Updated Discount </returns>
+        /// <param name="discount"> Model to add </param>
+        /// <returns> Added Discount </returns>
         /// <exception cref="Exception"></exception>
         public async Task<bool> AddDiscount(Discount discount)
         {
             try
             {
-                if (discount.Id > 0)
-                {
-                    _context.Update(discount);
-                }
-                else
-                {
-                    _context.Add(discount);
-                }
+                _context.Add(discount);
                 return true;
             }
             catch (Exception)

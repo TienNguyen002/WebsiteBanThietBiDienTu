@@ -1,13 +1,20 @@
 ﻿using Application.Media;
 using Application.Services;
+using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using Infrastructure.Contexts;
 using Infrastructure.Repositories;
 using Infrastructure.Seeders;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Serilog;
+using Swashbuckle.AspNetCore.Filters;
+using System.Text;
 
 namespace Api.Extensions
 {
@@ -36,6 +43,11 @@ namespace Api.Extensions
             builder.Services.AddScoped<IDiscountService, DiscountService>();
             builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
             builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
+            builder.Services.AddScoped<ITagRepository, TagRepository>();
+            builder.Services.AddScoped<ITagService, TagService>();
+            builder.Services.AddScoped<IStatusRepository, StatusRepository>();
+            builder.Services.AddScoped<IStatusService, StatusService>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             return builder;
         }
@@ -70,10 +82,49 @@ namespace Api.Extensions
         //    return builder;
         //}
 
+        public static WebApplicationBuilder ConfigureIdentityJWT(this WebApplicationBuilder builder)
+        {
+            //Identity
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<DeviceWebDbContext>()
+                .AddSignInManager()
+                .AddRoles<IdentityRole>();
+
+            //JWT
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+                };
+            });
+            return builder;
+        }
+
         public static WebApplicationBuilder ConfigureSwaggerOpenApi(this WebApplicationBuilder builder)
         {
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
             return builder;
         }
 

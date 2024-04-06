@@ -1,10 +1,11 @@
 ﻿using Domain.Entities;
 using Infrastructure.Mappings;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contexts
 {
-    public class DeviceWebDbContext : DbContext
+    public class DeviceWebDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -21,7 +22,9 @@ namespace Infrastructure.Contexts
         public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public DeviceWebDbContext(DbContextOptions<DeviceWebDbContext> options) : base(options) { }
+        public DeviceWebDbContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,6 +33,7 @@ namespace Infrastructure.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CategoryMap).Assembly);
         }
     }

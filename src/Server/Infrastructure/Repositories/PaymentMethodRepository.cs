@@ -10,23 +10,16 @@ namespace Infrastructure.Repositories
         public PaymentMethodRepository(DeviceWebDbContext context) : base(context) { }
 
         /// <summary>
-        /// Add Payment Method If Model Has No Id / Update PaymentMethod If Model Has Id
+        /// Add Payment
         /// </summary>
-        /// <param name="paymentMethod"> Model to add/update </param>
-        /// <returns> Added/Updated Payment Method </returns>
+        /// <param name="paymentMethod"> Model to add </param>
+        /// <returns> Added Payment Method </returns>
         /// <exception cref="Exception"></exception>
         public async Task<bool> AddPaymentMethod(PaymentMethod paymentMethod)
         {
             try
             {
-                if (paymentMethod.Id > 0)
-                {
-                    _context.Update(paymentMethod);
-                }
-                else
-                {
-                    _context.Add(paymentMethod);
-                }
+                _context.Add(paymentMethod);
                 return true;
             }
             catch (Exception)
