@@ -157,6 +157,7 @@ namespace Infrastructure.Seeders
                     User = users[0],
                     Product = products[0],
                     Detail = "Em rất thích sản phẩm này",
+                    Rating = 5,
                     CommentDate = DateTime.Now,
                 }
             };
@@ -171,17 +172,17 @@ namespace Infrastructure.Seeders
             {
                 new()
                 {
-                    ImageUrl = "Hinh 1",
+                    ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/iphone-15-pro-max_3.png",
                     Product = products[0],
                 },
                 new()
                 {
-                    ImageUrl = "Hinh 2",
+                    ImageUrl = "https://cdn2.cellphones.com.vn/x/media/catalog/product/v/n/vn_iphone_15_pro_black_titanium_pdp_image_position-1a_black_titanium_color.jpg",
                     Product = products[0],
                 },
                 new()
                 {
-                    ImageUrl = "Hinh 3",
+                    ImageUrl = "https://cdn2.cellphones.com.vn/x/media/catalog/product/v/n/vn_iphone_15_pro_blue_titanium_pdp_image_position-1a_blue_titanium_color.jpg",
                     Product = products[0],
                 }
             };
