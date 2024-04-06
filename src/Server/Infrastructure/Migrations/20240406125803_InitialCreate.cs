@@ -365,6 +365,7 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Detail = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
                     CommentDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
@@ -393,7 +394,7 @@ namespace Infrastructure.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DiscountPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 4, 2, 16, 49, 24, 487, DateTimeKind.Local).AddTicks(7807)),
+                    StartDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 4, 6, 19, 58, 2, 461, DateTimeKind.Local).AddTicks(639)),
                     EndDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     ProductId = table.Column<int>(type: "int", nullable: false)

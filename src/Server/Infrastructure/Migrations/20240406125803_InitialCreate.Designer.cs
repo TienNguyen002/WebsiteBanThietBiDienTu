@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DeviceWebDbContext))]
-    [Migration("20240402094924_InitialCreate")]
+    [Migration("20240406125803_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -189,6 +189,9 @@ namespace Infrastructure.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Rating")
+                        .HasColumnType("int");
+
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
@@ -221,7 +224,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("StartDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 4, 2, 16, 49, 24, 487, DateTimeKind.Local).AddTicks(7807));
+                        .HasDefaultValue(new DateTime(2024, 4, 6, 19, 58, 2, 461, DateTimeKind.Local).AddTicks(639));
 
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()

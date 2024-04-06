@@ -11,6 +11,9 @@ namespace Domain.Entities
         //Chi tiết bình luận
         public string Detail { get; set; } = null!;
 
+        //Đánh giá
+        public int Rating { get; set; }
+
         //Ngày bình luận
         public DateTime CommentDate { get; set; }
 
