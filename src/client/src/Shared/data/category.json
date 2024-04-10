@@ -1,0 +1,29 @@
+{
+    "result": [
+      {
+        "id": 1,
+        "name": "Điện thoại",
+        "icon": ""
+      },
+      {
+        "id": 2,
+        "name": "Tablet"
+      },
+      {
+        "id": 3,
+        "name": "Laptop"
+      },
+      {
+        "id": 4,
+        "name": "Âm thanh"
+      },
+      {
+        "id": 5,
+        "name": "Đồng hồ"
+      },
+      {
+        "id": 6,
+        "name": "Camera"
+      }
+    ]
+  }
