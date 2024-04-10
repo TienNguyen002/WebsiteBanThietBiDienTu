@@ -13,10 +13,10 @@ const HomePage = () => {
   return (
     <div>
       <Header />
-      <Banner />
+      {/* <Banner />
       <FlashSale />
       <Product />
-      <Footer />
+      <Footer /> */}
     </div>
   );
 };

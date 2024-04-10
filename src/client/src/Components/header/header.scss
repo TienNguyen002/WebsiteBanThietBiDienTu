@@ -1,34 +1,45 @@
-.header {
+.home-header {
   width: 100%;
-  background-color: navy;
-  display: flex;
-  gap: 17%;
-  padding: 10px 20px 10px;
-  color: white;
-  align-items: center;
-
-  &-logo {
-    padding: 10px;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  &-banner {
+    width: fit-content;
   }
-  .category {
-    display: inline;
-    border-radius: 10px;
-    border: 2px solid #f2f2f2;
-    padding: 10px;
-    background-color: #185bb3;
-  }
-  .searching {
-    display: inline-flex;
-    gap: 10px;
-    .icon-search {
-      padding: 10px;
-    }
-    .input-search {
-      width: 120%;
-    }
-  }
-  &-end {
+  &-navbar {
     display: flex;
-    gap: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    &-logo {
+      width: 80px;
+      height: 60px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+    &-search {
+      position: absolute;
+      display: flex;
+      .input-search {
+        height: 30px;
+        width: 500px;
+        border-radius: 20px;
+        padding-left: 20px;
+      }
+      .search-icon {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        color: var(--black);
+      }
+    }
+    &-end {
+      display: flex;
+      gap: 30px;
+      color: var(--white);
+    }
   }
 }

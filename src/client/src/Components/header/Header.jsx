@@ -1,29 +1,31 @@
 import "./header.scss";
+import banner from "../../Shared/images/banner-top.jpg";
+import logo from "../../Shared/images/logo-4.png";
+import { ShoppingCart, UserRound, Search } from "lucide-react";
 
 const Header = () => {
   return (
     <>
-      <div className="header-top">
-        <div className="swiper wrapper">
-          This is one to swipe and have banner
+      <div className="home-header">
+        <div className="home-header-banner">
+          <img src={banner} alt="Banner" />
         </div>
-      </div>
-      <div className="header">
-        <div className="header-logo">
-          {/* <img src="https://www.titancorpvn.com/assets/images/logo-white.png" alt="" /> */}
-          <span>Hello</span>
-        </div>
-        <div className="category">
-          <i class="fa-solid fa-book"></i>
-          <span> Danh mục</span>
-        </div>
-        <div className="searching">
-          <i className="icon-search" class="fa-solid fa-magnifying-glass"></i>
-          <input className="input-search" type="text" />
-        </div>
-        <div className="header-end">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <i class="fa-solid fa-user"></i>
+        <div className="home-header-navbar">
+          <div className="home-header-navbar-logo">
+            <img src={logo} alt="Logo" className="home-header-navbar-logo" />
+          </div>
+          <div className="home-header-navbar-search">
+            <input
+              className="input-search"
+              type="text"
+              placeholder="I'm shopping for ..."
+            />
+            <Search className="search-icon" />
+          </div>
+          <div className="home-header-navbar-end">
+            <UserRound className="user-icon" />
+            <ShoppingCart className="cart-icon" />
+          </div>
         </div>
       </div>
     </>
