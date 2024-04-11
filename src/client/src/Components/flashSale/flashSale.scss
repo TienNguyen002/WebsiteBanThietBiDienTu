@@ -1,3 +1,17 @@
-.flash-sale {
-  margin: 20px 20% 0;
+.home-flash-sale {
+  margin: 10px 13% 0;
+  background: var(--light-blue);
+  border-radius: 1em;
+  &-top {
+    display: flex;
+    align-items: center;
+    padding: 5px 20px;
+  }
+  &-title {
+    color: var(--white);
+  }
+  &-icon {
+    margin-left: 5px;
+    color: var(--yellow);
+  }
 }

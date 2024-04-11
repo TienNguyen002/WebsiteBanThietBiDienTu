@@ -1,59 +1,64 @@
 import React from "react";
+import { Youtube, Facebook, Instagram, Twitter } from "lucide-react";
 import "./footer.scss";
 
 const Footer = () => {
   return (
-    <div className="footer">
-      <div className="footer-top">
-        <div className="footer-top-about">
-          <h4 className="title">VỀ CHÚNG TÔI</h4>
-          <ul className="item">
-            <li>Giới thiệu</li>
-            <li>Tuyển dụng</li>
-          </ul>
+    <>
+      <div className="home-footer">
+        <div className="home-footer-top">
+          <div className="home-footer-top-about">
+            <ul className="item">
+              <h4 className="title">VỀ CHÚNG TÔI</h4>
+              <li>Giới thiệu</li>
+              <li>Tuyển dụng</li>
+            </ul>
+          </div>
+          <div className="home-footer-top-policy">
+            <ul className="item">
+              <h4 className="title">CHÍNH SÁCH</h4>
+              <li>Chính sách bảo hành</li>
+              <li>Chính sách thanh toán</li>
+              <li>Chính sách giao hàng</li>
+              <li>Chính sách bảo mật</li>
+            </ul>
+          </div>
+          <div className="home-footer-top-information">
+            <ul className="item">
+              <h4 className="title">THÔNG TIN</h4>
+              <li>Hệ thống cửa hàng</li>
+              <li>Trung tâm bảo hành</li>
+              <li>Tra cứu địa chỉ bảo hành</li>
+            </ul>
+          </div>
+          <div className="home-footer-top-support">
+            <ul className="item">
+              <h4 className="title">TỔNG ĐÀI HỖ TRỢ (8:00 - 21:00)</h4>
+              <li>CSKH:</li>
+              <li>Bảo hành:</li>
+              <li>HTKT:</li>
+              <li>Email:</li>
+            </ul>
+          </div>
         </div>
-        <div className="footer-top-policy">
-          <h4 className="title">CHÍNH SÁCH</h4>
-          <ul className="item">
-            <li>Chính sách bảo hành</li>
-            <li>Chính sách thanh toán</li>
-            <li>Chính sách giao hàng</li>
-            <li>Chính sách bảo mật</li>
-          </ul>
-        </div>
-        <div className="footer-top-information">
-          <h4 className="title">THÔNG TIN</h4>
-          <ul className="item">
-            <li>Hệ thống cửa hàng</li>
-            <li>Trung tâm bảo hành</li>
-            <li>Tra cứu địa chỉ bảo hành</li>
-          </ul>
-        </div>
-        <div className="footer-top-support">
-          <h4 className="title">TỔNG ĐÀI HỖ TRỢ (8:00 - 21:00)</h4>
-          <ul className="item">
-            <li>CSKH:</li>
-            <li>Bảo hành:</li>
-            <li>HTKT:</li>
-            <li>Email:</li>
-          </ul>
-        </div>
-      </div>
-      <div className="footer-bot">
-        <div className="footer-bot-copyright">
-          &copy; 2024 - HỆ THỐNG BÁN THIẾT BỊ
-        </div>
-        <div className="footer-bot-social">
-          <h4>KẾT NỐI VỚI CHÚNG TÔI</h4>
-          <div className="footer-bot-social-icon">
-            <i class="fa-brands fa-youtube"></i>
-            <i class="fa-brands fa-facebook"></i>
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-tiktok"></i>
+        <div className="home-footer-bot">
+          <div className="home-footer-bot-copyright">
+            <h4>&copy; 2024 - HỆ THỐNG BÁN THIẾT BỊ</h4>
+          </div>
+          <div className="home-footer-bot-social">
+            <h4 className="home-footer-bot-social-title">
+              KẾT NỐI VỚI CHÚNG TÔI
+            </h4>
+            <div className="home-footer-bot-social-icon">
+              <Youtube className="youtube-icon" />
+              <Facebook className="facebook-icon" />
+              <Instagram className="instagram-icon" />
+              <Twitter className="twitter-icon" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
