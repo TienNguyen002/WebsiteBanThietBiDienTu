@@ -1,0 +1,41 @@
+.home-clock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgb(255, 255, 255);
+  &-data {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    &-detail {
+      display: flex;
+      align-items: center;
+      &-number {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+      }
+      &-name {
+        padding-left: 10px;
+        font-size: 2rem;
+        padding-top: 8px;
+      }
+    }
+    &-dot {
+      font-size: 3rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .clock_wrapper {
+    justify-content: center;
+  }
+
+  .clock_data h1 {
+    font-size: 1.1rem !important;
+  }
+
+  .clock_data h5 {
+    font-size: 0.9rem !important;
+  }
+}

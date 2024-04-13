@@ -1,0 +1,17 @@
+.home-page {
+  scroll-behavior: smooth;
+  &-top-button {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: #073394;
+    color: #fff;
+    border-radius: 50%;
+    height: 53px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+    align-items: center;
+  }
+}
