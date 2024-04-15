@@ -14,6 +14,9 @@
       color: gray;
       cursor: pointer;
     }
+    &-more:hover {
+      color: black;
+    }
   }
   &-product {
     display: flex;

@@ -1,13 +1,13 @@
 .home-header {
   width: 100%;
-  background: #073394;
+  background: var(--dark-red);
   &-banner {
     object-fit: cover;
     width: 100%;
   }
   &-navbar {
     width: 100%;
-    background: #073394;
+    background: var(--dark-red);
     display: flex;
     z-index: 10;
     justify-content: space-around;
@@ -23,6 +23,7 @@
       position: absolute;
       display: flex;
       .input-search {
+        border: 1px solid gray;
         height: 30px;
         width: 500px;
         border-radius: 20px;

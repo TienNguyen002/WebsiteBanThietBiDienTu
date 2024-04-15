@@ -3,6 +3,7 @@ import "./header.scss";
 import banner from "../../Shared/images/banner-top.jpg";
 import logo from "../../Shared/images/logo-4.png";
 import { ShoppingCart, UserRound, Search } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const navbarRef = useRef(null);
@@ -34,9 +35,9 @@ const Header = () => {
           <img src={banner} alt="Banner" />
         </div>
         <div ref={navbarRef} className="home-header-navbar">
-          <div className="home-header-navbar-logo">
+          <Link to="/" className="home-header-navbar-logo">
             <img src={logo} alt="Logo" className="home-header-navbar-logo" />
-          </div>
+          </Link>
           <div className="home-header-navbar-search">
             <input
               className="input-search"

@@ -25,32 +25,29 @@ const ProductCard = () => {
 
   return (
     <>
-      {/* <Link to={"/detail"}> */}
       <div ref={productCardRef} className="product-box">
-        <img
-          src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/e/tecno-spark-20-pro-plus_1__2.png"
-          alt="Tên sản phẩm"
-          className="product-box-image"
-        />
-        <h3 className="product-box-name">
-          <Link to={"/detail"} className="product-box-name-detail">
-            Tên sản phẩm
-          </Link>
-        </h3>
-        <div className="product-box-price">
-          <div className="product-box-price-discount">
-            <p>8.000.000đ</p>
+        <Link to={"/detail"} className="product-box-detail">
+          <img
+            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/e/tecno-spark-20-pro-plus_1__2.png"
+            alt="Tên sản phẩm"
+            className="product-box-detail-image"
+          />
+          <h3 className="product-box-detail-name">Tên sản phẩm </h3>
+          <div className="product-box-detail-price">
+            <div className="product-box-detail-price-discount">
+              <p>8.000.000đ</p>
+            </div>
+            <div className="product-box-detail-price-current">
+              <s>10.000.000đ</s>
+            </div>
           </div>
-          <div className="product-box-price-current">
-            <s>10.000.000đ</s>
+          <div className="product-box-info">
+            <StarRating rating={4} className="product-box-info-rating" />
+            <div to={"/detail"}>
+              <Eye className="product-box-info-more" />
+            </div>
           </div>
-        </div>
-        <div className="product-box-detail">
-          <StarRating rating={4} className="product-box-detail-rating" />
-          <Link to={"/detail"}>
-            <Eye className="product-box-detail-more" />
-          </Link>
-        </div>
+        </Link>
         {showAction && (
           <div className="product-box-action">
             <ShoppingCart className="product-box-action-cart" />
@@ -58,7 +55,6 @@ const ProductCard = () => {
           </div>
         )}
       </div>
-      {/* </Link> */}
     </>
   );
 };

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import Category from "../../Components/category/Category";
 import FlashSale from "./../../Components/flashSale/FlashSale";
 import Product from "../../Components/product/Product";
 import { ArrowUp } from "lucide-react";
 import "../../styles/homePage.scss";
 import TopSuggest from "../../Components/topSuggest/TopSuggest";
+import TopBody from "../../Components/topBody/TopBody";
 
 const HomePage = () => {
   const buttonRef = useRef(null);
@@ -49,9 +49,12 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <Category />
+      <TopBody />
       <FlashSale />
       <TopSuggest />
+      <Product />
+      <Product />
+      <Product />
       <Product />
       {show ? (
         <button
