@@ -1,16 +1,19 @@
 .home-top-body {
+  margin: 10px 2% 0;
   display: grid;
-  grid-template-columns: 9% 60% 15%;
+  grid-template-columns: 12% 60% 15%;
   padding: 10px 110px;
   justify-content: center;
   &-category {
     border: solid 1px var(--gray);
     border-radius: 1em;
     padding: 10px;
-    width: 150px;
+    width: 200px;
     &-item {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      text-align: center;
     }
   }
   .swiper {

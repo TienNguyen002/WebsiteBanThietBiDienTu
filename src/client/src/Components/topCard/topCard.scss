@@ -1,0 +1,45 @@
+.top-card {
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    &-title {
+      color: red;
+      font-weight: bold;
+      font-size: 25px;
+      margin: 10px 0;
+    }
+    &-more {
+      display: flex;
+      align-items: center;
+      color: gray;
+      cursor: pointer;
+    }
+  }
+  &-product {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    border-radius: 1em;
+    padding: 20px;
+    width: fit-content;
+    &-detail {
+      margin: 0 10px;
+      &-image {
+        height: 8em;
+        width: 100%;
+      }
+      &-name {
+        font-size: 15px;
+        text-align: center;
+        margin: 0;
+      }
+      &-price {
+        text-align: center;
+        margin: 5px;
+        &-current {
+          color: red;
+        }
+      }
+    }
+  }
+}

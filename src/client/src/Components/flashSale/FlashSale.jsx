@@ -3,16 +3,12 @@ import { Zap, ChevronRight } from "lucide-react";
 import ProductCard from "../productCard/ProductCard";
 import Clock from "../clock/Clock";
 import { Swiper, SwiperSlide } from "swiper/react";
-import {
-  EffectCoverflow,
-  Navigation,
-  Pagination,
-  Autoplay,
-} from "swiper/modules";
+import { EffectCoverflow, Autoplay, Navigation } from "swiper/modules";
 
 import "./flashSale.scss";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const FlashSale = () => {
@@ -34,16 +30,13 @@ const FlashSale = () => {
         <Swiper
           loop={true}
           loopFillGroupWithBlank={true}
-          // pagination={{
-          //   clickable: true,
-          // }}
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
           navigation={true}
-          modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
+          modules={[EffectCoverflow, Autoplay, Navigation]}
           className="home-flash-sale-swiper"
           effect={"coverflow"}
           coverflowEffect={{
@@ -98,13 +91,6 @@ const FlashSale = () => {
             </div>
           </SwiperSlide>
         </Swiper>
-        {/* <div className="home-flash-sale-product">
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-        </div> */}
       </div>
     </>
   );

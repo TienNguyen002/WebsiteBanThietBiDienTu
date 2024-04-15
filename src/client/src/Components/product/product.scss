@@ -1,6 +1,16 @@
 .product {
-  margin: 20px 20% 0;
-  &-detail {
-    display: flex;
+  margin: 10px 13% 0;
+  display: flex;
+  &-branch {
+    &-list {
+      &-detail {
+        display: flex;
+      }
+    }
+  }
+  &-list {
+    &-header {
+      display: flex;
+    }
   }
 }
