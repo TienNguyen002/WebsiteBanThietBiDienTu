@@ -1,0 +1,26 @@
+.home-category {
+  margin: 10px 13% 0;
+  &-component {
+    display: grid;
+    grid-template-columns: 18% 18% 18% 18% 18%;
+    justify-content: center;
+    margin-bottom: 20px;
+    cursor: pointer;
+    &-item {
+      display: flex;
+      justify-content: center;
+      background: var(--white);
+      text-align: center;
+      align-items: center;
+      width: 90%;
+      height: 60px;
+      border-radius: 1em;
+      margin: 10px 0;
+    }
+    &-item:hover {
+      box-shadow: 0 0 20px rgb(160, 160, 160);
+      color: var(--white);
+      background: var(--light-red);
+    }
+  }
+}

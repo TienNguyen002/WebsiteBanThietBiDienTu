@@ -6,7 +6,7 @@
   padding: 20px 0;
   height: 58em;
   &-branch {
-    background: white;
+    background: var(--white);
     height: fit-content;
     width: 100%;
     border-radius: 1em;
@@ -29,8 +29,8 @@
         }
       }
       &-detail:hover {
-        color: white;
-        background: #e88873;
+        color: var(--white);
+        background: var(--light-red);
       }
       &-all {
         text-align: center;
@@ -43,8 +43,8 @@
         cursor: pointer;
       }
       &-all:hover {
-        color: white;
-        background: #e88873;
+        color: var(--white);
+        background: var(--light-red);
       }
     }
   }
@@ -61,10 +61,10 @@
       }
       &-more {
         cursor: pointer;
-        color: gray;
+        color: var(--gray);
       }
       &-more:hover {
-        color: black;
+        color: var(--black);
       }
     }
     &-item {

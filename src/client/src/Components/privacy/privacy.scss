@@ -1,7 +1,36 @@
 .privacy {
+  margin: 10px 13% 0;
   display: flex;
   justify-content: center;
   text-align: center;
   gap: 10%;
-  border-top: 1px solid #000;
+  color: var(--white);
+  &-delivery {
+    background: #e984a2;
+    border-radius: 1em;
+    width: 25%;
+  }
+  &-payment {
+    background: #b9cc95;
+    border-radius: 1em;
+    width: 25%;
+  }
+  &-confidence {
+    background: #f8d49b;
+    border-radius: 1em;
+    width: 25%;
+  }
+  &-support {
+    background: #ffe4bb;
+    border-radius: 1em;
+    width: 25%;
+  }
+  &-logo {
+    font-size: 30px;
+    margin-top: 20px;
+  }
+  &-title {
+    font-size: 18px;
+    padding: 10px;
+  }
 }

@@ -15,7 +15,7 @@ const TopBody = () => {
         <div className="home-top-body-category">
           {category.result.map((item, index) => (
             <div key={index} className="home-top-body-category-item">
-              <div home-top-body-category-item-detail>
+              <div className="home-top-body-category-item-detail">
                 <Smartphone className="category-icon" />
                 <span className="category-name">{item.name}</span>
               </div>
