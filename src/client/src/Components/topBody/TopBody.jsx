@@ -4,6 +4,9 @@ import category from "../../Shared/data/category.json";
 import banner from "../../Shared/data/banner.json";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import ad1 from "../../Shared/images/ad-1.png";
+import ad2 from "../../Shared/images/ad-2.png";
+import ad3 from "../../Shared/images/ad-3.png";
 import "./topBody.scss";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -42,7 +45,11 @@ const TopBody = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="more-img">Sample</div>
+        <div className="home-top-body-more">
+          <img src={ad1} alt="ad1" className="home-top-body-more-ad" />
+          <img src={ad2} alt="ad1" className="home-top-body-more-ad" />
+          <img src={ad3} alt="ad1" className="home-top-body-more-ad" />
+        </div>
       </div>
     </>
   );

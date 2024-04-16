@@ -1,5 +1,18 @@
 .home-category {
   margin: 10px 13% 0;
+  &-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-more {
+      display: flex;
+      color: var(--gray);
+      cursor: pointer;
+    }
+    &-more:hover {
+      color: var(--black);
+    }
+  }
   &-component {
     display: grid;
     grid-template-columns: 18% 18% 18% 18% 18%;

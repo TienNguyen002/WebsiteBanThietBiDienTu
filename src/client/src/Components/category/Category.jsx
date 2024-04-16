@@ -1,13 +1,18 @@
 import React from "react";
 import category from "../../Shared/data/category.json";
-import { Smartphone } from "lucide-react";
+import { Smartphone, ChevronRight } from "lucide-react";
 import "./category.scss";
 
 const Category = () => {
   return (
     <>
       <div className="home-category">
-        <h1 className="home-category-title">Danh mục</h1>
+        <div className="home-category-top">
+          <h1 className="home-category-top-title">Danh mục</h1>
+          <p className="home-category-top-more">
+            Xem tất cả <ChevronRight />
+          </p>
+        </div>
         <div className="home-category-component">
           {category.result.map((item, index) => (
             <div key={index} className="home-category-component-item">
