@@ -106,7 +106,7 @@ ALL I NEED IS MY FINAL GRADE, MY HOPE IS "Giỏi" DEGREE => Nên là YEP tôi v�
 
 TÔI CẢM THẤY SỰ NHỜ VẢ NÀY LÀ KHÔNG CÓ Ý NGHĨA NÊN LÀ ...
 
-**_"TỰ THÂN VẬN ĐỘNG TỰ AI NẤY CODE, TÔI KHÔNG HỖ TRỢ AI NỮA AI ĐỌC ĐC CODE THÌ CÓ ĐIỂM, VÀ SẼ PHÂN CHIA CÔNG BẰNG NÊN MẤY BẠN AI TỰ ĐỌC CODE NHE HIỂU THÌ CÓ ĐIỂM KHÔNG THÌ THÔI, YEAH XIN CẢM ƠN"_**
+**_"TỰ THÂN VẬN ĐỘNG TỰ AI NẤY CODE, TÔI KHÔNG HỖ TRỢ AI NỮA AI ĐỌC ĐC CODE THÌ CÓ ĐIỂM, VÀ SẼ PHÂN CHIA CÔNG BẰNG NÊN MẤY BẠN TỰ ĐỌC CODE NHE HIỂU THÌ CÓ ĐIỂM KHÔNG THÌ THÔI, YEAH XIN CẢM ƠN :))"_**
 
 Giờ tôi tiếp tục làm tiếp đây... CẢM ƠN MẤY BẠN CHO TÔI CẢM GIÁC NÀY!! HỐI HẬN KHI KHÔNG CHỊU SANG NHÓM BN DUẬT VÀ HƯNG
 
