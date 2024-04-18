@@ -42,7 +42,7 @@ const Header = () => {
             <input
               className="input-search"
               type="text"
-              placeholder="I'm shopping for ..."
+              placeholder="Bạn đang tìm gì ..."
             />
             <Search className="search-icon" />
           </div>
