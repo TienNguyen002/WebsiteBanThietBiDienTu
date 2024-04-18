@@ -1,0 +1,52 @@
+{
+    "result": [
+      {
+        "id": 1,
+        "name": "Samsung Galaxy Z Flip5 512GB",
+        "image": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-z-lip5_3_.png",
+        "current": "25.990.000đ",
+        "discout": "16.090.000đ",
+        "star": 5
+      },
+      {
+        "id": 1,
+        "name": "Samsung Galaxy Z Fold5 12GB 512GB",
+        "image": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-z-fold5_2_.png",
+        "current": "40.990.000đ",
+        "discout": "29.990.000đ",
+        "star": 5
+      },
+      {
+        "id": 1,
+        "name": "Samsung Galaxy Tab S9 FE Plus WIFI 8GB 128GB",
+        "image": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-tab-s9-fe-plus-wifi_1_.png",
+        "current": "13.990.000đ",
+        "discout": "8.990.000đ",
+        "star": 5
+      },
+      {
+        "id": 1,
+        "name": "TECNO POVA 5 8GB 128GB",
+        "image": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/e/tecno-pova-5_2_.png",
+        "current": "4.490.000đ",
+        "discout": "3.790.000đ",
+        "star": 5
+      },
+      {
+        "id": 1,
+        "name": "Samsung Galaxy A54 8GB 256GB",
+        "image": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-a54-8gb-256gb.png",
+        "current": "11.490.000đ",
+        "discout": "7.890.000đ",
+        "star": 5
+      },
+      {
+        "id": 1,
+        "name": "INOI Note 13s 8GB 256GB",
+        "image": "https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/d/i/dien-thoai-inoi-note-13s_2.png",
+        "current": "3.390.000đ",
+        "discout": "2.990.000đ",
+        "star": 5
+      }
+    ]
+  }

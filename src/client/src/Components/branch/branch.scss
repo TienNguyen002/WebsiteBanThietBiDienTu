@@ -1,0 +1,21 @@
+.branch-list {
+  margin: 10px 15% 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+  justify-content: space-around;
+  justify-items: center;
+  &-logo {
+    filter: grayscale(100%);
+    transition: filter 0.4s ease-in-out;
+    height: 50px;
+    width: fit-content;
+    margin-bottom: 10px;
+  }
+  &-logo:hover {
+    filter: grayscale(0%);
+    height: 60px;
+    width: fit-content;
+    transition: height 0.4s ease-in-out;
+  }
+}

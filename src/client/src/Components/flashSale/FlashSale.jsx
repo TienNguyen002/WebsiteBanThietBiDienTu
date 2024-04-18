@@ -4,12 +4,13 @@ import ProductCard from "../productCard/ProductCard";
 import Clock from "../clock/Clock";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Autoplay, Navigation } from "swiper/modules";
-
+import product from "../../Shared/data/product.json";
 import "./flashSale.scss";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
 
 const FlashSale = () => {
   return (
@@ -23,9 +24,9 @@ const FlashSale = () => {
           <div className="home-flash-sale-top-clock">
             <Clock />
           </div>
-          <div className="home-flash-sale-top-more">
+          <Link to={"/more"} className="home-flash-sale-top-more">
             Xem tất cả <ChevronRight />
-          </div>
+          </Link>
         </div>
         <Swiper
           loop={true}
@@ -61,35 +62,22 @@ const FlashSale = () => {
             },
           }}
         >
-          <SwiperSlide className="home-flash-sale-swiper-slide">
-            <div className="home-flash-sale-swiper-slide-container">
-              <ProductCard />
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide className="home-flash-sale-swiper-slide">
-            <div className="home-flash-sale-swiper-slide-container">
-              <ProductCard />
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide className="home-flash-sale-swiper-slide">
-            <div className="home-flash-sale-swiper-slide-container">
-              <ProductCard />
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide className="home-flash-sale-swiper-slide">
-            <div className="home-flash-sale-swiper-slide-container">
-              <ProductCard />
-            </div>
-          </SwiperSlide>
-
-          <SwiperSlide className="home-flash-sale-swiper-slide">
-            <div className="home-flash-sale-swiper-slide-container">
-              <ProductCard />
-            </div>
-          </SwiperSlide>
+          {product.result.map((item, index) => (
+            <SwiperSlide className="home-flash-sale-swiper-slide">
+              <div
+                className="home-flash-sale-swiper-slide-container"
+                key={index}
+              >
+                <ProductCard
+                  name={item.name}
+                  image={item.image}
+                  current={item.current}
+                  discout={item.discout}
+                  star={item.star}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </>

@@ -2,7 +2,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "../Pages/userPage/HomePage";
 import ProductDetail from "../Pages/userPage/ProductDetail";
 import AdminPage from "../Pages/adminPage/AdminPage";
-import HomeLayout from "../Pages/Layout/HomeLayout";
+import HomeLayout from "../Layout/HomeLayout";
+import MorePage from "../Pages/userPage/MorePage";
+import SearchPage from "../Pages/userPage/SearchPage";
 
 const Router = () => {
   return (
@@ -11,6 +13,8 @@ const Router = () => {
         <Route path="/" element={<HomeLayout />}>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/detail" element={<ProductDetail />}></Route>
+          <Route path="/more" element={<MorePage />}></Route>
+          <Route path="/search" element={<SearchPage />}></Route>
         </Route>
       </Routes>
       <Routes>

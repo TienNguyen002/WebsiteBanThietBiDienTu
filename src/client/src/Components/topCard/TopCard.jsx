@@ -2,90 +2,49 @@ import React from "react";
 import StarRating from "../starRating/StarRating";
 import { Award, ChevronRight } from "lucide-react";
 import "./topCard.scss";
+import product from "../../Shared/data/product.json";
 
 const TopCard = (props) => {
+  const { title } = props;
+
   return (
     <>
       <div className="top-card">
         <div className="top-card-header">
           <div className="top-card-header-title">
             <Award />
-            Top Rating
+            {title}
           </div>
-          <div className="top-card-header-more">
+          {/* <div className="top-card-header-more">
             Xem tất cả <ChevronRight />
-          </div>
+          </div> */}
         </div>
         <div className="top-card-product">
-          <div className="top-card-product-detail">
-            <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-s23-ulatra_2__1.png"
-              alt="anh"
-              className="top-card-product-detail-image"
-            />
-            <StarRating rating={4} className="product-box-detail-rating" />
-            <h3 className="top-card-product-detail-name">Tên sản phẩm</h3>
-            <div className="top-card-product-detail-price">
-              <div className="top-card-product-detail-price-current">
-                <p>8.000.000đ</p>
-              </div>
-              <div className="top-card-product-detail-price-original">
-                <s>10.000.000đ</s>
-              </div>
-            </div>
-          </div>
-          <div className="top-card-product-detail">
-            <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-s23-ulatra_2__1.png"
-              alt="anh"
-              className="top-card-product-detail-image"
-            />
-            <StarRating rating={4} className="product-box-detail-rating" />
-            <h3 className="top-card-product-detail-name">Tên sản phẩm</h3>
-            <div className="top-card-product-detail-price">
-              <div className="top-card-product-detail-price-current">
-                <p>8.000.000đ</p>
-              </div>
-              <div className="top-card-product-detail-price-original">
-                <s>10.000.000đ</s>
+          {product.result.slice(0, 4).map((item, index) => (
+            <div className="top-card-product-detail" key={index}>
+              <img
+                src={item.image}
+                alt={item.name}
+                className="top-card-product-detail-image"
+              />
+              <div className="top-card-product-detail-item">
+                <h3 className="top-card-product-detail-item-name">
+                  {item.name}
+                </h3>
+                <div className="top-card-product-detail-item-price">
+                  <div className="top-card-product-detail-item-price-current">
+                    <p>{item.discout}</p>
+                  </div>
+                  <div className="top-card-product-detail-item-price-original">
+                    <s>{item.current}</s>
+                  </div>
+                </div>
+                <StarRating rating={4} className="product-box-detail-rating" />
               </div>
             </div>
-          </div>
-          <div className="top-card-product-detail">
-            <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-s23-ulatra_2__1.png"
-              alt="anh"
-              className="top-card-product-detail-image"
-            />
-            <StarRating rating={4} className="product-box-detail-rating" />
-            <h3 className="top-card-product-detail-name">Tên sản phẩm</h3>
-            <div className="top-card-product-detail-price">
-              <div className="top-card-product-detail-price-current">
-                <p>8.000.000đ</p>
-              </div>
-              <div className="top-card-product-detail-price-original">
-                <s>10.000.000đ</s>
-              </div>
-            </div>
-          </div>
-          <div className="top-card-product-detail">
-            <img
-              src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-s23-ulatra_2__1.png"
-              alt="anh"
-              className="top-card-product-detail-image"
-            />
-            <StarRating rating={4} className="product-box-detail-rating" />
-            <h3 className="top-card-product-detail-name">Tên sản phẩm</h3>
-            <div className="top-card-product-detail-price">
-              <div className="top-card-product-detail-price-current">
-                <p>8.000.000đ</p>
-              </div>
-              <div className="top-card-product-detail-price-original">
-                <s>10.000.000đ</s>
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
+        <div className="top-card-more">Xem tất cả</div>
       </div>
     </>
   );

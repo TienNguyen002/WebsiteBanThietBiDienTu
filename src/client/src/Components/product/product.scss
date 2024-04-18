@@ -24,13 +24,18 @@
         padding: 12px;
         align-items: center;
         cursor: pointer;
+        filter: grayscale(100%);
+        transition: filter 0.4s ease-in-out;
         &-logo {
           margin-right: 10px;
+          width: 35px;
+          height: 23px;
         }
       }
       &-detail:hover {
         color: var(--white);
         background: var(--light-red);
+        filter: grayscale(0%);
       }
       &-all {
         text-align: center;

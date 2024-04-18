@@ -3,15 +3,9 @@
   &-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    &-more {
-      display: flex;
-      color: var(--gray);
-      cursor: pointer;
-    }
-    &-more:hover {
-      color: var(--black);
-    }
+    justify-content: center;
+    text-transform: uppercase;
+    color: var(--red);
   }
   &-component {
     display: grid;

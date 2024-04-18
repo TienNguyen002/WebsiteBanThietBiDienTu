@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Đồ án tốt nghiệp - Khóa K44 - Năm học 2023-2024
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Xây dựng ứng dụng bán thiết bị điện tử
 
-## Available Scripts
+# Trầm cảm time
 
-In the project directory, you can run:
+Tôi đã trầm cảm như nào :< !!
 
-### `yarn start`
+# Làm Back-end
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Trước tết - Ờ thì cũng có hỗ trợ thiết kế Database đi
+Làm Database
+Sau tết - Vâng thời điểm trầm cảm xảy ra sau vụ sau tết này
+1 câu nói làm nên tất cả "Mình xây dựng structure xong mẫy bn vô phụ mình nhe"
+VÀ CÔNG VIỆC CỦA TÔI ĐÃ TỰ LÀM TỪ ĐÂY
+Xây dựng structure
+Viết API - Endpoint
+Phân chia công việc (Trong khi mình làm hết)
+Làm POWER POINT Ừ THÌ CÓ BN TÔ NGỒI LÀM, LÚC SAU BN HIẾU VÔ
+Thuyết trình - sao lúc đó mình k nói ra hết nhỉ
+Thực tập thì mới phát hiện ra nhiều thứ
+Đập đi xây lại Database
+Xây lại structure - Theo kiểu clean-architecture
+Viết API - Controller
+Nghiên cứu Identity
+.... Tiến trình vẫn sẽ còn tiếp tục ....
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Làm Front-end
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Kêu mấy bạn trong nhóm nghiên cứu xây dựng
+Mấy bạn không thèm để ý cũng như rep lại
+Tự mình xây dựng structure
+Xây dựng trang Homepage - Mất gần 2 tuần để làm ...
+Hên là có sự giúp đỡ của bạn Tân nên là YEP MỌI CHUYỆN VẪN CÒN TRÔI CHẢY
+Mhưng mà trong tương lai chắc vẫn còn sửa tiếp
+Và tôi đã tự động out nhóm "Nhóm 3 bạn - Hiếu Tiến và Tô"- Nhưng mấy bạn kia vẫn k nói j :v,
+Không ai hỏi sao out nhóm thì tự trách bản thân mình đi
+YEAH TÔI NGHĨ NÊN TỰ TRÁCH BẢN THÂN MÌNH BỞI VÌ LÀ MỘT NHÓM TRƯỞNG K TỐT
+LÀ MỘT NGƯỜI KHÔNG NGHE LỜI BẠN DUẬT, BẠN HƯNG ĐỂ CÓ THỂ VÀO CHUNG NHÓM TỐT HƠN
+LÀ MỘT NGƯỜI CẢM GIÁC NHƯ LÀ MẤY BẠN TRONG NHÓM SẼ GIÚP MÌNH LÀM ĐỒ ÁN
+LÀ MỘT NGƯỜI HAY BAO CHE CHO NGƯỜI KHÁC MẶC DÙ MÌNH MÌNH PHẢI GÒ LƯNG RA LÀM
+LÀ MỘT NGƯỜI MÀ NGÀY NÀO CX THỨC TỚI 12H ĐỂ LÀM - À đôi khi ngồi chơi k vì lười
+LÀ MỘT NGƯỜI CẢM THẤY TỘI KHI NGHE TỪ "THÔI"
+LÀ MỘT NGƯỜI DỄ SIÊU LÒNG KHI NGHE TỪ "GÁNH" - Gánh này gánh nặng hay gánh người nhỉ
+LÀ MỘT NGƯỜI KHÔNG GẶP DUYÊN SỚM HƠN
+VÀ TẠI TRƯỚC TẾT TÔI LƯỜI, TÔI CHỦ QUAN LÀ LÀM KỊP
+=> YEAH NHỮNG ĐIỀU NÀY ĐÃ LÀM TÔI CHẬM TIẾN ĐỘ SO VỚI MẤY BN KHÁC CÙNG LÀM ĐỒ ÁN
+THẦY AI CŨNG LÀM GẦN XONG HẾT R, H MÌNH MS XÂY DỰNG ĐC CÁI KHUNG NGOÀI CÙNG
+Ừm thì nếu mà mấy bạn nói mấy bạn đi thực tập, ỦA MÌNH CX THỰC TẬP MÀ SAO KÌ Z
+BIẾT BAO NHIÊU VIỆC PHẢI LÀM, NGÀY NÀO LÊN CX CÓ TASK ĐỂ LÀM, CŨNG PHẢI VÒ ĐẦU BỨT TÓC RA ĐỂ ĐI TÌM KIẾM
+VÂNG NHẮC CHO MẤY BN NHỚ LÀ "ĐỒ ÁN 10 TÍN, THỰC TẬP 8 TÍN - ĐỒ ÁN 3TR GẦN 4TR, THỰC TẬP CHỈ GẦN 2 TR THÔI"
+Sự trầm cảm này gần như đưa lên thêm một bậc :p
+Tinh thần trầm cảm và vẫn bắt đầu tiến trình
+---18/04/2024---
+Tiến trình xây dựng tiếp theo: Xây dựng trang tìm kiếm, trang xem tất cả, ....
+Và vâng dự kiến ngày 22 sẽ báo cáo
+Còn ngày T6 T7 CN để làm tiếp những gì đặt ra .....
+Well sự trầm cảm này còn tiếp diễn khi tôi biết là tôi làm không kịp
+Và theo lời của Duật, Hưng thì còn sẽ xảy ra lỗi nhiều lắm nên là WELL
+ALL I NEED IS MY FINAL GRADE, MY HOPE IS "Giỏi" DEGREE => Nên là YEP tôi vẫn phải tự cố gắng thôi
+TÔI CẢM THẤY SỰ NHỜ VẢ NÀY LÀ KHÔNG CÓ Ý NGHĨA NÊN LÀ ...
+"TỰ THÂN VẬN ĐỘNG TỰ AI NẤY CODE, TÔI KHÔNG HỖ TRỢ AI NỮA AI ĐỌC ĐC CODE THÌ CÓ ĐIỂM, YEAH XIN CẢM ƠN"
+Giờ tôi tiếp tục làm tiếp đây... CẢM ƠN MẤY BẠN CHO TÔI CẢM GIÁC NÀY!! HỐI HẬN KHI KHÔNG CHỊU SANG NHÓM BN DUẬT VÀ HƯNG
+MẤY NGÀY TRÊN KHÔNG NHỚ NGÀY NÊN LÀ ĐỂ TẠM NGÀY NAY NHÉ :p
+MỖI MỘT NGÀY LÀM TÔI SẼ NOTE TẠI ĐÂY TỚI KHI XONG ĐỒ ÁN
+--- KẾT THÚC NGÀY 18/04/2024 ---
+... SỰ TRẦM CẢM NÀY SẼ CÒN TIẾP TỤC ĐÂY ...

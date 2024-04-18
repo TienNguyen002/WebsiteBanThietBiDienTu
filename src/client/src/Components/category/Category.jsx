@@ -9,9 +9,6 @@ const Category = () => {
       <div className="home-category">
         <div className="home-category-top">
           <h1 className="home-category-top-title">Danh mục</h1>
-          <p className="home-category-top-more">
-            Xem tất cả <ChevronRight />
-          </p>
         </div>
         <div className="home-category-component">
           {category.result.map((item, index) => (

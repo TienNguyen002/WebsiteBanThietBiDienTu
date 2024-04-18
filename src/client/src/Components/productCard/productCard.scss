@@ -25,6 +25,9 @@
       display: flex;
       justify-content: center;
       color: black;
+      align-items: center;
+      text-align: center;
+      height: 50px;
     }
     &-price {
       border-radius: 3em;
@@ -66,6 +69,7 @@
     margin: 10px;
     color: gray;
     animation: slide-in 0.3s ease forwards;
+    overflow: hidden;
     &-cart:hover {
       color: rgb(34, 93, 255);
     }

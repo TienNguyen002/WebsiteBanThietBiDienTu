@@ -1,6 +1,7 @@
 import React from "react";
 import { Youtube, Facebook, Instagram, Twitter } from "lucide-react";
 import "./footer.scss";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -34,10 +35,30 @@ const Footer = () => {
           <div className="home-footer-top-support">
             <ul className="item">
               <h4 className="title">TỔNG ĐÀI HỖ TRỢ (8:00 - 21:00)</h4>
-              <li>CSKH:</li>
-              <li>Bảo hành:</li>
-              <li>HTKT:</li>
-              <li>Email:</li>
+              <li>
+                CSKH:
+                <Link>
+                  <b>0819104319</b>
+                </Link>
+              </li>
+              <li>
+                Bảo hành:
+                <Link>
+                  <b>0819104319</b>
+                </Link>
+              </li>
+              <li>
+                HTKT:
+                <Link>
+                  <b>0819104319</b>
+                </Link>
+              </li>
+              <li>
+                Email:
+                <Link>
+                  <b>2015749@dlu.edu.vn</b>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

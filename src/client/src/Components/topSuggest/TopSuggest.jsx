@@ -6,8 +6,9 @@ const TopSuggest = () => {
   return (
     <>
       <div className="top-suggest">
-        <TopCard />
-        <TopCard />
+        <TopCard title={"Sản phẩm được đánh giá cao"} />
+        <TopCard title={"Sản phẩm mới"} />
+        <TopCard title={"Sản phẩm bán chạy"} />
       </div>
     </>
   );
