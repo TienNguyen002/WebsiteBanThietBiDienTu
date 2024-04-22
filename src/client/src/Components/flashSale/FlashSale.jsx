@@ -5,14 +5,22 @@ import Clock from "../clock/Clock";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCoverflow, Autoplay, Navigation } from "swiper/modules";
 import product from "../../Shared/data/product.json";
+import { Link } from "react-router-dom";
 import "./flashSale.scss";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
+import "swiper/css/autoplay";
 import "swiper/css/pagination";
-import { Link } from "react-router-dom";
 
 const FlashSale = () => {
+  const handleLink = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
+
   return (
     <>
       <div className="home-flash-sale">
@@ -24,7 +32,11 @@ const FlashSale = () => {
           <div className="home-flash-sale-top-clock">
             <Clock />
           </div>
-          <Link to={"/more"} className="home-flash-sale-top-more">
+          <Link
+            to={"/sale"}
+            onClick={handleLink}
+            className="home-flash-sale-top-more"
+          >
             Xem tất cả <ChevronRight />
           </Link>
         </div>
@@ -63,7 +75,7 @@ const FlashSale = () => {
           }}
         >
           {product.result.map((item, index) => (
-            <SwiperSlide className="home-flash-sale-swiper-slide">
+            <SwiperSlide className="home-flash-sale-swiper-slide" key={index}>
               <div
                 className="home-flash-sale-swiper-slide-container"
                 key={index}
@@ -72,8 +84,9 @@ const FlashSale = () => {
                   name={item.name}
                   image={item.image}
                   current={item.current}
-                  discout={item.discout}
+                  discount={item.discount}
                   star={item.star}
+                  color={item.colors}
                 />
               </div>
             </SwiperSlide>

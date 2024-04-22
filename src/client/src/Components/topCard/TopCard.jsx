@@ -1,11 +1,22 @@
 import React from "react";
 import StarRating from "../starRating/StarRating";
-import { Award, ChevronRight } from "lucide-react";
-import "./topCard.scss";
+import { Award } from "lucide-react";
 import product from "../../Shared/data/product.json";
+import { formatVND } from "./../../Common/function";
+import "./topCard.scss";
+import { Link, useNavigate } from "react-router-dom";
 
 const TopCard = (props) => {
-  const { title } = props;
+  const { title, isNew } = props;
+  const navigate = useNavigate();
+
+  const handleLink = () => {
+    navigate("/detail");
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
 
   return (
     <>
@@ -21,7 +32,11 @@ const TopCard = (props) => {
         </div>
         <div className="top-card-product">
           {product.result.slice(0, 4).map((item, index) => (
-            <div className="top-card-product-detail" key={index}>
+            <div
+              className="top-card-product-detail"
+              key={index}
+              onClick={handleLink}
+            >
               <img
                 src={item.image}
                 alt={item.name}
@@ -33,18 +48,25 @@ const TopCard = (props) => {
                 </h3>
                 <div className="top-card-product-detail-item-price">
                   <div className="top-card-product-detail-item-price-current">
-                    <p>{item.discout}</p>
+                    <p>{formatVND(item.discount)}</p>
                   </div>
                   <div className="top-card-product-detail-item-price-original">
-                    <s>{item.current}</s>
+                    <s>{formatVND(item.current)}</s>
                   </div>
                 </div>
-                <StarRating rating={4} className="product-box-detail-rating" />
+                {isNew ? null : (
+                  <StarRating
+                    rating={item.star}
+                    className="product-box-detail-rating"
+                  />
+                )}
               </div>
             </div>
           ))}
         </div>
-        <div className="top-card-more">Xem tất cả</div>
+        <Link to={"/sale"} onClick={handleLink} className="top-card-more">
+          Xem tất cả
+        </Link>
       </div>
     </>
   );

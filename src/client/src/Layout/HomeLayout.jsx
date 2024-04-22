@@ -1,8 +1,9 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "../Components/header/Header";
 import Footer from "../Components/footer/Footer";
 import { ArrowUp } from "lucide-react";
+import "../styles/homeLayout.scss";
 
 const HomeLayout = () => {
   const buttonRef = useRef(null);
@@ -47,20 +48,22 @@ const HomeLayout = () => {
 
   return (
     <>
-      <Header />
-      <div>
-        <Outlet />
+      <div className="home-layout">
+        <Header />
+        <div>
+          <Outlet />
+        </div>
+        {show ? (
+          <button
+            ref={buttonRef}
+            onClick={goToTop}
+            className="home-page-top-button"
+          >
+            <ArrowUp />
+          </button>
+        ) : null}
+        <Footer />
       </div>
-      {show ? (
-        <button
-          ref={buttonRef}
-          onClick={goToTop}
-          className="home-page-top-button"
-        >
-          <ArrowUp />
-        </button>
-      ) : null}
-      <Footer />
     </>
   );
 };

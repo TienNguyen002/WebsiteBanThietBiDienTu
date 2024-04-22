@@ -2,12 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import "./productCard.scss";
 import StarRating from "../starRating/StarRating";
 import { ShoppingCart, Heart, Eye } from "lucide-react";
-import { Link } from "react-router-dom";
+import { formatVND } from "../../Common/function";
+import ColorSquare from "../colorSquare/ColorSquare";
+import { useNavigate } from "react-router-dom";
 
 const ProductCard = (props) => {
   const [showAction, setShowAction] = useState(false);
   const productCardRef = useRef(null);
-  const { name, image, current, discout, star } = props;
+  const { name, image, current, discount, star, color } = props;
+  const navigate = useNavigate();
+
   useEffect(() => {
     const handleMouseEnter = () => {
       setShowAction(true);
@@ -23,33 +27,66 @@ const ProductCard = (props) => {
     }
   }, []);
 
+  const handleLink = () => {
+    navigate("/detail");
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
+
   return (
     <>
       <div ref={productCardRef} className="product-box">
-        <Link to={"/detail"} className="product-box-detail">
-          <img src={image} alt={name} className="product-box-detail-image" />
+        <div to={"/detail"} className="product-box-detail">
+          <div className="product-box-detail-top">
+            <img
+              src={image}
+              alt={name}
+              className="product-box-detail-top-image"
+            />
+            {showAction && (
+              <div className="product-box-detail-top-action">
+                <li className="product-box-detail-top-action-item">
+                  <ShoppingCart className="product-box-detail-top-action-item-cart" />
+                </li>
+                <li className="product-box-detail-top-action-item">
+                  <Eye
+                    className="product-box-detail-top-action-item-more"
+                    onClick={handleLink}
+                  />
+                </li>
+                <li className="product-box-detail-top-action-item">
+                  <Heart className="product-box-detail-top-action-item-heart" />
+                </li>
+              </div>
+            )}
+          </div>
+
           <h3 className="product-box-detail-name">{name} </h3>
+          <div className="product-box-detail-color">
+            {color.map((item, index) => (
+              <ColorSquare key={index} color={item.name} />
+            ))}
+          </div>
           <div className="product-box-detail-price">
             <div className="product-box-detail-price-discount">
-              <p>{discout}</p>
+              <p>{formatVND(discount)}</p>
             </div>
             <div className="product-box-detail-price-current">
-              <s>{current}</s>
+              <s>{formatVND(current)}</s>
             </div>
           </div>
           <div className="product-box-info">
             <StarRating rating={star} className="product-box-info-rating" />
-            <div to={"/detail"}>
-              <Eye className="product-box-info-more" />
-            </div>
           </div>
-        </Link>
-        {showAction && (
+        </div>
+        {/* {showAction && (
           <div className="product-box-action">
             <ShoppingCart className="product-box-action-cart" />
             <Heart className="product-box-action-heart" />
           </div>
-        )}
+        )} */}
       </div>
     </>
   );

@@ -20,6 +20,11 @@
       text-align: left;
       list-style-type: none;
     }
+    .link {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
   }
   &-bot {
     display: flex;
@@ -35,6 +40,7 @@
       &-icon {
         display: flex;
         gap: 10px;
+        cursor: pointer;
         .youtube-icon:hover {
           color: red;
         }

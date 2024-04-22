@@ -37,27 +37,19 @@ const Footer = () => {
               <h4 className="title">TỔNG ĐÀI HỖ TRỢ (8:00 - 21:00)</h4>
               <li>
                 CSKH:
-                <Link>
-                  <b>0819104319</b>
-                </Link>
+                <Link className="link"> 0819104319</Link>
               </li>
               <li>
                 Bảo hành:
-                <Link>
-                  <b>0819104319</b>
-                </Link>
+                <Link className="link"> 0819104319</Link>
               </li>
               <li>
                 HTKT:
-                <Link>
-                  <b>0819104319</b>
-                </Link>
+                <Link className="link"> 0819104319</Link>
               </li>
               <li>
                 Email:
-                <Link>
-                  <b>2015749@dlu.edu.vn</b>
-                </Link>
+                <Link className="link"> 2015749@dlu.edu.vn</Link>
               </li>
             </ul>
           </div>

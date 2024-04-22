@@ -1,0 +1,12 @@
+.color-square {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 1em;
+  border: 1px solid var(--gray);
+  cursor: pointer;
+}
+.color-square:hover {
+  border: 2px solid var(--gray);
+}

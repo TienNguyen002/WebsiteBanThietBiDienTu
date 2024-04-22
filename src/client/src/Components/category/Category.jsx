@@ -1,24 +1,46 @@
 import React from "react";
 import category from "../../Shared/data/category.json";
-import { Smartphone, ChevronRight } from "lucide-react";
 import "./category.scss";
+import { useNavigate } from "react-router-dom";
 
-const Category = () => {
+const Category = (props) => {
+  const { title } = props;
+  const navigate = useNavigate();
+
+  const handleLink = () => {
+    navigate("/more");
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
+
   return (
     <>
       <div className="home-category">
-        <div className="home-category-top">
-          <h1 className="home-category-top-title">Danh mục</h1>
-        </div>
+        {title ? (
+          <div className="home-category-top">
+            <h1 className="home-category-top-title">Danh mục</h1>
+          </div>
+        ) : null}
         <div className="home-category-component">
           {category.result.map((item, index) => (
-            <div key={index} className="home-category-component-item">
-              <div>
-                <Smartphone className="home-category-component-icon" />
-                <span className="home-category-component-name">
+            <div
+              key={index}
+              className="home-category-component-item"
+              onClick={handleLink}
+            >
+              {/* <div> */}
+              {/* <Smartphone className="home-category-component-icon" /> */}
+              <img
+                src={item.image}
+                alt={item.name}
+                className="home-category-component-item-image"
+              />
+              {/* <span className="home-category-component-name">
                   {item.name}
-                </span>
-              </div>
+                </span> */}
+              {/* </div> */}
             </div>
           ))}
         </div>

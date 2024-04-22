@@ -4,7 +4,7 @@
   grid-template-columns: 12% 86%;
   column-gap: 20px;
   padding: 20px 0;
-  height: 58em;
+  height: 62em;
   &-branch {
     background: var(--white);
     height: fit-content;
@@ -46,6 +46,7 @@
         margin-top: 40px;
         margin-bottom: 10px;
         cursor: pointer;
+        text-decoration: none;
       }
       &-all:hover {
         color: var(--white);
@@ -53,7 +54,7 @@
       }
     }
   }
-  &-list {
+  &-comp {
     width: 100%;
     border-radius: 3em;
     &-header {

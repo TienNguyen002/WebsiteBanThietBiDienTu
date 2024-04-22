@@ -24,7 +24,7 @@ const HomePage = () => {
       <Banner />
       <Product title={"Âm thanh"} />
       <Product title={"PC"} />
-      <Category />
+      <Category title={true}/>
     </div>
   );
 };

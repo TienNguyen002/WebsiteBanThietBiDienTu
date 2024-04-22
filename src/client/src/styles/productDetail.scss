@@ -1,0 +1,56 @@
+.product-information {
+  margin: 10px 9% 0;
+  &-item {
+    display: flex;
+    // height: 500px;
+    &-box {
+      background: var(--white);
+      width: 900px;
+      height: fit-content;
+      margin-left: 20px;
+      padding: 0 20px;
+      border-radius: 1em;
+      &-category {
+        color: var(--gray);
+      }
+      &-price {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: black;
+        &-discount {
+          color: red;
+          font-size: 18px;
+          font-weight: bold;
+          justify-items: center;
+        }
+      }
+      &-status {
+        display: flex;
+        gap: 10px;
+        &-info {
+          color: rgb(0, 194, 0);
+        }
+      }
+      &-branch {
+        display: flex;
+        gap: 10px;
+        &-logo {
+          height: 50px;
+          width: 50px;
+          cursor: pointer;
+        }
+      }
+      &-special {
+        &-title {
+          text-transform: uppercase;
+          font-weight: bold;
+          color: var(--red);
+        }
+        li {
+          color: var(--gray);
+        }
+      }
+    }
+  }
+}

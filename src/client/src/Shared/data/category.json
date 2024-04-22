@@ -3,43 +3,52 @@
       {
         "id": 1,
         "name": "Điện thoại",
-        "icon": ""
+        "image": "https://i.pinimg.com/564x/40/1c/25/401c257ad45c1f8e7367454284c76748.jpg"
       },
       {
         "id": 2,
-        "name": "Tablet"
+        "name": "Tablet",
+        "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRPVoUzh_yi6qO0-3kXPoBbepL0zKI1_hTokxOjsT95lss7utf0YQiNnqfM_qR0iMnlwI33ELEERs7yNduEv4-BQp9lbMungViDEiSl3GxAUO5S1NeC4ohlXpudU999oBUV5u7jsac2Ig&usqp=CAc"
       },
       {
         "id": 3,
-        "name": "Laptop"
+        "name": "Laptop",
+        "image": "https://cdn.tgdd.vn/Products/Images/44/311178/asus-vivobook-go-15-e1504fa-r5-nj776w-thumb-600x600.jpg"
       },
       {
         "id": 4,
-        "name": "Âm thanh"
+        "name": "Âm thanh",
+        "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/MQTQ3?wid=1144&hei=1144&fmt=jpeg&qlt=90&.v=1687660671363"
       },
       {
         "id": 5,
-        "name": "Đồng hồ"
+        "name": "Đồng hồ",
+        "image": "https://store.storeimages.cdn-apple.com/8756/as-images.apple.com/is/41-cell-alum-pink-sport-band-light-pink-s9?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1693282238597"
       },
       {
         "id": 6,
-        "name": "Camera"
+        "name": "Camera",
+        "image": "https://bizweb.dktcdn.net/100/410/941/products/01-large-20230817224004v.jpg?v=1704359995467"
       },
       {
         "id": 7,
-        "name": "Camera"
+        "name": "Phụ kiện",
+        "image": "https://cdn-v2.didongviet.vn/files/products/2023/4/25/1/1684983917855_pin_sac_du_phong_innostyle_powermax_pd_20w_20000mah_ic2a_ip20kp_didongviet.jpg"
       },
       {
         "id": 8,
-        "name": "Camera"
+        "name": "PC",
+        "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCktt_XTFh8Uvjl0LeqiIXX_2ZJCcMdifdZz4oK_eqVg&s"
       },
       {
         "id": 9,
-        "name": "Camera"
+        "name": "Màn hình",
+        "image": "https://www.lg.com/vn/images/man-hinh-may-tinh/md07565854/gallery/N04_D4.jpg"
       },
       {
         "id": 10,
-        "name": "Camera"
+        "name": "TV",
+        "image": "https://www.lg.com/vn/images/tivi/md07572853/gallery/D-6.jpg"
       }
     ]
   }

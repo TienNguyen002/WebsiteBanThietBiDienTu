@@ -5,17 +5,28 @@
   grid-gap: 5px;
   justify-content: space-around;
   justify-items: center;
+  width: 80%;
+  height: 200px;
   &-logo {
+    background: var(--white);
     filter: grayscale(100%);
     transition: filter 0.4s ease-in-out;
     height: 50px;
     width: fit-content;
     margin-bottom: 10px;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    cursor: pointer;
+    // -webkit-transition-property: all;
+    // -webkit-transition-duration: 0.3s;
+    // -webkit-transition-timing-function: ease;
   }
   &-logo:hover {
     filter: grayscale(0%);
     height: 60px;
     width: fit-content;
     transition: height 0.4s ease-in-out;
+    transform: scale(1.2);
   }
 }

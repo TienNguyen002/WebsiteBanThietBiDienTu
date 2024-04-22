@@ -67,6 +67,9 @@
     background: var(--white);
     margin-top: 20px;
     border-radius: 1em;
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--black);
   }
   &-more:hover {
     background: var(--light-red);
