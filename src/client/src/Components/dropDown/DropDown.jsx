@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import "./dropDown.scss";
-import dropDown from "../../Shared/data/dropDown.json";
 
 const DropDown = ({ selected, setSelected }) => {
   const [isActive, setIsActive] = useState(false);

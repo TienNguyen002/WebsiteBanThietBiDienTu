@@ -9,9 +9,11 @@
       height: fit-content;
       margin-left: 20px;
       padding: 0 20px;
-      border-radius: 1em;
+      border-radius: 2em;
+      border: 1px solid var(--gray);
       &-category {
         color: var(--gray);
+        cursor: pointer;
       }
       &-price {
         display: flex;
@@ -37,7 +39,7 @@
         gap: 10px;
         &-logo {
           height: 50px;
-          width: 50px;
+          width: 80px;
           cursor: pointer;
         }
       }
@@ -49,6 +51,64 @@
         }
         li {
           color: var(--gray);
+        }
+      }
+      &-action {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        &-cart {
+          margin: 10px 0;
+          padding: 10px 10px;
+          display: flex;
+          gap: 10px;
+          background: var(--light-red);
+          border-radius: 3em;
+          width: fit-content;
+          &-quantity {
+            display: flex;
+            border-radius: 45px;
+            border: 1px solid var(--black);
+            width: fit-content;
+            &-input {
+              text-align: center;
+              font-size: 20px;
+              border: none;
+            }
+            button {
+              color: var(--red);
+              background: var(--white);
+              border: none;
+              cursor: pointer;
+              font-size: 25px;
+            }
+            &-decrement {
+              padding: 15px 5px 15px 25px;
+              border-radius: 45px 0 0 45px;
+            }
+            &-increase {
+              padding: 15px 25px 15px 5px;
+              border-radius: 0 45px 45px 0;
+            }
+          }
+          &-add {
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-right: 10px;
+          }
+        }
+        &-heart {
+          border: 1px solid var(--light-gray);
+          border-radius: 3em;
+          padding: 10px;
+          cursor: pointer;
+        }
+        &-heart:hover {
+          border: 1px solid var(--black);
+          color: var(--red);
         }
       }
     }

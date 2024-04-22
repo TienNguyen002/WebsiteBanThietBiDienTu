@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import NavigationBar from "../../Components/navigationBar/NavigationBar";
 import ImageGallery from "../../Components/imageGallery/ImageGallery";
 import StarRating from "./../../Components/starRating/StarRating";
@@ -6,9 +6,12 @@ import { formatVND } from "../../Common/function";
 import ColorSquare from "./../../Components/colorSquare/ColorSquare";
 import "../../styles/productDetail.scss";
 import { useNavigate } from "react-router-dom";
+import ProductTag from "../../Components/productTag/ProductTag";
+import { ShoppingCart, Heart } from "lucide-react";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1);
 
   const handleBranchLink = () => {
     navigate("/branch");
@@ -16,6 +19,22 @@ const ProductDetail = () => {
       top: 0,
       behavior: "instant",
     });
+  };
+
+  const handleCategoryLink = () => {
+    navigate("/more");
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
+  const decreaseQuantity = () => {
+    setQuantity(quantity - 1);
   };
   // const parts = window.location.pathname.split("/");
   return (
@@ -25,11 +44,23 @@ const ProductDetail = () => {
         <div className="product-information-item">
           <ImageGallery />
           <div className="product-information-item-box">
-            <p className="product-information-item-box-category">Điện thoại</p>
-            <h2>Samsung Galaxy Z Flip5 256GB</h2>
-            <StarRating rating={5} />
-            <div>Tag</div>
-            <div>
+            <p
+              className="product-information-item-box-category"
+              onClick={handleCategoryLink}
+            >
+              Điện thoại
+            </p>
+            <h2 className="product-information-item-box-name">
+              Samsung Galaxy Z Flip5 256GB
+            </h2>
+            <StarRating
+              rating={5}
+              className="product-information-item-box-rating"
+            />
+            <div className="product-information-item-box-tag">
+              <ProductTag />
+            </div>
+            <div className="product-information-item-box-color">
               <ColorSquare />
             </div>
             <div className="product-information-item-box-price">
@@ -85,12 +116,46 @@ const ProductDetail = () => {
                 xước
               </li>
             </div>
-            <p>Thêm vào giỏ hàng</p>
+            <div className="product-information-item-box-action">
+              <div className="product-information-item-box-action-cart">
+                <div className="product-information-item-box-action-cart-quantity">
+                  <button
+                    className="product-information-item-box-action-cart-quantity-decrement"
+                    onClick={decreaseQuantity}
+                    disabled={quantity === 0}
+                  >
+                    -
+                  </button>
+                  <input
+                    type="number"
+                    min={0}
+                    max={10}
+                    step={1}
+                    className="product-information-item-box-action-cart-quantity-input"
+                    readOnly
+                    value={quantity}
+                  />
+                  <button
+                    className="product-information-item-box-action-cart-quantity-increase"
+                    onClick={increaseQuantity}
+                    disabled={quantity === 100}
+                  >
+                    +
+                  </button>
+                </div>
+                <p className="product-information-item-box-action-cart-add">
+                  Thêm vào giỏ hàng <ShoppingCart />
+                </p>
+              </div>
+              <div className="product-information-item-box-action-heart">
+                <Heart />
+              </div>
+            </div>
           </div>
         </div>
-        <p>Thông tin sản phẩm</p>
+        {/* <p>Thông tin sản phẩm</p>
         <p>Phụ kiện</p>
-        <p>Sản phẩm tương tự</p>
+        <p>Sản phẩm tương tự</p> */}
         <p>Mô tả chi tiết - Đặc điểm nổi bật</p>
         <p>Thông số kỹ thuật</p>
         <div>

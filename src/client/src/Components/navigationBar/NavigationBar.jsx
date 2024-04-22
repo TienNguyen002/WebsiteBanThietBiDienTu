@@ -25,7 +25,7 @@ const NavigationBar = () => {
           <ChevronRight />
           Điện thoại <ChevronRight />
           Samsung <ChevronRight />
-          Z5 Seríes <ChevronRight />
+          Z5 Series <ChevronRight />
           Samsung Galaxy Z Flip5 256GB
         </div>
       </div>
