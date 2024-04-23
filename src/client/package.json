@@ -13,6 +13,7 @@
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "antd": "^5.16.2",
+    "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "flaticon": "^0.1.0",
     "lucide-react": "^0.366.0",

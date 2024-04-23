@@ -1,5 +1,5 @@
 import React from "react";
-import Category from "../../Components/user/reUse/category/Category";
+import Category from "../../Components/user/common/category/Category";
 // import Branch from "../../Components/branch/Branch";
 import ProductFilter from "../../Components/user/product/productFilter/ProductFilter";
 import ProductColumn from "../../Components/user/product/productColumn/ProductColumn";

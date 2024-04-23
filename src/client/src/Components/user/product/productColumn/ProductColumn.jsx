@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./productColumn.scss";
-import PageComponent from "../../reUse/pagination/PageComponent";
+import PageComponent from "../../common/pagination/PageComponent";
 import { Grip, List } from "lucide-react";
 import ProductCard from "../productCard/ProductCard";
 import ProductFlexCard from "../productFlexCard/ProductFlexCard";

@@ -1,7 +1,7 @@
 //Import Component Library
 import React, { useEffect, useState } from "react";
 //Import Component
-import Quantity from "../../reUse/quantity/Quantity";
+import Quantity from "../../common/quantity/Quantity";
 //Import Function
 import { formatVND } from "../../../../Common/function";
 

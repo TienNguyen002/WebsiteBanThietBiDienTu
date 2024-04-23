@@ -1,11 +1,14 @@
-//Import Component
-import React from "react";
-import { useNavigate } from "react-router-dom";
+//Import Component Library
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
-import { ChevronRight, Smartphone } from "lucide-react";
+import { ChevronRight } from "lucide-react";
+//Import API
+import { getAllCategory } from "../../../../Api/Controller";
+//Import Component
+import CategoryIcon from "../../common/categoryIcon/CategoryIcon";
 //Import data
-import category from "../../../../Shared/data/category.json";
 import banner from "../../../../Shared/data/banner.json";
 import ad1 from "../../../../Shared/images/ad-1.png";
 import ad2 from "../../../../Shared/images/ad-2.png";
@@ -17,31 +20,40 @@ import "swiper/css/pagination";
 
 const TopHome = () => {
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
 
   const handleLink = () => {
-    navigate("/more");
     window.scrollTo({
       top: 0,
       behavior: "instant",
     });
   };
 
+  useEffect(() => {
+    getAllCategory().then((data) => {
+      if (data) {
+        setCategories(data);
+      } else setCategories([]);
+    });
+  }, []);
+
   return (
     <>
       <div className="home-top-body">
         <div className="home-top-body-category">
-          {category.result.map((item, index) => (
-            <div
+          {categories.map((item, index) => (
+            <Link
+              to={item.urlSlug}
               key={index}
               className="home-top-body-category-item"
               onClick={handleLink}
             >
               <div className="home-top-body-category-item-detail">
-                <Smartphone className="category-icon" />
+                <CategoryIcon item={item} />
                 <span className="category-name">{item.name}</span>
               </div>
               <ChevronRight className="category-more" />
-            </div>
+            </Link>
           ))}
         </div>
         <Swiper

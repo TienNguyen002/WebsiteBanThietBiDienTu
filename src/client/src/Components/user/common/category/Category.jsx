@@ -1,13 +1,14 @@
 //Import Component Library
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-//Import Data
-import category from "../../../../Shared/data/category.json";
+//Import API
+import { getAllCategory } from "../../../../Api/Controller";
 //CSS
 import "./category.scss";
 
 const Category = (props) => {
   const { title } = props;
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
   const handleLink = () => {
@@ -18,6 +19,14 @@ const Category = (props) => {
     });
   };
 
+  useEffect(() => {
+    getAllCategory().then((data) => {
+      if (data) {
+        setCategories(data);
+      } else setCategories([]);
+    });
+  }, []);
+
   return (
     <>
       <div className="home-category">
@@ -27,7 +36,7 @@ const Category = (props) => {
           </div>
         ) : null}
         <div className="home-category-component">
-          {category.result.map((item, index) => (
+          {categories.map((item, index) => (
             <div
               key={index}
               className="home-category-component-item"
@@ -36,7 +45,7 @@ const Category = (props) => {
               {/* <div> */}
               {/* <Smartphone className="home-category-component-icon" /> */}
               <img
-                src={item.image}
+                src={item.imageUrl}
                 alt={item.name}
                 className="home-category-component-item-image"
               />

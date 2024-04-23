@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavigationBar from "../../Components/user/reUse/navigationBar/NavigationBar";
+import NavigationBar from "../../Components/user/common/navigationBar/NavigationBar";
 import ImageGallery from "../../Components/user/product/imageGallery/ImageGallery";
 import StarRating from "./../../Components/user/product/starRating/StarRating";
 import { formatVND } from "../../Common/function";
@@ -10,7 +10,7 @@ import { ShoppingCart, Heart } from "lucide-react";
 import { Tabs } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import "../../styles/productDetail.scss";
-import Quantity from "../../Components/user/reUse/quantity/Quantity";
+import Quantity from "../../Components/user/common/quantity/Quantity";
 
 const ProductDetail = () => {
   const navigate = useNavigate();

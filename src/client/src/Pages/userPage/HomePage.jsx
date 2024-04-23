@@ -4,9 +4,9 @@ import ProductList from "../../Components/user/product/productList/ProductList";
 import "../../styles/homePage.scss";
 import TopSuggest from "../../Components/user/body/topSuggest/TopSuggest";
 import TopHome from "../../Components/user/body/topHome/TopHome";
-import Privacy from "../../Components/user/reUse/privacy/Privacy";
-import Banner from "../../Components/user/reUse/banner/Banner";
-import Category from "../../Components/user/reUse/category/Category";
+import Privacy from "../../Components/user/common/privacy/Privacy";
+import Banner from "../../Components/user/common/banner/Banner";
+import Category from "../../Components/user/common/category/Category";
 
 const HomePage = () => {
   useEffect(() => {

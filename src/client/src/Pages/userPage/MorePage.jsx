@@ -1,5 +1,5 @@
 import React from "react";
-import Branch from "../../Components/user/reUse/branch/Branch";
+import Branch from "../../Components/user/common/branch/Branch";
 import ProductFilter from "../../Components/user/product/productFilter/ProductFilter";
 import ProductColumn from "../../Components/user/product/productColumn/ProductColumn";
 import "../../styles/morePage.scss";
