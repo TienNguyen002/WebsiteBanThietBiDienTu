@@ -29,10 +29,8 @@ namespace Application.Services
         {
             var discount = new Discount()
             {
-                DiscountPrice = model.DiscountPrice,
                 StartDate = DateTime.Now,
                 EndDate = model.EndDate,
-                ProductId = model.ProductId,
                 Status = true,
             };
             await _repository.Add(discount);
@@ -46,12 +44,12 @@ namespace Application.Services
         /// <param name="id"> Id Of Discount want to delete </param>
         /// <returns> Deleted Discount </returns>
         /// <exception cref="Exception"></exception>
-        public async Task<bool> DeleteDiscount(int id)
-        {
-            await _repository.DeleteDiscount(id);
-            int saved = await _unitOfWork.Commit();
-            return saved > 0;
-        }
+        //public async Task<bool> DeleteDiscount(int id)
+        //{
+        //    await _repository.DeleteDiscount(id);
+        //    int saved = await _unitOfWork.Commit();
+        //    return saved > 0;
+        //}
 
         /// <summary>
         /// Get All Discounts
@@ -60,7 +58,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<IList<DiscountDTO>> GetAllDiscounts()
         {
-            var discounts = await _repository.GetAllWithInclude(d => d.Product);
+            var discounts = await _repository.GetAll();
             return _mapper.Map<IList<DiscountDTO>>(discounts);
         }
 
@@ -72,7 +70,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<DiscountDTO> GetDiscountById(int id)
         {
-            var discount = await _repository.GetByIdWithInclude(id, d => d.Product);
+            var discount = await _repository.GetById(id);
             return _mapper.Map<DiscountDTO>(discount);
         }
     }

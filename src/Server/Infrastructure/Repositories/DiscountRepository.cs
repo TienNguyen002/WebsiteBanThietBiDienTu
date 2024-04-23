@@ -15,21 +15,20 @@ namespace Infrastructure.Repositories
         /// <param name="id"> Id Of Discount want to delete </param>
         /// <returns> Deleted Discount </returns>
         /// <exception cref="Exception"></exception>
-        public async Task<bool> DeleteDiscount(int id)
-        {
-            var discountToDelete = await _context.Set<Discount>()
-                .Include(c => c.Product)
-                .Where(c => c.Id == id)
-                .FirstOrDefaultAsync();
-            try
-            {
-                _context.Remove(discountToDelete);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        //public async Task<bool> DeleteDiscount(int id)
+        //{
+        //    var discountToDelete = await _context.Set<Discount>()
+        //        .Where(c => c.Id == id)
+        //        .FirstOrDefaultAsync();
+        //    try
+        //    {
+        //        _context.Remove(discountToDelete);
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
     }
 }

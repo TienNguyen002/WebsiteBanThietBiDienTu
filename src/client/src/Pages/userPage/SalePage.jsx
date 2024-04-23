@@ -1,8 +1,8 @@
 import React from "react";
-import Category from "../../Components/category/Category";
+import Category from "../../Components/user/reUse/category/Category";
 // import Branch from "../../Components/branch/Branch";
-import ProductFilter from "../../Components/productFilter/ProductFilter";
-import ProductList from "../../Components/productList/ProductList";
+import ProductFilter from "../../Components/user/product/productFilter/ProductFilter";
+import ProductColumn from "../../Components/user/product/productColumn/ProductColumn";
 import "../../styles/salePage.scss";
 
 const SalePage = () => {
@@ -18,7 +18,7 @@ const SalePage = () => {
             <ProductFilter hasBranch={true} />
           </div>
           <div className="sale-page-product-list">
-            <ProductList />
+            <ProductColumn />
           </div>
         </div>
       </div>

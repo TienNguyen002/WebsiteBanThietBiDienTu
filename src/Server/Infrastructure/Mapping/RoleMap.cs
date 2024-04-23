@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Mappings
+namespace Infrastructure.Mapping
 {
     public class RoleMap : IEntityTypeConfiguration<Role>
     {

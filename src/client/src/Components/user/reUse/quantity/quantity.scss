@@ -1,0 +1,26 @@
+.quantity {
+  display: flex;
+  border-radius: 45px;
+  border: 1px solid var(--black);
+  width: fit-content;
+  &-input {
+    text-align: center;
+    font-size: 20px;
+    border: none;
+  }
+  button {
+    color: var(--red);
+    background: var(--white);
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+  }
+  &-decrement {
+    padding: 15px 5px 15px 25px;
+    border-radius: 45px 0 0 45px;
+  }
+  &-increase {
+    padding: 15px 25px 15px 5px;
+    border-radius: 0 45px 45px 0;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "../Components/header/Header";
-import Footer from "../Components/footer/Footer";
+import Header from "../Components/user/header/Header";
+import Footer from "../Components/user/footer/Footer";
 import { ArrowUp } from "lucide-react";
 import "../styles/homeLayout.scss";
 

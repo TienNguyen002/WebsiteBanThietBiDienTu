@@ -41,18 +41,12 @@ namespace Application.Services
             product.ImageUrl = await _mediaManager.SaveImgFileAsync(model.ImageFile.OpenReadStream(),
                                                                      model.ImageFile.FileName,
                                                                      model.ImageFile.ContentType);
-            product.Description = model.Description;
             product.Specification = model.Specification;
             product.Amount = model.Amount;
-            if(model.Amount > 0)
-            {
-                product.Status = true;
-            }
             product.Price = model.Price;
             product.OrPrice = model.OrPrice;
             product.BranchId = model.BranchId;
             product.CategoryId = model.CategoryId;
-            product.Tag.UrlSlug = model.TagSlug;
             await _repository.AddOrUpdate(product);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
@@ -112,10 +106,10 @@ namespace Application.Services
         /// <param name="tag"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public async Task<IList<ProductDTO>> GetProductByTag(string tag)
-        {
-            var products = await _repository.GetAllProductByTag(tag);
-            return _mapper.Map<IList<ProductDTO>>(products);
-        }
+        //public async Task<IList<ProductDTO>> GetProductByTag(string tag)
+        //{
+        //    var products = await _repository.GetAllProductByTag(tag);
+        //    return _mapper.Map<IList<ProductDTO>>(products);
+        //}
     }
 }

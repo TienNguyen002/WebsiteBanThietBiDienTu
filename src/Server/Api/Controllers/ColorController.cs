@@ -57,16 +57,16 @@ namespace Api.Controllers
         /// </summary>
         /// <param name="slug"> UrlSlug want to get Color </param>
         /// <returns> Color With UrlSlug want to get </returns>
-        [HttpGet("bySlug/{slug}")]
-        public async Task<ActionResult<ColorDTO>> GetColorBySlug(string slug)
-        {
-            var color = await _service.GetColorBySlug(slug);
-            if (color == null)
-            {
-                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
-            }
-            return Ok(ApiResponse.Success(color));
-        }
+        //[HttpGet("bySlug/{slug}")]
+        //public async Task<ActionResult<ColorDTO>> GetColorBySlug(string slug)
+        //{
+        //    var color = await _service.GetColorBySlug(slug);
+        //    if (color == null)
+        //    {
+        //        return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+        //    }
+        //    return Ok(ApiResponse.Success(color));
+        //}
 
         /// <summary>
         /// Add/Update Color

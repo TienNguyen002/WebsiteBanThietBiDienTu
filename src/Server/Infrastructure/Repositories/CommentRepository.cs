@@ -17,7 +17,7 @@ namespace Infrastructure.Repositories
         /// <exception cref="Exception"></exception>
         public async Task<IList<Comment>> GetCommentsByProductTag(string tag)
         {
-            return await _context.Set<Comment>().Where(c => c.Product.Tag.UrlSlug == tag).ToListAsync();   
+            return await _context.Set<Comment>().Where(c => c.Serie.UrlSlug == tag).ToListAsync();   
         }
     }
 }

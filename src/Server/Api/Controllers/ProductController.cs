@@ -40,16 +40,16 @@ namespace Api.Controllers
         /// Get All Products
         /// </summary>
         /// <returns> List Of Products </returns>
-        [HttpGet("byTag/{tag}")]
-        public async Task<ActionResult<IList<ProductDTO>>> GetAllProductsByTag(string tag)
-        {
-            var product = await _service.GetProductByTag(tag);
-            if (product == null)
-            {
-                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
-            }
-            return Ok(ApiResponse.Success(product));
-        }
+        //[HttpGet("byTag/{tag}")]
+        //public async Task<ActionResult<IList<ProductDTO>>> GetAllProductsByTag(string tag)
+        //{
+        //    var product = await _service.GetProductByTag(tag);
+        //    if (product == null)
+        //    {
+        //        return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+        //    }
+        //    return Ok(ApiResponse.Success(product));
+        //}
 
         /// <summary>
         /// Get Product By Id

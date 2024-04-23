@@ -13,6 +13,12 @@ namespace Domain.Entities
         //Mã sản phẩm
         public int Id { get; set; }
 
+        //Số lượng
+        public int Quantity { get; set; }
+
+        //Giá
+        public decimal Price { get; set; }
+
         //Mã đơn hàng
         public int OrderId { get; set; }   
 
@@ -24,11 +30,5 @@ namespace Domain.Entities
 
         //Sản phẩm
         public Product? Product { get; set; }
-
-        //Số lượng
-        public int Quantity { get; set; }
-
-        //Giá
-        public decimal Price { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Mappings
+namespace Infrastructure.Mapping
 {
     public class ColorMap : IEntityTypeConfiguration<Color>
     {
@@ -13,9 +13,6 @@ namespace Infrastructure.Mappings
             builder.HasKey(c => c.Id);
 
             builder.Property(c => c.Name)
-                .IsRequired();
-
-            builder.Property(c => c.UrlSlug)
                 .IsRequired();
         }
     }

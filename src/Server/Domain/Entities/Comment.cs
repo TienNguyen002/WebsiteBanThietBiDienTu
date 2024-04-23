@@ -12,16 +12,19 @@ namespace Domain.Entities
         public string Detail { get; set; } = null!;
 
         //Đánh giá
-        public int Rating { get; set; }
+        public decimal Rating { get; set; }
 
         //Ngày bình luận
         public DateTime CommentDate { get; set; }
 
-        //Mã sản phẩm
-        public int ProductId { get; set; }
+        //Trạng thái
+        public bool Status { get; set; }
 
-        //Sản phẩm
-        public Product? Product { get; set; }
+        //Mã dòng
+        public int SerieId { get; set; }
+
+        //Dòng sản phẩm
+        public Serie? Serie { get; set; }
 
         //Mã người dùng
         public int UserId { get; set; }

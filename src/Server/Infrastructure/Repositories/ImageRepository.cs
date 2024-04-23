@@ -18,7 +18,7 @@ namespace Infrastructure.Repositories
         public async Task<bool> DeleteImage(int id)
         {
             var imageToDelete = await _context.Set<Image>()
-                .Include(i => i.Product)
+                .Include(i => i.Serie)
                 .Where(i => i.Id == id)
                 .FirstOrDefaultAsync();
             try

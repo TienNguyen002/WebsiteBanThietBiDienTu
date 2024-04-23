@@ -32,7 +32,6 @@ namespace Application.Services
             image.ImageUrl = await _mediaManager.SaveImgFileAsync(model.ImageFile.OpenReadStream(),
                                                                     model.ImageFile.FileName,
                                                                     model.ImageFile.ContentType);
-            image.ProductId = model.ProductId;
             await _repository.AddOrUpdate(image);
             int saved = await _unitOfWork.Commit();
             return saved > 0;

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Mappings
+namespace Infrastructure.Mapping
 {
     public class ProductMap : IEntityTypeConfiguration<Product>
     {
@@ -15,23 +15,29 @@ namespace Infrastructure.Mappings
             builder.Property(p => p.Name)
                 .IsRequired();
 
+            builder.Property(p => p.ShortName)
+                .IsRequired();
+
             builder.Property(p => p.UrlSlug)
                 .IsRequired();
 
-            builder.Property(p => p.Description) 
+            builder.Property(p => p.Rating)
+                .HasColumnType("decimal(18,2)");
+
+            builder.Property(p => p.ImageUrl)
+               .HasMaxLength(1000);
+
+            builder.Property(p => p.ShortDescription) 
                 .IsRequired();
 
             builder.Property(p => p.Specification)
                 .IsRequired();
 
-            builder.Property(p => p.ImageUrl)
-                .HasMaxLength(1000);
-
             builder.Property(p => p.Amount)
                 .HasMaxLength(500);
 
-            builder.Property(p => p.Status)
-                .HasDefaultValue(true);
+            builder.Property(p => p.SalePrice)
+               .HasColumnType("decimal(18,2)");
 
             builder.Property(p => p.Price)
                 .HasColumnType("decimal(18,2)");
@@ -39,6 +45,8 @@ namespace Infrastructure.Mappings
             builder.Property(p => p.OrPrice)
                 .IsRequired()
                 .HasColumnType("decimal(18,2)");
+
+            builder.Property(p => p.SoldQuantity);
 
             builder.HasOne(p => p.Category)
                 .WithMany(c => c.Products)
@@ -52,11 +60,17 @@ namespace Infrastructure.Mappings
                 .HasConstraintName("FK_Branches_Products")
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(p => p.Tag)
-                .WithMany(t => t.Products)
-                .HasForeignKey(p => p.TagId)
-                .HasConstraintName("FK_Tags_Products")
+            builder.HasOne(p => p.Serie)
+                .WithMany(s => s.Products)
+                .HasForeignKey(p => p.SerieId)
+                .HasConstraintName("FK_Series_Products")
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(p => p.Sale)
+                .WithMany(s => s.Products)
+                .HasForeignKey(p => p.SaleId)
+                .HasConstraintName("FK_Sales_Products")
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(p => p.Colors)
                 .WithMany(c => c.Products)

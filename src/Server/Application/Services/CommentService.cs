@@ -25,7 +25,6 @@ namespace Application.Services
             {
                 Detail = model.Detail,
                 Rating = model.Rating,
-                ProductId = model.ProductId,
                 UserId = model.UserId,
                 CommentDate = DateTime.Now,
             };

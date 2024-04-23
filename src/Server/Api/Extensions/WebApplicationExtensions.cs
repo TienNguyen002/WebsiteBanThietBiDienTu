@@ -43,8 +43,6 @@ namespace Api.Extensions
             builder.Services.AddScoped<IDiscountService, DiscountService>();
             builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
             builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
-            builder.Services.AddScoped<ITagRepository, TagRepository>();
-            builder.Services.AddScoped<ITagService, TagService>();
             builder.Services.AddScoped<IStatusRepository, StatusRepository>();
             builder.Services.AddScoped<IStatusService, StatusService>();
             builder.Services.AddScoped<IUserService, UserService>();

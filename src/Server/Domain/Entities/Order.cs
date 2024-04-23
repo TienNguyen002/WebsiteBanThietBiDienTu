@@ -35,6 +35,12 @@ namespace Domain.Entities
         //Phương thức
         public PaymentMethod? PaymentMethod { get; set; }
 
+        //Mã giảm giá
+        public int DiscountId { get; set; }
+
+        //Giảm giá
+        public Discount? Discount { get; set; }
+
         //Danh sách sản phẩm
         public IList<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
     }

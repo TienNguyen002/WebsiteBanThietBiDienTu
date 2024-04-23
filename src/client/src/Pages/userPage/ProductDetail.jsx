@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import NavigationBar from "../../Components/navigationBar/NavigationBar";
-import ImageGallery from "../../Components/imageGallery/ImageGallery";
-import StarRating from "./../../Components/starRating/StarRating";
+import NavigationBar from "../../Components/user/reUse/navigationBar/NavigationBar";
+import ImageGallery from "../../Components/user/product/imageGallery/ImageGallery";
+import StarRating from "./../../Components/user/product/starRating/StarRating";
 import { formatVND } from "../../Common/function";
-import ColorSquare from "./../../Components/colorSquare/ColorSquare";
-import "../../styles/productDetail.scss";
+import ColorSquare from "./../../Components/user/product/colorSquare/ColorSquare";
 import { useNavigate } from "react-router-dom";
-import ProductTag from "../../Components/productTag/ProductTag";
+import ProductTag from "../../Components/user/product/productTag/ProductTag";
 import { ShoppingCart, Heart } from "lucide-react";
+import { Tabs } from "antd";
+import TabPane from "antd/es/tabs/TabPane";
+import "../../styles/productDetail.scss";
+import Quantity from "../../Components/user/reUse/quantity/Quantity";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
+  const [available, setAvailable] = useState(true);
 
   const handleBranchLink = () => {
     navigate("/branch");
@@ -29,13 +33,6 @@ const ProductDetail = () => {
     });
   };
 
-  const increaseQuantity = () => {
-    setQuantity(quantity + 1);
-  };
-
-  const decreaseQuantity = () => {
-    setQuantity(quantity - 1);
-  };
   // const parts = window.location.pathname.split("/");
   return (
     <>
@@ -75,9 +72,15 @@ const ProductDetail = () => {
               <p className="product-information-item-box-status-title">
                 Tình trạng:
               </p>
-              <p className="product-information-item-box-status-info">
-                Còn hàng
-              </p>
+              {available ? (
+                <p className="product-information-item-box-status-available">
+                  Còn hàng
+                </p>
+              ) : (
+                <p className="product-information-item-box-status-out">
+                  Hết hàng
+                </p>
+              )}
             </div>
             <div className="product-information-item-box-branch">
               <p className="product-information-item-box-branch-title">
@@ -119,29 +122,7 @@ const ProductDetail = () => {
             <div className="product-information-item-box-action">
               <div className="product-information-item-box-action-cart">
                 <div className="product-information-item-box-action-cart-quantity">
-                  <button
-                    className="product-information-item-box-action-cart-quantity-decrement"
-                    onClick={decreaseQuantity}
-                    disabled={quantity === 0}
-                  >
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    min={0}
-                    max={10}
-                    step={1}
-                    className="product-information-item-box-action-cart-quantity-input"
-                    readOnly
-                    value={quantity}
-                  />
-                  <button
-                    className="product-information-item-box-action-cart-quantity-increase"
-                    onClick={increaseQuantity}
-                    disabled={quantity === 100}
-                  >
-                    +
-                  </button>
+                  <Quantity quantity={quantity} setQuantity={setQuantity} />
                 </div>
                 <p className="product-information-item-box-action-cart-add">
                   Thêm vào giỏ hàng <ShoppingCart />
@@ -153,19 +134,49 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
-        {/* <p>Thông tin sản phẩm</p>
-        <p>Phụ kiện</p>
-        <p>Sản phẩm tương tự</p> */}
-        <p>Mô tả chi tiết - Đặc điểm nổi bật</p>
-        <p>Thông số kỹ thuật</p>
-        <div>
-          Đánh giá - Tổng đánh giá
-          <div>
-            <p>Ô bình luận kèm đánh giá</p>
-            <p>Gửi</p>
-            <p>Danh sách bình luận của khách hàng</p>
+        <div className="product-infomation-body">
+          <div className="product-information-body-tab">
+            <Tabs defaultActiveKey="1" centered>
+              <TabPane
+                tab={
+                  <span className="product-information-body-tab-title">
+                    Mô tả sản phẩm
+                  </span>
+                }
+                key="1"
+                className="product-information-body-tab-content product-information-body-tab-content-desc"
+              >
+                Mô tả sản phẩm
+              </TabPane>
+              <TabPane
+                tab={
+                  <span className="product-information-body-tab-title">
+                    Thông số kỹ thuật
+                  </span>
+                }
+                key="2"
+                className="product-information-body-tab-content product-information-body-tab-content-speci"
+              >
+                Thông số kỹ thuật
+              </TabPane>
+              <TabPane
+                tab={
+                  <span className="product-information-body-tab-title">
+                    Bình luận
+                  </span>
+                }
+                key="3"
+                className="product-information-body-tab-content product-information-body-tab-content-comment"
+              >
+                Bình luận
+              </TabPane>
+            </Tabs>
           </div>
         </div>
+
+        {/*
+        <p>Phụ kiện</p>
+        <p>Sản phẩm tương tự</p> */}
       </div>
     </>
   );

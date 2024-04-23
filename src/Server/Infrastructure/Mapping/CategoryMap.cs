@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Mappings
+namespace Infrastructure.Mapping
 {
     public class CategoryMap : IEntityTypeConfiguration<Category>
     {
@@ -17,6 +17,8 @@ namespace Infrastructure.Mappings
 
             builder.Property(c => c.UrlSlug)
                 .IsRequired();
+
+            builder.Property(c => c.ImageUrl);
         }
     }
 }

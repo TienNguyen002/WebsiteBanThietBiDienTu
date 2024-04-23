@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Mappings
+namespace Infrastructure.Mapping
 {
     public class OrderMap : IEntityTypeConfiguration<Order>
     {
@@ -18,7 +18,7 @@ namespace Infrastructure.Mappings
             builder.Property(o => o.Quantity);
 
             builder.Property(o => o.TotalPrice)
-                .HasColumnType("decimal(18,2)"); ;
+                .HasColumnType("decimal(18,2)");
 
             builder.HasOne(o => o.Status)
                 .WithMany(s => s.Orders)
@@ -37,6 +37,12 @@ namespace Infrastructure.Mappings
                 .HasForeignKey(o => o.PaymentMethodId)
                 .HasConstraintName("FK_Orders_PaymentMethods")
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(o => o.Discount)
+               .WithMany(d => d.Orders)
+               .HasForeignKey(o => o.DiscountId)
+               .HasConstraintName("FK_Orders_Discounts")
+               .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

@@ -1,6 +1,6 @@
 import React from "react";
-import ProductFilter from "../../Components/productFilter/ProductFilter";
-import ProductList from "../../Components/productList/ProductList";
+import ProductFilter from "../../Components/user/product/productFilter/ProductFilter";
+import ProductColumn from "../../Components/user/product/productColumn/ProductColumn";
 import "../../styles/branchPage.scss";
 
 const BranchPage = () => {
@@ -12,7 +12,7 @@ const BranchPage = () => {
             <ProductFilter hasBranch={false} />
           </div>
           <div className="branch-page-product-list">
-            <ProductList />
+            <ProductColumn />
           </div>
         </div>
       </div>

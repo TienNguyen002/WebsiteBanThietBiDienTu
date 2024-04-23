@@ -7,6 +7,6 @@ namespace Domain.Interfaces.Services
         Task<IList<DiscountDTO>> GetAllDiscounts();
         Task<DiscountDTO> GetDiscountById(int id);
         Task<bool> AddDiscount(DiscountEditModel model);
-        Task<bool> DeleteDiscount(int id);
+        //Task<bool> DeleteDiscount(int id);
     }
 }

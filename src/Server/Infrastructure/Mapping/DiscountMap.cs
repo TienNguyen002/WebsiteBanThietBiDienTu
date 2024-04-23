@@ -1,12 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Mapping
 {
@@ -18,7 +12,10 @@ namespace Infrastructure.Mapping
 
             builder.HasKey(d => d.Id);
 
-            builder.Property(d => d.DiscountPrice)
+            builder.Property(d => d.CodeName)
+                .IsRequired();
+
+            builder.Property(d => d.DiscountPercent)
                 .IsRequired()
                 .HasColumnType("decimal(18,2)"); ;
 
@@ -31,12 +28,6 @@ namespace Infrastructure.Mapping
 
             builder.Property(d => d.Status)
                 .HasDefaultValue(true);
-
-            builder.HasOne(d => d.Product)
-                .WithMany(p => p.Discounts)
-                .HasForeignKey(d => d.ProductId)
-                .HasConstraintName("FK_Discounts_Products")
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

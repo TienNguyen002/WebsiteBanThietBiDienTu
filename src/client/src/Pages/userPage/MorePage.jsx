@@ -1,7 +1,7 @@
 import React from "react";
-import Branch from "../../Components/branch/Branch";
-import ProductFilter from "../../Components/productFilter/ProductFilter";
-import ProductList from "../../Components/productList/ProductList";
+import Branch from "../../Components/user/reUse/branch/Branch";
+import ProductFilter from "../../Components/user/product/productFilter/ProductFilter";
+import ProductColumn from "../../Components/user/product/productColumn/ProductColumn";
 import "../../styles/morePage.scss";
 
 const MorePage = () => {
@@ -16,7 +16,7 @@ const MorePage = () => {
             <ProductFilter hasBranch={false} />
           </div>
           <div className="more-page-product-list">
-            <ProductList />
+            <ProductColumn />
           </div>
         </div>
       </div>

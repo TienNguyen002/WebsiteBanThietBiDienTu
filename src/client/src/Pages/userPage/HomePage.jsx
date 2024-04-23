@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import FlashSale from "./../../Components/flashSale/FlashSale";
-import Product from "../../Components/product/Product";
+import FlashSale from "./../../Components/user/body/flashSale/FlashSale";
+import ProductList from "../../Components/user/product/productList/ProductList";
 import "../../styles/homePage.scss";
-import TopSuggest from "../../Components/topSuggest/TopSuggest";
-import TopBody from "../../Components/topBody/TopBody";
-import Privacy from "../../Components/privacy/Privacy";
-import Banner from "../../Components/banner/Banner";
-import Category from "../../Components/category/Category";
+import TopSuggest from "../../Components/user/body/topSuggest/TopSuggest";
+import TopHome from "../../Components/user/body/topHome/TopHome";
+import Privacy from "../../Components/user/reUse/privacy/Privacy";
+import Banner from "../../Components/user/reUse/banner/Banner";
+import Category from "../../Components/user/reUse/category/Category";
 
 const HomePage = () => {
   useEffect(() => {
@@ -15,16 +15,16 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
-      <TopBody />
+      <TopHome />
       <FlashSale />
       <Privacy />
       <TopSuggest />
-      <Product title={"Điện thoại"} />
-      <Product title={"Laptop"} />
+      <ProductList title={"Điện thoại"} />
+      <ProductList title={"Laptop"} />
       <Banner />
-      <Product title={"Âm thanh"} />
-      <Product title={"PC"} />
-      <Category title={true}/>
+      <ProductList title={"Âm thanh"} />
+      <ProductList title={"PC"} />
+      <Category title={true} />
     </div>
   );
 };

@@ -21,11 +21,9 @@ namespace Infrastructure.Repositories
             var productToDelete = await _context.Set<Product>()
                 .Include(p => p.Branch)
                 .Include(p => p.Category)
-                .Include(p => p.Tag)
-                .Include(p => p.Images)
+                .Include(p => p.Serie)
                 .Include(p => p.Colors)
-                .Include(p => p.Comments)
-                .Include(p => p.Discounts)
+                .Include(p => p.Sale)
                 .Include(p => p.OrderItems)
                 .Where(p => p.Id == id)
                 .FirstOrDefaultAsync();
@@ -46,12 +44,12 @@ namespace Infrastructure.Repositories
         /// <param name="tag">Tag of product want to get</param>
         /// <returns>A list of product getting by tag</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public async Task<IList<Product>> GetAllProductByTag(string tag)
-        {
-            return await _context.Set<Product>()
-                .Where(p => p.Tag.UrlSlug.Contains(tag))
-                .ToListAsync();
-        }
+        //public async Task<IList<Product>> GetAllProductByTag(string tag)
+        //{
+        //    return await _context.Set<Product>()
+        //        .Where(p => p.Tag.UrlSlug.Contains(tag))
+        //        .ToListAsync();
+        //}
 
         public async Task<Product> GetProductBySlug(string slug)
         {
