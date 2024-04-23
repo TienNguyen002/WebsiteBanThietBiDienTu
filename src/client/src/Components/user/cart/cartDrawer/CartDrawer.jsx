@@ -25,6 +25,7 @@ const CartDrawer = () => {
         {/* <CartProduct setTotal={setTotal} />
         <p>Total: {total} </p>
         <button>Mở giỏ hàng</button>
+        Hello tieens khoai to
         <button>Thanh toán</button> */}
         <p>Bạn chưa có sản phẩm nào tại giỏ hàng.</p> Cùng đi 1 vòng mua sắm
         nào!!
