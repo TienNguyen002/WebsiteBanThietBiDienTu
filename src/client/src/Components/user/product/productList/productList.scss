@@ -4,7 +4,7 @@
   grid-template-columns: 12% 86%;
   column-gap: 20px;
   padding: 20px 0;
-  height: 62em;
+  height: fit-content;
   &-branch {
     background: var(--white);
     height: fit-content;

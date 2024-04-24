@@ -20,6 +20,7 @@ const ImageGallery = () => {
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
           }}
+          zoom={true}
           spaceBetween={10}
           navigation={true}
           modules={[Navigation, Thumbs, Autoplay]}

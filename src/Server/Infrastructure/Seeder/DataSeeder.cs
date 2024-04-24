@@ -1949,12 +1949,12 @@ namespace Infrastructure.Seeders
             {
                 new()
                 {
-                    EndDate = DateTime.Now,
+                    EndDate = new DateTime(2024, 4, 24),
                     Status = false,
                 },
                 new()
                 {
-                    EndDate = DateTime.Now.AddDays(20),
+                    EndDate = new DateTime(2024, 5, 11),
                     Status = true,
                 },
             };

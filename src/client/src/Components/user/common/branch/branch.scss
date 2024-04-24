@@ -6,7 +6,7 @@
   justify-content: space-around;
   justify-items: center;
   width: 80%;
-  height: 200px;
+  height: fit-content;
   &-logo {
     background: var(--white);
     filter: grayscale(100%);

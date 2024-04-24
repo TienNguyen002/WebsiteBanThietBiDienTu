@@ -21,8 +21,6 @@ const HomeLayout = () => {
       } else {
         setShow(false);
       }
-      if (window.scrollY >= 100) {
-      }
 
       if (
         window.innerHeight + window.pageYOffset >=
