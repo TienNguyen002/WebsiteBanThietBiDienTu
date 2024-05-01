@@ -1,6 +1,4 @@
-﻿using Domain.DTO.Product;
-
-namespace Domain.DTO.Comment
+﻿namespace Domain.DTO.Comment
 {
     public class CommentDTO
     {
@@ -8,6 +6,5 @@ namespace Domain.DTO.Comment
         public string Detail { get; set; } = null!;
         public int Rating { get; set; }
         public DateTime CommentDate { get; set; }
-        public ProductDTO? Product { get; set; }
     }
 }

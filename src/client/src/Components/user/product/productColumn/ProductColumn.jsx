@@ -6,6 +6,7 @@ import ProductCard from "../productCard/ProductCard";
 import ProductFlexCard from "../productFlexCard/ProductFlexCard";
 import product from "../../../../Shared/data/product.json";
 import DropDown from "./dropDown/DropDown";
+import ProductItem from "./../productCard/ProductItem";
 
 const ProductColumn = () => {
   const [grid, setGrid] = useState(true);
@@ -50,7 +51,7 @@ const ProductColumn = () => {
         <div className={grid ? "product-list-grid" : ""}>
           {product.result.map((item, index) =>
             grid ? (
-              <ProductCard
+              <ProductItem
                 key={index}
                 name={item.name}
                 image={item.image}

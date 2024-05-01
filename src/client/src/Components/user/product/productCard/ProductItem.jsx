@@ -6,10 +6,10 @@ import { formatVND } from "../../../../Common/function";
 import ColorSquare from "../colorSquare/ColorSquare";
 import { useNavigate } from "react-router-dom";
 
-const ProductCard = (props) => {
+const ProductItem = (props) => {
   const [showAction, setShowAction] = useState(false);
   const productCardRef = useRef(null);
-  const { name, image, slug, current, salePrice, star, color } = props;
+  const { name, image, slug, current, orPrice, star, color } = props;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -71,10 +71,10 @@ const ProductCard = (props) => {
           </div>
           <div className="product-box-detail-price">
             <div className="product-box-detail-price-discount">
-              <p>{formatVND(salePrice)}</p>
+              <p>{formatVND(current)}</p>
             </div>
             <div className="product-box-detail-price-current">
-              <s>{formatVND(current)}</s>
+              <s>{formatVND(orPrice)}</s>
             </div>
           </div>
           <div className="product-box-info">
@@ -92,4 +92,4 @@ const ProductCard = (props) => {
   );
 };
 
-export default ProductCard;
+export default ProductItem;

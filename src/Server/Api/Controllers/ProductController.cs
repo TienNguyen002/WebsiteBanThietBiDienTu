@@ -1,4 +1,5 @@
 ﻿using Api.Response;
+using Domain.DTO;
 using Domain.DTO.Product;
 using Domain.Interfaces.Services;
 using MapsterMapper;
@@ -8,7 +9,6 @@ using System.Net;
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _service;
@@ -59,12 +59,12 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDTO>> GetProductById(int id)
         {
-            var branch = await _service.GetProductById(id);
-            if (branch == null)
+            var product = await _service.GetProductById(id);
+            if (product == null)
             {
                 return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
             }
-            return Ok(ApiResponse.Success(branch));
+            return Ok(ApiResponse.Success(product));
         }
 
         /// <summary>
@@ -73,14 +73,14 @@ namespace Api.Controllers
         /// <param name="slug"> UrlSlug want to get Product </param>
         /// <returns> Product With UrlSlug want to get </returns>
         [HttpGet("bySlug/{slug}")]
-        public async Task<ActionResult<ProductDTO>> GetProductBySlug(string slug)
+        public async Task<ActionResult<ProductDetailDTO>> GetProductBySlug(string slug)
         {
-            var branch = await _service.GetProductBySlug(slug);
-            if (branch == null)
+            var product = await _service.GetProductBySlug(slug);
+            if (product == null)
             {
                 return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
             }
-            return Ok(ApiResponse.Success(branch));
+            return Ok(ApiResponse.Success(product));
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace Api.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var branchCreate = await _service.AddOrUpdateProduct(model);
-            if (!branchCreate)
+            var productCreate = await _service.AddOrUpdateProduct(model);
+            if (!productCreate)
             {
                 return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
             }
@@ -118,6 +118,58 @@ namespace Api.Controllers
                 return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
             }
             return Ok(ApiResponse.Success(result)); ;
+        }
+
+        [HttpGet("top/{limit}")]
+        public async Task<ActionResult<ProductDTO>> GetTopProducts(int limit)
+        {
+            var products = await _service.GetTopProducts(limit);
+            if (products == null)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(products));
+        }
+
+        [HttpGet("new/{limit}")]
+        public async Task<ActionResult<ProductDTO>> GetNewProducts(int limit)
+        {
+            var products = await _service.GetNewProducts(limit);
+            if (products == null)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(products));
+        }
+
+        [HttpGet("sold/{limit}")]
+        public async Task<ActionResult<ProductDTO>> GetSoldProducts(int limit)
+        {
+            var products = await _service.GetSoldProducts(limit);
+            if (products == null)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(products));
+        }
+
+        [HttpGet("{limit}/{category}")]
+        public async Task<ActionResult<ProductByCategoryDTO>> GetLimitProductByCategory(int limit, string category)
+        {
+            var products = await _service.GetLimitProductByCategory(limit, category);
+            if (products == null)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(products));
+        }
+
+        [HttpGet("paged")]
+        public async Task<ActionResult<ProductDTO>> GetPagedProduct([AsParameters] ProductQuery query,
+            PagingModel model)
+        {
+            var result = await _service.GetPagedProductsAsync(query, model);
+            return Ok(ApiResponse.Success(result));
         }
     }
 }

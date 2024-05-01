@@ -2,14 +2,16 @@
 
 namespace Domain.DTO.Product
 {
-    public class SaleProductDTO
+    public class ProductByCategoryDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string UrlSlug { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
         public IList<ProductColorDTO> Colors { get; set; } = new List<ProductColorDTO>();
-        public decimal SalePrice { get; set; }
-        public decimal Price { get; set; }
+        public int SalePrice { get; set; }
+        public int Price { get; set; }
+        public int OrPrice { get; set; }
         public decimal Rating { get; set; }
     }
 }

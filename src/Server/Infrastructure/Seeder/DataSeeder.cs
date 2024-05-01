@@ -1,6 +1,5 @@
 ﻿using Domain.Entities;
 using Infrastructure.Contexts;
-using static System.Net.WebRequestMethods;
 
 namespace Infrastructure.Seeders
 {
@@ -1052,11 +1051,6 @@ namespace Infrastructure.Seeders
                     Branch = branches[0],
                     Serie = series[12],
                     Sale = sales[0],
-                    Colors = new List<Color>()
-                    {
-                        colors[0],
-                        colors[1],
-                    }
                 },
                 new()
                 {
@@ -1076,11 +1070,6 @@ namespace Infrastructure.Seeders
                     Branch = branches[1],
                     Serie = series[13],
                     Sale = sales[0],
-                    Colors = new List<Color>()
-                    {
-                        colors[0],
-                        colors[1],
-                    }
                 },
                 new()
                 {
@@ -1100,11 +1089,6 @@ namespace Infrastructure.Seeders
                     Branch = branches[50],
                     Serie = series[14],
                     Sale = sales[0],
-                    Colors = new List<Color>()
-                    {
-                        colors[0],
-                        colors[1],
-                    }
                 },
                 new()
                 {
@@ -1124,11 +1108,6 @@ namespace Infrastructure.Seeders
                     Branch = branches[51],
                     Serie = series[15],
                     Sale = sales[0],
-                    Colors = new List<Color>()
-                    {
-                        colors[0],
-                        colors[1],
-                    }
                 },
                 new()
                 {

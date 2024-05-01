@@ -16,7 +16,7 @@ namespace Infrastructure.Repositories
             return await _context.Set<Sale>()
                 .Include(b => b.Products)
                 .ThenInclude(p => p.Colors)
-                .Where(b => b.Id == id)
+                .Where(b => b.Id == id && b.Status == true)
                 .FirstOrDefaultAsync();
         }
     }

@@ -2,11 +2,11 @@ import React from "react";
 import "./colorSquare.scss";
 
 const colorMap = {
-  red: "#ff0000",
+  Đỏ: "#ff0000",
   yellow: "#ffff00",
-  green: "#008000",
-  orange: "#ffa500",
-  blue: "#0000ff",
+  "Xanh lá": "#008000",
+  Cam: "#ffa500",
+  "Xanh nước": "#0000ff",
   black: "#000000",
   // Add more color mappings here
 };

@@ -19,11 +19,11 @@ const HomePage = () => {
       <FlashSale />
       <Privacy />
       <TopSuggest />
-      <ProductList title={"Điện thoại"} />
-      <ProductList title={"Laptop"} />
+      <ProductList title={"Điện thoại"} category={"dien-thoai"} />
+      <ProductList title={"Laptop"} category={"laptop"} />
       <Banner />
-      <ProductList title={"Âm thanh"} />
-      <ProductList title={"PC"} />
+      <ProductList title={"Âm thanh"} category={"am-thanh"} />
+      <ProductList title={"PC"} category={"pc"} />
       <Category title={true} />
     </div>
   );

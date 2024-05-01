@@ -26,7 +26,7 @@ namespace Infrastructure.Repositories
                 _context.Remove(branchToDelete);
                 return true;
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return false;
             }
@@ -44,6 +44,15 @@ namespace Infrastructure.Repositories
                 .Include(b => b.Products)
                 .Where(b => b.UrlSlug == slug)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<IList<Branch>> GetLimitBranchByCategory(int limit, string category)
+        {
+            return await _context.Set<Branch>()
+                .Include(p => p.Products)
+                .Where(p => p.Products.Any(p => p.Category.UrlSlug.Contains(category)))
+                .Take(limit)
+                .ToListAsync();
         }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using Domain.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
@@ -17,10 +12,10 @@ namespace Domain.Entities
         public int Quantity { get; set; }
 
         //Giá
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         //Mã đơn hàng
-        public int OrderId { get; set; }   
+        public int OrderId { get; set; }
 
         //Đơn hàng
         public Order? Order { get; set; }

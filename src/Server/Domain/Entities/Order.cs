@@ -15,7 +15,7 @@ namespace Domain.Entities
         public int Quantity { get; set; }
 
         //Tổng tiền
-        public decimal TotalPrice { get; set; }
+        public int TotalPrice { get; set; }
 
         //Mã trạng thái
         public int StatusId { get; set; }

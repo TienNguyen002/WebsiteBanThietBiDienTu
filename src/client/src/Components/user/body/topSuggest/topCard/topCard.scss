@@ -25,6 +25,7 @@
     background: white;
     border-radius: 1em;
     padding: 20px;
+    margin-bottom: 10px;
     &-detail {
       display: flex;
       margin: 0 10px;
@@ -38,7 +39,7 @@
         align-self: center;
         &-name {
           font-size: 15px;
-          margin: 0;
+          margin: 0 10px;
           width: 200px;
         }
         &-price {
@@ -46,7 +47,7 @@
           align-items: center;
           gap: 10px;
           text-align: center;
-          margin: 5px;
+          margin: 5px 10px;
           &-current {
             color: red;
             font-weight: bold;

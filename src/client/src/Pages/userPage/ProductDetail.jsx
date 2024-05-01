@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavigationBar from "../../Components/user/common/navigationBar/NavigationBar";
 import ImageGallery from "../../Components/user/product/imageGallery/ImageGallery";
 import StarRating from "./../../Components/user/product/starRating/StarRating";
 import { formatVND } from "../../Common/function";
 import ColorSquare from "./../../Components/user/product/colorSquare/ColorSquare";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductTag from "../../Components/user/product/productTag/ProductTag";
 import { ShoppingCart, Heart } from "lucide-react";
 import { Tabs } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import "../../styles/productDetail.scss";
 import Quantity from "../../Components/user/common/quantity/Quantity";
+import { getProductDetail } from "../../Api/Controller";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [available, setAvailable] = useState(true);
+  const [product, setProduct] = useState({});
+  const params = useParams();
+  const { slug } = params;
+
+  useEffect(() => {
+    getProductDetail(slug).then((data) => {
+      if (data) {
+        setProduct(data);
+        console.log(data);
+      } else setProduct([]);
+    });
+  }, []);
 
   const handleBranchLink = () => {
     navigate("/branch");
@@ -48,7 +61,7 @@ const ProductDetail = () => {
               Điện thoại
             </p>
             <h2 className="product-information-item-box-name">
-              Samsung Galaxy Z Flip5 256GB
+              {product.name}
             </h2>
             <StarRating
               rating={5}

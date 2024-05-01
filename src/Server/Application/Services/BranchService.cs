@@ -87,5 +87,11 @@ namespace Application.Services
             var branch = await _repository.GetBranchBySlug(slug);
             return _mapper.Map<BranchDTO>(branch);
         }
+
+        public async Task<IList<BranchProductDTO>> GetLimitBranchByCategory(int limit, string category)
+        {
+            var branches = await _repository.GetLimitBranchByCategory(limit, category);
+            return _mapper.Map<IList<BranchProductDTO>>(branches);
+        }
     }
 }

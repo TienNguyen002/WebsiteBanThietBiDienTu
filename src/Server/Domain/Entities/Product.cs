@@ -33,20 +33,20 @@ namespace Domain.Entities
         public int Amount { get; set; }
 
         //Giá sale
-        public decimal SalePrice { get; set; }
+        public int SalePrice { get; set; }
 
         //Giá hiện tại
-        public decimal Price { get; set; }
+        public int Price { get; set; }
 
         //Giá gốc
-        public decimal OrPrice { get; set; }
+        public int OrPrice { get; set; }
 
         //Số lượng bán
         public int SoldQuantity { get; set; }
 
         //Mã danh mục
         public int CategoryId { get; set; }
-        
+
         //Danh mục
         public Category? Category { get; set; }
 
