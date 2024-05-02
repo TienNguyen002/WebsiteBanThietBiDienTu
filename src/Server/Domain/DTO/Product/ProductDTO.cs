@@ -9,6 +9,7 @@ namespace Domain.DTO.Product
         public string Name { get; set; } = null!;
         public string UrlSlug { get; set; } = null!;
         public string ImageUrl { get; set; } = null!;
+        public string ShortDescription { get; set; } = null!;
         public BranchProductDTO Branch { get; set; }
         public IList<ProductColorDTO> Colors { get; set; } = new List<ProductColorDTO>();
         public int SalePrice { get; set; }

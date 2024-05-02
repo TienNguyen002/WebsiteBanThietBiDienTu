@@ -9,6 +9,10 @@
     }
     &-list {
       padding: 0 10px;
+      .ant-pagination {
+        text-align: center;
+        margin-bottom: 10px;
+      }
     }
   }
 }

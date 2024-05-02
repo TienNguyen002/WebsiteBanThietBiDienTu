@@ -7,7 +7,7 @@ import ColorSquare from "../colorSquare/ColorSquare";
 import { useNavigate } from "react-router-dom";
 
 const ProductFlexCard = (props) => {
-  const { name, image, current, discount, star, color } = props;
+  const { name, image, current, orPrice, star, color, shortDes } = props;
   const navigate = useNavigate();
 
   const handleLink = () => {
@@ -36,10 +36,10 @@ const ProductFlexCard = (props) => {
             />
             <div className="product-flex-card-detail-price">
               <div className="product-flex-card-detail-price-discount">
-                <p>{formatVND(discount)}</p>
+                <p>{formatVND(current)}</p>
               </div>
               <div className="product-flex-card-detail-price-current">
-                <s>{formatVND(current)}</s>
+                <s>{formatVND(orPrice)}</s>
               </div>
             </div>
             <div className="product-flex-card-detail-action">
@@ -53,12 +53,7 @@ const ProductFlexCard = (props) => {
               <Heart className="product-flex-card-detail-action-heart" />
             </div>
           </div>
-          <div className="product-flex-card-description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum
-            consequuntur velit repudiandae voluptatum exercitationem veniam quae
-            aperiam itaque. Nihil, earum alias numquam neque repellendus
-            repellat temporibus iste facilis sapiente dicta!
-          </div>
+          <div className="product-flex-card-description">{shortDes}</div>
         </div>
       </div>
     </>

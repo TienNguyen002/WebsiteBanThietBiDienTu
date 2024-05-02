@@ -33,7 +33,7 @@ export function getBranchList(limit, category) {
   );
 }
 
-export function getContact(payload) {
+export function getPagedProduct(payload) {
   return get_api(
     process.env.REACT_APP_API_ITEM_PAGE + `?${convertObjToQueryString(payload)}`
   );
@@ -41,4 +41,11 @@ export function getContact(payload) {
 
 export function getProductDetail(slug) {
   return get_api(process.env.REACT_APP_API_ITEM_DETAIL + `${slug}`);
+}
+
+export function getProductFilter(payload) {
+  return get_api(
+    process.env.REACT_APP_API_ITEM_FILTER +
+      `?${convertObjToQueryString(payload)}`
+  );
 }

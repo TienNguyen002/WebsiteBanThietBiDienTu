@@ -225,6 +225,8 @@ namespace Infrastructure.Repositories
             {
                 Id = p.Category.Id,
                 Name = p.Category.Name,
+                ImageUrl = p.Category.ImageUrl,
+                UrlSlug = p.Category.UrlSlug,
                 // Map other relevant properties
             })
            .DistinctBy(c => c.Id)

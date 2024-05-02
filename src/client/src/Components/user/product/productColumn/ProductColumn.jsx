@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import "./productColumn.scss";
-import PageComponent from "../../common/pagination/PageComponent";
 import { Grip, List } from "lucide-react";
-import ProductCard from "../productCard/ProductCard";
 import ProductFlexCard from "../productFlexCard/ProductFlexCard";
-import product from "../../../../Shared/data/product.json";
 import DropDown from "./dropDown/DropDown";
 import ProductItem from "./../productCard/ProductItem";
 
-const ProductColumn = () => {
+const ProductColumn = ({ products, metadata }) => {
   const [grid, setGrid] = useState(true);
   const [selected, setSelected] = useState("");
 
@@ -49,32 +46,32 @@ const ProductColumn = () => {
           <DropDown selected={selected} setSelected={setSelected} />
         </div>
         <div className={grid ? "product-list-grid" : ""}>
-          {product.result.map((item, index) =>
-            grid ? (
-              <ProductItem
-                key={index}
-                name={item.name}
-                image={item.image}
-                current={item.current}
-                discount={item.discount}
-                star={item.star}
-                color={item.colors}
-              />
-            ) : grid === false ? (
-              <ProductFlexCard
-                key={index}
-                name={item.name}
-                image={item.image}
-                current={item.current}
-                discount={item.discount}
-                star={item.star}
-                color={item.colors}
-              />
-            ) : null
-          )}
-        </div>
-        <div className="product-list-page">
-          <PageComponent />
+          {products && products.length > 0
+            ? products.map((item, index) =>
+                grid ? (
+                  <ProductItem
+                    key={index}
+                    name={item.name}
+                    image={item.imageUrl}
+                    current={item.price}
+                    orPrice={item.orPrice}
+                    star={item.rating}
+                    color={item.colors}
+                  />
+                ) : grid === false ? (
+                  <ProductFlexCard
+                    key={index}
+                    name={item.name}
+                    image={item.imageUrl}
+                    current={item.price}
+                    orPrice={item.orPrice}
+                    star={item.rating}
+                    color={item.colors}
+                    shortDes={item.shortDescription}
+                  />
+                ) : null
+              )
+            : null}
         </div>
       </div>
     </>

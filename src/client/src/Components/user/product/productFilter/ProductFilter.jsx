@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import "./productFilter.scss";
 import { Slider } from "antd";
 import { formatVND } from "../../../../Common/function";
-import branch from "../../../../Shared/data/branch.json";
 import { Radio } from "antd";
 import ColorSquare from "../colorSquare/ColorSquare";
-import color from "../../../../Shared/data/color.json";
 import StarRating from "../starRating/StarRating";
 
-const ProductFilter = ({ hasBranch }) => {
+const ProductFilter = ({ hasBranch, branches, colors }) => {
   const [branchValue, setBranchValue] = useState("all");
   const [starValue, setStarValue] = useState("all");
   const [minValue, setMinValue] = useState(50000);
@@ -60,16 +58,18 @@ const ProductFilter = ({ hasBranch }) => {
             <p className="product-filter-branch-title">Thương hiệu</p>
             <Radio.Group onChange={onBranchChange} value={branchValue}>
               <Radio value="all">Tất cả</Radio>
-              {branch.result.map((item, index) => (
-                <div className="product-filter-branch-list" key={index}>
-                  <Radio
-                    value={item.name}
-                    className="product-filter-branch-list-name"
-                  >
-                    {item.name}
-                  </Radio>
-                </div>
-              ))}
+              {branches && branches.length > 0
+                ? branches.map((item, index) => (
+                    <div className="product-filter-branch-list" key={index}>
+                      <Radio
+                        value={item.name}
+                        className="product-filter-branch-list-name"
+                      >
+                        {item.name}
+                      </Radio>
+                    </div>
+                  ))
+                : null}
             </Radio.Group>
           </div>
         ) : null}
@@ -103,9 +103,11 @@ const ProductFilter = ({ hasBranch }) => {
             <p className="product-filter-color-top-title">Màu</p>
             <p className="product-filter-color-top-remove">Xóa lọc</p>
           </div>
-          {color.result.map((item, index) => (
-            <ColorSquare key={index} color={item.color} />
-          ))}
+          {colors && colors.length > 0
+            ? colors.map((item, index) => (
+                <ColorSquare key={index} color={item.name} />
+              ))
+            : null}
         </div>
       </div>
     </>

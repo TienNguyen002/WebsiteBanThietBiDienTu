@@ -7,13 +7,13 @@ import { getAllCategory } from "../../../../Api/Controller";
 import "./category.scss";
 
 const Category = (props) => {
-  const { title, sale } = props;
+  const { title, sale, category } = props;
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
-  const handleLink = () => {
+  const handleLink = (urlSlug) => {
     if (sale) {
-      navigate("/sale/1");
+      navigate(`/sale/${urlSlug}`);
     }
     window.scrollTo({
       top: 0,
@@ -33,31 +33,47 @@ const Category = (props) => {
     <>
       <div className="home-category">
         {title ? (
-          <div className="home-category-top">
-            <h1 className="home-category-top-title">Danh mục</h1>
-          </div>
-        ) : null}
-        <div className="home-category-component">
-          {categories.map((item, index) => (
-            <div
-              key={index}
-              className="home-category-component-item"
-              onClick={handleLink}
-            >
-              {/* <div> */}
-              {/* <Smartphone className="home-category-component-icon" /> */}
-              <img
-                src={item.imageUrl}
-                alt={item.name}
-                className="home-category-component-item-image"
-              />
-              {/* <span className="home-category-component-name">
-                  {item.name}
-                </span> */}
-              {/* </div> */}
+          <>
+            <div className="home-category-top">
+              <h1 className="home-category-top-title">Danh mục</h1>
             </div>
-          ))}
-        </div>
+            <div className="home-category-component">
+              {categories.map((item, index) => (
+                <div
+                  key={index}
+                  className="home-category-component-item"
+                  onClick={handleLink(item.urlSlug)}
+                >
+                  <img
+                    src={item.imageUrl}
+                    alt={item.name}
+                    className="home-category-component-item-image"
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="home-category-component">
+              {category && category.length > 0
+                ? category.map((item, index) => (
+                    <div
+                      key={index}
+                      className="home-category-component-item"
+                      onClick={handleLink}
+                    >
+                      <img
+                        src={item.imageUrl}
+                        alt={item.name}
+                        className="home-category-component-item-image"
+                      />
+                    </div>
+                  ))
+                : null}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

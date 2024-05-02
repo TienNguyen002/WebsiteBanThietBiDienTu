@@ -328,7 +328,7 @@ namespace Infrastructure.Seeders
                     OrPrice = 34990000,
                     SoldQuantity = 20,
                     Category = categories[1],
-                    Branch = branches[0],
+                    Branch = branches[1],
                     Serie = series[1],
                     Colors = new List<Color>()
                     {

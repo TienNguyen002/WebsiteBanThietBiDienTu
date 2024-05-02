@@ -6,12 +6,12 @@
         public bool IsHighRating { get; set; }
         public bool IsNew { get; set; }
         public bool IsTop { get; set; }
-        public string SortOrder { get; set; }
-        public string Category { get; set; }
-        public string Branch { get; set; }
+        public string? SortOrder { get; set; }
+        public string? Category { get; set; }
+        public string? Branch { get; set; }
         public int MinPrice { get; set; }
         public int MaxPrice { get; set; }
         public decimal Rating { get; set; }
-        public string Color { get; set; }
+        public string? Color { get; set; }
     }
 }
