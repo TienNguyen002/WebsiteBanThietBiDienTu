@@ -3,11 +3,11 @@ import "./colorSquare.scss";
 
 const colorMap = {
   Đỏ: "#ff0000",
-  yellow: "#ffff00",
+  Vàng: "#ffff00",
   "Xanh lá": "#008000",
   Cam: "#ffa500",
   "Xanh nước": "#0000ff",
-  black: "#000000",
+  Đen: "#000000",
   // Add more color mappings here
 };
 

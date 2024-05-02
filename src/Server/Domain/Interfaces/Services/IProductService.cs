@@ -16,6 +16,7 @@ namespace Domain.Interfaces.Services
         Task<IList<ProductDTO>> GetNewProducts(int limit);
         Task<IList<ProductDTO>> GetSoldProducts(int limit);
         Task<IList<ProductByCategoryDTO>> GetLimitProductByCategory(int limit, string category);
+        Task<ProductFilter> GetProductFiltersAsync(FilterQuery query);
         Task<PaginationResult<ProductDTO>> GetPagedProductsAsync(ProductQuery query, PagingModel pagingModel);
     }
 }

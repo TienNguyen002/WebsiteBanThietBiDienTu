@@ -14,6 +14,7 @@ namespace Domain.Interfaces.Repositories
         Task<IList<Product>> GetLimitProductByCategory(int limit, string category);
         Task<IPagedList<Product>> GetPagedProductAsync(ProductQuery query,
             IPagingParams pagingParams);
+        Task<ProductFilter> GetProductFiltersAsync(FilterQuery query);
         Task<Product> GetProductBySlug(string slug);
     }
 }

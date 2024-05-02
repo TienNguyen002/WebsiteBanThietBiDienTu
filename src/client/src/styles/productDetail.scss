@@ -4,6 +4,9 @@
     cursor: context-menu;
     display: flex;
     // height: 500px;
+    &-image {
+      width: 600px;
+    }
     &-box {
       background: var(--white);
       width: 900px;
@@ -42,8 +45,10 @@
         display: flex;
         gap: 10px;
         &-logo {
-          height: 50px;
-          width: 80px;
+          height: 10%;
+          width: 10%;
+          margin-top: 15px;
+          align-items: center;
           cursor: pointer;
         }
       }

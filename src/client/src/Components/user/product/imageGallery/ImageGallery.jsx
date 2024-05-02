@@ -7,7 +7,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/autoplay";
 
-const ImageGallery = () => {
+const ImageGallery = ({ images }) => {
   const [imgThumbs, setImgThumbs] = useState(null);
 
   return (
@@ -30,7 +30,14 @@ const ImageGallery = () => {
           }}
           className="image-gallery-current"
         >
-          <SwiperSlide>
+          {images
+            ? images.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <img src={item.imageUrl} alt={item.id} />
+                </SwiperSlide>
+              ))
+            : null}
+          {/* <SwiperSlide>
             <img
               src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-z-lip5_3_.png"
               alt="1"
@@ -65,7 +72,7 @@ const ImageGallery = () => {
               src="https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/g/a/galaxy_z_flip5_-_3_1.png"
               alt="1"
             />
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
         <Swiper
           onSwiper={setImgThumbs}
@@ -75,7 +82,16 @@ const ImageGallery = () => {
           modules={[Navigation, Thumbs]}
           className="image-gallery-thumbs"
         >
-          <SwiperSlide>
+          {images
+            ? images.map((item, index) => (
+                <SwiperSlide key={index}>
+                  <div className="image-gallery-thumbs-wrapper">
+                    <img src={item.imageUrl} alt={item.id} />
+                  </div>
+                </SwiperSlide>
+              ))
+            : null}
+          {/* <SwiperSlide>
             <div className="image-gallery-thumbs-wrapper">
               <img
                 src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-z-lip5_3_.png"
@@ -122,7 +138,7 @@ const ImageGallery = () => {
                 alt="1"
               />
             </div>
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
       </div>
     </>

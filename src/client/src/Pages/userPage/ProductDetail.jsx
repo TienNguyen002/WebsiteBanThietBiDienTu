@@ -16,8 +16,9 @@ import { getProductDetail } from "../../Api/Controller";
 const ProductDetail = () => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
-  const [available, setAvailable] = useState(true);
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState([]);
+  const [branch, setBranch] = useState({});
+  const [serie, setSerie] = useState({});
   const params = useParams();
   const { slug } = params;
 
@@ -25,7 +26,8 @@ const ProductDetail = () => {
     getProductDetail(slug).then((data) => {
       if (data) {
         setProduct(data);
-        console.log(data);
+        setBranch(data.branch);
+        setSerie(data.serie);
       } else setProduct([]);
     });
   }, []);
@@ -46,46 +48,77 @@ const ProductDetail = () => {
     });
   };
 
+  const handleTagClick = (newSlug) => {
+    navigate(`/${newSlug}`);
+    window.location.reload();
+  };
+
+  console.log(serie.images);
   // const parts = window.location.pathname.split("/");
   return (
     <>
-      <NavigationBar />
+      <NavigationBar
+        category={product.category}
+        branch={branch.name}
+        serie={serie.name}
+        name={product.name}
+      />
       <div className="product-information">
         <div className="product-information-item">
-          <ImageGallery />
+          {serie.images && serie.images.length > 0 ? (
+            <ImageGallery images={serie.images} />
+          ) : (
+            <img
+              src={product.imageUrl}
+              alt={product.name}
+              className="product-information-item-image"
+            />
+          )}
           <div className="product-information-item-box">
             <p
               className="product-information-item-box-category"
               onClick={handleCategoryLink}
             >
-              Điện thoại
+              {product.category}
             </p>
             <h2 className="product-information-item-box-name">
               {product.name}
             </h2>
-            <StarRating
-              rating={5}
-              className="product-information-item-box-rating"
-            />
+            {product.rating ? (
+              <StarRating
+                rating={product.rating}
+                className="product-information-item-box-rating"
+              />
+            ) : null}
             <div className="product-information-item-box-tag">
-              <ProductTag />
+              <ProductTag
+                products={serie.products}
+                tag={product.shortName}
+                onClick={handleTagClick}
+              />
             </div>
             <div className="product-information-item-box-color">
-              <ColorSquare />
+              {product.colors ? (
+                <>
+                  {product.colors.map((item, index) => (
+                    <ColorSquare color={item.name} key={index} />
+                  ))}
+                </>
+              ) : null}
             </div>
             <div className="product-information-item-box-price">
               <div className="product-information-item-box-price-discount">
-                <p>{formatVND(16990000)}</p>
+                <p>{formatVND(product.price)}</p>
               </div>
               <div className="product-information-item-box-price-current">
-                <s>{formatVND(25990000)}</s>
+                <s>{formatVND(product.orPrice)}</s>
               </div>
             </div>
             <div className="product-information-item-box-status">
               <p className="product-information-item-box-status-title">
                 Tình trạng:
               </p>
-              {available ? (
+              {product.amount > 0 ? (
                 <p className="product-information-item-box-status-available">
                   Còn hàng
                 </p>
@@ -100,8 +133,8 @@ const ProductDetail = () => {
                 Thương hiệu:
               </p>
               <img
-                src="https://w7.pngwing.com/pngs/176/171/png-transparent-samsung-galaxy-gurugram-faridabad-logo-samsung-blue-text-logo.png"
-                alt="Samsung"
+                src={branch.imageUrl}
+                alt={branch.name}
                 className="product-information-item-box-branch-logo"
                 onClick={handleBranchLink}
               />
@@ -110,27 +143,7 @@ const ProductDetail = () => {
               <p className="product-information-item-box-special-title">
                 Đặc điểm nổi bật
               </p>
-              <li>
-                Galaxy AI tiện ích - Khoanh vùng search đa năng, là trợ lý chỉnh
-                ảnh, trợ lý chat thông minh, phiên dịch trực tiếp
-              </li>
-              <li>
-                Thần thái nổi bật, cân mọi phong cách- Lấy cảm hứng từ thiên
-                nhiên với màu sắc thời thượng, xu hướng
-              </li>
-              <li>
-                Thiết kế thu hút ánh nhìn - Gập không kẽ hỡ, dẫn đầu công nghệ
-                bản lề Flex
-              </li>
-              <li>
-                Tuyệt tác selfie thoả sức sáng tạo - Camera sau hỗ trợ AI xử lí
-                cực sắc nét ngay cả trên màn hình ngoài
-              </li>
-              <li>
-                Bền bỉ bất chấp mọi tình huống - Đạt chuẩn kháng bụi và nước
-                IPX8 cùng chất liệu nhôm Armor Aluminum giúp hạn chế cong và
-                xước
-              </li>
+              {product.shortDescription}
             </div>
             <div className="product-information-item-box-action">
               <div className="product-information-item-box-action-cart">
@@ -159,7 +172,7 @@ const ProductDetail = () => {
                 key="1"
                 className="product-information-body-tab-content product-information-body-tab-content-desc"
               >
-                Mô tả sản phẩm
+                {serie.description}
               </TabPane>
               <TabPane
                 tab={
@@ -170,7 +183,7 @@ const ProductDetail = () => {
                 key="2"
                 className="product-information-body-tab-content product-information-body-tab-content-speci"
               >
-                Thông số kỹ thuật
+                {product.specification}
               </TabPane>
               <TabPane
                 tab={

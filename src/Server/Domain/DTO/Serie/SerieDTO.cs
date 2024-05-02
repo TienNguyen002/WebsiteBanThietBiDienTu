@@ -6,6 +6,7 @@ namespace Domain.DTO.Serie
 {
     public class SerieDTO
     {
+        public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public IList<CommentDTO> Comments { get; set; }
         public IList<ImageDTO> Images { get; set; }

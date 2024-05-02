@@ -7,12 +7,14 @@ import { getAllCategory } from "../../../../Api/Controller";
 import "./category.scss";
 
 const Category = (props) => {
-  const { title } = props;
+  const { title, sale } = props;
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
   const handleLink = () => {
-    navigate("/more");
+    if (sale) {
+      navigate("/sale/1");
+    }
     window.scrollTo({
       top: 0,
       behavior: "instant",

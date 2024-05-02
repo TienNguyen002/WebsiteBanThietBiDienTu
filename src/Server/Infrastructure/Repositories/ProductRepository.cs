@@ -1,4 +1,7 @@
 ﻿using Domain.Contracts;
+using Domain.DTO.Branch;
+using Domain.DTO.Category;
+using Domain.DTO.Color;
 using Domain.DTO.Product;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
@@ -173,6 +176,76 @@ namespace Infrastructure.Repositories
             var productQuery = GetProductByQueryable(query);
             var result = await productQuery.ToPagedListAsync(pagingParams);
             return result;
+        }
+
+        public async Task<ProductFilter> GetProductFiltersAsync(FilterQuery query)
+        {
+            IQueryable<Product> productQuery = _context.Set<Product>()
+                .Include(p => p.Sale)
+                .Include(p => p.Category)
+                .Include(p => p.Branch)
+                .Include(p => p.Serie)
+                .Include(p => p.Colors);
+
+            if (query.IsSale)
+            {
+                productQuery = productQuery.Where(i => i.Sale.Status == query.IsSale);
+            }
+            if (query.IsHighRating)
+            {
+                productQuery = productQuery.Where(i => i.Rating >= 4).OrderBy(p => p.Rating);
+            }
+            if (query.IsNew)
+            {
+                productQuery = productQuery.Where(i => i.Rating == null).OrderByDescending(p => p.Id);
+            }
+            if (query.IsTop)
+            {
+                productQuery = productQuery.OrderBy(p => p.SoldQuantity);
+            }
+            if (!string.IsNullOrWhiteSpace(query.Category))
+            {
+                productQuery = productQuery.Where(p => p.Category.UrlSlug.Contains(query.Category));
+            }
+            if (!string.IsNullOrWhiteSpace(query.Branch))
+            {
+                productQuery = productQuery.Where(p => p.Branch.UrlSlug.Contains(query.Branch));
+            }
+            var products = await productQuery.ToListAsync();
+            var branches = products.Select(p => new BranchDTO
+            {
+                Id = p.Branch.Id,
+                Name = p.Branch.Name,
+                // Map other relevant properties
+            })
+           .DistinctBy(b => b.Id)
+           .ToList();
+
+            var categories = products.Select(p => new CategoryDTO
+            {
+                Id = p.Category.Id,
+                Name = p.Category.Name,
+                // Map other relevant properties
+            })
+           .DistinctBy(c => c.Id)
+           .ToList();
+
+            var colors = products.SelectMany(p => p.Colors)
+              .Select(c => new ColorDTO
+              {
+                  Id = c.Id,
+                  Name = c.Name,
+                  // Map other relevant properties
+              })
+              .DistinctBy(c => c.Id)
+              .ToList();
+
+            return new ProductFilter
+            {
+                Branches = branches,
+                Categories = categories,
+                Colors = colors
+            };
         }
     }
 }

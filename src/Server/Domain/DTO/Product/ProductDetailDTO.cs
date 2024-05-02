@@ -10,6 +10,7 @@ namespace Domain.DTO.Product
         public string Name { get; set; } = null!;
         public string UrlSlug { get; set; } = null!;
         public string ShortName { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
         public decimal Rating { get; set; }
         public string ShortDescription { get; set; } = null!;
         public string Specification { get; set; } = null!;

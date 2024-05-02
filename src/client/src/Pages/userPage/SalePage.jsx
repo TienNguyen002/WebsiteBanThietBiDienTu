@@ -4,13 +4,15 @@ import Category from "../../Components/user/common/category/Category";
 import ProductFilter from "../../Components/user/product/productFilter/ProductFilter";
 import ProductColumn from "../../Components/user/product/productColumn/ProductColumn";
 import "../../styles/salePage.scss";
+import NavigationBar from "../../Components/user/common/navigationBar/NavigationBar";
 
 const SalePage = () => {
   return (
     <>
+      <NavigationBar sale="Sale" />
       <div className="sale-page">
         <div className="sale-page-category">
-          <Category title={false} />
+          <Category title={false} sale={true} />
           {/* <Branch /> */}
         </div>
         <div className="sale-page-product">

@@ -17,6 +17,8 @@
     &-price {
       font-size: small;
     }
+    text-decoration: none;
+    color: var(--gray);
   }
   &-box-active {
     text-align: center;
@@ -27,5 +29,7 @@
     padding-top: 5px;
     padding-left: 20px;
     padding-right: 20px;
+    text-decoration: none;
+    color: var(--black);
   }
 }

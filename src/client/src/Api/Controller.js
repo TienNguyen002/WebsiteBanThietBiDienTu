@@ -40,6 +40,5 @@ export function getContact(payload) {
 }
 
 export function getProductDetail(slug) {
-  console.log("dasdsad", slug);
   return get_api(process.env.REACT_APP_API_ITEM_DETAIL + `${slug}`);
 }

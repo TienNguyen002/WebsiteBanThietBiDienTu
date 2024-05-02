@@ -14,7 +14,6 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           <Route path="/" element={<HomePage />}></Route>
-          {/* <Route path="/detail" element={<ProductDetail />}></Route> */}
           <Route path="/:slug" element={<ProductDetail />}></Route>
           <Route path="/sale" element={<SalePage />}></Route>
           <Route path="/more" element={<MorePage />}></Route>
@@ -23,8 +22,6 @@ const Router = () => {
           <Route path="/branch" element={<BranchPage />}></Route>
           <Route path="/search" element={<SearchPage />}></Route>
         </Route>
-      </Routes>
-      <Routes>
         <Route path="/admin" element={<AdminPage />}></Route>
       </Routes>
     </BrowserRouter>

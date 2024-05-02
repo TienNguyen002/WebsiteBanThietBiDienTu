@@ -9,6 +9,7 @@ using System.Net;
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _service;
@@ -165,10 +166,17 @@ namespace Api.Controllers
         }
 
         [HttpGet("paged")]
-        public async Task<ActionResult<ProductDTO>> GetPagedProduct([AsParameters] ProductQuery query,
-            PagingModel model)
+        public async Task<ActionResult<ProductDTO>> GetPagedProduct([FromQuery] ProductQuery query,
+           [FromQuery] PagingModel model)
         {
             var result = await _service.GetPagedProductsAsync(query, model);
+            return Ok(ApiResponse.Success(result));
+        }
+
+        [HttpGet("filter")]
+        public async Task<ActionResult<ProductFilter>> GetProductFilters([FromQuery] FilterQuery query)
+        {
+            var result = await _service.GetProductFiltersAsync(query);
             return Ok(ApiResponse.Success(result));
         }
     }

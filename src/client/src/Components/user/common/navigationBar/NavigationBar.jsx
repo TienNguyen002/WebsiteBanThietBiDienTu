@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "./navigationBar.scss";
 
-const NavigationBar = () => {
+const NavigationBar = ({ sale, category, branch, serie, name }) => {
   const navigate = useNavigate();
 
   const handleLink = () => {
@@ -22,11 +22,36 @@ const NavigationBar = () => {
             <i className="fa-solid fa-house"></i>
             Trang chủ
           </div>
-          <ChevronRight />
-          Điện thoại <ChevronRight />
-          Samsung <ChevronRight />
-          Z5 Series <ChevronRight />
-          Samsung Galaxy Z Flip5 256GB
+          {sale ? (
+            <>
+              <ChevronRight />
+              {sale}
+            </>
+          ) : null}
+          {category ? (
+            <>
+              <ChevronRight />
+              {category}
+            </>
+          ) : null}
+          {branch ? (
+            <>
+              <ChevronRight />
+              {branch}
+            </>
+          ) : null}
+          {serie ? (
+            <>
+              <ChevronRight />
+              {serie}
+            </>
+          ) : null}
+          {name ? (
+            <>
+              <ChevronRight />
+              {name}
+            </>
+          ) : null}
         </div>
       </div>
     </>

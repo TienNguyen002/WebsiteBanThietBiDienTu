@@ -11,7 +11,7 @@ const TopCard = (props) => {
   const navigate = useNavigate();
 
   const handleLink = () => {
-    navigate("/detail");
+    // navigate(`/${urlSlug}`);
     window.scrollTo({
       top: 0,
       behavior: "instant",
@@ -34,7 +34,8 @@ const TopCard = (props) => {
           {products ? (
             <>
               {products.map((item, index) => (
-                <div
+                <Link
+                  to={item.urlSlug}
                   className="top-card-product-detail"
                   key={index}
                   onClick={handleLink}
@@ -63,12 +64,12 @@ const TopCard = (props) => {
                       />
                     )}
                   </div>
-                </div>
+                </Link>
               ))}
             </>
           ) : null}
         </div>
-        <Link to={"/sale"} onClick={handleLink} className="top-card-more">
+        <Link to={"/sale"} className="top-card-more">
           Xem tất cả
         </Link>
       </div>

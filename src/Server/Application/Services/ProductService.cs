@@ -146,5 +146,10 @@ namespace Application.Services
             var paginationResult = new PaginationResult<ProductDTO>(new PagedList<ProductDTO>(products, result.PageNumber, result.PageSize, result.TotalItemCount));
             return paginationResult;
         }
+
+        public async Task<ProductFilter> GetProductFiltersAsync(FilterQuery query)
+        {
+            return await _repository.GetProductFiltersAsync(query);
+        }
     }
 }
