@@ -5,7 +5,7 @@ import AdminPage from "../Pages/adminPage/AdminPage";
 import HomeLayout from "../Layout/HomeLayout";
 import MorePage from "../Pages/userPage/MorePage";
 import SearchPage from "../Pages/userPage/SearchPage";
-import SalePage from "../Pages/userPage/SalePage";
+import ListPage from "../Pages/userPage/ListPage";
 import BranchPage from "./../Pages/userPage/BranchPage";
 
 const Router = () => {
@@ -15,8 +15,9 @@ const Router = () => {
         <Route path="/" element={<HomeLayout />}>
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/:slug" element={<ProductDetail />}></Route>
-          <Route path="/sale" element={<SalePage />}></Route>
-          <Route path="/sale/:category" element={<SalePage />}></Route>
+          <Route path="/sale" element={<ListPage />}></Route>
+          <Route path="/sale/:category" element={<ListPage
+           />}></Route>
           <Route path="/more" element={<MorePage />}></Route>
           <Route path="/dien-thoai" element={<MorePage />}></Route>
           <Route path="/branch" element={<BranchPage />}></Route>

@@ -3,27 +3,27 @@ import Category from "../../Components/user/common/category/Category";
 // import Branch from "../../Components/branch/Branch";
 import ProductFilter from "../../Components/user/product/productFilter/ProductFilter";
 import ProductColumn from "../../Components/user/product/productColumn/ProductColumn";
-import "../../styles/salePage.scss";
+import "../../styles/listPage.scss";
 import NavigationBar from "../../Components/user/common/navigationBar/NavigationBar";
 import { getProductFilter, getPagedProduct } from "../../Api/Controller";
 import PageComponent from "../../Components/user/common/pagination/PageComponent";
 
-const SalePage = () => {
+const ListPage = () => {
   const [branches, setBranches] = useState();
   const [categories, setCategories] = useState();
   const [colors, setColors] = useState();
   const [products, setProducts] = useState([]);
   const [metadata, setMetadata] = useState();
-
   const filterPayload = {
     isSale: true,
   };
 
   const [payload, setPayload] = useState({
     isSale: true,
-    pageSize: 20,
+    pageSize: 16,
     pageNumber: 1,
   });
+  console.log(metadata);
 
   useEffect(() => {
     getProductFilter(filterPayload).then((data) => {
@@ -53,24 +53,35 @@ const SalePage = () => {
     setPayload((prevPayload) => ({ ...prevPayload, pageNumber }));
   };
 
+  const handlePageSize = (pageSize) => {
+    setPayload((prevPayload) => ({
+      ...prevPayload,
+      pageSize,
+      pageNumber: 1,
+    }));
+  };
+
   return (
     <>
       <NavigationBar sale="Sale" />
-      <div className="sale-page">
-        <div className="sale-page-category">
+      <div className="list-page">
+        <div className="list-page-category">
           <Category title={false} sale={true} category={categories} />
           {/* <Branch /> */}
         </div>
-        <div className="sale-page-product">
-          <div className="sale-page-product-filter">
+        <div className="list-page-product">
+          <div className="list-page-product-filter">
             <ProductFilter
               hasBranch={true}
               branches={branches}
               colors={colors}
             />
           </div>
-          <div className="sale-page-product-list">
-            <ProductColumn products={products} metadata={metadata} />
+          <div className="list-page-product-list">
+            <ProductColumn
+              products={products}
+              onPageSizeChange={handlePageSize}
+            />
             {metadata && (
               <PageComponent metadata={metadata} onChange={handlePageChange} />
             )}
@@ -81,4 +92,4 @@ const SalePage = () => {
   );
 };
 
-export default SalePage;
+export default ListPage;

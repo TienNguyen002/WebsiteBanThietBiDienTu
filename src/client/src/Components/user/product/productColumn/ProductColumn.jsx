@@ -5,16 +5,18 @@ import ProductFlexCard from "../productFlexCard/ProductFlexCard";
 import DropDown from "./dropDown/DropDown";
 import ProductItem from "./../productCard/ProductItem";
 
-const ProductColumn = ({ products, metadata }) => {
+const ProductColumn = ({ products, onPageSizeChange }) => {
   const [grid, setGrid] = useState(true);
   const [selected, setSelected] = useState("");
 
   const onClickGrid = () => {
     setGrid(true);
+    onPageSizeChange(16);
   };
 
   const onClickFlex = () => {
     setGrid(false);
+    onPageSizeChange(8);
   };
 
   return (
@@ -52,6 +54,7 @@ const ProductColumn = ({ products, metadata }) => {
                   <ProductItem
                     key={index}
                     name={item.name}
+                    slug={item.urlSlug}
                     image={item.imageUrl}
                     current={item.price}
                     orPrice={item.orPrice}
@@ -62,6 +65,7 @@ const ProductColumn = ({ products, metadata }) => {
                   <ProductFlexCard
                     key={index}
                     name={item.name}
+                    slug={item.urlSlug}
                     image={item.imageUrl}
                     current={item.price}
                     orPrice={item.orPrice}

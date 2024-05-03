@@ -9,7 +9,7 @@ const PageComponent = ({ metadata, onChange }) => {
         showTotal={(total, range) =>
           `${range[0]}-${range[1]} of ${total} items`
         }
-        defaultPageSize={metadata.pageSize}
+        pageSize={metadata.pageSize}
         defaultCurrent={metadata.pageNumber}
         onChange={onChange}
       />

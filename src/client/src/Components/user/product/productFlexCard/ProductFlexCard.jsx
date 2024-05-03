@@ -7,11 +7,11 @@ import ColorSquare from "../colorSquare/ColorSquare";
 import { useNavigate } from "react-router-dom";
 
 const ProductFlexCard = (props) => {
-  const { name, image, current, orPrice, star, color, shortDes } = props;
+  const { name, image, slug, current, orPrice, star, color, shortDes } = props;
   const navigate = useNavigate();
 
   const handleLink = () => {
-    navigate("/detail");
+    navigate(`/${slug}`);
     window.scrollTo({
       top: 0,
       behavior: "instant",
