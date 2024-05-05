@@ -26,7 +26,7 @@ const ProductDetail = () => {
     getProductDetail(slug).then((data) => {
       if (data) {
         setProduct(data);
-        setBranch(data.branch);
+        setBranch(data.serie.branch);
         setSerie(data.serie);
       } else setProduct([]);
     });
@@ -58,7 +58,7 @@ const ProductDetail = () => {
   return (
     <>
       <NavigationBar
-        category={product.category}
+        category={serie.category}
         branch={branch.name}
         serie={serie.name}
         name={product.name}
@@ -79,7 +79,7 @@ const ProductDetail = () => {
               className="product-information-item-box-category"
               onClick={handleCategoryLink}
             >
-              {product.category}
+              {serie.category}
             </p>
             <h2 className="product-information-item-box-name">
               {product.name}

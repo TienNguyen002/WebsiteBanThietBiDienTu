@@ -1,5 +1,5 @@
 ﻿using Domain.DTO.Branch;
-using Domain.DTO.Product;
+using Domain.DTO.Serie;
 using Domain.Entities;
 using Mapster;
 
@@ -15,7 +15,7 @@ namespace Api.Mapsters
 
             config.NewConfig<Branch, BranchProductDTO>();
 
-            config.NewConfig<Product, ProductDetailDTO>()
+            config.NewConfig<Serie, SerieDTO>()
                 .Map(desc => desc.Category, src => src.Category.Name);
         }
     }

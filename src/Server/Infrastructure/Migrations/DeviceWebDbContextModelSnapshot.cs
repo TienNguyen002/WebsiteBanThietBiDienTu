@@ -229,7 +229,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("StartDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 4, 23, 14, 56, 48, 343, DateTimeKind.Local).AddTicks(7432));
+                        .HasDefaultValue(new DateTime(2024, 5, 5, 18, 5, 15, 35, DateTimeKind.Local).AddTicks(8078));
 
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
@@ -368,12 +368,6 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("int");
 
-                    b.Property<int>("BranchId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ImageUrl")
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
@@ -420,10 +414,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("CategoryId");
 
                     b.HasIndex("SaleId");
 
@@ -482,6 +472,12 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BranchId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -495,6 +491,10 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Series", (string)null);
                 });
@@ -806,20 +806,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
                 {
-                    b.HasOne("Domain.Entities.Branch", "Branch")
-                        .WithMany("Products")
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Branches_Products");
-
-                    b.HasOne("Domain.Entities.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Categories_Products");
-
                     b.HasOne("Domain.Entities.Sale", "Sale")
                         .WithMany("Products")
                         .HasForeignKey("SaleId")
@@ -834,13 +820,30 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Series_Products");
 
-                    b.Navigation("Branch");
-
-                    b.Navigation("Category");
-
                     b.Navigation("Sale");
 
                     b.Navigation("Serie");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Serie", b =>
+                {
+                    b.HasOne("Domain.Entities.Branch", "Branch")
+                        .WithMany("Series")
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Branches_Series");
+
+                    b.HasOne("Domain.Entities.Category", "Category")
+                        .WithMany("Series")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Categories_Series");
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -908,12 +911,12 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Branch", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Series");
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Series");
                 });
 
             modelBuilder.Entity("Domain.Entities.Discount", b =>

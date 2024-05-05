@@ -44,18 +44,6 @@ namespace Domain.Entities
         //Số lượng bán
         public int SoldQuantity { get; set; }
 
-        //Mã danh mục
-        public int CategoryId { get; set; }
-
-        //Danh mục
-        public Category? Category { get; set; }
-
-        //Mã thương hiệu
-        public int BranchId { get; set; }
-
-        //Thương hiệu
-        public Branch? Branch { get; set; }
-
         //Mã đòng
         public int SerieId { get; set; }
 

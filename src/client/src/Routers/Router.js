@@ -7,6 +7,8 @@ import MorePage from "../Pages/userPage/MorePage";
 import SearchPage from "../Pages/userPage/SearchPage";
 import ListPage from "../Pages/userPage/ListPage";
 import BranchPage from "./../Pages/userPage/BranchPage";
+import LoginPage from "../Pages/accountPage/LoginPage";
+import RegisterPage from "../Pages/accountPage/RegisterPage";
 
 const Router = () => {
   return (
@@ -16,14 +18,15 @@ const Router = () => {
           <Route path="/" element={<HomePage />}></Route>
           <Route path="/:slug" element={<ProductDetail />}></Route>
           <Route path="/sale" element={<ListPage />}></Route>
-          <Route path="/sale/:category" element={<ListPage
-           />}></Route>
+          <Route path="/sale/:category" element={<ListPage />}></Route>
           <Route path="/more" element={<MorePage />}></Route>
           <Route path="/dien-thoai" element={<MorePage />}></Route>
           <Route path="/branch" element={<BranchPage />}></Route>
           <Route path="/search" element={<SearchPage />}></Route>
         </Route>
         <Route path="/admin" element={<AdminPage />}></Route>
+        <Route path="/login" element={<LoginPage />}></Route>
+        <Route path="/register" element={<RegisterPage />}></Route>
       </Routes>
     </BrowserRouter>
   );

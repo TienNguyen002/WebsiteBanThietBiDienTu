@@ -17,6 +17,18 @@ namespace Domain.Entities
         //Mô tả
         public string Description { get; set; } = null!;
 
+        //Mã danh mục
+        public int CategoryId { get; set; }
+
+        //Danh mục
+        public Category? Category { get; set; }
+
+        //Mã thương hiệu
+        public int BranchId { get; set; }
+
+        //Thương hiệu
+        public Branch? Branch { get; set; }
+
         //Danh sách bình luận
         public IList<Comment> Comments { get; set; } = new List<Comment>();
 

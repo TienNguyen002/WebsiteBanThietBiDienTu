@@ -24,8 +24,6 @@ namespace Infrastructure.Repositories
         public async Task<bool> DeleteProduct(int id)
         {
             var productToDelete = await _context.Set<Product>()
-                .Include(p => p.Branch)
-                .Include(p => p.Category)
                 .Include(p => p.Serie)
                 .Include(p => p.Colors)
                 .Include(p => p.Sale)
@@ -46,10 +44,9 @@ namespace Infrastructure.Repositories
         public async Task<IList<Product>> GetLimitProductByCategory(int limit, string category)
         {
             return await _context.Set<Product>()
-                .Include(p => p.Category)
-                .Include(p => p.Branch)
+                .Include(p => p.Serie)
                 .Include(p => p.Colors)
-                .Where(p => p.Category.UrlSlug.Contains(category))
+                .Where(p => p.Serie.Category.UrlSlug.Contains(category))
                 .Take(limit)
                 .ToListAsync();
         }
@@ -79,15 +76,17 @@ namespace Infrastructure.Repositories
         public async Task<Product> GetProductBySlug(string slug)
         {
             return await _context.Set<Product>()
-                .Include(p => p.Branch)
                 .Include(p => p.Serie)
                     .ThenInclude(s => s.Comments)
                 .Include(p => p.Serie)
                     .ThenInclude(s => s.Images)
                 .Include(p => p.Serie)
-                    .ThenInclude(s => s.Products)
+                    .ThenInclude(s => s.Branch)
                 .Include(s => s.Colors)
-                .Include(p => p.Category)
+                 .Include(p => p.Serie)
+                    .ThenInclude(s => s.Category)
+                 .Include(p => p.Serie)
+                    .ThenInclude(s => s.Products)
                 .Where(p => p.UrlSlug.Contains(slug))
                 .FirstOrDefaultAsync();
         }
@@ -114,9 +113,10 @@ namespace Infrastructure.Repositories
         {
             IQueryable<Product> productQuery = _context.Set<Product>()
                 .Include(p => p.Sale)
-                .Include(p => p.Category)
-                .Include(p => p.Branch)
                 .Include(p => p.Serie)
+                    .ThenInclude(p => p.Category)
+                .Include(p => p.Serie)
+                    .ThenInclude(p => p.Branch)
                 .Include(p => p.Colors);
             if (query.IsSale)
             {
@@ -133,6 +133,18 @@ namespace Infrastructure.Repositories
             if (query.IsTop)
             {
                 productQuery = productQuery.OrderBy(p => p.SoldQuantity);
+            }
+            if (query.Rating == 0 || string.IsNullOrWhiteSpace(query.Category) || string.IsNullOrWhiteSpace(query.Branch) || string.IsNullOrWhiteSpace(query.Color))
+            {
+                productQuery = productQuery.OrderByDescending(p => p.Id);
+            }
+            if (!string.IsNullOrWhiteSpace(query.Category))
+            {
+                productQuery = productQuery.Where(p => p.Serie.Category.UrlSlug == query.Category);
+            }
+            if (!string.IsNullOrWhiteSpace(query.Branch))
+            {
+                productQuery = productQuery.Where(p => p.Serie.Branch.UrlSlug == query.Branch);
             }
             if (!string.IsNullOrWhiteSpace(query.SortOrder))
             {
@@ -157,7 +169,9 @@ namespace Infrastructure.Repositories
             }
             if (query.MinPrice > 0 && query.MaxPrice > 0)
             {
-                productQuery = productQuery.Where(p => (p.Price >= query.MinPrice && p.Price <= query.MaxPrice) || (p.OrPrice >= query.MinPrice && p.OrPrice <= query.MaxPrice));
+                productQuery = productQuery.Where(p =>
+                    ((int?)p.Price ?? (int?)p.OrPrice) >= query.MinPrice &&
+                    ((int?)p.Price ?? (int?)p.OrPrice) <= query.MaxPrice);
             }
             if (query.Rating > 0)
             {
@@ -182,9 +196,10 @@ namespace Infrastructure.Repositories
         {
             IQueryable<Product> productQuery = _context.Set<Product>()
                 .Include(p => p.Sale)
-                .Include(p => p.Category)
-                .Include(p => p.Branch)
                 .Include(p => p.Serie)
+                    .ThenInclude(p => p.Category)
+                .Include(p => p.Serie)
+                    .ThenInclude(p => p.Branch)
                 .Include(p => p.Colors);
 
             if (query.IsSale)
@@ -205,17 +220,17 @@ namespace Infrastructure.Repositories
             }
             if (!string.IsNullOrWhiteSpace(query.Category))
             {
-                productQuery = productQuery.Where(p => p.Category.UrlSlug.Contains(query.Category));
+                productQuery = productQuery.Where(p => p.Serie.Category.UrlSlug.Contains(query.Category));
             }
             if (!string.IsNullOrWhiteSpace(query.Branch))
             {
-                productQuery = productQuery.Where(p => p.Branch.UrlSlug.Contains(query.Branch));
+                productQuery = productQuery.Where(p => p.Serie.Branch.UrlSlug.Contains(query.Branch));
             }
             var products = await productQuery.ToListAsync();
             var branches = products.Select(p => new BranchDTO
             {
-                Id = p.Branch.Id,
-                Name = p.Branch.Name,
+                Id = p.Serie.Branch.Id,
+                Name = p.Serie.Branch.Name,
                 // Map other relevant properties
             })
            .DistinctBy(b => b.Id)
@@ -223,10 +238,10 @@ namespace Infrastructure.Repositories
 
             var categories = products.Select(p => new CategoryDTO
             {
-                Id = p.Category.Id,
-                Name = p.Category.Name,
-                ImageUrl = p.Category.ImageUrl,
-                UrlSlug = p.Category.UrlSlug,
+                Id = p.Serie.Category.Id,
+                Name = p.Serie.Category.Name,
+                ImageUrl = p.Serie.Category.ImageUrl,
+                UrlSlug = p.Serie.Category.UrlSlug,
                 // Map other relevant properties
             })
            .DistinctBy(c => c.Id)

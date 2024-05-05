@@ -11,19 +11,25 @@ const colorMap = {
   // Add more color mappings here
 };
 
-const ColorSquare = ({ color }) => {
+const NoColorFound = ({ color }) => {
+  return <div>Không có màu: {color}</div>;
+};
+
+const ColorSquare = ({ color, onClick }) => {
   const hexColor = colorMap[color];
 
   if (!hexColor) {
-    return <div>Không có màu: {color}</div>;
+    return <NoColorFound color={color} />;
   }
 
   return (
     <div
+      key={color}
       style={{
         backgroundColor: hexColor,
       }}
       className="color-square"
+      onClick={() => onClick(color)}
     />
   );
 };

@@ -1,5 +1,4 @@
-﻿using Domain.DTO.Branch;
-using Domain.DTO.Color;
+﻿using Domain.DTO.Color;
 using Domain.DTO.Serie;
 
 namespace Domain.DTO.Product
@@ -18,8 +17,6 @@ namespace Domain.DTO.Product
         public int SalePrice { get; set; }
         public int Price { get; set; }
         public int OrPrice { get; set; }
-        public string Category { get; set; }
-        public BranchProductDTO Branch { get; set; }
         public IList<ProductColorDTO> Colors { get; set; }
         public SerieDTO Serie { get; set; }
     }

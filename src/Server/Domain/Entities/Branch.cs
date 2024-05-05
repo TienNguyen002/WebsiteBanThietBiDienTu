@@ -17,7 +17,7 @@ namespace Domain.Entities
         //Hình ảnh
         public string? ImageUrl { get; set; }
 
-        //Danh sách sản phẩm
-        public IList<Product> Products { get; set; } = new List<Product>();
+        //Danh sách dòng sản phẩm
+        public IList<Serie> Series { get; set; } = new List<Serie>();
     }
 }

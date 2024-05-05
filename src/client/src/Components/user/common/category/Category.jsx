@@ -1,6 +1,6 @@
 //Import Component Library
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 //Import API
 import { getAllCategory } from "../../../../Api/Controller";
 //CSS
@@ -11,7 +11,8 @@ const Category = (props) => {
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
-  const handleLink = (urlSlug) => {
+  const handleLink = ({ urlSlug }) => {
+    console.log(urlSlug);
     if (sale) {
       navigate(`/sale/${urlSlug}`);
     }
@@ -39,7 +40,7 @@ const Category = (props) => {
             </div>
             <div className="home-category-component">
               {categories.map((item, index) => (
-                <div
+                <Link
                   key={index}
                   className="home-category-component-item"
                   onClick={handleLink(item.urlSlug)}
@@ -49,7 +50,7 @@ const Category = (props) => {
                     alt={item.name}
                     className="home-category-component-item-image"
                   />
-                </div>
+                </Link>
               ))}
             </div>
           </>

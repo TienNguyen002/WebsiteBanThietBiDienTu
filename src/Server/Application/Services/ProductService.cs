@@ -47,8 +47,8 @@ namespace Application.Services
             product.Amount = model.Amount;
             product.Price = model.Price;
             product.OrPrice = model.OrPrice;
-            product.BranchId = model.BranchId;
-            product.CategoryId = model.CategoryId;
+            //product.BranchId = model.BranchId;
+            //product.CategoryId = model.CategoryId;
             await _repository.AddOrUpdate(product);
             int saved = await _unitOfWork.Commit();
             return saved > 0;

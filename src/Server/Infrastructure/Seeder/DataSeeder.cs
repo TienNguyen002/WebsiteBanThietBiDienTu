@@ -26,10 +26,10 @@ namespace Infrastructure.Seeders
             var paymentMethods = AddPaymentMethods();
             var discounts = AddDiscounts();
             var sales = AddSales();
-            var series = AddSeries();
 
+            var series = AddSeries(branches, categories);
             var users = AddUsers(roles);
-            var products = AddProducts(categories, branches, colors, sales, series);
+            var products = AddProducts(colors, sales, series);
             var orders = AddOrders(users, paymentMethods, statuses, discounts);
             var orderItems = AddOrderItems(products, orders);
             var images = AddImages(series);
@@ -227,8 +227,6 @@ namespace Infrastructure.Seeders
         }
 
         private IList<Product> AddProducts(
-            IList<Category> categories,
-            IList<Branch> branches,
             IList<Color> colors,
             IList<Sale> sales,
             IList<Serie> series)
@@ -249,8 +247,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 20,
-                    Category = categories[0],
-                    Branch = branches[0],
                     Serie = series[0],
                     Colors = new List<Color>()
                     {
@@ -275,8 +271,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[0],
-                    Branch = branches[0],
                     Serie = series[0],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -301,8 +295,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[0],
-                    Branch = branches[0],
                     Serie = series[0],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -327,8 +319,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 20,
-                    Category = categories[1],
-                    Branch = branches[1],
                     Serie = series[1],
                     Colors = new List<Color>()
                     {
@@ -351,8 +341,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[0],
-                    Branch = branches[1],
                     Serie = series[1],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -375,8 +363,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[0],
-                    Branch = branches[1],
                     Serie = series[1],
                     Colors = new List<Color>()
                     {
@@ -399,8 +385,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 20,
-                    Category = categories[2],
-                    Branch = branches[0],
                     Serie = series[2],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -423,8 +407,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 20,
-                    Category = categories[2],
-                    Branch = branches[0],
                     Serie = series[2],
                     Colors = new List<Color>()
                     {
@@ -447,8 +429,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 20,
-                    Category = categories[2],
-                    Branch = branches[0],
                     Serie = series[2],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -471,8 +451,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[2],
-                    Branch = branches[6],
                     Serie = series[3],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -495,8 +473,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[2],
-                    Branch = branches[6],
                     Serie = series[3],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -519,8 +495,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[2],
-                    Branch = branches[6],
                     Serie = series[3],
                     Colors = new List<Color>()
                     {
@@ -543,8 +517,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[1],
-                    Branch = branches[0],
                     Serie = series[4],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -567,8 +539,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[1],
-                    Branch = branches[0],
                     Serie = series[4],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -591,8 +561,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[1],
-                    Branch = branches[0],
                     Serie = series[4],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -615,8 +583,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[1],
-                    Branch = branches[1],
                     Serie = series[5],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -639,8 +605,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[1],
-                    Branch = branches[1],
                     Serie = series[5],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -663,8 +627,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[1],
-                    Branch = branches[1],
                     Serie = series[5],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -687,8 +649,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[3],
-                    Branch = branches[0],
                     Serie = series[6],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -711,8 +671,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[3],
-                    Branch = branches[0],
                     Serie = series[6],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -735,8 +693,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[3],
-                    Branch = branches[27],
                     Serie = series[7],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -759,8 +715,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[3],
-                    Branch = branches[27],
                     Serie = series[7],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -783,8 +737,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[3],
-                    Branch = branches[27],
                     Serie = series[7],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -807,8 +759,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[4],
-                    Branch = branches[0],
                     Serie = series[8],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -831,8 +781,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[4],
-                    Branch = branches[0],
                     Serie = series[8],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -855,8 +803,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[4],
-                    Branch = branches[0],
                     Serie = series[8],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -879,8 +825,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[4],
-                    Branch = branches[1],
                     Serie = series[9],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -903,8 +847,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[4],
-                    Branch = branches[1],
                     Serie = series[9],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -927,8 +869,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[4],
-                    Branch = branches[1],
                     Serie = series[9],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -951,8 +891,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[5],
-                    Branch = branches[41],
                     Serie = series[10],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -975,8 +913,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[5],
-                    Branch = branches[41],
                     Serie = series[10],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -999,8 +935,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[5],
-                    Branch = branches[41],
                     Serie = series[10],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -1023,8 +957,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[5],
-                    Branch = branches[2],
                     Serie = series[11],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -1047,8 +979,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[6],
-                    Branch = branches[0],
                     Serie = series[12],
                     Sale = sales[0],
                 },
@@ -1066,8 +996,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[6],
-                    Branch = branches[1],
                     Serie = series[13],
                     Sale = sales[0],
                 },
@@ -1085,8 +1013,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[7],
-                    Branch = branches[50],
                     Serie = series[14],
                     Sale = sales[0],
                 },
@@ -1104,8 +1030,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[7],
-                    Branch = branches[51],
                     Serie = series[15],
                     Sale = sales[0],
                 },
@@ -1123,8 +1047,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[8],
-                    Branch = branches[6],
                     Serie = series[16],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -1147,8 +1069,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[8],
-                    Branch = branches[1],
                     Serie = series[17],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -1171,8 +1091,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[9],
-                    Branch = branches[1],
                     Serie = series[18],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -1195,8 +1113,6 @@ namespace Infrastructure.Seeders
                     Price = 31390000,
                     OrPrice = 34990000,
                     SoldQuantity = 10,
-                    Category = categories[9],
-                    Branch = branches[1],
                     Serie = series[19],
                     Sale = sales[0],
                     Colors = new List<Color>()
@@ -1784,7 +1700,7 @@ namespace Infrastructure.Seeders
             return paymentMethods;
         }
 
-        private IList<Serie> AddSeries()
+        private IList<Serie> AddSeries(IList<Branch> branches, IList<Category> categories)
         {
             var series = new List<Serie>()
             {
@@ -1793,120 +1709,160 @@ namespace Infrastructure.Seeders
                     Name = "Iphone 15 Series",
                     UrlSlug = "iphone-15-series",
                     Description = "iPhone 15 Pro Max thiết kế mới với chất liệu titan chuẩn hàng không vũ trụ bền bỉ, trọng lượng nhẹ, đồng thời trang bị nút Action và cổng sạc USB-C tiêu chuẩn giúp nâng cao tốc độ sạc. Khả năng chụp ảnh đỉnh cao của iPhone 15 bản Pro Max đến từ camera chính 48MP, camera UltraWide 12MP và camera telephoto có khả năng zoom quang học đến 5x. Bên cạnh đó, iPhone 15 ProMax sử dụng chip A17 Pro mới mạnh mẽ. Xem thêm chi tiết những điểm nổi bật của sản phẩm qua thông tin sau!",
+                    Branch = branches[0],
+                    Category = categories[0]
                 },
                 new()
                 {
                     Name = "Galaxy S24 Series",
                     UrlSlug = "galaxy-s24-series",
                     Description = "Samsung S24 Ultra là siêu phẩm smartphone đỉnh cao mở đầu năm 2024 đến từ nhà Samsung với chip Snapdragon 8 Gen 3 For Galaxy mạnh mẽ, công nghệ tương lai Galaxy AI cùng khung viền Titan đẳng cấp hứa hẹn sẽ mang tới nhiều sự thay đổi lớn về mặt thiết kế và cấu hình. SS Galaxy S24 bản Ultra sở hữu màn hình 6.8 inch Dynamic AMOLED 2X tần số quét 120Hz. Máy cũng sở hữu camera chính 200MP, camera zoom quang học 50MP, camera tele 10MP và camera góc siêu rộng 12MP.",
+                    Branch = branches[1],
+                    Category = categories[0]
                 },
                 new()
                 {
                     Name = "Macbook Pro 2023",
                     UrlSlug = "macbook-pro-2023",
                     Description = "Macbook Pro 14 inch M3 Pro 2023 18GB/512GB có độ phân giải 3.024 x 1.964 pixels, độ sáng lên tới 1.600 nits, hỗ trợ tần số quét 120Hz xử lý hình ảnh cực mượt. Đặc biệt, sản phẩm Macbook Pro M3 năm 2023 trang bị con chip Apple M3 Pro, đi kèm với 18GB RAM và 512GB bộ nhớ trong. ",
+                    Branch = branches[0],
+                    Category = categories[2]
                 },
                 new()
                 {
                     Name = "ASUS Gaming",
                     UrlSlug = "asus-gaming",
                     Description = "Laptop Asus Tuf Gaming F15 FX506HF-HN078W với thiết kế năng động, mang vẻ đẹp thu hút với CPU core intel i5, GPU GeForce RTX™ 2050 và RAM 8 GB. Kết hợp là màn hiển thị FHD IPS 144Hz cực kỳ rõ nét. Ngoài ra laptop Asus Gaming cũng có thêm hệ thống âm thanh đỉnh cao nhờ vào công nghệ tiên tiến để phục vụ tối đa người dùng.",
+                    Branch = branches[6],
+                    Category = categories[2]
                 },
                 new()
                 {
                     Name = "Ipad Pro",
                     UrlSlug = "ipad-pro",
                     Description = "So sánh iPad Pro 2022 và iPad Pro 2021\r\nRa mắt với nhiều cải tiến và hiệu năng mạnh mẽ, iPad Pro 2022 mang đến nhiều trải nghiệm thú vị cho người dùng. Vậy sản phẩm này có gì khác so với thế hệ trước. Xem bảng so sánh chi tiết sau đây nhé!",
+                    Branch = branches[0],
+                    Category = categories[1]
                 },
                 new()
                 {
                     Name = "Tab S9 Series",
                     UrlSlug = "tab-s9-series",
                     Description = "Máy tính bảng Samsung Galaxy Tab S9 FE được trang bị màn hình 10.9 inch với tấm nền LCD cùng tần số quét 90Hz giúp mang lại trải nghiệm hiển thị sống động. Máy được trang bị chuẩn kháng nước và bụi bẩn IP68 cùng với dung lượng pin tới 8000 mAh. Cấu hình máy với chipset Exynos 1380 cùng RAM 6GB mang lại trải nghiệm dùng ổn định.",
+                    Branch = branches[1],
+                    Category = categories[1]
                 },
                 new()
                 {
                     Name = "Airpod",
                     UrlSlug = "airpod",
                     Description = "Airpods Pro 2 Type-C với công nghệ khử tiếng ồn chủ động mang lại khả năng khử ồn lên gấp 2 lần mang lại trải nghiệm nghe - gọi và trải nghiệm âm nhạc ấn tượng. Cùng với đó, điện thoại còn được trang bị công nghệ âm thanh không gian giúp trải nghiệm âm nhạc thêm phần sống động. Airpods Pro 2 Type-C với cổng sạc Type C tiện lợi cùng viên pin mang lại thời gian trải nghiệm lên đến 6 giờ tiện lợi.",
+                    Branch = branches[0],
+                    Category = categories[3]
                 },
                 new()
                 {
                     Name = "JBL",
                     UrlSlug = "jbl",
                     Description = "Tai nghe JBL Wave Beam được trang bị trình điều kiển 8mm mang lại âm thanh vượt trội với âm bass sâu kết hợp với thiết kế đóng kín giúp tăng cường hiệu suất âm thanh. Tai nghe được trang bị thiết kế khá vừa vặn cùng với đó là bộ sưu tập màu sắc đa dạng như xanh, đen, trắng và vàng. JBL Wave Beam với công nghệ Smart Ambient cho phép người dùng dễ dàng dễ dàng nghe được âm thanh xung quanh, cùng với đó là tính năng TalkThru hỗ trợ tạm dừng âm nhạc nhanh chóng để tham gia các cuộc trò chuyện với bạn bè.",
+                    Branch = branches[27],
+                    Category = categories[3]
                 },
                 new()
                 {
                     Name = "Apple Watch Series 9",
                     UrlSlug = "apple-watch-series-9",
                     Description = "Đồng hồ Apple Watch Series 9 45mm sở hữu on chip S9 SiP - CPU với 5,6 tỷ bóng bán dẫn giúp mang lại hiệu năng cải thiện hơn 60% so với thế hệ S8. Màn hình thiết bị với kích thước 45mm cùng độ sáng tối đa lên 2000 nit mang lại trải nghiệm hiển thị vượt trội. Cùng với đó, đồng hồ Apple Watch s9 này còn được trang bị nhiều tính năng hỗ trợ theo dõi sức khỏe và tập luyện thông minh.",
+                    Branch = branches[0],
+                    Category = categories[4]
                 },
                 new()
                 {
                     Name = "Galaxy Watch 6",
                     UrlSlug = "galaxy-watch-6",
                     Description = "Đồng hồ Samsung Galaxy Watch 6 trang bị màn hình Sapphire cứng cáp, bền bỉ với khả năng chống nước đạt chuẩn IP68 và 5ATM, giúp người dùng thoải mái sử dụng trong nhiều môi trường khác nhau. Bên cạnh đó, dung lượng pin 300mAh cùng khả năng sạc nhanh có thể nạp đến 45% trong vòng 30 phút, cho thời gian sử dụng lên đến nhiều giờ liền.",
+                    Branch = branches[1],
+                    Category = categories[4]
                 },
                 new()
                 {
                     Name = "GoPro",
                     UrlSlug = "gopro",
                     Description = "Camera hành trình Gopro Hero 11 là siêu phẩm tiếp theo của Gopro đạt chất lượng hình ảnh cao chuyên biệt dành cho các tín đồ du lịch. Sản phẩm còn là người bạn đồng hành dành cho các phượt thủ không thể thiếu đó là một chiếc máy ảnh hành trình.",
+                    Branch = branches[41],
+                    Category = categories[5]
                 },
                 new()
                 {
                     Name = "Xiaomi",
                     UrlSlug = "xiaomi",
                     Description = "Camera Xiaomi Mi Home Security C200 (BHR6766GL) hỗ trợ giám sát tối ưu với hình ảnh sắc nét và góc nhìn rộng. Chiếc camera an ninh Xiaomi sẽ là người bạn đồng hành tuyệt vời giúp không gian nhà và văn phòng của bạn được đảm bảo an toàn tối đa. Nhờ tích hợp công nghệ tiên tiến, sản phẩm cũng giúp bạn tiết kiệm băng thông kết nối và bộ nhớ hiệu quả.",
+                    Branch = branches[2],
+                    Category = categories[5]
                 },
                 new()
                 {
                     Name = "Apple Care",
                     UrlSlug = "apple-care",
                     Description = "Dịch vụ AppleCare+ cho iPad Pro 12.9 icnh 2020 – Gia tăng thời gian bảo hành iPad chính hãng",
+                    Branch = branches[0],
+                    Category = categories[6]
                 },
                 new()
                 {
                     Name = "Samsung Care",
                     UrlSlug = "samsung-care",
                     Description = "Gói 2 năm Samsung Care + cho điện thoại Samsung Galaxy A14 với tổng giá trị bằng 200% giá trị thiết bị trong vòng 2 năm bao gồm cả bị rơi vỡ, vào nước. Hơn thế, cách thức đăng ký Samsung Care Plus dễ dàng, bảo vệ toàn cầu, nhận và giao hàng miễn phí giúp bạn thoải mái hơn trong quá trình sử dụng.",
+                    Branch = branches[1],
+                    Category = categories[6]
                 },
                 new()
                 {
                     Name = "CPU",
                     UrlSlug = "cpu",
                     Description = "Bộ vi xử lý Intel Core i5 12400F khi mới ra mắt trên thị trường đã được người dùng săn lùng thông tin khắp nơi. Từ đó sản phẩm được rất nhiều khách hàng, đặt biệt là các game thủ tin dùng, bởi thế được coi như đối thủ nặng ký của nhiều thiết bị cùng chức năng khác.",
+                    Branch = branches[50],
+                    Category = categories[7]
                 },
                 new()
                 {
                     Name = "Main",
                     UrlSlug = "main",
                     Description = "Mainboard Asrock B450M HDV R4 là bo mạch chủ đáng để bạn bỏ tiền ra trang bị cho bộ PC của mình. Sở hữu những ưu điểm tuyệt vời về đường truyền cũng như vẻ ngoài, sản phẩm mainboard Asrock sẽ giúp cho bạn có trải nghiệm hài lòng nhất. ",
+                    Branch = branches[51],
+                    Category = categories[7]
                 },
                 new()
                 {
-                    Name = "Asus",
+                    Name = "Màn hình Asus",
                     UrlSlug = "asus",
                     Description = "Màn hình gaming Asus TUF VG246H1A 24 inch là mẫu màn hình được sản xuất dành riêng cho các game thủ. Sản phẩm màn hình Asus này được bị tốc độ làm mới tới 100 hz cùng với nhiều công nghệ tối ưu cho các trải nghiệm gaming.",
+                    Branch = branches[6],
+                    Category = categories[8]
                 },
                 new()
                 {
-                    Name = "Samsung",
+                    Name = "Màn hình Samsung",
                     UrlSlug = "samsung",
                     Description = "Màn hình Samsung LU28R550UQEXXV 28 inch siêu mỏng ấn tượng, sở hữu hình ảnh UHD rõ nét sống động. Nếu bạn đang có nhu cầu thay thế hoặc mua thêm cho mình một chiếc màn hình để đáp ứng nhu cầu công việc, học tập thì chắc chắn không thể bỏ qua sản phẩm này.",
+                    Branch = branches[1],
+                    Category = categories[8]
                 },
                 new()
                 {
-                    Name = "50 inch",
+                    Name = "Tivi Samsung 50 inch",
                     UrlSlug = "50-inch",
                     Description = "Smart tivi Samsung Crystal UHD 4K 50 inch UA50AU7700KXXV được đánh giá cao bởi thiết kế hiện đại, tính năng nổi bật và hình ảnh ấn tượng. Xem ngay thông tin chi tiết tivi Samsung dưới đây!",
+                    Branch = branches[1],
+                    Category = categories[9]
                 },
                 new()
                 {
-                    Name = "55 inch",
+                    Name = "Tivi Samsung 55 inch",
                     UrlSlug = "55-inch",
                     Description = "Tivi Khung Samsung 55LS03B là dòng sản phẩm có lối thiết kế mới, độc đáo. Hãy cùng CellphoneS tìm hiểu thêm về mẫu tivi thông minh Samsung mới này trong bài viết dưới đây nhé!",
+                    Branch = branches[1],
+                    Category = categories[9]
                 },
             };
             var serieAdd = new List<Serie>();

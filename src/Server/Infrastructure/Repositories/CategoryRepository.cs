@@ -18,7 +18,7 @@ namespace Infrastructure.Repositories
         public async Task<bool> DeleteCategory(int id)
         {
             var categoryToDelete = await _context.Set<Category>()
-                .Include(c => c.Products)
+                .Include(c => c.Series)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
             try
@@ -41,7 +41,8 @@ namespace Infrastructure.Repositories
         public async Task<Category> GetCategoryBySlug(string slug)
         {
             return await _context.Set<Category>()
-                .Include(c => c.Products)
+                .Include(c => c.Series)
+                .ThenInclude(s => s.Products)
                 .Where(c => c.UrlSlug == slug)
                 .FirstOrDefaultAsync();
         }

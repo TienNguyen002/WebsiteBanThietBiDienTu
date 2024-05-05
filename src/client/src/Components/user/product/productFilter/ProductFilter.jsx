@@ -5,24 +5,48 @@ import { formatVND } from "../../../../Common/function";
 import { Radio } from "antd";
 import ColorSquare from "../colorSquare/ColorSquare";
 import StarRating from "../starRating/StarRating";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  resetColor,
+  updateBranch,
+  updateColor,
+  updateMaxPrice,
+  updateMinPrice,
+  updateRating,
+} from "../../../../Redux/Payload";
 
 const ProductFilter = ({ hasBranch, branches, colors }) => {
-  const [branchValue, setBranchValue] = useState("all");
-  const [starValue, setStarValue] = useState("all");
-  const [minValue, setMinValue] = useState(50000);
-  const [maxValue, setMaxValue] = useState(10000000);
+  const payloadFilter = useSelector((state) => state.payloadFilter);
+  const [minValue, setMinValue] = useState(payloadFilter.minPrice);
+  const [maxValue, setMaxValue] = useState(payloadFilter.maxPrice);
+  const dispatch = useDispatch();
+
+  const handleReset = (e) => {
+    dispatch(resetColor());
+  };
 
   const onBranchChange = (e) => {
-    setBranchValue(e.target.value);
+    dispatch(updateBranch(e.target.value));
   };
 
   const onStarChange = (e) => {
-    setStarValue(e.target.value);
+    dispatch(updateRating(e.target.value));
   };
 
   const onChangeComplete = (value) => {
     setMinValue(value[0]);
     setMaxValue(value[1]);
+  };
+
+  const onChangePrice = () => {
+    dispatch(updateMinPrice(minValue));
+    dispatch(updateMaxPrice(maxValue));
+  };
+
+  const handleColorClick = (colorName) => {
+    dispatch(updateColor(colorName));
+    console.log(`Color clicked: ${colorName}`);
+    // Add your logic here
   };
 
   return (
@@ -38,9 +62,9 @@ const ProductFilter = ({ hasBranch, branches, colors }) => {
             range={{
               draggableTrack: true,
             }}
-            defaultValue={[minValue, maxValue]}
+            defaultValue={[payloadFilter.minPrice, payloadFilter.maxPrice]}
             min={50000}
-            max={10000000}
+            max={50000000}
             step={50000}
             onChangeComplete={onChangeComplete}
           />
@@ -50,14 +74,19 @@ const ProductFilter = ({ hasBranch, branches, colors }) => {
               {formatVND(minValue)} - {formatVND(maxValue)}
             </p>
           </div>
-          <p className="product-filter-price-button">Lọc</p>
+          <button
+            className="product-filter-price-button"
+            onClick={onChangePrice}
+          >
+            Lọc
+          </button>
         </div>
         {hasBranch ? (
           <div className="product-filter-branch">
             <p className="product-filter-line"></p>
             <p className="product-filter-branch-title">Thương hiệu</p>
-            <Radio.Group onChange={onBranchChange} value={branchValue}>
-              <Radio value="all">Tất cả</Radio>
+            <Radio.Group value={payloadFilter.branch} onChange={onBranchChange}>
+              <Radio value="">Tất cả</Radio>
               {branches && branches.length > 0
                 ? branches.map((item, index) => (
                     <div className="product-filter-branch-list" key={index}>
@@ -76,8 +105,8 @@ const ProductFilter = ({ hasBranch, branches, colors }) => {
         <div className="product-filter-rating">
           <p className="product-filter-line"></p>
           <p className="product-filter-rating-title">Đánh giá</p>
-          <Radio.Group onChange={onStarChange} value={starValue}>
-            <Radio value="all">Tất cả</Radio>
+          <Radio.Group onChange={onStarChange} value={payloadFilter.rating}>
+            <Radio value={0}>Tất cả</Radio>
             <div className="product-filter-rating-list">
               <Radio value={5} className="product-filter-rating-list-5">
                 <StarRating rating={5} />
@@ -101,11 +130,20 @@ const ProductFilter = ({ hasBranch, branches, colors }) => {
           <p className="product-filter-line"></p>
           <div className="product-filter-color-top">
             <p className="product-filter-color-top-title">Màu</p>
-            <p className="product-filter-color-top-remove">Xóa lọc</p>
+            <button
+              className="product-filter-color-top-remove"
+              onClick={handleReset}
+            >
+              Xóa lọc
+            </button>
           </div>
           {colors && colors.length > 0
             ? colors.map((item, index) => (
-                <ColorSquare key={index} color={item.name} />
+                <ColorSquare
+                  key={index}
+                  color={item.name}
+                  onClick={handleColorClick}
+                />
               ))
             : null}
         </div>

@@ -40,6 +40,56 @@
       display: flex;
       gap: 30px;
       color: var(--white);
+      &-user {
+        position: relative;
+        .user-icon {
+          cursor: pointer;
+        }
+        &-dropdown {
+          position: absolute;
+          background: var(--white);
+          color: var(--black);
+          cursor: pointer;
+          left: -85px;
+          top: 50px;
+          width: 200px;
+          border: 1px solid var(--gray);
+          border-radius: 1em;
+        }
+        &-dropdown::before {
+          content: "";
+          position: absolute;
+          background: var(--white);
+          top: -0.7rem;
+          left: 5.5rem;
+          width: 20px;
+          height: 20px;
+          transform: rotate(45deg);
+          border-left: 1px solid var(--gray);
+          border-top: 1px solid var(--gray);
+        }
+        ul {
+          padding: 0px 10px;
+        }
+      }
     }
   }
+}
+
+.drop-down {
+  display: flex;
+  font-size: 17px;
+  padding: 0;
+  gap: 20px;
+  border-radius: 10px;
+}
+
+.drop-down:hover {
+  background: var(--light-red);
+  color: var(--white);
+}
+
+.link {
+  text-decoration: none;
+  color: var(--black);
 }

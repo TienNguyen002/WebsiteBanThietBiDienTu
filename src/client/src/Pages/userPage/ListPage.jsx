@@ -7,6 +7,7 @@ import "../../styles/listPage.scss";
 import NavigationBar from "../../Components/user/common/navigationBar/NavigationBar";
 import { getProductFilter, getPagedProduct } from "../../Api/Controller";
 import PageComponent from "../../Components/user/common/pagination/PageComponent";
+import { useSelector } from "react-redux";
 
 const ListPage = () => {
   const [branches, setBranches] = useState();
@@ -14,16 +15,24 @@ const ListPage = () => {
   const [colors, setColors] = useState();
   const [products, setProducts] = useState([]);
   const [metadata, setMetadata] = useState();
+  const payloadFilter = useSelector((state) => state.payloadFilter);
+
   const filterPayload = {
     isSale: true,
   };
 
   const [payload, setPayload] = useState({
     isSale: true,
+    sortOrder: payloadFilter.sortOrder,
+    category: payloadFilter.category,
+    branch: payloadFilter.branch,
+    minPrice: payloadFilter.minPrice,
+    maxPrice: payloadFilter.maxPrice,
+    rating: payloadFilter.rating,
+    color: payloadFilter.color,
     pageSize: 16,
     pageNumber: 1,
   });
-  console.log(metadata);
 
   useEffect(() => {
     getProductFilter(filterPayload).then((data) => {
@@ -47,7 +56,7 @@ const ListPage = () => {
         setMetadata(null);
       }
     });
-  }, [payload]);
+  }, [payload, payloadFilter]);
 
   const handlePageChange = (pageNumber) => {
     setPayload((prevPayload) => ({ ...prevPayload, pageNumber }));

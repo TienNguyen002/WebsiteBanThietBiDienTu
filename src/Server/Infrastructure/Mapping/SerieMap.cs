@@ -20,6 +20,18 @@ namespace Infrastructure.Mapping
 
             builder.Property(s => s.Description)
                 .IsRequired();
+
+            builder.HasOne(p => p.Category)
+                .WithMany(c => c.Series)
+                .HasForeignKey(p => p.CategoryId)
+                .HasConstraintName("FK_Categories_Series")
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(p => p.Branch)
+                .WithMany(b => b.Series)
+                .HasForeignKey(p => p.BranchId)
+                .HasConstraintName("FK_Branches_Series")
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

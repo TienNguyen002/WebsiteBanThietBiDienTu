@@ -1,13 +1,15 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./header.scss";
 import banner from "../../../Shared/images/banner-top.jpg";
 import logo from "../../../Shared/images/logo-4.png";
-import { UserRound, Search } from "lucide-react";
+import { UserRound, Search, UserRoundPlus, LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
 import CartDrawer from "../cart/cartDrawer/CartDrawer";
 
 const Header = () => {
   const navbarRef = useRef(null);
+  const userRef = useRef(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +25,14 @@ const Header = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
+
+    // let handler = (e) => {
+    //   if (userRef.current && !userRef.current.contains(e.target)) {
+    //     setOpen(false);
+    //   }
+    // };
+
+    // document.addEventListener("mousedown", handler);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -48,12 +58,37 @@ const Header = () => {
             <Search className="search-icon" />
           </div>
           <div className="home-header-navbar-end">
-            <UserRound className="user-icon" />
+            <div className="home-header-navbar-end-user" ref={userRef}>
+              <UserRound className="user-icon" onClick={() => setOpen(!open)} />
+              {open && (
+                <div className="home-header-navbar-end-user-dropdown">
+                  <ul>
+                    <Link to={`/login`} className="link">
+                      <DropDownItem image={<LogIn />} title="Đăng nhập" />
+                    </Link>
+
+                    <Link to={`/register`} className="link">
+                      <DropDownItem image={<UserRoundPlus />} title="Đăng ký" />
+                    </Link>
+                  </ul>
+                </div>
+              )}
+            </div>
             <CartDrawer className="cart-icon" />
           </div>
         </div>
       </div>
     </>
+  );
+};
+
+const DropDownItem = (props) => {
+  return (
+    <li className="drop-down">
+      <p className="drop-down">
+        {props.image} {props.title}
+      </p>
+    </li>
   );
 };
 

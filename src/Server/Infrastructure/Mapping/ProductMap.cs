@@ -27,7 +27,7 @@ namespace Infrastructure.Mapping
             builder.Property(p => p.ImageUrl)
                .HasMaxLength(1000);
 
-            builder.Property(p => p.ShortDescription) 
+            builder.Property(p => p.ShortDescription)
                 .IsRequired();
 
             builder.Property(p => p.Specification)
@@ -47,18 +47,6 @@ namespace Infrastructure.Mapping
                 .HasColumnType("decimal(18,2)");
 
             builder.Property(p => p.SoldQuantity);
-
-            builder.HasOne(p => p.Category)
-                .WithMany(c => c.Products)
-                .HasForeignKey(p => p.CategoryId)
-                .HasConstraintName("FK_Categories_Products")
-                .OnDelete(DeleteBehavior.Cascade);
-
-            builder.HasOne(p => p.Branch)
-                .WithMany(b => b.Products)
-                .HasForeignKey(p => p.BranchId)
-                .HasConstraintName("FK_Branches_Products")
-                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(p => p.Serie)
                 .WithMany(s => s.Products)

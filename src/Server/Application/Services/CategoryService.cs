@@ -60,7 +60,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<IList<CategoryDTO>> GetAllCategories()
         {
-            var categories = await _repository.GetAllWithInclude(c => c.Products);
+            var categories = await _repository.GetAllWithInclude(c => c.Series);
             return _mapper.Map<IList<CategoryDTO>>(categories);
         }
 
@@ -72,7 +72,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<CategoryDTO> GetCategoryById(int id)
         {
-            var category = await _repository.GetByIdWithInclude(id, c => c.Products);
+            var category = await _repository.GetByIdWithInclude(id, c => c.Series);
             return _mapper.Map<CategoryDTO>(category);
         }
 
