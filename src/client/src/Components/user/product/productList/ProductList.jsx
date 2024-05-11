@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
-import "./productList.scss";
-import branch from "../../../../Shared/data/branch.json";
-import product from "../../../../Shared/data/product.json";
+import "../../styles/homePage.scss";
 import { useNavigate } from "react-router-dom";
 import { getBranchList, getProductList } from "../../../../Api/Controller";
 import ProductItem from "../productCard/ProductItem";
@@ -28,15 +26,15 @@ const ProductList = (props) => {
   }, []);
 
   const handleLink = () => {
-    navigate("/more");
+    navigate(`/${category}`);
     window.scrollTo({
       top: 0,
       behavior: "instant",
     });
   };
 
-  const handleBranchLink = () => {
-    navigate("/branch");
+  const handleBranchLink = (urlSlug) => {
+    navigate(`/${category}/${urlSlug}`);
     window.scrollTo({
       top: 0,
       behavior: "instant",
@@ -55,7 +53,7 @@ const ProductList = (props) => {
                   <div
                     className="product-branch-list-detail"
                     key={index}
-                    onClick={handleBranchLink}
+                    onClick={() => handleBranchLink(item.urlSlug)}
                   >
                     <img
                       src={item.imageUrl}

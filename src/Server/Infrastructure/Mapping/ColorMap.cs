@@ -14,6 +14,9 @@ namespace Infrastructure.Mapping
 
             builder.Property(c => c.Name)
                 .IsRequired();
+
+            builder.Property(c => c.UrlSlug)
+                .IsRequired();
         }
     }
 }

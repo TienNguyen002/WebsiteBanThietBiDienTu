@@ -6,13 +6,13 @@ import { EffectCoverflow, Autoplay, Navigation } from "swiper/modules";
 import { Link } from "react-router-dom";
 //Import Component
 import ProductCard from "../../product/productCard/ProductCard";
-import Clock from "./clock/Clock";
+import Clock from "../../common/Clock";
 //Import Icon
 import { Zap, ChevronRight } from "lucide-react";
 //Import API
 import { getAllSale } from "../../../../Api/Controller";
 //CSS
-import "./flashSale.scss";
+import "../../styles/homePage.scss";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";

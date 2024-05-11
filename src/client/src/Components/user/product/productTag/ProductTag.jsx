@@ -1,6 +1,6 @@
 import React from "react";
 import { formatVND } from "../../../../Common/function";
-import "./productTag.scss";
+import "../../styles/homePage.scss";
 
 const ProductTag = ({ products, tag, onClick }) => {
   return (

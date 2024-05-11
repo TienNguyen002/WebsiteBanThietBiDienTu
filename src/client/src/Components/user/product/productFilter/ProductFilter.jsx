@@ -1,36 +1,33 @@
 import React, { useState } from "react";
-import "./productFilter.scss";
+import "../../styles/homePage.scss";
 import { Slider } from "antd";
 import { formatVND } from "../../../../Common/function";
 import { Radio } from "antd";
-import ColorSquare from "../colorSquare/ColorSquare";
+import ColorSquare from "../../common/ColorSquare";
 import StarRating from "../starRating/StarRating";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  resetColor,
-  updateBranch,
-  updateColor,
-  updateMaxPrice,
-  updateMinPrice,
-  updateRating,
-} from "../../../../Redux/Payload";
 
-const ProductFilter = ({ hasBranch, branches, colors }) => {
-  const payloadFilter = useSelector((state) => state.payloadFilter);
-  const [minValue, setMinValue] = useState(payloadFilter.minPrice);
-  const [maxValue, setMaxValue] = useState(payloadFilter.maxPrice);
-  const dispatch = useDispatch();
-
-  const handleReset = (e) => {
-    dispatch(resetColor());
-  };
+const ProductFilter = ({
+  hasBranch,
+  branches,
+  colors,
+  onMinMaxFilterChange,
+  onBranchFilterChange,
+  onRatingFilterChange,
+  onColorFilterChange,
+}) => {
+  const [branchValue, setBranchValue] = useState("");
+  const [starValue, setStarValue] = useState(0);
+  const [minValue, setMinValue] = useState(50000);
+  const [maxValue, setMaxValue] = useState(50000000);
 
   const onBranchChange = (e) => {
-    dispatch(updateBranch(e.target.value));
+    setBranchValue(e.target.value);
+    onBranchFilterChange(e.target.value);
   };
 
   const onStarChange = (e) => {
-    dispatch(updateRating(e.target.value));
+    setStarValue(e.target.value);
+    onRatingFilterChange(e.target.value);
   };
 
   const onChangeComplete = (value) => {
@@ -38,15 +35,16 @@ const ProductFilter = ({ hasBranch, branches, colors }) => {
     setMaxValue(value[1]);
   };
 
-  const onChangePrice = () => {
-    dispatch(updateMinPrice(minValue));
-    dispatch(updateMaxPrice(maxValue));
+  const handleColorClick = (slug) => {
+    onColorFilterChange(slug);
   };
 
-  const handleColorClick = (colorName) => {
-    dispatch(updateColor(colorName));
-    console.log(`Color clicked: ${colorName}`);
-    // Add your logic here
+  const resetColor = () => {
+    onColorFilterChange("");
+  };
+
+  const filterPrice = () => {
+    onMinMaxFilterChange(minValue, maxValue);
   };
 
   return (
@@ -62,7 +60,7 @@ const ProductFilter = ({ hasBranch, branches, colors }) => {
             range={{
               draggableTrack: true,
             }}
-            defaultValue={[payloadFilter.minPrice, payloadFilter.maxPrice]}
+            defaultValue={[minValue, maxValue]}
             min={50000}
             max={50000000}
             step={50000}
@@ -74,10 +72,7 @@ const ProductFilter = ({ hasBranch, branches, colors }) => {
               {formatVND(minValue)} - {formatVND(maxValue)}
             </p>
           </div>
-          <button
-            className="product-filter-price-button"
-            onClick={onChangePrice}
-          >
+          <button className="product-filter-price-button" onClick={filterPrice}>
             Lọc
           </button>
         </div>
@@ -85,7 +80,7 @@ const ProductFilter = ({ hasBranch, branches, colors }) => {
           <div className="product-filter-branch">
             <p className="product-filter-line"></p>
             <p className="product-filter-branch-title">Thương hiệu</p>
-            <Radio.Group value={payloadFilter.branch} onChange={onBranchChange}>
+            <Radio.Group onChange={onBranchChange} value={branchValue}>
               <Radio value="">Tất cả</Radio>
               {branches && branches.length > 0
                 ? branches.map((item, index) => (
@@ -105,7 +100,7 @@ const ProductFilter = ({ hasBranch, branches, colors }) => {
         <div className="product-filter-rating">
           <p className="product-filter-line"></p>
           <p className="product-filter-rating-title">Đánh giá</p>
-          <Radio.Group onChange={onStarChange} value={payloadFilter.rating}>
+          <Radio.Group onChange={onStarChange} value={starValue}>
             <Radio value={0}>Tất cả</Radio>
             <div className="product-filter-rating-list">
               <Radio value={5} className="product-filter-rating-list-5">
@@ -132,18 +127,21 @@ const ProductFilter = ({ hasBranch, branches, colors }) => {
             <p className="product-filter-color-top-title">Màu</p>
             <button
               className="product-filter-color-top-remove"
-              onClick={handleReset}
+              onClick={resetColor}
             >
               Xóa lọc
             </button>
           </div>
           {colors && colors.length > 0
             ? colors.map((item, index) => (
-                <ColorSquare
-                  key={index}
-                  color={item.name}
-                  onClick={handleColorClick}
-                />
+                <>
+                  <ColorSquare
+                    key={index}
+                    color={item.name}
+                    slug={item.urlSlug}
+                    onClick={handleColorClick}
+                  />
+                </>
               ))
             : null}
         </div>

@@ -120,19 +120,23 @@ namespace Infrastructure.Seeders
             {
                 new()
                 {
-                    Name = "Đỏ"
+                    Name = "Đỏ",
+                    UrlSlug = "do"
                 },
                 new()
                 {
-                    Name = "Xanh nước"
+                    Name = "Xanh nước",
+                    UrlSlug = "xanh-nuoc"
                 },
                 new()
                 {
-                    Name = "Xanh lá"
+                    Name = "Xanh lá",
+                    UrlSlug = "xanh-la"
                 },
                 new()
                 {
-                    Name = "Cam"
+                    Name = "Cam",
+                    UrlSlug = "cam"
                 },
             };
             var colorAdd = new List<Color>();

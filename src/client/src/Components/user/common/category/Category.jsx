@@ -1,21 +1,18 @@
 //Import Component Library
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 //Import API
 import { getAllCategory } from "../../../../Api/Controller";
 //CSS
-import "./category.scss";
+import "../../styles/homePage.scss";
 
 const Category = (props) => {
-  const { title, sale, category } = props;
+  const { title, category } = props;
   const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
 
-  const handleLink = ({ urlSlug }) => {
-    console.log(urlSlug);
-    if (sale) {
-      navigate(`/sale/${urlSlug}`);
-    }
+  const handleLink = (urlSlug) => {
+    navigate(`/list/${urlSlug}`);
     window.scrollTo({
       top: 0,
       behavior: "instant",
@@ -40,17 +37,17 @@ const Category = (props) => {
             </div>
             <div className="home-category-component">
               {categories.map((item, index) => (
-                <Link
+                <div
                   key={index}
                   className="home-category-component-item"
-                  onClick={handleLink(item.urlSlug)}
+                  onClick={() => handleLink(item.urlSlug)}
                 >
                   <img
                     src={item.imageUrl}
                     alt={item.name}
                     className="home-category-component-item-image"
                   />
-                </Link>
+                </div>
               ))}
             </div>
           </>
@@ -62,7 +59,7 @@ const Category = (props) => {
                     <div
                       key={index}
                       className="home-category-component-item"
-                      onClick={handleLink}
+                      onClick={() => handleLink(item.urlSlug)}
                     >
                       <img
                         src={item.imageUrl}

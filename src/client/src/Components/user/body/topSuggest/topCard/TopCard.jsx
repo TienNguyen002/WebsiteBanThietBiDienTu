@@ -1,17 +1,25 @@
 import React from "react";
 import StarRating from "../../../product/starRating/StarRating";
 import { Award } from "lucide-react";
-import product from "../../../../../Shared/data/product.json";
 import { formatVND } from "../../../../../Common/function";
-import "./topCard.scss";
+import "../../../styles/homePage.scss";
 import { Link, useNavigate } from "react-router-dom";
 
 const TopCard = (props) => {
-  const { title, isNew, products } = props;
+  const { title, isNew, products, isHighRating, isTop } = props;
   const navigate = useNavigate();
 
-  const handleLink = () => {
-    // navigate(`/${urlSlug}`);
+  const handleLink = (urlSlug) => {
+    if (isHighRating) {
+      navigate("/high-rating");
+    }
+    if (isNew) {
+      navigate("/new");
+    }
+    if (isTop) {
+      navigate("/top");
+    }
+    navigate(`/detail/${urlSlug}`);
     window.scrollTo({
       top: 0,
       behavior: "instant",
@@ -34,11 +42,10 @@ const TopCard = (props) => {
           {products ? (
             <>
               {products.map((item, index) => (
-                <Link
-                  to={item.urlSlug}
+                <div
                   className="top-card-product-detail"
                   key={index}
-                  onClick={handleLink}
+                  onClick={() => handleLink(item.urlSlug)}
                 >
                   <img
                     src={item.imageUrl}
@@ -64,14 +71,14 @@ const TopCard = (props) => {
                       />
                     )}
                   </div>
-                </Link>
+                </div>
               ))}
             </>
           ) : null}
         </div>
-        <Link to={"/sale"} className="top-card-more">
+        <div onClick={handleLink} className="top-card-more">
           Xem tất cả
-        </Link>
+        </div>
       </div>
     </>
   );

@@ -128,7 +128,7 @@ namespace Infrastructure.Repositories
             }
             if (query.IsNew)
             {
-                productQuery = productQuery.Where(i => i.Rating == null).OrderByDescending(p => p.Id);
+                productQuery = productQuery.Where(i => i.Price == null).OrderByDescending(p => p.Id);
             }
             if (query.IsTop)
             {
@@ -179,7 +179,7 @@ namespace Infrastructure.Repositories
             }
             if (!string.IsNullOrWhiteSpace(query.Color))
             {
-                productQuery = productQuery.Where(p => p.Colors.Any(c => c.Name.Contains(query.Color)));
+                productQuery = productQuery.Where(p => p.Colors.Any(c => c.UrlSlug.Contains(query.Color)));
             }
             return productQuery;
         }
@@ -231,6 +231,8 @@ namespace Infrastructure.Repositories
             {
                 Id = p.Serie.Branch.Id,
                 Name = p.Serie.Branch.Name,
+                UrlSlug = p.Serie.Branch.UrlSlug,
+                ImageUrl = p.Serie.Branch.ImageUrl,
                 // Map other relevant properties
             })
            .DistinctBy(b => b.Id)
@@ -252,7 +254,7 @@ namespace Infrastructure.Repositories
               {
                   Id = c.Id,
                   Name = c.Name,
-                  // Map other relevant properties
+                  UrlSlug = c.UrlSlug
               })
               .DistinctBy(c => c.Id)
               .ToList();

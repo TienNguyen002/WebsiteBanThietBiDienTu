@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import TopCard from "./topCard/TopCard";
-import "./topSuggest.scss";
+import "../../styles/homePage.scss";
 import { getTop, getNew, getSold } from "../../../../Api/Controller";
 
 const TopSuggest = () => {
@@ -31,9 +31,13 @@ const TopSuggest = () => {
   return (
     <>
       <div className="top-suggest">
-        <TopCard title={"Sản phẩm được đánh giá cao"} products={top} />
+        <TopCard
+          title={"Sản phẩm được đánh giá cao"}
+          products={top}
+          isHighRating={true}
+        />
         <TopCard title={"Sản phẩm mới"} isNew={true} products={news} />
-        <TopCard title={"Sản phẩm bán chạy"} products={sold} />
+        <TopCard title={"Sản phẩm bán chạy"} isTop={true} products={sold} />
       </div>
     </>
   );

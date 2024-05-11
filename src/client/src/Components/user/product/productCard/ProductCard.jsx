@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./productCard.scss";
+import "../../styles/homePage.scss";
 import StarRating from "../starRating/StarRating";
 import { ShoppingCart, Heart, Eye } from "lucide-react";
 import { formatVND } from "../../../../Common/function";
-import ColorSquare from "../colorSquare/ColorSquare";
+import ColorSquare from "../../common/ColorSquare";
 import { useNavigate } from "react-router-dom";
 
 const ProductCard = (props) => {
@@ -28,7 +28,7 @@ const ProductCard = (props) => {
   }, []);
 
   const handleLink = () => {
-    navigate(`/${slug}`);
+    navigate(`/detail/${slug}`);
     window.scrollTo({
       top: 0,
       behavior: "instant",

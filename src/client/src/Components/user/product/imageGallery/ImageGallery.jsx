@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./imageGallery.scss";
+import "../../styles/homePage.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs, Autoplay } from "swiper/modules";
 import "swiper/css";

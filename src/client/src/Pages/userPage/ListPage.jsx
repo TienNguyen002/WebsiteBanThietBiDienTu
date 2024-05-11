@@ -3,38 +3,55 @@ import Category from "../../Components/user/common/category/Category";
 // import Branch from "../../Components/branch/Branch";
 import ProductFilter from "../../Components/user/product/productFilter/ProductFilter";
 import ProductColumn from "../../Components/user/product/productColumn/ProductColumn";
-import "../../styles/listPage.scss";
-import NavigationBar from "../../Components/user/common/navigationBar/NavigationBar";
+import "../../styles/homeLayout.scss";
+import NavigationBar from "../../Components/user/common/NavigationBar";
 import { getProductFilter, getPagedProduct } from "../../Api/Controller";
-import PageComponent from "../../Components/user/common/pagination/PageComponent";
-import { useSelector } from "react-redux";
+import PageComponent from "../../Components/user/common/PageComponent";
 
-const ListPage = () => {
+const ListPage = ({ isSale, isHighRating, isNew, isTop }) => {
   const [branches, setBranches] = useState();
   const [categories, setCategories] = useState();
   const [colors, setColors] = useState();
   const [products, setProducts] = useState([]);
   const [metadata, setMetadata] = useState();
-  const payloadFilter = useSelector((state) => state.payloadFilter);
+  const [naviBar, setNaviBar] = useState("");
 
   const filterPayload = {
-    isSale: true,
+    isSale: isSale,
+    isHighRating: isHighRating,
+    isNew: isNew,
+    isTop: isTop,
   };
 
   const [payload, setPayload] = useState({
-    isSale: true,
-    sortOrder: payloadFilter.sortOrder,
-    category: payloadFilter.category,
-    branch: payloadFilter.branch,
-    minPrice: payloadFilter.minPrice,
-    maxPrice: payloadFilter.maxPrice,
-    rating: payloadFilter.rating,
-    color: payloadFilter.color,
+    isSale: isSale,
+    isHighRating: isHighRating,
+    isNew: isNew,
+    isTop: isTop,
+    sortOrder: "",
+    category: "",
+    branch: "",
+    minPrice: 50000,
+    maxPrice: 50000000,
+    rating: 0,
+    color: "",
     pageSize: 16,
     pageNumber: 1,
   });
 
   useEffect(() => {
+    if (isSale) {
+      setNaviBar("Ưu đãi");
+    }
+    if (isHighRating) {
+      setNaviBar("Sản phẩm đánh giá cao");
+    }
+    if (isNew) {
+      setNaviBar("Sản phẩm mới");
+    }
+    if (isTop) {
+      setNaviBar("Sản phẩm bán chạy");
+    }
     getProductFilter(filterPayload).then((data) => {
       if (data) {
         setBranches(data.branches);
@@ -56,10 +73,32 @@ const ListPage = () => {
         setMetadata(null);
       }
     });
-  }, [payload, payloadFilter]);
+  }, [payload]);
 
   const handlePageChange = (pageNumber) => {
     setPayload((prevPayload) => ({ ...prevPayload, pageNumber }));
+  };
+
+  const handleMinMaxChange = (minPrice, maxPrice) => {
+    setPayload((prevPayload) => ({
+      ...prevPayload,
+      minPrice,
+      maxPrice,
+    }));
+  };
+
+  const handleBranchChange = (branch) => {
+    setPayload((prevPayload) => ({
+      ...prevPayload,
+      branch,
+    }));
+  };
+
+  const handleRatingChange = (rating) => {
+    setPayload((prevPayload) => ({
+      ...prevPayload,
+      rating,
+    }));
   };
 
   const handlePageSize = (pageSize) => {
@@ -70,12 +109,26 @@ const ListPage = () => {
     }));
   };
 
+  const handleSortChange = (sortOrder) => {
+    setPayload((prevPayload) => ({
+      ...prevPayload,
+      sortOrder,
+    }));
+  };
+
+  const handleColorChange = (color) => {
+    setPayload((prevPayload) => ({
+      ...prevPayload,
+      color,
+    }));
+  };
+
   return (
     <>
-      <NavigationBar sale="Sale" />
+      <NavigationBar title={naviBar} />
       <div className="list-page">
         <div className="list-page-category">
-          <Category title={false} sale={true} category={categories} />
+          <Category title={false} category={categories} />
           {/* <Branch /> */}
         </div>
         <div className="list-page-product">
@@ -84,12 +137,17 @@ const ListPage = () => {
               hasBranch={true}
               branches={branches}
               colors={colors}
+              onMinMaxFilterChange={handleMinMaxChange}
+              onBranchFilterChange={handleBranchChange}
+              onRatingFilterChange={handleRatingChange}
+              onColorFilterChange={handleColorChange}
             />
           </div>
           <div className="list-page-product-list">
             <ProductColumn
               products={products}
               onPageSizeChange={handlePageSize}
+              onSortOrderChange={handleSortChange}
             />
             {metadata && (
               <PageComponent metadata={metadata} onChange={handlePageChange} />

@@ -11,6 +11,9 @@ namespace Domain.Entities
         //Tên màu
         public string Name { get; set; } = null!;
 
+        //Mã định danh màu
+        public string UrlSlug { get; set; } = null!;
+
         //Danh sách sản phẩm
         public IList<Product> Products { get; set; } = new List<Product>();
     }

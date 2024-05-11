@@ -1,6 +1,6 @@
 import React from "react";
 import { Youtube, Facebook, Instagram, Twitter } from "lucide-react";
-import "./footer.scss";
+import "../styles/homePage.scss";
 import { Link } from "react-router-dom";
 
 const Footer = () => {

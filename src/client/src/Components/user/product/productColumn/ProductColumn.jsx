@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import "./productColumn.scss";
+import "../../styles/homePage.scss";
 import { Grip, List } from "lucide-react";
 import ProductFlexCard from "../productFlexCard/ProductFlexCard";
-import DropDown from "./dropDown/DropDown";
+import DropDown from "../../common/DropDown";
 import ProductItem from "./../productCard/ProductItem";
 import { useDispatch, useSelector } from "react-redux";
 import { reset, updateGrid } from "../../../../Redux/Grid";
 
-const ProductColumn = ({ products, onPageSizeChange }) => {
+const ProductColumn = ({ products, onPageSizeChange, onSortOrderChange }) => {
   const [selected, setSelected] = useState("");
   const gridChange = useSelector((state) => state.gridChange);
   const dispatch = useDispatch();
@@ -58,7 +58,11 @@ const ProductColumn = ({ products, onPageSizeChange }) => {
               <List />
             </button>
           </div>
-          <DropDown selected={selected} setSelected={setSelected} />
+          <DropDown
+            selected={selected}
+            setSelected={setSelected}
+            onChange={onSortOrderChange}
+          />
         </div>
         <div className={gridChange.grid ? "product-list-grid" : ""}>
           {products && products.length > 0

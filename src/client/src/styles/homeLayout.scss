@@ -3,3 +3,39 @@
   // background: lightblue;
   scroll-behavior: smooth;
 }
+
+.home-page {
+  &-top-button {
+    position: fixed;
+    bottom: 10px;
+    right: 20px;
+    padding: 10px 15px;
+    background-color: var(--dark-red);
+    color: #fff;
+    border-radius: 50%;
+    height: 53px;
+    border: 1px solid #fff;
+    cursor: pointer;
+    transition: all 0.5s ease 0s;
+    align-items: center;
+  }
+}
+
+.list-page {
+  margin: 10px 8% 0;
+  &-product {
+    display: grid;
+    grid-template-columns: 17% 73%;
+    &-filter {
+      padding: 20px;
+      border-radius: 1em;
+    }
+    &-list {
+      padding: 0 10px;
+      .ant-pagination {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+    }
+  }
+}

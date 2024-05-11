@@ -15,8 +15,7 @@ namespace Api.Mapsters
 
             config.NewConfig<Branch, BranchProductDTO>();
 
-            config.NewConfig<Serie, SerieDTO>()
-                .Map(desc => desc.Category, src => src.Category.Name);
+            config.NewConfig<Serie, SerieDTO>();
         }
     }
 }

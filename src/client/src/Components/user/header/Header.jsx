@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./header.scss";
+import "../styles/homePage.scss";
 import banner from "../../../Shared/images/banner-top.jpg";
 import logo from "../../../Shared/images/logo-4.png";
 import { UserRound, Search, UserRoundPlus, LogIn } from "lucide-react";
 import { Link } from "react-router-dom";
-import CartDrawer from "../cart/cartDrawer/CartDrawer";
+import CartDrawer from "../cart/CartDrawer";
 
 const Header = () => {
   const navbarRef = useRef(null);
@@ -74,7 +74,9 @@ const Header = () => {
                 </div>
               )}
             </div>
-            <CartDrawer className="cart-icon" />
+            <div className="home-header-navbar-end-cart">
+              <CartDrawer className="cart-icon" />
+            </div>
           </div>
         </div>
       </div>
