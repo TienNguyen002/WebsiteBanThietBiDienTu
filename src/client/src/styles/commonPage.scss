@@ -3,8 +3,69 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
+
   &-image {
-    height: 30px;
-    width: 10px;
+    display: flex;
+    align-self: center;
+    height: 50%;
+    width: 50%;
+  }
+
+  &-message {
+    font-size: 3em;
+    text-transform: uppercase;
+    align-self: center;
+  }
+
+  &-button {
+    width: 20%;
+    height: 50px;
+    border-radius: 3em;
+    text-transform: uppercase;
+    font-size: 2em;
+    background: var(--white);
+    align-self: center;
+  }
+
+  &-button:hover {
+    background: var(--light-red);
+    color: var(--white);
+    cursor: pointer;
+  }
+}
+
+/*=========== 400 ===========*/
+.bad-request-page {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+
+  &-image {
+    display: flex;
+    align-self: center;
+    height: 50%;
+    width: 50%;
+  }
+
+  &-message {
+    font-size: 3em;
+    text-transform: uppercase;
+    align-self: center;
+  }
+
+  &-button {
+    width: 20%;
+    height: 50px;
+    border-radius: 3em;
+    text-transform: uppercase;
+    font-size: 2em;
+    background: var(--white);
+    align-self: center;
+  }
+
+  &-button:hover {
+    background: var(--light-red);
+    color: var(--white);
+    cursor: pointer;
   }
 }

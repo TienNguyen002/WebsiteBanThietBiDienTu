@@ -17,6 +17,9 @@ code {
   --white: white;
   --black: black;
   --gray: gray;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-600: #718096;
   --light-gray: #d3d3d3;
   --red: red;
   --light-red:#E84476;

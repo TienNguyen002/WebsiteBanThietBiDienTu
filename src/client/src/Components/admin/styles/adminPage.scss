@@ -1,0 +1,173 @@
+/*=========== Side Bar ===========*/
+.admin {
+  height: 100vh;
+  // width: fit-content;
+  border-right: 1px solid var(--light-gray);
+  &-navbar {
+    display: flex;
+    background-color: var(--white);
+    flex-direction: column;
+    height: 100%;
+    border-right-width: 1px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    &-top {
+      display: flex;
+      padding: 1rem;
+      padding-bottom: 0.5rem;
+      justify-content: space-between;
+      align-items: center;
+      &-image {
+        overflow: hidden;
+        transition-property: all;
+      }
+      &-button {
+        padding: 0.375rem;
+        background-color: #f9fafb;
+        border-radius: 0.5rem;
+      }
+      &-button:hover {
+        background-color: #f3f4f6;
+      }
+    }
+    &-items {
+      flex: 1;
+      padding: 0 0.75rem;
+    }
+    &-user {
+      display: flex;
+      border-top-width: 1px;
+      padding: 0.75rem;
+      align-items: center;
+      &-icon {
+        display: flex;
+        cursor: pointer;
+      }
+      &-info {
+        display: flex;
+        overflow: hidden;
+        transition-property: all;
+        justify-content: space-between;
+        align-items: center;
+        &-text {
+          // gap: 20px;
+          // font-size: 1em;
+          line-height: 1rem;
+          &-name {
+            font-weight: 600;
+          }
+          &-gmail {
+            font-size: 1rem;
+            color: var(--gray-600);
+          }
+          &-button {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*=========== Side Bar Item ===========*/
+.sidebar-item {
+  display: flex;
+  position: relative;
+  padding: 0.5rem 0.75rem;
+  margin: 0.25rem 0;
+  transition-property: background-color, border-color, color, fill, stroke;
+  font-weight: 500;
+  align-items: center;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  &:hover .sidebar-item-collapse {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 99999;
+  }
+  &-text {
+    overflow: hidden;
+    transition-property: all;
+  }
+  &-alert {
+    position: absolute;
+    right: 0.5rem;
+    background-color: #818cf8;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 0.25rem;
+  }
+  &-collapse {
+    position: absolute;
+    width: 8rem;
+    // left: 100%;
+    border-radius: 0.375rem;
+    padding: 0.25rem 0.5rem;
+    margin-left: 3rem;
+    background-color: #cbd5e1;
+    color: #2d3748;
+    font-size: 1rem;
+    visibility: hidden;
+    opacity: 0.2;
+    transform: translateX(0.75rem);
+    transition: all 0.2s ease-in-out;
+  }
+}
+
+.active {
+  background-image: linear-gradient(to top right, var(--tw-gradient-stops));
+  background-color: #c7d2fe;
+  background-color: #e0e7ff;
+  color: #3730a3;
+  height: 21px;
+}
+.deactive {
+  color: #4b5563;
+  height: 21px;
+}
+.deactive:hover {
+  background-color: #eef2ff;
+}
+.image-expanded {
+  width: 5rem;
+}
+.user-expanded {
+  width: 13rem;
+  margin-left: 0.75rem;
+}
+.expanded {
+  margin-left: 0.75rem;
+  width: 8rem;
+}
+.collapsed {
+  width: 0;
+}
+.alert-collapsed {
+  top: 0.5rem;
+}
+
+/*=========== Top Bar ===========*/
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 1px solid var(--light-gray);
+  &-text {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 2em;
+    color: rgb(0, 102, 255);
+  }
+  &-nofication {
+    display: flex;
+    gap: 20px;
+    align-self: center;
+    font-size: 2em;
+    &-message {
+      cursor: pointer;
+    }
+    &-bell {
+      cursor: pointer;
+    }
+  }
+}

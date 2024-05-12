@@ -1,0 +1,19 @@
+/*=========== Admin Layout ===========*/
+.admin-layout {
+  display: flex;
+  &-content {
+    width: 100%;
+  }
+}
+
+/*=========== Admin Management ===========*/
+.management {
+  padding: 10px 20px;
+  &-top {
+    display: flex;
+    justify-content: space-between;
+    &-title {
+      color: rgb(0, 102, 255);
+    }
+  }
+}

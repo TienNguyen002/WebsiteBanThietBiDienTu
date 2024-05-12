@@ -7,7 +7,7 @@ export async function get_api(your_api) {
     if (data.isSuccess) return data.result;
     else return null;
   } catch (error) {
-    alert("Error", error.message);
+    // alert("Error", error.message);
   }
 }
 

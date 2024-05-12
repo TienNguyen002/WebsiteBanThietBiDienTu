@@ -11,6 +11,15 @@ import LoginPage from "../Pages/accountPage/LoginPage";
 import RegisterPage from "../Pages/accountPage/RegisterPage";
 import AdminLayout from "../Layout/AdminLayout";
 import NotFound from "../Pages/common/NotFound";
+import BadRequest from "../Pages/common/BadRequest";
+import Dashboard from "../Pages/adminPage/Dashboard";
+import CategoryManagement from "../Pages/adminPage/manage/CategoryManagement";
+import BranchManagement from "../Pages/adminPage/manage/BranchManagement";
+import SerieManagement from "../Pages/adminPage/manage/SerieManagement";
+import CartManagement from "../Pages/adminPage/manage/CartManagement";
+import FeedbackManagement from "../Pages/adminPage/manage/FeedbackManagement";
+import UserManagement from "../Pages/adminPage/manage/UserManagement";
+import DiscountManagement from "../Pages/adminPage/manage/DiscountManagement";
 
 const Router = () => {
   return (
@@ -177,11 +186,19 @@ const Router = () => {
         </Route>
         <Route path="/admin" element={<AdminLayout />}>
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/category" element={<CategoryManagement />} />
+          <Route path="/admin/branch" element={<BranchManagement />} />
+          <Route path="/admin/serie" element={<SerieManagement />} />
+          <Route path="/admin/cart" element={<CartManagement/>} />
+          <Route path="/admin/discount" element={<DiscountManagement />} />
+          <Route path="/admin/user" element={<UserManagement />} />
+          <Route path="/admin/feedback" element={<FeedbackManagement />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="400" element={<NotFound />} />
+        <Route path="400" element={<BadRequest />} />
       </Routes>
     </BrowserRouter>
   );

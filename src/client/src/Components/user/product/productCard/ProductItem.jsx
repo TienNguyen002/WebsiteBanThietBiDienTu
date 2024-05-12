@@ -62,7 +62,7 @@ const ProductItem = (props) => {
               </div>
             )}
           </div>
-
+          <p className="product-filter-line"></p>
           <h3 className="product-box-detail-name">{name} </h3>
           <div className="product-box-detail-color">
             {color.map((item, index) => (
