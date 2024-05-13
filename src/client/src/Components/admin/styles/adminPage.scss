@@ -171,3 +171,25 @@
     }
   }
 }
+
+/*=========== Search Input ===========*/
+.management-action {
+  display: flex;
+  align-items: center;
+  &-search {
+    width: 200px;
+  }
+  &-add {
+    margin-left: 8px;
+  }
+}
+
+/*=========== Filter Dropdown ===========*/
+.filter-dropdown {
+  padding: 8px;
+  &-reset {
+    width: 90;
+    margin-top: 8px;
+    margin-left: 5px;
+  }
+}

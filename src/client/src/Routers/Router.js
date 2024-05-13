@@ -20,6 +20,7 @@ import CartManagement from "../Pages/adminPage/manage/CartManagement";
 import FeedbackManagement from "../Pages/adminPage/manage/FeedbackManagement";
 import UserManagement from "../Pages/adminPage/manage/UserManagement";
 import DiscountManagement from "../Pages/adminPage/manage/DiscountManagement";
+import CategoryEdit from "../Pages/adminPage/edit/CategoryEdit";
 
 const Router = () => {
   return (
@@ -39,8 +40,8 @@ const Router = () => {
               />
             }
           />
-          <Route
-            path="/sale/:category"
+            <Route
+              path="/sale/:category"
             element={
               <MorePage
                 isSale={true}
@@ -49,9 +50,9 @@ const Router = () => {
                 isTop={false}
               />
             }
-          />
-          <Route
-            path="/sale/:category/:branch"
+            />
+            <Route
+              path="/sale/:category/:branch"
             element={
               <BranchPage
                 isSale={true}
@@ -61,8 +62,8 @@ const Router = () => {
               />
             }
           />
-          <Route
-            path="/high-rating"
+            <Route
+              path="/high-rating"
             element={
               <ListPage
                 isSale={false}
@@ -71,9 +72,9 @@ const Router = () => {
                 isTop={false}
               />
             }
-          />
-          <Route
-            path="/high-rating/:category"
+            />
+            <Route
+              path="/high-rating/:category"
             element={
               <MorePage
                 isSale={false}
@@ -82,9 +83,9 @@ const Router = () => {
                 isTop={false}
               />
             }
-          />
-          <Route
-            path="/high-rating/:category/:branch"
+            />
+            <Route
+              path="/high-rating/:category/:branch"
             element={
               <BranchPage
                 isSale={false}
@@ -93,7 +94,7 @@ const Router = () => {
                 isTop={false}
               />
             }
-          />
+            />
           <Route
             path="/new"
             element={
@@ -116,8 +117,8 @@ const Router = () => {
               />
             }
           />
-          <Route
-            path="/new/:category/:branch"
+            <Route
+              path="/new/:category/:branch"
             element={
               <BranchPage
                 isSale={false}
@@ -126,7 +127,7 @@ const Router = () => {
                 isTop={false}
               />
             }
-          />
+            />
           <Route
             path="/top"
             element={
@@ -149,8 +150,8 @@ const Router = () => {
               />
             }
           />
-          <Route
-            path="/top/:category/:branch"
+            <Route
+              path="/top/:category/:branch"
             element={
               <BranchPage
                 isSale={false}
@@ -159,7 +160,7 @@ const Router = () => {
                 isTop={true}
               />
             }
-          />
+            />
           <Route
             path="/list/:category"
             element={
@@ -188,9 +189,10 @@ const Router = () => {
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/category" element={<CategoryManagement />} />
+          <Route path="/admin/category/:id" element={<CategoryEdit />} />
           <Route path="/admin/branch" element={<BranchManagement />} />
           <Route path="/admin/serie" element={<SerieManagement />} />
-          <Route path="/admin/cart" element={<CartManagement/>} />
+          <Route path="/admin/cart" element={<CartManagement />} />
           <Route path="/admin/discount" element={<DiscountManagement />} />
           <Route path="/admin/user" element={<UserManagement />} />
           <Route path="/admin/feedback" element={<FeedbackManagement />} />

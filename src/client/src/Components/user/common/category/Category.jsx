@@ -19,6 +19,14 @@ const Category = (props) => {
     });
   };
 
+  const handleListLink = (urlSlug) => {
+    navigate(`${urlSlug}`);
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
+
   useEffect(() => {
     getAllCategory().then((data) => {
       if (data) {
@@ -59,7 +67,7 @@ const Category = (props) => {
                     <div
                       key={index}
                       className="home-category-component-item"
-                      onClick={() => handleLink(item.urlSlug)}
+                      onClick={() => handleListLink(item.urlSlug)}
                     >
                       <img
                         src={item.imageUrl}

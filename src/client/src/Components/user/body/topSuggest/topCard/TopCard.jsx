@@ -19,7 +19,9 @@ const TopCard = (props) => {
     if (isTop) {
       navigate("/top");
     }
-    navigate(`/detail/${urlSlug}`);
+    if (urlSlug !== "") {
+      navigate(`/detail/${urlSlug}`);
+    }
     window.scrollTo({
       top: 0,
       behavior: "instant",
@@ -76,7 +78,7 @@ const TopCard = (props) => {
             </>
           ) : null}
         </div>
-        <div onClick={handleLink} className="top-card-more">
+        <div onClick={() => handleLink("")} className="top-card-more">
           Xem tất cả
         </div>
       </div>

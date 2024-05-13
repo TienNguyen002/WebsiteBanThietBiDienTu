@@ -17,3 +17,29 @@
     }
   }
 }
+
+.action {
+  cursor: pointer;
+  display: flex;
+  gap: 20px;
+  &-edit {
+    color: var(--primary);
+  }
+  &-remove {
+    color: var(--danger);
+  }
+}
+
+/*=========== Admin Edit Form ===========*/
+.edit {
+  padding: 10px 20px;
+  &-title {
+    color: rgb(0, 102, 255);
+  }
+  &-form {
+    &-button {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

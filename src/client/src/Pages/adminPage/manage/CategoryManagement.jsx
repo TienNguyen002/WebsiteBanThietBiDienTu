@@ -1,97 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Table, Input, Button, Form, Space, Dropdown, Menu } from "antd";
-import { Search } from "lucide-react";
-import { DownOutlined } from "@ant-design/icons";
-
-const SearchInput = ({ searchQuery, setSearchQuery }) => {
-  const handleSearch = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  return (
-    <div style={{ display: "flex", alignItems: "center" }}>
-      <Input
-        value={searchQuery}
-        onChange={handleSearch}
-        placeholder="Search"
-        style={{ width: 200 }}
-      />
-      {/* <Button type="primary" icon={<Search />} style={{ marginLeft: 8 }}>
-        Search
-      </Button> */}
-      <Button type="primary" style={{ marginLeft: 8 }}>
-        Add
-      </Button>
-    </div>
-  );
-};
-
-const DataTable = ({ columns, dataSource, searchQuery }) => {
-  const filteredData = dataSource.filter((item) => {
-    return Object.values(item).some((value) =>
-      value.toString().toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  });
-
-  return (
-    <Table
-      columns={columns}
-      dataSource={filteredData}
-      pagination={{
-        pageSize: 10,
-        total: filteredData.length,
-        showSizeChanger: true,
-        showQuickJumper: true,
-        position: ["bottomCenter"],
-      }}
-    />
-  );
-};
+import React, { useState } from "react";
+import { Form, Space } from "antd";
+import SearchInput from "../../../Components/admin/management/SearchInput";
+import DataTable from "../../../Components/admin/management/DataTable";
+import { getColumnFilterProps } from "../../../Common/tableFunction";
+import { Eye, Pencil, Trash } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import "../../../styles/adminLayout.scss";
 
 const CategoryManagement = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const navigate = useNavigate();
 
-  const getColumnFilterProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8 }}>
-        <Dropdown
-          overlay={
-            <Menu
-              items={dataSource.map((item) => ({
-                label: item[dataIndex],
-                key: item[dataIndex],
-              }))}
-              onClick={({ key }) => {
-                setSelectedKeys([key]);
-                confirm();
-              }}
-            />
-          }
-        >
-          <Button>
-            {selectedKeys.length > 0 ? selectedKeys[0] : "Select"}{" "}
-            <DownOutlined />
-          </Button>
-        </Dropdown>
-        <Button onClick={clearFilters} style={{ width: 90, marginTop: 8 }}>
-          Reset
-        </Button>
-      </div>
-    ),
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
-        : "",
-    render: (text) => <a>{text}</a>,
-  });
+  const handleLink = (link) => {
+    navigate(link);
+  };
 
   const [dataSource, setDataSource] = useState([
     {
@@ -110,32 +34,41 @@ const CategoryManagement = () => {
 
   const columns = [
     {
-      title: "Name",
+      title: "Hình",
       dataIndex: "name",
       key: "name",
       sorter: (a, b) => a.name - b.name,
     },
     {
-      title: "Age",
+      title: "Tên danh mục",
       dataIndex: "age",
       key: "age",
       sorter: (a, b) => a.age - b.age,
     },
+    // {
+    //   title: "Address",
+    //   dataIndex: "address",
+    //   key: "address",
+    //   sorter: (a, b) => a.address - b.address,
+    //   ...getColumnFilterProps("address", dataSource),
+    // },
     {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-      sorter: (a, b) => a.address - b.address,
-      ...getColumnFilterProps("address"),
-    },
-    {
-      title: "Action",
+      title: "Chức năng",
       key: "operation",
       fixed: "right",
       render: (_, record) => (
         <Space size="middle">
-          <a>Invite {record.name}</a>
-          <a>Delete</a>
+          <div className="action">
+            <Eye onClick={() => handleLink(`${record.key}`)} />
+            <Pencil
+              className="action-edit"
+              onClick={() => handleLink(`${record.key}`)}
+            />
+            <Trash
+              className="action-remove"
+              onClick={() => handleLink(`${record.key}`)}
+            />
+          </div>
         </Space>
       ),
     },
@@ -156,6 +89,10 @@ const CategoryManagement = () => {
             columns={columns}
             dataSource={dataSource}
             searchQuery={searchQuery}
+            page={page}
+            pageSize={pageSize}
+            setPage={setPage}
+            setPageSize={setPageSize}
           />
         </Form>
       </div>
