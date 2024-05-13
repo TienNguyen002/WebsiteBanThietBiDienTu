@@ -1,31 +1,55 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Table, Dropdown, Menu, Input, Button, Form, Space, Tag } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import React, { useState, useEffect } from "react";
+import { Table, Input, Button, Form, Space, Dropdown, Menu } from "antd";
 import { Search } from "lucide-react";
+import { DownOutlined } from "@ant-design/icons";
+
+const SearchInput = ({ searchQuery, setSearchQuery }) => {
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  return (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      <Input
+        value={searchQuery}
+        onChange={handleSearch}
+        placeholder="Search"
+        style={{ width: 200 }}
+      />
+      {/* <Button type="primary" icon={<Search />} style={{ marginLeft: 8 }}>
+        Search
+      </Button> */}
+      <Button type="primary" style={{ marginLeft: 8 }}>
+        Add
+      </Button>
+    </div>
+  );
+};
+
+const DataTable = ({ columns, dataSource, searchQuery }) => {
+  const filteredData = dataSource.filter((item) => {
+    return Object.values(item).some((value) =>
+      value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  });
+
+  return (
+    <Table
+      columns={columns}
+      dataSource={filteredData}
+      pagination={{
+        pageSize: 10,
+        total: filteredData.length,
+        showSizeChanger: true,
+        showQuickJumper: true,
+        position: ["bottomCenter"],
+      }}
+    />
+  );
+};
 
 const CategoryManagement = () => {
-  const [searchText, setSearchText] = useState("");
-  const [searchedColumn, setSearchedColumn] = useState("");
-  const [bottom] = useState("bottomCenter");
-
-  const handleSearch = (selectedKeys, confirm) => {
-    confirm();
-    setSearchText(selectedKeys[0]);
-    setSearchedColumn(selectedKeys[0]);
-  };
-
-  const handleReset = (clearFilters) => {
-    clearFilters();
-    setSearchText("");
-  };
-
-  const handleTableChange = (pagination, filters, sorter) => {
-    console.log("pagination", pagination);
-    console.log("filters", filters);
-    console.log("sorter", sorter);
-  };
-
-  let searchInput;
+  const [searchQuery, setSearchQuery] = useState("");
 
   const getColumnFilterProps = (dataIndex) => ({
     filterDropdown: ({
@@ -54,13 +78,6 @@ const CategoryManagement = () => {
             <DownOutlined />
           </Button>
         </Dropdown>
-        <Button
-          type="primary"
-          onClick={confirm}
-          style={{ width: 90, marginRight: 8, marginTop: 8 }}
-        >
-          Ok
-        </Button>
         <Button onClick={clearFilters} style={{ width: 90, marginTop: 8 }}>
           Reset
         </Button>
@@ -76,66 +93,7 @@ const CategoryManagement = () => {
     render: (text) => <a>{text}</a>,
   });
 
-  const getColumnSearchProps = (dataIndex) => ({
-    filterDropdown: ({
-      setSelectedKeys,
-      selectedKeys,
-      confirm,
-      clearFilters,
-    }) => (
-      <div style={{ padding: 8 }}>
-        <Input
-          ref={(node) => {
-            searchInput = node;
-          }}
-          placeholder={`Search ${dataIndex}`}
-          value={selectedKeys[0]}
-          onChange={(e) =>
-            setSelectedKeys(e.target.value ? [e.target.value] : [])
-          }
-          onPressEnter={() => handleSearch(selectedKeys, confirm)}
-          style={{ width: 188, marginBottom: 8, display: "block" }}
-        />
-        <Button
-          type="primary"
-          onClick={() => handleSearch(selectedKeys, confirm)}
-          // icon={<Search />}
-          size="small"
-          style={{ width: 90, marginRight: 8 }}
-        >
-          Search
-        </Button>
-        <Button
-          onClick={() => handleReset(clearFilters)}
-          size="small"
-          style={{ width: 90 }}
-        >
-          Reset
-        </Button>
-      </div>
-    ),
-    filterIcon: (filtered) => (
-      <Search
-        filtered={filtered}
-        style={{ color: filtered ? "#1890ff" : undefined }}
-      />
-    ),
-    onFilterDropdownVisibleChange: (visible) => {
-      if (visible) {
-        setTimeout(() => searchInput.focus(), 100);
-      }
-    },
-    onFilter: (value, record) =>
-      record[dataIndex]
-        ? record[dataIndex]
-            .toString()
-            .toLowerCase()
-            .includes(value.toLowerCase())
-        : "",
-    render: (text) => <a>{text}</a>,
-  });
-
-  const dataSource = [
+  const [dataSource, setDataSource] = useState([
     {
       key: 1,
       name: "123",
@@ -148,7 +106,7 @@ const CategoryManagement = () => {
       age: 42,
       address: "123 Downing Street",
     },
-  ];
+  ]);
 
   const columns = [
     {
@@ -156,7 +114,6 @@ const CategoryManagement = () => {
       dataIndex: "name",
       key: "name",
       sorter: (a, b) => a.name - b.name,
-      ...getColumnSearchProps("name"),
     },
     {
       title: "Age",
@@ -175,7 +132,6 @@ const CategoryManagement = () => {
       title: "Action",
       key: "operation",
       fixed: "right",
-      // width: 100,
       render: (_, record) => (
         <Space size="middle">
           <a>Invite {record.name}</a>
@@ -186,30 +142,24 @@ const CategoryManagement = () => {
   ];
 
   return (
-    <>
-      <div className="management">
-        <div className="management-top">
-          <h1 className="management-top-title">Quản lý danh mục</h1>
-          <p>Thêm mới</p>
-        </div>
-        <div className="management-table">
-          <Form>
-            <Table
-              columns={columns}
-              dataSource={dataSource}
-              onChange={handleTableChange}
-              pagination={{
-                pageSize: 10,
-                total: dataSource.length,
-                showSizeChanger: true,
-                showQuickJumper: true,
-                position: [bottom],
-              }}
-            />
-          </Form>
-        </div>
+    <div className="management">
+      <div className="management-top">
+        <h1 className="management-top-title">Quản lý danh mục</h1>
+        <SearchInput
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
       </div>
-    </>
+      <div className="management-table">
+        <Form>
+          <DataTable
+            columns={columns}
+            dataSource={dataSource}
+            searchQuery={searchQuery}
+          />
+        </Form>
+      </div>
+    </div>
   );
 };
 
