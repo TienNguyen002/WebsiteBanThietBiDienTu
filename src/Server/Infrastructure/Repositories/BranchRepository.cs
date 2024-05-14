@@ -33,6 +33,24 @@ namespace Infrastructure.Repositories
         }
 
         /// <summary>
+        /// Get All Branches
+        /// </summary>
+        /// <returns> A List Of Branches </returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task<IList<Branch>> GetAllBranchesAsync()
+        {
+            return await _context.Set<Branch>()
+               .Include(c => c.Series)
+               .ThenInclude(s => s.Products)
+               .ToListAsync();
+        }
+
+        public Task<Branch> GetBranchByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
         /// Get Branch By Slug
         /// </summary>
         /// <param name="slug"> UrlSlug want to get Branch </param>

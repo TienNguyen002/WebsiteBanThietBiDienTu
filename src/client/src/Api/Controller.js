@@ -5,6 +5,10 @@ export function getAllCategory() {
   return get_api(process.env.REACT_APP_API_ALL_CATEGORIES);
 }
 
+export function getAllBranch() {
+  return get_api(process.env.REACT_APP_API_ALL_BRANCHES);
+}
+
 export function getAllSale() {
   return get_api(process.env.REACT_APP_API_ALL_SALES);
 }
@@ -28,9 +32,7 @@ export function getProductList(limit, category) {
 }
 
 export function getBranchList(limit, category) {
-  return get_api(
-    process.env.REACT_APP_API_BRANCH_CATEGORY + `${limit}/${category}`
-  );
+  return get_api(process.env.REACT_APP_API_BRANCH + `${limit}/${category}`);
 }
 
 export function getPagedProduct(payload) {
@@ -48,4 +50,8 @@ export function getProductFilter(payload) {
     process.env.REACT_APP_API_ITEM_FILTER +
       `?${convertObjToQueryString(payload)}`
   );
+}
+
+export function getCategoryById(id) {
+  return get_api(process.env.REACT_APP_API_CATEGORY + `${id}`);
 }

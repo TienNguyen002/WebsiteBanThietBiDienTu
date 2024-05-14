@@ -57,7 +57,7 @@ const CategoryManagement = () => {
             <Eye onClick={() => handleLink(`${record.id}`)} />
             <Pencil
               className="action-edit"
-              onClick={() => handleLink(`${record.id}`)}
+              onClick={() => handleLink(`edit/${record.id}`)}
             />
             <Trash
               className="action-remove"
@@ -76,6 +76,7 @@ const CategoryManagement = () => {
         <SearchInput
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          link={"edit"}
         />
       </div>
       <div className="management-table">

@@ -72,7 +72,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<CategoryDTO> GetCategoryById(int id)
         {
-            var category = await _repository.GetByIdWithInclude(id, c => c.Series);
+            var category = await _repository.GetCategoryById(id);
             return _mapper.Map<CategoryDTO>(category);
         }
 

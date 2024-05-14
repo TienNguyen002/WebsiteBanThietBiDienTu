@@ -60,7 +60,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<IList<BranchDTO>> GetAllBranches()
         {
-            var branches = await _repository.GetAllWithInclude(b => b.Series);
+            var branches = await _repository.GetAllBranchesAsync();
             return _mapper.Map<IList<BranchDTO>>(branches);
         }
 

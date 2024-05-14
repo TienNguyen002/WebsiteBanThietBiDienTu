@@ -12,6 +12,8 @@ namespace Api.Mapsters
         public void Register(TypeAdapterConfig config)
         {
             config.NewConfig<Branch, BranchProductDTO>();
+            config.NewConfig<Branch, BranchDTO>()
+                .Map(desc => desc.ProductCount, src => src.Series.Sum(s => s.Products.Count));
 
             config.NewConfig<Serie, SerieDTO>();
 
@@ -21,7 +23,8 @@ namespace Api.Mapsters
                 .Map(desc => desc.Serie, src => src.Serie);
 
             config.NewConfig<Category, CategoryDTO>()
-                .Map(dest => dest.ProductCount, src => src.Series.Sum(serie => serie.Products.Count));
+                .Map(desc => desc.ProductCount, src => src.Series.Sum(s => s.Products.Count))
+                .Map(desc => desc.Products, src => src.Series.Select(s => s.Products));
         }
     }
 }

@@ -45,6 +45,15 @@ namespace Infrastructure.Repositories
                 .ToListAsync();
         }
 
+        public async Task<Category> GetCategoryById(int id)
+        {
+            return await _context.Set<Category>()
+                .Include(c => c.Series)
+                .ThenInclude(s => s.Products)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
         /// <summary>
         /// Get Category By Slug
         /// </summary>

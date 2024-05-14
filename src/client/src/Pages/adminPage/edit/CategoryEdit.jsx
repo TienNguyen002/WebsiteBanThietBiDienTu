@@ -1,21 +1,33 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import "../../../styles/adminLayout.scss";
+import { getCategoryById } from "../../../Api/Controller";
+import { useParams } from "react-router-dom";
+import { Input } from "antd";
 
 const CategoryEdit = () => {
+  const initialState = {
+    id: 0,
+    name: "",
+    urlSlug: "",
+    imageUrl: "",
+  };
+
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [category, setCategory] = useState(initialState);
   const imageRef = useRef(null);
   const editImageFrame =
     "https://www.digitalcitizen.life/wp-content/uploads/2020/10/photo_gallery-1-596x225.jpg";
 
-  const initialState = {
-    id: 0,
-    boldTitle: "",
-    title: "",
-    urlSlug: "",
-    description: "",
-    imageUrl: "",
-    Locale: "",
-  };
+  let { id } = useParams();
+  id = id ?? 0;
+
+  useEffect(() => {
+    getCategoryById(id).then((data) => {
+      if (data) {
+        setCategory(data);
+      } else setCategory([]);
+    });
+  }, []);
 
   const goBack = () => {
     window.history.go(-1);
@@ -47,12 +59,17 @@ const CategoryEdit = () => {
   return (
     <>
       <div className="edit">
-        <h1 className="edit-title">Chỉnh sửa danh mục</h1>
+        {id === 0 ? (
+          <h1 className="edit-title">Thêm danh mục</h1>
+        ) : (
+          <h1 className="edit-title">Chỉnh sửa danh mục</h1>
+        )}
+
         <form className="edit-form">
           <div className="gallery">
             <label htmlFor="uploadGallery">
               <img
-                src={previewUrl || /*banner.imageUrl*/ editImageFrame}
+                src={previewUrl || category.imageUrl || editImageFrame}
                 className="img-glalery z-20"
               />
               <input
@@ -68,11 +85,10 @@ const CategoryEdit = () => {
               />
             </label>
           </div>
-          <input></input>
-          <input></input>
+          <Input value={category.name}></Input>
           <div className="edit-form-button">
             <p onClick={goBack}>Quay lại</p>
-            <p>Lưu</p>
+            <h1>{id === 0 ? "Thêm" : "Chỉnh sửa"}</h1>
           </div>
         </form>
       </div>

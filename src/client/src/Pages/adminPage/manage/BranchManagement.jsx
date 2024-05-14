@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Space } from "antd";
 import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
-import { getColumnFilterProps } from "../../../Common/tableFunction";
 import { Eye, Pencil, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { getAllBranch } from "../../../Api/Controller";
 import "../../../styles/adminLayout.scss";
 
 const BranchManagement = () => {
+  const [branches, setBranches] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -17,50 +18,35 @@ const BranchManagement = () => {
     navigate(link);
   };
 
-  const [dataSource, setDataSource] = useState([
-    {
-      key: 1,
-      name: "123",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: 2,
-      name: "456",
-      age: 42,
-      address: "123 Downing Street",
-    },
-  ]);
+  useEffect(() => {
+    getAllBranch().then((data) => {
+      if (data) {
+        setBranches(data);
+      } else setBranches([]);
+    });
+  }, []);
 
   const columns = [
     {
       title: "Hình",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "imageUrl",
+      key: "imageUrl",
+      render: (imageUrl) => <img src={imageUrl} className="item-image" />,
       width: 400,
-      sorter: (a, b) => a.name - b.name,
     },
     {
       title: "Tên thương hiệu",
-      dataIndex: "age",
-      key: "age",
+      dataIndex: "name",
+      key: "name",
       width: 400,
-      sorter: (a, b) => a.age - b.age,
     },
     {
       title: "Số sản phẩm thuộc thương hiệu",
-      dataIndex: "age",
-      key: "age",
+      dataIndex: "productCount",
+      key: "productCount",
       width: 400,
-      sorter: (a, b) => a.age - b.age,
+      sorter: (a, b) => a.productCount - b.productCount,
     },
-    // {
-    //   title: "Address",
-    //   dataIndex: "address",
-    //   key: "address",
-    //   sorter: (a, b) => a.address - b.address,
-    //   ...getColumnFilterProps("address", dataSource),
-    // },
     {
       title: "Chức năng",
       key: "operation",
@@ -68,14 +54,14 @@ const BranchManagement = () => {
       render: (_, record) => (
         <Space size="middle">
           <div className="action">
-            <Eye onClick={() => handleLink(`${record.key}`)} />
+            <Eye onClick={() => handleLink(`${record.id}`)} />
             <Pencil
               className="action-edit"
-              onClick={() => handleLink(`${record.key}`)}
+              onClick={() => handleLink(`${record.id}`)}
             />
             <Trash
               className="action-remove"
-              onClick={() => handleLink(`${record.key}`)}
+              onClick={() => handleLink(`${record.id}`)}
             />
           </div>
         </Space>
@@ -96,7 +82,7 @@ const BranchManagement = () => {
         <Form>
           <DataTable
             columns={columns}
-            dataSource={dataSource}
+            dataSource={branches}
             searchQuery={searchQuery}
             page={page}
             pageSize={pageSize}
