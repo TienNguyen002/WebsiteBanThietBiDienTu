@@ -33,6 +33,19 @@ namespace Infrastructure.Repositories
         }
 
         /// <summary>
+        /// Get All Categories
+        /// </summary>
+        /// <returns> A List Of Categories </returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task<IList<Category>> GetAllCategories()
+        {
+            return await _context.Set<Category>()
+                .Include(c => c.Series)
+                .ThenInclude(s => s.Products)
+                .ToListAsync();
+        }
+
+        /// <summary>
         /// Get Category By Slug
         /// </summary>
         /// <param name="slug"> UrlSlug want to get Category </param>

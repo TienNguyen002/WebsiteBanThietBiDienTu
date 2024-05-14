@@ -3,6 +3,7 @@ using Domain.DTO.Branch;
 using Domain.DTO.Category;
 using Domain.DTO.Color;
 using Domain.DTO.Product;
+using Domain.DTO.Serie;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Infrastructure.Contexts;
@@ -146,6 +147,10 @@ namespace Infrastructure.Repositories
             {
                 productQuery = productQuery.Where(p => p.Serie.Branch.UrlSlug == query.Branch);
             }
+            if (!string.IsNullOrWhiteSpace(query.Serie))
+            {
+                productQuery = productQuery.Where(p => p.Serie.UrlSlug == query.Serie);
+            }
             if (!string.IsNullOrWhiteSpace(query.SortOrder))
             {
                 switch (query.SortOrder.ToUpper())
@@ -259,11 +264,22 @@ namespace Infrastructure.Repositories
               .DistinctBy(c => c.Id)
               .ToList();
 
+            var series = products.Select(p => new ShortSerieDTO
+            {
+                Id = p.Serie.Id,
+                Name = p.Serie.Name,
+                UrlSlug = p.Serie.UrlSlug,
+                // Map other relevant properties
+            })
+           .DistinctBy(s => s.Id)
+           .ToList();
+
             return new ProductFilter
             {
                 Branches = branches,
                 Categories = categories,
-                Colors = colors
+                Colors = colors,
+                Series = series,
             };
         }
     }

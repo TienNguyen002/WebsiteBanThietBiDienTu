@@ -60,7 +60,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<IList<CategoryDTO>> GetAllCategories()
         {
-            var categories = await _repository.GetAllWithInclude(c => c.Series);
+            var categories = await _repository.GetAllCategories();
             return _mapper.Map<IList<CategoryDTO>>(categories);
         }
 

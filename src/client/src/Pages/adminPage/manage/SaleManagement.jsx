@@ -7,7 +7,7 @@ import { Eye, Pencil, Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/adminLayout.scss";
 
-const SerieManagement = () => {
+const SaleManagement = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
@@ -34,37 +34,21 @@ const SerieManagement = () => {
 
   const columns = [
     {
-      title: "Tên dòng sản phẩm",
+      title: "Hình",
       dataIndex: "name",
       key: "name",
       width: 400,
       sorter: (a, b) => a.name - b.name,
     },
     {
-      title: "Mô tả",
+      title: "Tên thương hiệu",
       dataIndex: "age",
       key: "age",
       width: 400,
       sorter: (a, b) => a.age - b.age,
     },
     {
-      title: "Danh mục",
-      dataIndex: "age",
-      key: "age",
-      width: 400,
-      sorter: (a, b) => a.age - b.age,
-      ...getColumnFilterProps("age", dataSource),
-    },
-    {
-      title: "Thương hiệu",
-      dataIndex: "age",
-      key: "age",
-      width: 400,
-      sorter: (a, b) => a.age - b.age,
-      ...getColumnFilterProps("age", dataSource),
-    },
-    {
-      title: "Số sản phẩm thuộc dòng",
+      title: "Số sản phẩm thuộc thương hiệu",
       dataIndex: "age",
       key: "age",
       width: 400,
@@ -102,7 +86,7 @@ const SerieManagement = () => {
   return (
     <div className="management">
       <div className="management-top">
-        <h1 className="management-top-title">Quản lý sản phẩm</h1>
+        <h1 className="management-top-title">Quản lý ưu đãi</h1>
         <SearchInput
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -125,4 +109,4 @@ const SerieManagement = () => {
   );
 };
 
-export default SerieManagement;
+export default SaleManagement;

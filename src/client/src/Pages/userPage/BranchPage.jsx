@@ -6,14 +6,21 @@ import { useParams } from "react-router-dom";
 import { getProductFilter, getPagedProduct } from "../../Api/Controller";
 import NavigationBar from "../../Components/user/common/NavigationBar";
 import PageComponent from "../../Components/user/common/PageComponent";
+import Serie from "../../Components/user/common/Serie";
 
 const BranchPage = ({ isSale, isHighRating, isNew, isTop }) => {
   const param = useParams();
   let { category, branch } = param;
   const [colors, setColors] = useState();
+  const [series, setSeries] = useState();
   const [products, setProducts] = useState([]);
   const [metadata, setMetadata] = useState();
   const [naviBar, setNaviBar] = useState("");
+
+  const categoryName = products[0]?.category.name;
+  const categorySlug = products[0]?.category.urlSlug;
+  const branchName = products[0]?.branch.name;
+  const branchSlug = products[0]?.branch.urlSlug;
 
   const filterPayload = {
     isSale: isSale,
@@ -56,8 +63,10 @@ const BranchPage = ({ isSale, isHighRating, isNew, isTop }) => {
     getProductFilter(filterPayload).then((data) => {
       if (data) {
         setColors(data.colors);
+        setSeries(data.series);
       } else {
         setColors();
+        setSeries();
       }
     });
 
@@ -113,10 +122,21 @@ const BranchPage = ({ isSale, isHighRating, isNew, isTop }) => {
     }));
   };
 
+  console.log(series);
+
   return (
     <>
-      <NavigationBar title={naviBar} category={category} branch={branch} />
+      <NavigationBar
+        title={naviBar}
+        category={categoryName}
+        branch={branchName}
+        categorySlug={categorySlug}
+        branchSlug={branchSlug}
+      />
       <div className="list-page">
+        <div className="list-page-branch">
+          <Serie serie={series} />
+        </div>
         <div className="list-page-product">
           <div className="list-page-product-filter">
             <ProductFilter

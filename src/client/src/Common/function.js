@@ -16,7 +16,7 @@ export const convertDate = (inputDate) => {
 };
 
 export const splitUrl = (url) => {
-  url.split("/").slice(-3).join("/");
+  url.split("/").slice(-2).join("/");
 };
 
 export const convertObjToQueryString = function (obj) {

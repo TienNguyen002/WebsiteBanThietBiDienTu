@@ -68,8 +68,11 @@ const ProductDetail = () => {
     <>
       <NavigationBar
         category={category.name}
+        categorySlug={category.urlSlug}
         branch={branch.name}
+        branchSlug={branch.urlSlug}
         serie={serie.name}
+        serieSlug={serie.urlSlug}
         name={product.name}
       />
       {isVisibleLoading ? (

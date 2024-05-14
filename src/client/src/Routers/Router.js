@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import HomePage from "../Pages/userPage/HomePage";
 import ProductDetail from "../Pages/userPage/ProductDetail";
-import AdminPage from "../Pages/adminPage/AdminPage";
 import HomeLayout from "../Layout/HomeLayout";
 import MorePage from "../Pages/userPage/MorePage";
 import SearchPage from "../Pages/userPage/SearchPage";
@@ -21,6 +20,8 @@ import FeedbackManagement from "../Pages/adminPage/manage/FeedbackManagement";
 import UserManagement from "../Pages/adminPage/manage/UserManagement";
 import DiscountManagement from "../Pages/adminPage/manage/DiscountManagement";
 import CategoryEdit from "../Pages/adminPage/edit/CategoryEdit";
+import SaleManagement from "../Pages/adminPage/manage/SaleManagement";
+import SeriePage from "../Pages/userPage/SeriePage";
 
 const Router = () => {
   return (
@@ -29,168 +30,234 @@ const Router = () => {
         <Route path="/" element={<HomeLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/detail/:slug" element={<ProductDetail />} />
-          <Route
-            path="/sale"
-            element={
-              <ListPage
-                isSale={true}
-                isHighRating={false}
-                isNew={false}
-                isTop={false}
-              />
-            }
-          />
+          <Route path="/sale">
+            <Route
+              path="/sale"
+              element={
+                <ListPage
+                  isSale={true}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
+            />
             <Route
               path="/sale/:category"
-            element={
-              <MorePage
-                isSale={true}
-                isHighRating={false}
-                isNew={false}
-                isTop={false}
-              />
-            }
+              element={
+                <MorePage
+                  isSale={true}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
             />
             <Route
               path="/sale/:category/:branch"
-            element={
-              <BranchPage
-                isSale={true}
-                isHighRating={false}
-                isNew={false}
-                isTop={false}
-              />
-            }
-          />
+              element={
+                <BranchPage
+                  isSale={true}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
+            />
+            <Route
+              path="/sale/:category/:branch/:serie"
+              element={
+                <SeriePage
+                  isSale={true}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
+            />
+          </Route>
+          <Route path="/high-rating">
             <Route
               path="/high-rating"
-            element={
-              <ListPage
-                isSale={false}
-                isHighRating={true}
-                isNew={false}
-                isTop={false}
-              />
-            }
+              element={
+                <ListPage
+                  isSale={false}
+                  isHighRating={true}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
             />
             <Route
               path="/high-rating/:category"
-            element={
-              <MorePage
-                isSale={false}
-                isHighRating={true}
-                isNew={false}
-                isTop={false}
-              />
-            }
+              element={
+                <MorePage
+                  isSale={false}
+                  isHighRating={true}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
             />
             <Route
               path="/high-rating/:category/:branch"
-            element={
-              <BranchPage
-                isSale={false}
-                isHighRating={true}
-                isNew={false}
-                isTop={false}
-              />
-            }
+              element={
+                <BranchPage
+                  isSale={false}
+                  isHighRating={true}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
             />
-          <Route
-            path="/new"
-            element={
-              <ListPage
-                isSale={false}
-                isHighRating={false}
-                isNew={true}
-                isTop={false}
-              />
-            }
-          />
-          <Route
-            path="/new/:category"
-            element={
-              <MorePage
-                isSale={false}
-                isHighRating={false}
-                isNew={true}
-                isTop={false}
-              />
-            }
-          />
+            <Route
+              path="/high-rating/:category/:branch/:serie"
+              element={
+                <SeriePage
+                  isSale={false}
+                  isHighRating={true}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
+            />
+          </Route>
+          <Route path="/new">
+            <Route
+              path="/new"
+              element={
+                <ListPage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={true}
+                  isTop={false}
+                />
+              }
+            />
+            <Route
+              path="/new/:category"
+              element={
+                <MorePage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={true}
+                  isTop={false}
+                />
+              }
+            />
             <Route
               path="/new/:category/:branch"
-            element={
-              <BranchPage
-                isSale={false}
-                isHighRating={false}
-                isNew={true}
-                isTop={false}
-              />
-            }
+              element={
+                <BranchPage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={true}
+                  isTop={false}
+                />
+              }
             />
-          <Route
-            path="/top"
-            element={
-              <ListPage
-                isSale={false}
-                isHighRating={false}
-                isNew={false}
-                isTop={true}
-              />
-            }
-          />
-          <Route
-            path="/top/:category"
-            element={
-              <MorePage
-                isSale={false}
-                isHighRating={false}
-                isNew={false}
-                isTop={true}
-              />
-            }
-          />
+            <Route
+              path="/new/:category/:branch/:serie"
+              element={
+                <SeriePage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={true}
+                  isTop={false}
+                />
+              }
+            />
+          </Route>
+          <Route path="/top">
+            <Route
+              path="/top"
+              element={
+                <ListPage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={true}
+                />
+              }
+            />
+            <Route
+              path="/top/:category"
+              element={
+                <MorePage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={true}
+                />
+              }
+            />
             <Route
               path="/top/:category/:branch"
-            element={
-              <BranchPage
-                isSale={false}
-                isHighRating={false}
-                isNew={false}
-                isTop={true}
-              />
-            }
+              element={
+                <BranchPage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={true}
+                />
+              }
             />
-          <Route
-            path="/list/:category"
-            element={
-              <MorePage
-                isSale={false}
-                isHighRating={false}
-                isNew={false}
-                isTop={false}
-              />
-            }
-          />
-          <Route
-            path="/list/:category/:branch"
-            element={
-              <BranchPage
-                isSale={false}
-                isHighRating={false}
-                isNew={false}
-                isTop={false}
-              />
-            }
-          />
-          <Route path="/search" element={<SearchPage />} />
+            <Route
+              path="/top/:category/:branch/:serie"
+              element={
+                <SeriePage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={true}
+                />
+              }
+            />
+          </Route>
+          <Route path="/list">
+            <Route
+              path="/list/:category"
+              element={
+                <MorePage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
+            />
+            <Route
+              path="/list/:category/:branch"
+              element={
+                <BranchPage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
+            />
+            <Route
+              path="/list/:category/:branch/:serie"
+              element={
+                <SeriePage
+                  isSale={false}
+                  isHighRating={false}
+                  isNew={false}
+                  isTop={false}
+                />
+              }
+            />
+          </Route>
         </Route>
+        <Route path="/search" element={<SearchPage />} />
         <Route path="/admin" element={<AdminLayout />}>
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={<Dashboard />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/category" element={<CategoryManagement />} />
           <Route path="/admin/category/:id" element={<CategoryEdit />} />
           <Route path="/admin/branch" element={<BranchManagement />} />
+          <Route path="/admin/sale" element={<SaleManagement />} />
           <Route path="/admin/serie" element={<SerieManagement />} />
           <Route path="/admin/cart" element={<CartManagement />} />
           <Route path="/admin/discount" element={<DiscountManagement />} />

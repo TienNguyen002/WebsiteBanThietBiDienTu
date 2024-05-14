@@ -1,4 +1,7 @@
-﻿using Domain.DTO.Color;
+﻿using Domain.DTO.Branch;
+using Domain.DTO.Category;
+using Domain.DTO.Color;
+using Domain.DTO.Serie;
 
 namespace Domain.DTO.Product
 {
@@ -14,5 +17,8 @@ namespace Domain.DTO.Product
         public int Price { get; set; }
         public int OrPrice { get; set; }
         public decimal Rating { get; set; }
+        public ShortSerieDTO Serie { get; set; } = null!;
+        public CategoryDTO Category { get; set; } = null!;
+        public BranchDTO Branch { get; set; } = null!;
     }
 }

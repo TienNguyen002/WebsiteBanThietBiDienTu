@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Branch from "../../Components/user/common/Branch";
 import ProductFilter from "../../Components/user/product/productFilter/ProductFilter";
 import ProductColumn from "../../Components/user/product/productColumn/ProductColumn";
 import "../../styles/homeLayout.scss";
@@ -8,10 +7,9 @@ import { getProductFilter, getPagedProduct } from "../../Api/Controller";
 import NavigationBar from "../../Components/user/common/NavigationBar";
 import PageComponent from "../../Components/user/common/PageComponent";
 
-const MorePage = ({ isSale, isHighRating, isNew, isTop }) => {
+const SeriePage = ({ isSale, isHighRating, isNew, isTop }) => {
   const param = useParams();
-  let { category } = param;
-  const [branches, setBranches] = useState();
+  let { category, branch, serie } = param;
   const [colors, setColors] = useState();
   const [products, setProducts] = useState([]);
   const [metadata, setMetadata] = useState();
@@ -19,6 +17,10 @@ const MorePage = ({ isSale, isHighRating, isNew, isTop }) => {
 
   const categoryName = products[0]?.category.name;
   const categorySlug = products[0]?.category.urlSlug;
+  const branchName = products[0]?.branch.name;
+  const branchSlug = products[0]?.branch.urlSlug;
+  const serieName = products[0]?.serie.name;
+  const serieSlug = products[0]?.serie.urlSlug;
 
   const filterPayload = {
     isSale: isSale,
@@ -26,6 +28,7 @@ const MorePage = ({ isSale, isHighRating, isNew, isTop }) => {
     isNew: isNew,
     isTop: isTop,
     category: category,
+    branch: branch,
   };
 
   const [payload, setPayload] = useState({
@@ -35,7 +38,8 @@ const MorePage = ({ isSale, isHighRating, isNew, isTop }) => {
     isTop: isTop,
     sortOrder: "",
     category: category,
-    branch: "",
+    branch: branch,
+    serie: serie,
     minPrice: 50000,
     maxPrice: 50000000,
     rating: 0,
@@ -59,10 +63,8 @@ const MorePage = ({ isSale, isHighRating, isNew, isTop }) => {
     }
     getProductFilter(filterPayload).then((data) => {
       if (data) {
-        setBranches(data.branches);
         setColors(data.colors);
       } else {
-        setBranches();
         setColors();
       }
     });
@@ -87,13 +89,6 @@ const MorePage = ({ isSale, isHighRating, isNew, isTop }) => {
       ...prevPayload,
       minPrice,
       maxPrice,
-    }));
-  };
-
-  const handleBranchChange = (branch) => {
-    setPayload((prevPayload) => ({
-      ...prevPayload,
-      branch,
     }));
   };
 
@@ -132,19 +127,18 @@ const MorePage = ({ isSale, isHighRating, isNew, isTop }) => {
         title={naviBar}
         category={categoryName}
         categorySlug={categorySlug}
+        branch={branchName}
+        branchSlug={branchSlug}
+        serie={serieName}
+        serieSlug={serieSlug}
       />
       <div className="list-page">
-        <div className="list-page-branch">
-          <Branch sale={true} branch={branches} />
-        </div>
         <div className="list-page-product">
           <div className="list-page-product-filter">
             <ProductFilter
               hasBranch={false}
-              branches={branches}
               colors={colors}
               onMinMaxFilterChange={handleMinMaxChange}
-              onBranchFilterChange={handleBranchChange}
               onRatingFilterChange={handleRatingChange}
               onColorFilterChange={handleColorChange}
             />
@@ -165,4 +159,4 @@ const MorePage = ({ isSale, isHighRating, isNew, isTop }) => {
   );
 };
 
-export default MorePage;
+export default SeriePage;

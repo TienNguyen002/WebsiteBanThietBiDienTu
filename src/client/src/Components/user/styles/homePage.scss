@@ -287,10 +287,12 @@
 .home-banner {
   margin: 30px 13% 0;
   text-align: center;
-  background: linear-gradient(57deg,
-      rgba(255, 255, 255, 1) 0%,
-      rgba(232, 68, 118, 1) 52%,
-      rgba(205, 24, 79, 1) 100%);
+  background: linear-gradient(
+    57deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(232, 68, 118, 1) 52%,
+    rgba(205, 24, 79, 1) 100%
+  );
   padding: 30px;
   height: 150px;
   border-radius: 1em;
@@ -399,6 +401,41 @@
   }
 }
 
+/*=========== Serie ===========*/
+.serie-list {
+  margin: 10px 15% 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 5px;
+  justify-content: space-around;
+  justify-items: center;
+  width: 80%;
+  height: fit-content;
+
+  &-item {
+    margin-top: 10px;
+    background: var(--white);
+    border-radius: 1em;
+    border: 1px solid var(--black);
+    align-items: center;
+    padding: 10px 20px;
+    width: fit-content;
+    cursor: pointer;
+    color: var(--red);
+    font-weight: bold;
+    text-transform: uppercase;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+  }
+  &-item:hover {
+    width: fit-content;
+    transition: scale 0.4s ease-in-out;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgb(160, 160, 160);
+  }
+}
+
 //Icon
 .category-icon {
   width: 30px;
@@ -408,18 +445,20 @@
 /*=========== Navigation Bar ===========*/
 .navigation-bar {
   background: var(--white);
-
   &-item {
     margin-left: 10%;
     display: flex;
     align-items: center;
     text-align: center;
     cursor: pointer;
-
     &-home {
       color: var(--light-red);
       text-decoration: none;
       font-weight: bold;
+    }
+    &-link:hover {
+      color: var(--light-red);
+      font-weight: 400;
     }
   }
 }

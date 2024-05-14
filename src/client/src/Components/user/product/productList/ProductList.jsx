@@ -26,7 +26,7 @@ const ProductList = (props) => {
   }, []);
 
   const handleLink = () => {
-    navigate(`/${category}`);
+    navigate(`/list/${category}`);
     window.scrollTo({
       top: 0,
       behavior: "instant",
@@ -34,7 +34,7 @@ const ProductList = (props) => {
   };
 
   const handleBranchLink = (urlSlug) => {
-    navigate(`/${category}/${urlSlug}`);
+    navigate(`/list/${category}/${urlSlug}`);
     window.scrollTo({
       top: 0,
       behavior: "instant",

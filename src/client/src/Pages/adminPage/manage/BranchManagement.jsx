@@ -37,12 +37,21 @@ const BranchManagement = () => {
       title: "Hình",
       dataIndex: "name",
       key: "name",
+      width: 400,
       sorter: (a, b) => a.name - b.name,
     },
     {
       title: "Tên thương hiệu",
       dataIndex: "age",
       key: "age",
+      width: 400,
+      sorter: (a, b) => a.age - b.age,
+    },
+    {
+      title: "Số sản phẩm thuộc thương hiệu",
+      dataIndex: "age",
+      key: "age",
+      width: 400,
       sorter: (a, b) => a.age - b.age,
     },
     // {

@@ -9,6 +9,7 @@ namespace Domain.DTO.Serie
     public class SerieDTO
     {
         public string Name { get; set; } = null!;
+        public string UrlSlug { get; set; } = null!;
         public string Description { get; set; } = null!;
         public CategoryProductDTO Category { get; set; }
         public BranchProductDTO Branch { get; set; }
