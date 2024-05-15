@@ -1,8 +1,11 @@
-﻿namespace Domain.DTO.Category
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Domain.DTO.Category
 {
     public class CategoryEditModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public IFormFile? ImageFile { get; set; }
     }
 }

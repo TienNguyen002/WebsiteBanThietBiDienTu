@@ -255,7 +255,6 @@ const Router = () => {
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/category" element={<CategoryManagement />} />
-          <Route path="/admin/category/edit/:id" element={<CategoryEdit />} />
           <Route path="/admin/branch" element={<BranchManagement />} />
           <Route path="/admin/sale" element={<SaleManagement />} />
           <Route path="/admin/serie" element={<SerieManagement />} />

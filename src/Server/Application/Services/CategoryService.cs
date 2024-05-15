@@ -5,17 +5,21 @@ using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using MapsterMapper;
 using SlugGenerator;
+using TitanWeb.Domain.Constants;
+using TitanWeb.Domain.Interfaces.Services;
 
 namespace Application.Services
 {
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _repository;
+        private readonly ICloundinaryService _cloundinaryService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public CategoryService(ICategoryRepository repository, IMapper mapper, IUnitOfWork unitOfWork)
+        public CategoryService(ICategoryRepository repository, ICloundinaryService cloundinaryService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _repository = repository;
+            _cloundinaryService = cloundinaryService;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
@@ -35,6 +39,10 @@ namespace Application.Services
             }
             category.Name = model.Name;
             category.UrlSlug = model.Name.GenerateSlug();
+            if (model.ImageFile != null)
+            {
+                category.ImageUrl = await _cloundinaryService.UploadImageAsync(model.ImageFile.OpenReadStream(), model.ImageFile.FileName, QueryManagements.CategoryFolder);
+            }
             await _repository.AddOrUpdate(category);
             int saved = await _unitOfWork.Commit();
             return saved > 0;

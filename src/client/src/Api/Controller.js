@@ -55,3 +55,11 @@ export function getProductFilter(payload) {
 export function getCategoryById(id) {
   return get_api(process.env.REACT_APP_API_CATEGORY + `${id}`);
 }
+
+export function editCategory(formData) {
+  return post_api(process.env.REACT_APP_API_CATEGORY, formData);
+}
+
+export function deleteCategory(id) {
+  return delete_api(process.env.REACT_APP_API_CATEGORY + `${id}`);
+}

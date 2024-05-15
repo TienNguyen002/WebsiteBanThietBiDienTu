@@ -1,5 +1,6 @@
 ﻿using Application.Media;
 using Application.Services;
+using CloudinaryDotNet;
 using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
@@ -10,11 +11,15 @@ using Infrastructure.Seeders;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
+using TitanWeb.Application.Media;
+using TitanWeb.Application.Services;
+using TitanWeb.Domain.Interfaces.Services;
 
 namespace Api.Extensions
 {
@@ -29,6 +34,13 @@ namespace Api.Extensions
                 options.UseSqlServer(
                     builder.Configuration
                         .GetConnectionString("DefaultConnection")));
+
+            builder.Services.Configure<CloudConfiguration>(builder.Configuration.GetSection("CloudinarySettings"));
+            builder.Services.AddSingleton(x =>
+            {
+                var config = x.GetService<IOptions<CloudConfiguration>>().Value;
+                return new Cloudinary(new Account(config.CloudName, config.ApiKey, config.ApiSecret));
+            });
 
             builder.Services.AddScoped<IMediaManager, LocalFileSystemMediaManager>();
             builder.Services.AddScoped<IDataSeeder, DataSeeder>();
@@ -54,6 +66,7 @@ namespace Api.Extensions
             builder.Services.AddScoped<ICommentService, CommentService>();
             builder.Services.AddScoped<ISaleRepository, SaleRepository>();
             builder.Services.AddScoped<ISaleService, SaleService>();
+            builder.Services.AddScoped<ICloundinaryService, CloudinaryService>();
 
             return builder;
         }

@@ -2,15 +2,11 @@ import React from "react";
 import { Input, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 
-const SearchInput = ({ searchQuery, setSearchQuery, link }) => {
+const SearchInput = ({ searchQuery, setSearchQuery, addClick }) => {
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
-  };
-
-  const handleLink = (link) => {
-    navigate(link);
   };
 
   return (
@@ -27,7 +23,7 @@ const SearchInput = ({ searchQuery, setSearchQuery, link }) => {
       <Button
         type="primary"
         className="management-action-add"
-        onClick={handleLink(link)}
+        onClick={addClick}
       >
         Thêm mới
       </Button>
