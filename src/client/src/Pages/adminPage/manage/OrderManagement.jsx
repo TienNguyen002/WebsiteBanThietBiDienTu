@@ -1,7 +1,7 @@
 import { Table } from "antd";
 import React from "react";
 
-const CartManagement = () => {
+const OrderManagement = () => {
   const dataSource = [
     {
       key: "1",
@@ -47,4 +47,4 @@ const CartManagement = () => {
   );
 };
 
-export default CartManagement;
+export default OrderManagement;

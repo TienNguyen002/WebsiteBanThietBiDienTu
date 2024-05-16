@@ -12,6 +12,9 @@ const ProductItem = (props) => {
   const { name, image, slug, current, orPrice, star, color } = props;
   const navigate = useNavigate();
 
+  const discountAmount = orPrice - current;
+  const discountPercentage = (discountAmount / orPrice) * 100;
+
   useEffect(() => {
     const handleMouseEnter = () => {
       setShowAction(true);
@@ -38,6 +41,9 @@ const ProductItem = (props) => {
   return (
     <>
       <div ref={productCardRef} className="product-box">
+        <div className="product-box-discount">
+          Giảm {discountPercentage.toFixed(0)}%
+        </div>
         <div to={"/detail"} className="product-box-detail">
           <div className="product-box-detail-top">
             <img

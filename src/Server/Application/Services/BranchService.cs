@@ -5,17 +5,21 @@ using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using MapsterMapper;
 using SlugGenerator;
+using TitanWeb.Domain.Constants;
+using TitanWeb.Domain.Interfaces.Services;
 
 namespace Application.Services
 {
     public class BranchService : IBranchService
     {
         private readonly IBranchRepository _repository;
+        private readonly ICloundinaryService _cloundinaryService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public BranchService(IBranchRepository repository, IMapper mapper, IUnitOfWork unitOfWork)
+        public BranchService(IBranchRepository repository, ICloundinaryService cloundinaryService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _repository = repository;
+            _cloundinaryService = cloundinaryService;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
@@ -35,6 +39,10 @@ namespace Application.Services
             }
             branch.Name = model.Name;
             branch.UrlSlug = model.Name.GenerateSlug();
+            if (model.ImageFile != null)
+            {
+                branch.ImageUrl = await _cloundinaryService.UploadImageAsync(model.ImageFile.OpenReadStream(), model.ImageFile.FileName, QueryManagements.CategoryFolder);
+            }
             await _repository.AddOrUpdate(branch);
             int saved = await _unitOfWork.Commit();
             return saved > 0;

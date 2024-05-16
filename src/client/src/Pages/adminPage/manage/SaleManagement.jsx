@@ -1,20 +1,30 @@
 import React, { useState } from "react";
-import { Form, Space } from "antd";
+import { Button, DatePicker, Form, Space } from "antd";
 import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
 import { getColumnFilterProps } from "../../../Common/tableFunction";
-import { Eye, Pencil, Trash } from "lucide-react";
+import { Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/adminLayout.scss";
+import dayjs from "dayjs";
 
 const SaleManagement = () => {
+  const [sale, setSale] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [editable, setEditable] = useState(false);
   const navigate = useNavigate();
 
   const handleLink = (link) => {
     navigate(link);
+  };
+
+  const value = dayjs("2024-05-11 00:00:00", "YYYY-MM-DD HH:mm:ss");
+  const onOk = (value) => {
+    setEditable(!editable);
+    console.log(editable);
+    console.log("onOk: ", value);
   };
 
   const [dataSource, setDataSource] = useState([
@@ -68,11 +78,6 @@ const SaleManagement = () => {
       render: (_, record) => (
         <Space size="middle">
           <div className="action">
-            <Eye onClick={() => handleLink(`${record.key}`)} />
-            <Pencil
-              className="action-edit"
-              onClick={() => handleLink(`${record.key}`)}
-            />
             <Trash
               className="action-remove"
               onClick={() => handleLink(`${record.key}`)}
@@ -87,6 +92,34 @@ const SaleManagement = () => {
     <div className="management">
       <div className="management-top">
         <h1 className="management-top-title">Quản lý ưu đãi</h1>
+      </div>
+      <div className="management-date">
+        <h2 className="management-date-title">Thời gian kết thúc ưu đãi:</h2>
+        <DatePicker
+          showTime
+          value={value}
+          placeholder="Thời gian kết thúc ưu đãi"
+          onChange={(value, dateString) => {
+            console.log("Selected Time: ", value);
+            console.log("Formatted Selected Time: ", dateString);
+          }}
+          className="management-date-picker"
+          disabled={editable ? false : true}
+          onOk={onOk}
+        />
+        <Button
+          type="primary"
+          onClick={onOk}
+          className="management-date-button"
+        >
+          {editable ? "Cập nhật thời gian" : "Chỉnh sửa"}
+        </Button>
+      </div>
+
+      <div className="management-top">
+        <h1 className="management-top-title">
+          Các sản phẩm đang trong thời gian ưu đãi
+        </h1>
         <SearchInput
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}

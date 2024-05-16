@@ -9,5 +9,6 @@
         /// Query For Cloud
         /// </summary>
         public static readonly string CategoryFolder = "Category";
+        public static readonly string BranchFolder = "Branch";
     }
 }

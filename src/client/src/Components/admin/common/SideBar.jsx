@@ -1,10 +1,8 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, { createContext, useState, useContext } from "react";
 import logo from "../../../Shared/images/logo-4.png";
 import {
   ChevronFirst,
   ChevronLast,
-  MoreVertical,
-  UserIcon,
   LayoutDashboard,
   LayoutList,
   Slack,
@@ -112,7 +110,7 @@ const SideBar = () => {
                 text="Dòng sản phẩm"
               />
               <SideBarItem
-                link={"/admin/cart"}
+                link={"/admin/order"}
                 icon={<ShoppingCart size={20} />}
                 isActive={active}
                 setActive={setActive}

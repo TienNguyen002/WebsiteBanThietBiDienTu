@@ -15,11 +15,10 @@ import Dashboard from "../Pages/adminPage/Dashboard";
 import CategoryManagement from "../Pages/adminPage/manage/CategoryManagement";
 import BranchManagement from "../Pages/adminPage/manage/BranchManagement";
 import SerieManagement from "../Pages/adminPage/manage/SerieManagement";
-import CartManagement from "../Pages/adminPage/manage/CartManagement";
+import OrderManagement from "../Pages/adminPage/manage/OrderManagement";
 import FeedbackManagement from "../Pages/adminPage/manage/FeedbackManagement";
 import UserManagement from "../Pages/adminPage/manage/UserManagement";
 import DiscountManagement from "../Pages/adminPage/manage/DiscountManagement";
-import CategoryEdit from "../Pages/adminPage/edit/CategoryEdit";
 import SaleManagement from "../Pages/adminPage/manage/SaleManagement";
 import SeriePage from "../Pages/userPage/SeriePage";
 
@@ -258,7 +257,7 @@ const Router = () => {
           <Route path="/admin/branch" element={<BranchManagement />} />
           <Route path="/admin/sale" element={<SaleManagement />} />
           <Route path="/admin/serie" element={<SerieManagement />} />
-          <Route path="/admin/cart" element={<CartManagement />} />
+          <Route path="/admin/order" element={<OrderManagement />} />
           <Route path="/admin/discount" element={<DiscountManagement />} />
           <Route path="/admin/user" element={<UserManagement />} />
           <Route path="/admin/feedback" element={<FeedbackManagement />} />

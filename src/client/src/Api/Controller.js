@@ -63,3 +63,15 @@ export function editCategory(formData) {
 export function deleteCategory(id) {
   return delete_api(process.env.REACT_APP_API_CATEGORY + `${id}`);
 }
+
+export function getBranchById(id) {
+  return get_api(process.env.REACT_APP_API_BRANCH + `${id}`);
+}
+
+export function editBranch(formData) {
+  return post_api(process.env.REACT_APP_API_BRANCH, formData);
+}
+
+export function deleteBranch(id) {
+  return delete_api(process.env.REACT_APP_API_BRANCH + `${id}`);
+}

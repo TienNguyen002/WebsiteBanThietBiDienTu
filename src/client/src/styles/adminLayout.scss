@@ -16,6 +16,21 @@
       color: rgb(0, 102, 255);
     }
   }
+  &-date {
+    display: flex;
+    gap: 30px;
+    &-title {
+      color: rgb(0, 102, 255);
+    }
+    &-picker {
+      height: 40px;
+      align-self: center;
+      border: 1px solid var(--black);
+    }
+    &-button {
+      align-self: center;
+    }
+  }
 }
 
 .action {

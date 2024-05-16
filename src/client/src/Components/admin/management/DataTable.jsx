@@ -19,7 +19,7 @@ const DataTable = ({
   return (
     <Table
       columns={columns}
-      dataSource={filteredData}
+      dataSource={[...filteredData]}
       pagination={{
         current: page,
         pageSize: pageSize,

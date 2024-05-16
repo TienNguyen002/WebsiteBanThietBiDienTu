@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Form, Space, Modal } from "antd";
 import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
-import { Eye, Pencil, Trash } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Pencil, Trash } from "lucide-react";
 import { deleteCategory, getAllCategory } from "../../../Api/Controller";
-import "../../../styles/adminLayout.scss";
 import CategoryEdit from "../edit/CategoryEdit";
 import Swal from "sweetalert2";
+import "../../../styles/adminLayout.scss";
+import toast, { Toaster } from "react-hot-toast";
 
 const CategoryManagement = () => {
   const [categories, setCategories] = useState([]);
@@ -16,19 +16,16 @@ const CategoryManagement = () => {
   const [pageSize, setPageSize] = useState(10);
   const [open, setOpen] = useState(false);
   const [idEdit, setIdEdit] = useState(0);
-  const navigate = useNavigate();
-
-  const handleLink = (link) => {
-    navigate(link);
-  };
+  const [reloadData, setReloadData] = useState(false);
 
   useEffect(() => {
+    setReloadData(false);
     getAllCategory().then((data) => {
       if (data) {
         setCategories(data);
       } else setCategories([]);
     });
-  }, []);
+  }, [reloadData]);
 
   const handleAddClick = () => {
     setIdEdit(0);
@@ -42,7 +39,6 @@ const CategoryManagement = () => {
 
   const handleOk = () => {
     setOpen(false);
-    setIdEdit(0);
   };
 
   const handleCancel = () => {
@@ -56,17 +52,19 @@ const CategoryManagement = () => {
       Swal.fire({
         title: "Bạn có muốn xóa dữ liệu này!",
         text: "Dữ liệu này không thể khôi phục khi xóa!",
+        cancelButtonText: "Hủy",
         icon: "error",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "DELETE",
+        confirmButtonText: "Xóa",
       }).then((result) => {
         if (result.isConfirmed) {
-          deleteCategory(id);
-          Swal.fire({
-            title: "Xóa thành công",
-            icon: "success",
+          deleteCategory(id).then((data) => {
+            if (data) {
+              toast.success("Xóa thành công");
+              setReloadData(true);
+            } else toast.error("Xóa thất bại");
           });
         }
       });
@@ -103,7 +101,6 @@ const CategoryManagement = () => {
       render: (_, record) => (
         <Space size="middle">
           <div className="action">
-            <Eye onClick={() => handleLink(`${record.id}`)} />
             <Pencil
               className="action-edit"
               onClick={() => handleEditClick(`${record.id}`)}
@@ -120,6 +117,7 @@ const CategoryManagement = () => {
 
   return (
     <div className="management">
+      <Toaster />
       <div className="management-top">
         <h1 className="management-top-title">Quản lý danh mục</h1>
         <SearchInput
@@ -142,7 +140,11 @@ const CategoryManagement = () => {
         </Form>
       </div>
       <Modal centered open={open} footer={null} onCancel={handleCancel}>
-        <CategoryEdit id={idEdit} onOk={handleOk} />
+        <CategoryEdit
+          id={idEdit}
+          onOk={handleOk}
+          setReloadData={setReloadData}
+        />
       </Modal>
     </div>
   );

@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import "../../../styles/adminLayout.scss";
-import { editCategory, getCategoryById } from "../../../Api/Controller";
+import { editBranch, getBranchById } from "../../../Api/Controller";
 import { Input } from "antd";
 import toast from "react-hot-toast";
 
-const CategoryEdit = ({ id, onOk, setReloadData }) => {
+const BranchEdit = ({ id, onOk, setReloadData }) => {
   const initialState = {
     id: 0,
     name: "",
@@ -12,8 +12,7 @@ const CategoryEdit = ({ id, onOk, setReloadData }) => {
     imageUrl: "",
   };
 
-  const [category, setCategory] = useState(initialState);
-  const imageRef = useRef(null);
+  const [branch, setBranch] = useState(initialState);
   const editImageFrame =
     "https://t4.ftcdn.net/jpg/04/81/13/43/360_F_481134373_0W4kg2yKeBRHNEklk4F9UXtGHdub3tYk.jpg";
 
@@ -22,10 +21,10 @@ const CategoryEdit = ({ id, onOk, setReloadData }) => {
       resetState();
     }
     if (id > 0) {
-      getCategoryById(id).then((data) => {
+      getBranchById(id).then((data) => {
         if (data) {
-          setCategory(data);
-        } else setCategory(initialState);
+          setBranch(data);
+        } else setBranch(initialState);
       });
     }
   }, [id]);
@@ -35,15 +34,16 @@ const CategoryEdit = ({ id, onOk, setReloadData }) => {
     const reader = new FileReader();
     reader.onloadend = async () => {
       if (reader.result) {
-        setCategory({ ...category, imageUrl: reader.result });
+        setBranch({ ...branch, imageUrl: reader.result });
       }
     };
     reader.readAsDataURL(file);
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData(e.target);
-    editCategory(formData).then((data) => {
+    editBranch(formData).then((data) => {
       if (data) {
         onOk();
         resetState();
@@ -60,16 +60,16 @@ const CategoryEdit = ({ id, onOk, setReloadData }) => {
   };
 
   const resetState = () => {
-    setCategory(initialState);
+    setBranch(initialState);
   };
 
   return (
     <>
       <div className="edit">
         {id === 0 ? (
-          <h1 className="edit-title">Thêm danh mục</h1>
+          <h1 className="edit-title">Thêm thương hiệu</h1>
         ) : (
-          <h1 className="edit-title">Chỉnh sửa danh mục</h1>
+          <h1 className="edit-title">Chỉnh sửa thương hiệu</h1>
         )}
 
         <form
@@ -83,21 +83,21 @@ const CategoryEdit = ({ id, onOk, setReloadData }) => {
               hidden
               name="Id"
               title="Id"
-              value={category.id}
-              onChange={(e) => setCategory({ ...category, id: e.target.value })}
+              value={branch.id}
+              onChange={(e) => setBranch({ ...branch, id: e.target.value })}
             ></input>
             <label htmlFor="uploadGallery">
-              {category.imageUrl === "" || category.imageUrl === null ? (
+              {branch.imageUrl === "" || branch.imageUrl === null ? (
                 <img
                   src={editImageFrame}
                   className="edit-form-gallery-image"
-                  alt={category.name}
+                  alt={branch.name}
                 />
               ) : (
                 <img
-                  src={category.imageUrl}
+                  src={branch.imageUrl}
                   className="edit-form-gallery-image"
-                  alt={category.name}
+                  alt={branch.name}
                 />
               )}
               <input
@@ -105,7 +105,6 @@ const CategoryEdit = ({ id, onOk, setReloadData }) => {
                 type="file"
                 name="ImageFile"
                 title="ImageFile"
-                ref={imageRef}
                 onChange={handleImageChange}
                 accept=".png, .jpg, .jpeg"
                 className="setGallery"
@@ -114,15 +113,13 @@ const CategoryEdit = ({ id, onOk, setReloadData }) => {
             </label>
           </div>
           <div className="edit-form-title">
-            <p className="edit-form-title-name">Tên danh mục</p>
+            <p className="edit-form-title-name">Tên thương hiệu</p>
             <Input
               name="name"
-              value={category.name}
-              placeholder={"Nhập tên danh mục"}
+              value={branch.name}
+              placeholder={"Nhập tên thương hiệu"}
               className="edit-form-title-input"
-              onChange={(e) =>
-                setCategory({ ...category, name: e.target.value })
-              }
+              onChange={(e) => setBranch({ ...branch, name: e.target.value })}
             ></Input>
           </div>
           <div className="edit-form-button">
@@ -136,4 +133,4 @@ const CategoryEdit = ({ id, onOk, setReloadData }) => {
   );
 };
 
-export default CategoryEdit;
+export default BranchEdit;
