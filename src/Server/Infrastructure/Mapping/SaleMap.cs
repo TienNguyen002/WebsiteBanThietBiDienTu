@@ -13,7 +13,8 @@ namespace Infrastructure.Mapping
             builder.HasKey(p => p.Id);
 
             builder.Property(d => d.EndDate)
-                .HasColumnType("datetime");
+                .HasColumnType("datetime")
+                .IsRequired(false);
 
             builder.Property(p => p.Status)
                 .HasDefaultValue(true);

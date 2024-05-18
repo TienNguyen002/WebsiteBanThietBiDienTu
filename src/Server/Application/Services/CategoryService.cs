@@ -5,8 +5,8 @@ using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using MapsterMapper;
 using SlugGenerator;
-using TitanWeb.Domain.Constants;
-using TitanWeb.Domain.Interfaces.Services;
+using Domain.Constants;
+using Domain.Interfaces.Services;
 
 namespace Application.Services
 {

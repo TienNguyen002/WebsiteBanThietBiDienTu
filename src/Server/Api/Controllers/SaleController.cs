@@ -1,4 +1,5 @@
 ﻿using Api.Response;
+using Domain.DTO.Category;
 using Domain.DTO.Sale;
 using Domain.Interfaces.Services;
 using MapsterMapper;
@@ -34,6 +35,22 @@ namespace Api.Controllers
                 return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
             }
             return Ok(ApiResponse.Success(sale));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<SaleDTO>> UpdateSale([FromForm] SaleEditModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var saleUpdate = await _service.UpdateSale(model);
+            if (!saleUpdate)
+            {
+                return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
+            }
+            var result = _mapper.Map<SaleDTO>(model);
+            return Ok(ApiResponse.Success(result));
         }
     }
 }

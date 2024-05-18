@@ -1,4 +1,4 @@
-﻿namespace TitanWeb.Application.Media
+﻿namespace Application.Media
 {
     public class CloudConfiguration
     {

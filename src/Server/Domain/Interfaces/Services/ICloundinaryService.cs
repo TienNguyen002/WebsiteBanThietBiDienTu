@@ -1,4 +1,4 @@
-﻿namespace TitanWeb.Domain.Interfaces.Services
+﻿namespace Domain.Interfaces.Services
 {
     public interface ICloundinaryService
     {

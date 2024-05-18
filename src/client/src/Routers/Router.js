@@ -21,6 +21,7 @@ import UserManagement from "../Pages/adminPage/manage/UserManagement";
 import DiscountManagement from "../Pages/adminPage/manage/DiscountManagement";
 import SaleManagement from "../Pages/adminPage/manage/SaleManagement";
 import SeriePage from "../Pages/userPage/SeriePage";
+import ProductManagement from "../Pages/adminPage/manage/ProductManagement";
 
 const Router = () => {
   return (
@@ -257,6 +258,7 @@ const Router = () => {
           <Route path="/admin/branch" element={<BranchManagement />} />
           <Route path="/admin/sale" element={<SaleManagement />} />
           <Route path="/admin/serie" element={<SerieManagement />} />
+          <Route path="/admin/serie/:slug" element={<ProductManagement />} />
           <Route path="/admin/order" element={<OrderManagement />} />
           <Route path="/admin/discount" element={<DiscountManagement />} />
           <Route path="/admin/user" element={<UserManagement />} />

@@ -1,10 +1,10 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Options;
-using TitanWeb.Application.Media;
-using TitanWeb.Domain.Interfaces.Services;
+using Application.Media;
+using Domain.Interfaces.Services;
 
-namespace TitanWeb.Application.Services
+namespace Application.Services
 {
     public class CloudinaryService : ICloundinaryService
     {

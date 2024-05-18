@@ -1,5 +1,3 @@
-import { Table, Input, Button, Form, Space, Dropdown, Menu } from "antd";
-import { DownOutlined } from "@ant-design/icons";
 import FilterDropdown from "../Components/admin/management/FilterDropdown";
 
 // const getColumnSearchProps = (dataIndex) => ({

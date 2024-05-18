@@ -12,6 +12,8 @@ namespace Infrastructure.Mapping
 
             builder.HasKey(o => o.Id);
 
+            builder.Property(o => o.Name);
+
             builder.Property(o => o.DateOrder)
                 .HasColumnType("datetime");
 

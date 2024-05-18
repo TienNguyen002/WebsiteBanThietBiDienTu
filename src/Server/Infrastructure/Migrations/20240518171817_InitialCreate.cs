@@ -103,7 +103,7 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CodeName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DiscountPercent = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 5, 7, 14, 39, 2, 488, DateTimeKind.Local).AddTicks(2171)),
+                    StartDate = table.Column<DateTime>(type: "datetime", nullable: false, defaultValue: new DateTime(2024, 5, 19, 0, 18, 16, 189, DateTimeKind.Local).AddTicks(3978)),
                     EndDate = table.Column<DateTime>(type: "datetime", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
@@ -146,7 +146,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EndDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime", nullable: true),
                     Status = table.Column<bool>(type: "bit", nullable: false, defaultValue: true)
                 },
                 constraints: table =>
@@ -421,6 +421,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateOrder = table.Column<DateTime>(type: "datetime", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),

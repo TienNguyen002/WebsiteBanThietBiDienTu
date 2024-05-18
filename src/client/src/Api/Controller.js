@@ -1,5 +1,5 @@
 import { convertObjToQueryString } from "../Common/function";
-import { delete_api, get_api, post_api } from "./method";
+import { delete_api, get_api, post_api, put_api } from "./method";
 
 export function getAllCategory() {
   return get_api(process.env.REACT_APP_API_ALL_CATEGORIES);
@@ -74,4 +74,20 @@ export function editBranch(formData) {
 
 export function deleteBranch(id) {
   return delete_api(process.env.REACT_APP_API_BRANCH + `${id}`);
+}
+
+export function updateSaleDate(formData) {
+  return post_api(process.env.REACT_APP_API_ALL_SALES, formData);
+}
+
+export function removeProductSale(id) {
+  return put_api(process.env.REACT_APP_API_REMOVE_PRODUCT_SALE + `${id}`);
+}
+
+export function getAllSerie() {
+  return get_api(process.env.REACT_APP_API_ALL_SERIES);
+}
+
+export function getAllOrders() {
+  return get_api(process.env.REACT_APP_API_ALL_ORDERS);
 }

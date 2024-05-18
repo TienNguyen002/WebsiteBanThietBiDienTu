@@ -1,82 +1,118 @@
-import React, { useState } from "react";
-import { Form, Space } from "antd";
+import React, { useEffect, useState } from "react";
+import { Form, Space, Modal } from "antd";
 import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
-import { getColumnFilterProps } from "../../../Common/tableFunction";
 import { Eye, Pencil, Trash } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { getColumnFilterProps } from "../../../Common/tableFunction";
+import { deleteCategory, getAllSerie } from "../../../Api/Controller";
+import CategoryEdit from "../edit/CategoryEdit";
+import Swal from "sweetalert2";
 import "../../../styles/adminLayout.scss";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const SerieManagement = () => {
+  const [series, setSeries] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [open, setOpen] = useState(false);
+  const [idEdit, setIdEdit] = useState(0);
+  const [reloadData, setReloadData] = useState(false);
   const navigate = useNavigate();
 
-  const handleLink = (link) => {
-    navigate(link);
+  useEffect(() => {
+    setReloadData(false);
+    getAllSerie().then((data) => {
+      if (data) {
+        setSeries(data);
+      } else setSeries([]);
+    });
+  }, [reloadData]);
+
+  const handleAddClick = () => {
+    setIdEdit(0);
+    setOpen(true);
   };
 
-  const [dataSource, setDataSource] = useState([
-    {
-      key: 1,
-      name: "123",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: 2,
-      name: "456",
-      age: 42,
-      address: "123 Downing Street",
-    },
-  ]);
+  const handleEditClick = (id) => {
+    setOpen(true);
+    setIdEdit(id);
+  };
+
+  const handleOk = () => {
+    setOpen(false);
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+    setIdEdit(0);
+  };
+
+  const handleLink = (urlSlug) => {
+    navigate(`${urlSlug}`);
+  };
+
+  const handleDelete = (id) => {
+    Remove(id);
+    async function Remove(id) {
+      Swal.fire({
+        title: "Bạn có muốn xóa dữ liệu này!",
+        text: "Dữ liệu này không thể khôi phục khi xóa!",
+        cancelButtonText: "Hủy",
+        icon: "error",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xóa",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteCategory(id).then((data) => {
+            if (data) {
+              toast.success("Xóa thành công");
+              setReloadData(true);
+            } else toast.error("Xóa thất bại");
+          });
+        }
+      });
+    }
+  };
 
   const columns = [
     {
-      title: "Tên dòng sản phẩm",
+      title: "Hình",
+      dataIndex: "images",
+      key: "images",
+      render: (images) =>
+        images[0] ? (
+          <img
+            src={images[0].imageUrl}
+            className="item-image"
+            alt={images[0].imageUrl}
+          />
+        ) : null,
+      width: 100,
+    },
+    {
+      title: "Tên danh mục",
       dataIndex: "name",
       key: "name",
       width: 400,
-      sorter: (a, b) => a.name - b.name,
-    },
-    {
-      title: "Mô tả",
-      dataIndex: "age",
-      key: "age",
-      width: 400,
-      sorter: (a, b) => a.age - b.age,
     },
     {
       title: "Danh mục",
-      dataIndex: "age",
-      key: "age",
+      dataIndex: "category",
+      key: "name",
+      ...getColumnFilterProps("category", series),
       width: 400,
-      sorter: (a, b) => a.age - b.age,
-      ...getColumnFilterProps("age", dataSource),
     },
     {
       title: "Thương hiệu",
-      dataIndex: "age",
-      key: "age",
+      dataIndex: "branch",
+      key: "branch",
+      ...getColumnFilterProps("branch", series),
       width: 400,
-      sorter: (a, b) => a.age - b.age,
-      ...getColumnFilterProps("age", dataSource),
     },
-    {
-      title: "Số sản phẩm thuộc dòng",
-      dataIndex: "age",
-      key: "age",
-      width: 400,
-      sorter: (a, b) => a.age - b.age,
-    },
-    // {
-    //   title: "Address",
-    //   dataIndex: "address",
-    //   key: "address",
-    //   sorter: (a, b) => a.address - b.address,
-    //   ...getColumnFilterProps("address", dataSource),
-    // },
     {
       title: "Chức năng",
       key: "operation",
@@ -84,14 +120,14 @@ const SerieManagement = () => {
       render: (_, record) => (
         <Space size="middle">
           <div className="action">
-            <Eye onClick={() => handleLink(`${record.key}`)} />
+            <Eye onClick={() => handleLink(`${record.urlSlug}`)} />
             <Pencil
               className="action-edit"
-              onClick={() => handleLink(`${record.key}`)}
+              onClick={() => handleEditClick(`${record.id}`)}
             />
             <Trash
               className="action-remove"
-              onClick={() => handleLink(`${record.key}`)}
+              onClick={() => handleDelete(`${record.id}`)}
             />
           </div>
         </Space>
@@ -101,18 +137,20 @@ const SerieManagement = () => {
 
   return (
     <div className="management">
+      <Toaster />
       <div className="management-top">
-        <h1 className="management-top-title">Quản lý sản phẩm</h1>
+        <h1 className="management-top-title">Quản lý dòng sản phẩm</h1>
         <SearchInput
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          addClick={handleAddClick}
         />
       </div>
       <div className="management-table">
         <Form>
           <DataTable
             columns={columns}
-            dataSource={dataSource}
+            dataSource={series}
             searchQuery={searchQuery}
             page={page}
             pageSize={pageSize}
@@ -121,6 +159,13 @@ const SerieManagement = () => {
           />
         </Form>
       </div>
+      <Modal centered open={open} footer={null} onCancel={handleCancel}>
+        <CategoryEdit
+          id={idEdit}
+          onOk={handleOk}
+          setReloadData={setReloadData}
+        />
+      </Modal>
     </div>
   );
 };

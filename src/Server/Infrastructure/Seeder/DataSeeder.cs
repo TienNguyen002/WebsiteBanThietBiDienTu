@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Infrastructure.Contexts;
+using System;
 
 namespace Infrastructure.Seeders
 {
@@ -212,10 +213,12 @@ namespace Infrastructure.Seeders
             IList<Status> statuses,
             IList<Discount> discounts)
         {
+                var random = new Random();
             var orders = new List<Order>()
             {
                 new()
                 {
+                    Name = $"#{random.Next(100000, 1000000):D6}",
                     User = users[0],
                     DateOrder = DateTime.Now,
                     Quantity = 2,
@@ -1178,6 +1181,11 @@ namespace Infrastructure.Seeders
                 },
                 new()
                 {
+                    Name = "Chờ thanh toán",
+                    UrlSlug = "cho-thanh-toan",
+                },
+                new()
+                {
                     Name = "Đã xác nhận",
                     UrlSlug = "da-xac-nhan",
                 },
@@ -1190,6 +1198,11 @@ namespace Infrastructure.Seeders
                 {
                     Name = "Thàng công",
                     UrlSlug = "thanh-cong",
+                },
+                new()
+                {
+                    Name = "Đơn hàng bị hủy",
+                    UrlSlug = "bi-huy",
                 },
             };
             var statusAdd = new List<Status>();

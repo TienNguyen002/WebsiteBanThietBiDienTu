@@ -1,5 +1,6 @@
 ﻿using Api.Response;
 using Domain.DTO;
+using Domain.DTO.Category;
 using Domain.DTO.Product;
 using Domain.Interfaces.Services;
 using MapsterMapper;
@@ -177,6 +178,13 @@ namespace Api.Controllers
         public async Task<ActionResult<ProductFilter>> GetProductFilters([FromQuery] FilterQuery query)
         {
             var result = await _service.GetProductFiltersAsync(query);
+            return Ok(ApiResponse.Success(result));
+        }
+
+        [HttpPut("removeSale/{id}")]
+        public async Task<ActionResult<ProductDTO>> RemoveSaleProduct(int id)
+        {
+            var result = await _service.RemoveSaleProduct(id);
             return Ok(ApiResponse.Success(result));
         }
     }

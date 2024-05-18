@@ -41,3 +41,15 @@ export async function post_api(your_api, formData) {
     alert("Can't post the request", error.message);
   }
 }
+
+export async function put_api(your_api) {
+  try {
+    const response = await axios.put(your_api);
+    const data = response.data;
+    if (data.isSuccess) return data.result;
+    else return null;
+  } catch (error) {
+    console.log("Error ", error.message);
+    return null;
+  }
+}

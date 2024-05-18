@@ -1,4 +1,5 @@
 ﻿using Domain.DTO.Sale;
+using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
@@ -40,6 +41,15 @@ namespace Application.Services
         {
             var sale = await _repository.GetCurrentSale(id);
             return _mapper.Map<SaleDTO>(sale);
+        }
+
+        public async Task<bool> UpdateSale(SaleEditModel model)
+        {
+            var sale = await _repository.GetCurrentSale(2);
+            sale.EndDate = model.EndDate;
+            await _repository.AddOrUpdate(sale);
+            int saved = await _unitOfWork.Commit();
+            return saved > 0;
         }
     }
 }

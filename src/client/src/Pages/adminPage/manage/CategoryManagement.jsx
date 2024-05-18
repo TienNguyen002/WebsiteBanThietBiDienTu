@@ -79,7 +79,7 @@ const CategoryManagement = () => {
       render: (imageUrl) => (
         <img src={imageUrl} className="item-image" alt={imageUrl} />
       ),
-      width: 400,
+      width: 100,
     },
     {
       title: "Tên danh mục",

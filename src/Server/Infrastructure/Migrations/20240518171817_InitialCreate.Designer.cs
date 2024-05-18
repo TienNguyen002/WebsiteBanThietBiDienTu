@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DeviceWebDbContext))]
-    [Migration("20240507073902_InitialCreate")]
+    [Migration("20240518171817_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -236,7 +236,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("StartDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 5, 7, 14, 39, 2, 488, DateTimeKind.Local).AddTicks(2171));
+                        .HasDefaultValue(new DateTime(2024, 5, 19, 0, 18, 16, 189, DateTimeKind.Local).AddTicks(3978));
 
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
@@ -284,6 +284,10 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("DiscountId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("PaymentMethodId")
                         .HasColumnType("int");
@@ -458,7 +462,7 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime");
 
                     b.Property<bool>("Status")

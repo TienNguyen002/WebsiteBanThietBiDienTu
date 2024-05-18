@@ -1,10 +1,8 @@
 import React from "react";
 import { Input, Button } from "antd";
-import { useNavigate } from "react-router-dom";
 
 const SearchInput = ({ searchQuery, setSearchQuery, addClick }) => {
-  const navigate = useNavigate();
-
+  console.log(searchQuery);
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -20,13 +18,15 @@ const SearchInput = ({ searchQuery, setSearchQuery, addClick }) => {
       {/* <Button type="primary" icon={<Search />} style={{ marginLeft: 8 }}>
           Search
         </Button> */}
-      <Button
-        type="primary"
-        className="management-action-add"
-        onClick={addClick}
-      >
-        Thêm mới
-      </Button>
+      {addClick && (
+        <Button
+          type="primary"
+          className="management-action-add"
+          onClick={addClick}
+        >
+          Thêm mới
+        </Button>
+      )}
     </div>
   );
 };

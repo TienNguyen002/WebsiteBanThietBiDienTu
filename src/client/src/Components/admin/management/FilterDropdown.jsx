@@ -9,14 +9,18 @@ const FilterDropdown = ({
   setSelectedKeys,
   confirm,
 }) => {
+  const uniqueDataSource = [
+    ...new Set(dataSource.map((item) => item[dataIndex])),
+  ];
+
   return (
     <div className="filter-dropdown">
       <Dropdown
         overlay={
           <Menu
-            items={dataSource.map((item) => ({
-              label: item[dataIndex],
-              key: item[dataIndex],
+            items={uniqueDataSource.map((item) => ({
+              label: item,
+              key: item,
             }))}
             onClick={({ key }) => {
               setSelectedKeys([key]);
@@ -26,7 +30,7 @@ const FilterDropdown = ({
         }
       >
         <Button>
-          {selectedKeys.length > 0 ? selectedKeys[0] : "Lựa chọn ..."}{" "}
+          {selectedKeys.length > 0 ? selectedKeys[0] : "Lựa chọn ..."}
           <DownOutlined />
         </Button>
       </Dropdown>

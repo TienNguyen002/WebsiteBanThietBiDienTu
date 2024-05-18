@@ -151,5 +151,15 @@ namespace Application.Services
         {
             return await _repository.GetProductFiltersAsync(query);
         }
+
+        public async Task<bool> RemoveSaleProduct(int id)
+        {
+            var saleProduct = await _repository.GetSaleProductById(id);
+            saleProduct.SalePrice = 0;
+            saleProduct.SaleId = 1;
+            await _repository.AddOrUpdate(saleProduct);
+            int saved = await _unitOfWork.Commit();
+            return saved > 0;
+        }
     }
 }

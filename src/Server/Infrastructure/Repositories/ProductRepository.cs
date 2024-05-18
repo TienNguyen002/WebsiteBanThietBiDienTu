@@ -282,5 +282,14 @@ namespace Infrastructure.Repositories
                 Series = series,
             };
         }
+
+        public async Task<Product> GetSaleProductById(int id)
+        {
+            return await _context.Set<Product>()
+                .Include(p => p.Sale)
+                .Where(p => p.SaleId == 2)
+                .Where(p => p.Id == id)
+                .FirstOrDefaultAsync();
+        }
     }
 }

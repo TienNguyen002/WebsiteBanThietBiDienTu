@@ -1,4 +1,4 @@
-﻿namespace TitanWeb.Domain.Constants
+﻿namespace Domain.Constants
 {
     /// <summary>
     /// Class Manage All Hard-Code Query

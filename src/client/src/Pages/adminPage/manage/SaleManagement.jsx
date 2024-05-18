@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, DatePicker, Form, Space } from "antd";
 import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
@@ -7,70 +7,122 @@ import { Trash } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import "../../../styles/adminLayout.scss";
 import dayjs from "dayjs";
+import {
+  getAllSale,
+  removeProductSale,
+  updateSaleDate,
+} from "../../../Api/Controller";
+import Swal from "sweetalert2";
+import toast, { Toaster } from "react-hot-toast";
+import { formatVND } from "../../../Common/function";
 
 const SaleManagement = () => {
-  const [sale, setSale] = useState();
+  const [sale, setSales] = useState([]);
+  const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [editable, setEditable] = useState(false);
+  const [reloadData, setReloadData] = useState(false);
   const navigate = useNavigate();
 
   const handleLink = (link) => {
     navigate(link);
   };
 
-  const value = dayjs("2024-05-11 00:00:00", "YYYY-MM-DD HH:mm:ss");
-  const onOk = (value) => {
-    setEditable(!editable);
-    console.log(editable);
-    console.log("onOk: ", value);
+  const disableDate = (current) => {
+    return current && current < dayjs().startOf("day");
   };
 
-  const [dataSource, setDataSource] = useState([
-    {
-      key: 1,
-      name: "123",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: 2,
-      name: "456",
-      age: 42,
-      address: "123 Downing Street",
-    },
-  ]);
+  const updateDate = (value) => {
+    if (value) {
+      let formData = new FormData();
+      formData.append("endDate", value.toISOString());
+      updateSaleDate(formData).then((data) => {
+        if (data) {
+          onOk();
+          toast.success("Cập nhật thành công");
+          setReloadData(true);
+        } else {
+          toast.error("Cập nhật thất bại");
+        }
+      });
+    }
+  };
+
+  const removeProduct = (id) => {
+    Remove(id);
+    async function Remove(id) {
+      Swal.fire({
+        title: "Bạn có muốn xóa dữ liệu này!",
+        text: "Dữ liệu này không thể khôi phục khi xóa!",
+        cancelButtonText: "Hủy",
+        icon: "error",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xóa",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          removeProductSale(id).then((data) => {
+            if (data) {
+              toast.success("Xóa thành công");
+              setReloadData(true);
+            } else toast.error("Xóa thất bại");
+          });
+        }
+      });
+    }
+  };
+
+  useEffect(() => {
+    setReloadData(false);
+    getAllSale().then((data) => {
+      if (data) {
+        setSales(data);
+        setProducts(data.products);
+      } else setSales([]);
+    });
+  }, [reloadData]);
+
+  const format = "YYYY-MM-DD HH:mm:ss";
+
+  const onOk = () => {
+    setEditable(!editable);
+  };
 
   const columns = [
     {
       title: "Hình",
+      dataIndex: "imageUrl",
+      key: "imageUrl",
+      width: 100,
+      render: (imageUrl) => (
+        <img src={imageUrl} className="item-image" alt={imageUrl} />
+      ),
+    },
+    {
+      title: "Sản phẩm",
       dataIndex: "name",
       key: "name",
       width: 400,
-      sorter: (a, b) => a.name - b.name,
     },
     {
-      title: "Tên thương hiệu",
-      dataIndex: "age",
-      key: "age",
+      title: "Giá khuyến mãi",
+      dataIndex: "salePrice",
+      key: "salePrice",
       width: 400,
-      sorter: (a, b) => a.age - b.age,
+      render: (salePrice) => <span>{formatVND(salePrice)}</span>,
+      sorter: (a, b) => a.salePrice - b.salePrice,
     },
     {
-      title: "Số sản phẩm thuộc thương hiệu",
-      dataIndex: "age",
-      key: "age",
+      title: "Giá hiện tại",
+      dataIndex: "price" || "orPrice",
+      key: "price" || "orPrice",
       width: 400,
-      sorter: (a, b) => a.age - b.age,
+      render: (price) => <span>{formatVND(price)}</span>,
+      sorter: (a, b) => a.price - b.price,
     },
-    // {
-    //   title: "Address",
-    //   dataIndex: "address",
-    //   key: "address",
-    //   sorter: (a, b) => a.address - b.address,
-    //   ...getColumnFilterProps("address", dataSource),
-    // },
     {
       title: "Chức năng",
       key: "operation",
@@ -80,7 +132,7 @@ const SaleManagement = () => {
           <div className="action">
             <Trash
               className="action-remove"
-              onClick={() => handleLink(`${record.key}`)}
+              onClick={() => removeProduct(`${record.id}`)}
             />
           </div>
         </Space>
@@ -90,6 +142,7 @@ const SaleManagement = () => {
 
   return (
     <div className="management">
+      <Toaster />
       <div className="management-top">
         <h1 className="management-top-title">Quản lý ưu đãi</h1>
       </div>
@@ -97,15 +150,16 @@ const SaleManagement = () => {
         <h2 className="management-date-title">Thời gian kết thúc ưu đãi:</h2>
         <DatePicker
           showTime
-          value={value}
+          name="endDate"
+          value={dayjs(sale.endDate, format)}
           placeholder="Thời gian kết thúc ưu đãi"
-          onChange={(value, dateString) => {
-            console.log("Selected Time: ", value);
-            console.log("Formatted Selected Time: ", dateString);
+          onChange={(value) => {
+            updateDate(value);
           }}
           className="management-date-picker"
           disabled={editable ? false : true}
           onOk={onOk}
+          disabledDate={disableDate}
         />
         <Button
           type="primary"
@@ -129,7 +183,7 @@ const SaleManagement = () => {
         <Form>
           <DataTable
             columns={columns}
-            dataSource={dataSource}
+            dataSource={products}
             searchQuery={searchQuery}
             page={page}
             pageSize={pageSize}

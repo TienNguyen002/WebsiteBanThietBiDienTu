@@ -22,6 +22,7 @@ import "swiper/css/pagination";
 const FlashSale = () => {
   const [sale, setSales] = useState([]);
   const [products, setProducts] = useState([]);
+  const [isSaleActive, setIsSaleActive] = useState(false);
 
   const handleLink = () => {
     window.scrollTo({
@@ -35,6 +36,13 @@ const FlashSale = () => {
       if (data) {
         setSales(data);
         setProducts(data.products);
+        const endDate = new Date(data.endDate);
+        const now = new Date();
+        if (now < endDate) {
+          setIsSaleActive(true);
+        } else {
+          setIsSaleActive(false);
+        }
       } else setSales([]);
     });
   }, []);
@@ -44,79 +52,81 @@ const FlashSale = () => {
 
   return (
     <>
-      <div className="home-flash-sale">
-        <div className="home-flash-sale-top">
-          <div className="home-flash-sale-top-title">
-            <h1 className="home-flash-sale-title">Flash Sale</h1>
-            <Zap className="home-flash-sale-icon" />
+      {isSaleActive ? (
+        <div className="home-flash-sale">
+          <div className="home-flash-sale-top">
+            <div className="home-flash-sale-top-title">
+              <h1 className="home-flash-sale-title">Flash Sale</h1>
+              <Zap className="home-flash-sale-icon" />
+            </div>
+            <div className="home-flash-sale-top-clock">
+              <Clock
+                days={days}
+                hours={hours}
+                minutes={minutes}
+                seconds={seconds}
+              />
+            </div>
+            <Link
+              to={"/sale"}
+              onClick={handleLink}
+              className="home-flash-sale-top-more"
+            >
+              Xem tất cả <ChevronRight />
+            </Link>
           </div>
-          <div className="home-flash-sale-top-clock">
-            <Clock
-              days={days}
-              hours={hours}
-              minutes={minutes}
-              seconds={seconds}
-            />
-          </div>
-          <Link
-            to={"/sale"}
-            onClick={handleLink}
-            className="home-flash-sale-top-more"
+          <Swiper
+            loop={true}
+            loopFillGroupWithBlank={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            navigation={true}
+            modules={[EffectCoverflow, Autoplay, Navigation]}
+            className="home-flash-sale-swiper"
+            effect={"coverflow"}
+            coverflowEffect={{
+              rotate: 10,
+              stretch: 50,
+              depth: 200,
+              modifier: 1,
+              slideShadows: true,
+            }}
+            breakpoints={{
+              640: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 30,
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 150,
+              },
+            }}
           >
-            Xem tất cả <ChevronRight />
-          </Link>
+            {products.map((item, index) => (
+              <SwiperSlide className="home-flash-sale-swiper-slide" key={index}>
+                <div className="home-flash-sale-swiper-slide-container">
+                  <ProductCard
+                    name={item.name}
+                    image={item.imageUrl}
+                    slug={item.urlSlug}
+                    salePrice={item.salePrice}
+                    current={item.price}
+                    star={item.rating}
+                    color={item.colors}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
-        <Swiper
-          loop={true}
-          loopFillGroupWithBlank={true}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          navigation={true}
-          modules={[EffectCoverflow, Autoplay, Navigation]}
-          className="home-flash-sale-swiper"
-          effect={"coverflow"}
-          coverflowEffect={{
-            rotate: 10,
-            stretch: 50,
-            depth: 200,
-            modifier: 1,
-            slideShadows: true,
-          }}
-          breakpoints={{
-            640: {
-              slidesPerView: 1,
-              spaceBetween: 20,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: 30,
-            },
-            1024: {
-              slidesPerView: 3,
-              spaceBetween: 150,
-            },
-          }}
-        >
-          {products.map((item, index) => (
-            <SwiperSlide className="home-flash-sale-swiper-slide" key={index}>
-              <div className="home-flash-sale-swiper-slide-container">
-                <ProductCard
-                  name={item.name}
-                  image={item.imageUrl}
-                  slug={item.urlSlug}
-                  salePrice={item.salePrice}
-                  current={item.price}
-                  star={item.rating}
-                  color={item.colors}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
+      ) : null}
     </>
   );
 };

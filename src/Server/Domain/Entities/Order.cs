@@ -8,6 +8,9 @@ namespace Domain.Entities
         //Mã đơn hàng
         public int Id { get; set; }
 
+        //Mã định dạng đơn hàng
+        public string Name { get; set; }
+
         //Ngày đặt hàng
         public DateTime DateOrder { get; set; }
 

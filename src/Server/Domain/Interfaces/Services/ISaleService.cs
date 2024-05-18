@@ -6,5 +6,6 @@ namespace Domain.Interfaces.Services
     {
         Task<SaleDTO> GetSaleById(int id);
         Task<SaleDTO> GetCurrentSale(int id);
+        Task<bool> UpdateSale(SaleEditModel model);
     }
 }

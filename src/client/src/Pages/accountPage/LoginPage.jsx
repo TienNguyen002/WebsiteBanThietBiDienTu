@@ -15,7 +15,6 @@ const LoginPage = () => {
 
   return (
     <div className="wrapper">
-      {" "}
       <div className="account-page">
         <MoveLeft className="account-page-back" onClick={goBack} />
         <div className="account-page-login">

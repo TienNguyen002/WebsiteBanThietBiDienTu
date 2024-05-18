@@ -16,5 +16,6 @@ namespace Domain.Interfaces.Repositories
             IPagingParams pagingParams);
         Task<ProductFilter> GetProductFiltersAsync(FilterQuery query);
         Task<Product> GetProductBySlug(string slug);
+        Task<Product> GetSaleProductById(int id);
     }
 }

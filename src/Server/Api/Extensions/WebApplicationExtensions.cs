@@ -17,9 +17,9 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
-using TitanWeb.Application.Media;
-using TitanWeb.Application.Services;
-using TitanWeb.Domain.Interfaces.Services;
+using Application.Media;
+using Application.Services;
+using Domain.Interfaces.Services;
 
 namespace Api.Extensions
 {
@@ -66,6 +66,10 @@ namespace Api.Extensions
             builder.Services.AddScoped<ICommentService, CommentService>();
             builder.Services.AddScoped<ISaleRepository, SaleRepository>();
             builder.Services.AddScoped<ISaleService, SaleService>();
+            builder.Services.AddScoped<ISerieRepository, SerieRepository>();
+            builder.Services.AddScoped<ISerieService, SerieService>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            builder.Services.AddScoped<IOrderService, OrderService>();
             builder.Services.AddScoped<ICloundinaryService, CloudinaryService>();
 
             return builder;

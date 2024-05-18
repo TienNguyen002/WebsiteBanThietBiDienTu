@@ -12,14 +12,14 @@ const DataTable = ({
 }) => {
   const filteredData = dataSource.filter((item) => {
     return Object.values(item).some((value) =>
-      value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      value?.toString().toLowerCase().includes(searchQuery.toLowerCase())
     );
   });
 
   return (
     <Table
       columns={columns}
-      dataSource={[...filteredData]}
+      dataSource={filteredData}
       pagination={{
         current: page,
         pageSize: pageSize,

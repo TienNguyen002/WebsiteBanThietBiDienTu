@@ -2,28 +2,31 @@ import React, { useEffect, useState } from "react";
 import { Form, Space, Modal } from "antd";
 import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
-import { Pencil, Trash } from "lucide-react";
-import { deleteBranch, getAllBranch } from "../../../Api/Controller";
+import { Eye, MoveLeft, Pencil, Trash } from "lucide-react";
+import { getColumnFilterProps } from "../../../Common/tableFunction";
+import { deleteCategory, getAllSerie } from "../../../Api/Controller";
+import CategoryEdit from "../edit/CategoryEdit";
 import Swal from "sweetalert2";
 import "../../../styles/adminLayout.scss";
 import toast, { Toaster } from "react-hot-toast";
-import BranchEdit from "../edit/BranchEdit";
+import { useNavigate } from "react-router-dom";
 
-const BranchManagement = () => {
-  const [branches, setBranches] = useState([]);
+const ProductManagement = () => {
+  const [series, setSeries] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [open, setOpen] = useState(false);
   const [idEdit, setIdEdit] = useState(0);
   const [reloadData, setReloadData] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setReloadData(false);
-    getAllBranch().then((data) => {
+    getAllSerie().then((data) => {
       if (data) {
-        setBranches(data);
-      } else setBranches([]);
+        setSeries(data);
+      } else setSeries([]);
     });
   }, [reloadData]);
 
@@ -46,6 +49,10 @@ const BranchManagement = () => {
     setIdEdit(0);
   };
 
+  const goBack = () => {
+    window.history.go(-1);
+  };
+
   const handleDelete = (id) => {
     Remove(id);
     async function Remove(id) {
@@ -60,7 +67,7 @@ const BranchManagement = () => {
         confirmButtonText: "Xóa",
       }).then((result) => {
         if (result.isConfirmed) {
-          deleteBranch(id).then((data) => {
+          deleteCategory(id).then((data) => {
             if (data) {
               toast.success("Xóa thành công");
               setReloadData(true);
@@ -74,25 +81,37 @@ const BranchManagement = () => {
   const columns = [
     {
       title: "Hình",
-      dataIndex: "imageUrl",
-      key: "imageUrl",
-      render: (imageUrl) => (
-        <img src={imageUrl} className="item-image" alt={imageUrl} />
-      ),
+      dataIndex: "images",
+      key: "images",
+      render: (images) =>
+        images[0] ? (
+          <img
+            src={images[0].imageUrl}
+            className="item-image"
+            alt={images[0].imageUrl}
+          />
+        ) : null,
       width: 100,
     },
     {
-      title: "Tên thương hiệu",
+      title: "Tên danh mục",
       dataIndex: "name",
       key: "name",
       width: 400,
     },
     {
-      title: "Số sản phẩm thuộc thương hiệu",
-      dataIndex: "productCount",
-      key: "productCount",
+      title: "Danh mục",
+      dataIndex: "category",
+      key: "name",
+      ...getColumnFilterProps("category", series),
       width: 400,
-      sorter: (a, b) => a.productCount - b.productCount,
+    },
+    {
+      title: "Thương hiệu",
+      dataIndex: "branch",
+      key: "branch",
+      ...getColumnFilterProps("branch", series),
+      width: 400,
     },
     {
       title: "Chức năng",
@@ -118,8 +137,11 @@ const BranchManagement = () => {
   return (
     <div className="management">
       <Toaster />
+      <div className="management-back" onClick={goBack}>
+        <MoveLeft />
+      </div>
       <div className="management-top">
-        <h1 className="management-top-title">Quản lý thương hiệu</h1>
+        <h1 className="management-top-title">Danh sách sản phẩm </h1>
         <SearchInput
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -130,7 +152,7 @@ const BranchManagement = () => {
         <Form>
           <DataTable
             columns={columns}
-            dataSource={branches}
+            dataSource={series}
             searchQuery={searchQuery}
             page={page}
             pageSize={pageSize}
@@ -140,10 +162,14 @@ const BranchManagement = () => {
         </Form>
       </div>
       <Modal centered open={open} footer={null} onCancel={handleCancel}>
-        <BranchEdit id={idEdit} onOk={handleOk} setReloadData={setReloadData} />
+        <CategoryEdit
+          id={idEdit}
+          onOk={handleOk}
+          setReloadData={setReloadData}
+        />
       </Modal>
     </div>
   );
 };
 
-export default BranchManagement;
+export default ProductManagement;

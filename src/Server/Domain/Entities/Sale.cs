@@ -9,7 +9,7 @@ namespace Domain.Entities
         public int Id { get; set; }
         
         //Ngày kết thúc sale
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         //Trạng thái
         public bool Status { get; set; }
