@@ -25,7 +25,7 @@ namespace Application.Services
             {
                 Detail = model.Detail,
                 Rating = model.Rating,
-                UserId = model.UserId,
+                ApplicationUserId = model.UserId,
                 CommentDate = DateTime.Now,
             };
             _repository.Add(comment);

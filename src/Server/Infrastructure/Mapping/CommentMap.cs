@@ -22,9 +22,9 @@ namespace Infrastructure.Mapping
             builder.Property(c => c.Status)
                 .HasDefaultValue(false);
 
-            builder.HasOne(c => c.User)
+            builder.HasOne(c => c.ApplicationUser)
                 .WithMany(u => u.Comments)
-                .HasForeignKey(c => c.UserId)
+                .HasForeignKey(c => c.ApplicationUserId)
                 .HasConstraintName("FK_Comments_Users")
                 .OnDelete(DeleteBehavior.Restrict);
 

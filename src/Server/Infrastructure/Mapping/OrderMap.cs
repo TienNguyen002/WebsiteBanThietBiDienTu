@@ -28,9 +28,9 @@ namespace Infrastructure.Mapping
                 .HasConstraintName("FK_Statuses_Orders")
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(o => o.User)
+            builder.HasOne(o => o.ApplicationUser)
                 .WithMany(u => u.Orders)
-                .HasForeignKey(o => o.UserId)
+                .HasForeignKey(o => o.ApplicationUserId)
                 .HasConstraintName("FK_Users_Orders")
                 .OnDelete(DeleteBehavior.Cascade);
 

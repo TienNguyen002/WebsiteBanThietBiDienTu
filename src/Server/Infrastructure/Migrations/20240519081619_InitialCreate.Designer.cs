@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DeviceWebDbContext))]
-    [Migration("20240518171817_InitialCreate")]
+    [Migration("20240519081619_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -47,6 +47,9 @@ namespace Infrastructure.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -185,6 +188,9 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CommentDate")
                         .HasColumnType("datetime");
 
@@ -203,14 +209,11 @@ namespace Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false);
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SerieId");
+                    b.HasIndex("ApplicationUserId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("SerieId");
 
                     b.ToTable("Comments", (string)null);
                 });
@@ -236,7 +239,7 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("StartDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
-                        .HasDefaultValue(new DateTime(2024, 5, 19, 0, 18, 16, 189, DateTimeKind.Local).AddTicks(3978));
+                        .HasDefaultValue(new DateTime(2024, 5, 19, 15, 16, 18, 604, DateTimeKind.Local).AddTicks(5118));
 
                     b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
@@ -279,6 +282,9 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("DateOrder")
                         .HasColumnType("datetime");
 
@@ -301,18 +307,15 @@ namespace Infrastructure.Migrations
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("DiscountId");
 
                     b.HasIndex("PaymentMethodId");
 
                     b.HasIndex("StatusId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Orders", (string)null);
                 });
@@ -433,27 +436,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Role", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UrlSlug")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles", (string)null);
-                });
-
             modelBuilder.Entity("Domain.Entities.Sale", b =>
                 {
                     b.Property<int>("Id")
@@ -529,49 +511,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Statuses", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasMaxLength(16)
-                        .HasColumnType("nvarchar(16)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UrlSlug")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -724,6 +663,12 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Comment", b =>
                 {
+                    b.HasOne("Domain.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany("Comments")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .HasConstraintName("FK_Comments_Users");
+
                     b.HasOne("Domain.Entities.Serie", "Serie")
                         .WithMany("Comments")
                         .HasForeignKey("SerieId")
@@ -731,16 +676,9 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Comments_Series");
 
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired()
-                        .HasConstraintName("FK_Comments_Users");
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Serie");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.Image", b =>
@@ -757,6 +695,12 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Order", b =>
                 {
+                    b.HasOne("Domain.Entities.ApplicationUser", "ApplicationUser")
+                        .WithMany("Orders")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasConstraintName("FK_Users_Orders");
+
                     b.HasOne("Domain.Entities.Discount", "Discount")
                         .WithMany("Orders")
                         .HasForeignKey("DiscountId")
@@ -778,20 +722,13 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Statuses_Orders");
 
-                    b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Orders")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Users_Orders");
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Discount");
 
                     b.Navigation("PaymentMethod");
 
                     b.Navigation("Status");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Entities.OrderItem", b =>
@@ -857,18 +794,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.HasOne("Domain.Entities.Role", "Role")
-                        .WithMany("Users")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("FK_Roles_Users");
-
-                    b.Navigation("Role");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -920,6 +845,13 @@ namespace Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Domain.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("Domain.Entities.Branch", b =>
                 {
                     b.Navigation("Series");
@@ -950,11 +882,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("OrderItems");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Role", b =>
-                {
-                    b.Navigation("Users");
-                });
-
             modelBuilder.Entity("Domain.Entities.Sale", b =>
                 {
                     b.Navigation("Products");
@@ -971,13 +898,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Status", b =>
                 {
-                    b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("Domain.Entities.User", b =>
-                {
-                    b.Navigation("Comments");
-
                     b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618

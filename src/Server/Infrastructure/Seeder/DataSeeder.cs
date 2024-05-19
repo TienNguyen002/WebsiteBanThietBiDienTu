@@ -1,5 +1,7 @@
 ﻿using Domain.Entities;
 using Infrastructure.Contexts;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace Infrastructure.Seeders
@@ -7,10 +9,16 @@ namespace Infrastructure.Seeders
     public class DataSeeder : IDataSeeder
     {
         private readonly DeviceWebDbContext _dbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly List<IdentityUserRole<string>> _userRoles;
 
-        public DataSeeder(DeviceWebDbContext dbContext)
+        public DataSeeder(DeviceWebDbContext dbContext, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, List<IdentityUserRole<string>> userRoles)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _userRoles = userRoles;
         }
 
         public void Initialize()
@@ -22,19 +30,101 @@ namespace Infrastructure.Seeders
             var categories = AddCategories();
             var colors = AddColors();
             var statuses = AddStatuses();
-            var roles = AddRoles();
             var branches = AddBranches();
             var paymentMethods = AddPaymentMethods();
             var discounts = AddDiscounts();
             var sales = AddSales();
+            var users = AddUsers();
 
             var series = AddSeries(branches, categories);
-            var users = AddUsers(roles);
             var products = AddProducts(colors, sales, series);
             var orders = AddOrders(users, paymentMethods, statuses, discounts);
             var orderItems = AddOrderItems(products, orders);
             var images = AddImages(series);
             var comments = AddComments(series, users);
+        }
+
+        private List<ApplicationUser> AddUsers()
+        {
+            string adminPwd = "Admin@123";
+            string staffPwd = "Staff@123";
+            string userPwd = "User@123";
+
+            var passwordHasher = new PasswordHasher<IdentityUser>();
+
+            // Seed Users
+            var adminUser = new ApplicationUser
+            {
+                UserName = "admin",
+                Name = "Admin",
+                Email = "admin@gmail.com",
+                EmailConfirmed = true,
+            };
+            adminUser.NormalizedUserName = adminUser.UserName.ToUpper();
+            adminUser.NormalizedEmail = adminUser.Email.ToUpper();
+            adminUser.PasswordHash = passwordHasher.HashPassword(adminUser, adminPwd);
+
+            var staffUser = new ApplicationUser
+            {
+                UserName = "staff",
+                Name = "Nguyễn Hoàng Nhật Tiến",
+                Email = "tiennguyenn002@gmail.com",
+                PhoneNumber = "0819104319",
+                Address = "Da Lat",
+                EmailConfirmed = true,
+            };
+            staffUser.NormalizedUserName = staffUser.UserName.ToUpper();
+            staffUser.NormalizedEmail = staffUser.Email.ToUpper();
+            staffUser.PasswordHash = passwordHasher.HashPassword(staffUser, staffPwd);
+
+            var memberUser = new ApplicationUser
+            {
+                UserName = "user",
+                Name = "Trần Trung Hiếu",
+                Email = "trantrunghieu@gmail.com",
+                PhoneNumber = "097979797",
+                Address = "Da Lat",
+                EmailConfirmed = true,
+            };
+            memberUser.NormalizedUserName = memberUser.UserName.ToUpper();
+            memberUser.NormalizedEmail = memberUser.Email.ToUpper();
+            memberUser.PasswordHash = passwordHasher.HashPassword(memberUser, userPwd);
+
+            List<ApplicationUser> users = new List<ApplicationUser>() {
+               adminUser,
+               staffUser,
+               memberUser,
+            };
+
+            _dbContext.ApplicationUsers.Add(memberUser);
+            _dbContext.ApplicationUsers.Add(staffUser);
+            _dbContext.ApplicationUsers.Add(adminUser);
+
+            var roleManager = _roleManager;
+            var adminRole = roleManager.FindByNameAsync("Quản lý").Result;
+            var staffRole = roleManager.FindByNameAsync("Nhân viên").Result;
+            var memberRole = roleManager.FindByNameAsync("Người dùng").Result;
+
+            _dbContext.UserRoles.Add(new IdentityUserRole<string>
+            {
+                RoleId = adminRole.Id,
+                UserId = adminUser.Id
+            });
+
+            _dbContext.UserRoles.Add(new IdentityUserRole<string>
+            {
+                RoleId = staffRole.Id,
+                UserId = staffUser.Id
+            });
+
+            _dbContext.UserRoles.Add(new IdentityUserRole<string>
+            {
+                RoleId = memberRole.Id,
+                UserId = memberUser.Id
+            });
+
+            _dbContext.SaveChanges();
+            return users;
         }
 
         private IList<Category> AddCategories()
@@ -155,13 +245,13 @@ namespace Infrastructure.Seeders
 
         private IList<Comment> AddComments(
             IList<Serie> series,
-            IList<User> users)
+            IList<ApplicationUser> users)
         {
             var comments = new List<Comment>()
             {
                 new()
                 {
-                    User = users[0],
+                    ApplicationUser = users[2],
                     Serie = series[0],
                     Detail = "Em rất thích sản phẩm này",
                     Rating = 5,
@@ -208,18 +298,18 @@ namespace Infrastructure.Seeders
         }
 
         private IList<Order> AddOrders(
-            IList<User> users,
+            IList<ApplicationUser> users,
             IList<PaymentMethod> paymentMethods,
             IList<Status> statuses,
             IList<Discount> discounts)
         {
-                var random = new Random();
+            var random = new Random();
             var orders = new List<Order>()
             {
                 new()
                 {
                     Name = $"#{random.Next(100000, 1000000):D6}",
-                    User = users[0],
+                    ApplicationUser = users[2],
                     DateOrder = DateTime.Now,
                     Quantity = 2,
                     TotalPrice = 70180000,
@@ -1142,47 +1232,19 @@ namespace Infrastructure.Seeders
             return products;
         }
 
-        private IList<Role> AddRoles()
-        {
-            var roles = new List<Role>()
-            {
-                new()
-                {
-                    Name = "User",
-                    UrlSlug = "user",
-                },
-                new()
-                {
-                    Name = "Admin",
-                    UrlSlug = "admin",
-                },
-            };
-            var roleAdd = new List<Role>();
-            foreach (var item in roles)
-            {
-                if (!_dbContext.Roles.Any(s => s.UrlSlug == item.UrlSlug))
-                {
-                    roleAdd.Add(item);
-                }
-            }
-            _dbContext.AddRange(roleAdd);
-            _dbContext.SaveChanges();
-            return roles;
-        }
-
         private IList<Status> AddStatuses()
         {
             var status = new List<Status>()
             {
                 new()
                 {
-                    Name = "Chờ xác nhận",
-                    UrlSlug = "cho-xac-nhan",
+                    Name = "Chờ thanh toán",
+                    UrlSlug = "cho-thanh-toan",
                 },
                 new()
                 {
-                    Name = "Chờ thanh toán",
-                    UrlSlug = "cho-thanh-toan",
+                    Name = "Chờ xác nhận",
+                    UrlSlug = "cho-xac-nhan",
                 },
                 new()
                 {
@@ -1570,75 +1632,6 @@ namespace Infrastructure.Seeders
             _dbContext.AddRange(branchAdd);
             _dbContext.SaveChanges();
             return branches;
-        }
-
-        private IList<User> AddUsers(
-            IList<Role> roles)
-        {
-            var users = new List<User>()
-            {
-                new()
-                {
-                    Name = "Trần Thái Linh",
-                    UrlSlug = "tran-thai-linh",
-                    Email = "tranthailinh09@gmail.com",
-                    Phone = "0876157866",
-                    Password = "password",
-                    Address = "123 A",
-                    Role = roles[0],
-                },
-                new()
-                {
-                    Name = "Nguyễn Văn Thuận",
-                    UrlSlug = "nguyen-van-thuan",
-                    Email = "nguyenvanthuan112@gmail.com",
-                    Phone = "0963457114",
-                    Password = "password",
-                    Address = "123 A",
-                    Role = roles[0],
-                },
-                new()
-                {
-                    Name = "Nguyễn Hoàng Nhật Tiến",
-                    UrlSlug = "nguyen-hoang-nhat-tien",
-                    Email = "2015749@dlu.edu.vn",
-                    Phone = "0819104319",
-                    Password = "password",
-                    Address = "123 A",
-                    Role = roles[1],
-                },
-                new()
-                {
-                    Name = "Trần Trung Hiếu",
-                    UrlSlug = "tran-trung-hieu",
-                    Email = "2011382@dlu.edu.vn",
-                    Phone = "0869820809",
-                    Password = "password",
-                    Address = "123 A",
-                    Role = roles[1],
-                },
-                new()
-                {
-                    Name = "Nguyễn Ngọc Minh Tiến",
-                    UrlSlug = "nguyen-ngoc-minh-tien",
-                    Email = "2015840@dlu.edu.vn",
-                    Phone = "0868103447",
-                    Password = "password",
-                    Address = "123 A",
-                    Role = roles[1],
-                },
-            };
-            var userAdd = new List<User>();
-            foreach (var item in users)
-            {
-                if (!_dbContext.Users.Any(s => s.UrlSlug == item.UrlSlug))
-                {
-                    userAdd.Add(item);
-                }
-            }
-            _dbContext.AddRange(userAdd);
-            _dbContext.SaveChanges();
-            return users;
         }
 
         private IList<Discount> AddDiscounts()

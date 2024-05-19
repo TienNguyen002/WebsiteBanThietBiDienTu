@@ -111,7 +111,11 @@ namespace Api.Extensions
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<DeviceWebDbContext>()
                 .AddSignInManager()
-                .AddRoles<IdentityRole>();
+                .AddRoles<IdentityRole>()
+                .AddUserManager<UserManager<ApplicationUser>>();
+
+            builder.Services.AddScoped<List<IdentityUserRole<string>>>();
+            builder.Services.AddAuthorization();
 
             //JWT
             builder.Services.AddAuthentication(options =>

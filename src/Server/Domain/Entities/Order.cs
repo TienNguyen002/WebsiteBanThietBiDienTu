@@ -27,10 +27,10 @@ namespace Domain.Entities
         public Status? Status { get; set; }
 
         //Mã người dùng
-        public int UserId { get; set; }
+        public string? ApplicationUserId { get; set; }
 
         //Người dùng
-        public User? User { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
 
         //Mã phương thức
         public int PaymentMethodId { get; set; }

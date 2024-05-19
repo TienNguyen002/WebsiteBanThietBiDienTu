@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Infrastructure.Mapping;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,11 +18,10 @@ namespace Infrastructure.Contexts
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Role> Roles { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<Serie> Series { get; set; }
         public DbSet<Status> Statuses { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         public DeviceWebDbContext(DbContextOptions options) : base(options)
         {
@@ -45,11 +45,15 @@ namespace Infrastructure.Contexts
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PaymentMethodMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductMap).Assembly);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(RoleMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SaleMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SerieMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(StatusMap).Assembly);
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(UserMap).Assembly);
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Id = "1", Name = "Quản lý", NormalizedName = "QUẢN LÝ" },
+                new IdentityRole { Id = "2", Name = "Nhân viên", NormalizedName = "NHÂN VIÊN" },
+                new IdentityRole { Id = "3", Name = "Người dùng", NormalizedName = "NGƯỜI DÙNG" }
+            );
         }
     }
 }

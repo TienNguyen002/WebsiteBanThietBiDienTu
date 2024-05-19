@@ -23,15 +23,18 @@ namespace Application.Services
             _roleManager = roleManager;
             _configuration = configuration;
         }
-        public async Task<ServiceResponses.GeneralResponse> CreateAccount(UserRegisterDTO register)
+
+        public async Task<GeneralResponse> CreateAccount(UserRegisterDTO register)
         {
             if (register is null) return new GeneralResponse(false, "Model is empty");
             var newUser = new ApplicationUser()
             {
                 Name = register.Name,
+                UserName = "user",
+                NormalizedUserName = register.Name.ToUpper(),
                 Email = register.Email,
+                NormalizedEmail = register.Email.ToUpper(),
                 PasswordHash = register.Password,
-                UserName = register.Email
             };
             var user = await _userManager.FindByEmailAsync(newUser.Email);
             if (user is not null) return new GeneralResponse(false, "User registered already");
@@ -40,25 +43,23 @@ namespace Application.Services
             if (!createUser.Succeeded) return new GeneralResponse(false, "Error occured.. please try again");
 
             //Assign Default Role : Admin to first registrar; rest is user
-            var checkAdmin = await _roleManager.FindByNameAsync("Admin");
-            if (checkAdmin is null)
-            {
-                await _roleManager.CreateAsync(new IdentityRole() { Name = "Admin" });
-                await _userManager.AddToRoleAsync(newUser, "Admin");
-                return new GeneralResponse(true, "Account Created");
-            }
-            else
-            {
-                var checkUser = await _roleManager.FindByNameAsync("User");
-                if (checkUser is null)
-                    await _roleManager.CreateAsync(new IdentityRole() { Name = "User" });
 
-                await _userManager.AddToRoleAsync(newUser, "User");
-                return new GeneralResponse(true, "Account Created");
-            }
+            //if (checkAdmin is null)
+            //{
+            //    await roleManager.CreateAsync(new IdentityRole() { Name = "Admin" });
+            //    await userManager.AddToRoleAsync(newUser, "Admin");
+            //    return new GeneralResponse(true, "Account Created");
+            //}
+
+            var checkUser = await _roleManager.FindByNameAsync("Người dùng");
+            if (checkUser is null)
+                await _roleManager.CreateAsync(new IdentityRole() { Name = "Người dùng" });
+
+            await _userManager.AddToRoleAsync(newUser, "Người dùng");
+            return new GeneralResponse(true, "Account Created");
         }
 
-        public async Task<ServiceResponses.LoginResponse> LoginAccount(UserLoginDTO login)
+        public async Task<LoginResponse> LoginAccount(UserLoginDTO login)
         {
             if (login == null)
                 return new LoginResponse(false, null!, "Login container is empty");
@@ -94,7 +95,7 @@ namespace Application.Services
                 claims: userClaims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: credentials
-                );
+            );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
     }

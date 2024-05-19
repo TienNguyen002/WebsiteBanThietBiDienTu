@@ -30,7 +30,7 @@ namespace Api.Mapsters
                 .Map(desc => desc.Products, src => src.Series.Select(s => s.Products));
 
             config.NewConfig<Order, OrderDTO>()
-                .Map(desc => desc.UserName, src => src.User.Name)
+                .Map(desc => desc.UserName, src => src.ApplicationUser.Name)
                 .Map(desc => desc.Status, src => src.Status.Name)
                 .Map(desc => desc.PaymentMethod, src => src.PaymentMethod.Name);
         }
