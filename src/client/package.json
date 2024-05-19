@@ -17,6 +17,7 @@
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "flaticon": "^0.1.0",
+    "jwt-decode": "^4.0.0",
     "lucide-react": "^0.366.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",

@@ -3,13 +3,26 @@ import "../styles/homePage.scss";
 import banner from "../../../Shared/images/banner-top.jpg";
 import logo from "../../../Shared/images/logo-4.png";
 import { UserRound, Search, UserRoundPlus, LogIn } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CartDrawer from "../cart/CartDrawer";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../../Redux/Account";
+import { Badge } from "antd";
 
 const Header = () => {
   const navbarRef = useRef(null);
   const userRef = useRef(null);
   const [open, setOpen] = useState(false);
+  let user = useSelector((state) => state.auth.login.currentUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let cart = useSelector((state) => state.cart);
+  console.log(cart);
+  const handleLogout = async () => {
+    await dispatch(logout());
+    navigate(`/`);
+    window.location.reload();
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,13 +39,13 @@ const Header = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    // let handler = (e) => {
-    //   if (userRef.current && !userRef.current.contains(e.target)) {
-    //     setOpen(false);
-    //   }
-    // };
+    let handler = (e) => {
+      if (userRef.current && !userRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
 
-    // document.addEventListener("mousedown", handler);
+    document.addEventListener("mousedown", handler);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -60,7 +73,7 @@ const Header = () => {
           <div className="home-header-navbar-end">
             <div className="home-header-navbar-end-user" ref={userRef}>
               <UserRound className="user-icon" onClick={() => setOpen(!open)} />
-              {open && (
+              {open && user === null ? (
                 <div className="home-header-navbar-end-user-dropdown">
                   <ul>
                     <Link to={`/login`} className="link">
@@ -72,10 +85,47 @@ const Header = () => {
                     </Link>
                   </ul>
                 </div>
-              )}
+              ) : (open && user.role === "Quản lý") ||
+                (open && user.role === "Nhân viên") ? (
+                <div className="home-header-navbar-end-user-dropdown">
+                  <ul>
+                    <Link to={`/admin`} className="link">
+                      <DropDownItem image={<LogIn />} title="Trang quản lý" />
+                    </Link>
+                    <div onClick={handleLogout} className="link">
+                      <DropDownItem
+                        image={<UserRoundPlus />}
+                        title="Đăng xuất"
+                      />
+                    </div>
+                  </ul>
+                </div>
+              ) : open && user ? (
+                <div className="home-header-navbar-end-user-dropdown">
+                  <ul>
+                    <Link to={`/`} className="link">
+                      <DropDownItem image={<LogIn />} title="Trang cá nhân" />
+                    </Link>
+                    <div onClick={handleLogout} className="link">
+                      <DropDownItem
+                        image={<UserRoundPlus />}
+                        title="Đăng xuất"
+                      />
+                    </div>
+                  </ul>
+                </div>
+              ) : null}
             </div>
             <div className="home-header-navbar-end-cart">
-              <CartDrawer className="cart-icon" />
+              <Badge
+                count={cart.totalAmount}
+                overflowCount={10}
+                size="small"
+                showZero
+                className="cart-icon"
+              >
+                <CartDrawer className="cart-icon" />
+              </Badge>
             </div>
           </div>
         </div>

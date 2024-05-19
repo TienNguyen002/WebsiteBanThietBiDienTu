@@ -5,6 +5,7 @@ import { ShoppingCart, Heart, Eye } from "lucide-react";
 import { formatVND } from "../../../../Common/function";
 import ColorSquare from "../../common/ColorSquare";
 import { useNavigate } from "react-router-dom";
+import { Badge } from "antd";
 
 const ProductCard = (props) => {
   const [showAction, setShowAction] = useState(false);
@@ -41,9 +42,11 @@ const ProductCard = (props) => {
   return (
     <>
       <div ref={productCardRef} className="product-box">
-        <div className="product-box-discount">
-          Giảm {discountPercentage.toFixed(0)}%
-        </div>
+        <Badge.Ribbon
+          text={`Giảm ${discountPercentage.toFixed(0)}%`}
+          placement="start"
+          className="product-box-discount"
+        ></Badge.Ribbon>
         <div to={"/detail"} className="product-box-detail">
           <div className="product-box-detail-top">
             <img

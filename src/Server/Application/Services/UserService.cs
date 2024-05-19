@@ -30,17 +30,15 @@ namespace Application.Services
             var newUser = new ApplicationUser()
             {
                 Name = register.Name,
-                UserName = "user",
-                NormalizedUserName = register.Name.ToUpper(),
+                UserName = register.Email,
                 Email = register.Email,
-                NormalizedEmail = register.Email.ToUpper(),
                 PasswordHash = register.Password,
             };
             var user = await _userManager.FindByEmailAsync(newUser.Email);
-            if (user is not null) return new GeneralResponse(false, "User registered already");
+            if (user is not null) return new GeneralResponse(false, "Email này đã được đăng ký");
 
             var createUser = await _userManager.CreateAsync(newUser!, register.Password);
-            if (!createUser.Succeeded) return new GeneralResponse(false, "Error occured.. please try again");
+            if (!createUser.Succeeded) return new GeneralResponse(false, "Đã có lỗi xảy ra, vui lòng thử lại");
 
             //Assign Default Role : Admin to first registrar; rest is user
 
@@ -56,26 +54,26 @@ namespace Application.Services
                 await _roleManager.CreateAsync(new IdentityRole() { Name = "Người dùng" });
 
             await _userManager.AddToRoleAsync(newUser, "Người dùng");
-            return new GeneralResponse(true, "Account Created");
+            return new GeneralResponse(true, "Tạo tài khoản thành công");
         }
 
         public async Task<LoginResponse> LoginAccount(UserLoginDTO login)
         {
             if (login == null)
-                return new LoginResponse(false, null!, "Login container is empty");
+                return new LoginResponse(false, null!, "Thiếu thông tin");
 
             var getUser = await _userManager.FindByEmailAsync(login.Email);
             if (getUser is null)
-                return new LoginResponse(false, null!, "User not found");
+                return new LoginResponse(false, null!, "Không tìm thấy tài khoản");
 
             bool checkUserPasswords = await _userManager.CheckPasswordAsync(getUser, login.Password);
             if (!checkUserPasswords)
-                return new LoginResponse(false, null!, "Invalid email/password");
+                return new LoginResponse(false, null!, "Sai email hoặc mật khẩu");
 
             var getUserRole = await _userManager.GetRolesAsync(getUser);
             var userSession = new UserSession(getUser.Id, getUser.Name, getUser.Email, getUserRole.First());
             string token = GenerateToken(userSession);
-            return new LoginResponse(true, token!, "Login completed");
+            return new LoginResponse(true, token!, "Đăng nhập thành công");
         }
 
         private string GenerateToken(UserSession user)

@@ -14,14 +14,14 @@ const BadRequest = () => {
   };
 
   return (
-    <div className="bad-request-page">
+    <div className="common-page">
       <img
         src="https://t3.ftcdn.net/jpg/04/08/40/50/360_F_408405006_Ou80YYIL1ssetJXkfAgyTDPIkgKzVnkj.jpg"
         alt="400"
-        className="bad-request-page-image"
+        className="common-page-image"
       />
-      <p className="bad-request-page-message">Bad Request!</p>
-      <button className="bad-request-page-button" onClick={handleBack}>
+      <p className="common-page-message">Bad Request!</p>
+      <button className="common-page-button" onClick={handleBack}>
         Quay lại trang chủ
       </button>
     </div>

@@ -19,6 +19,7 @@ const ProductFilter = ({
   const [starValue, setStarValue] = useState(0);
   const [minValue, setMinValue] = useState(50000);
   const [maxValue, setMaxValue] = useState(50000000);
+  const [colorSelect, setColorSelect] = useState({});
 
   const onBranchChange = (e) => {
     setBranchValue(e.target.value);
@@ -35,8 +36,9 @@ const ProductFilter = ({
     setMaxValue(value[1]);
   };
 
-  const handleColorClick = (slug) => {
+  const handleColorClick = (slug, name) => {
     onColorFilterChange(slug);
+    setColorSelect(name);
   };
 
   const resetColor = () => {
@@ -139,7 +141,8 @@ const ProductFilter = ({
                     key={index}
                     color={item.name}
                     slug={item.urlSlug}
-                    onClick={handleColorClick}
+                    select={colorSelect}
+                    onClick={() => handleColorClick(item.urlSlug, item.name)}
                   />
                 </>
               ))

@@ -15,7 +15,7 @@ const NoColorFound = ({ color }) => {
   return <div>Không có màu: {color}</div>;
 };
 
-const ColorSquare = ({ color, slug, onClick }) => {
+const ColorSquare = ({ color, slug, onClick, select }) => {
   const hexColor = colorMap[color];
 
   if (!hexColor) {
@@ -28,7 +28,7 @@ const ColorSquare = ({ color, slug, onClick }) => {
       style={{
         backgroundColor: hexColor,
       }}
-      className="color-square"
+      className={select === color ? "color-square-selected" : "color-square"}
       onClick={() => onClick(slug)}
     />
   );

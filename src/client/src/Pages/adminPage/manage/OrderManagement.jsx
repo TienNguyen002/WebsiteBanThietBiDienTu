@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Form, Space, Modal } from "antd";
 import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
-import { Eye, Pencil, Trash } from "lucide-react";
-import { deleteCategory, getAllOrders } from "../../../Api/Controller";
+import { Eye } from "lucide-react";
+import { getAllOrders } from "../../../Api/Controller";
 import CategoryEdit from "../edit/CategoryEdit";
-import Swal from "sweetalert2";
 import "../../../styles/adminLayout.scss";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import { convertDate, formatVND } from "../../../Common/function";
 import ManageTag from "../../../Components/shared/ManageTag";
 import OrderButton from "../../../Components/admin/common/OrderButton";
@@ -30,16 +29,6 @@ const OrderManagement = () => {
     });
   }, [reloadData]);
 
-  const handleAddClick = () => {
-    setIdEdit(0);
-    setOpen(true);
-  };
-
-  const handleEditClick = (id) => {
-    setOpen(true);
-    setIdEdit(id);
-  };
-
   const handleOk = () => {
     setOpen(false);
   };
@@ -47,31 +36,6 @@ const OrderManagement = () => {
   const handleCancel = () => {
     setOpen(false);
     setIdEdit(0);
-  };
-
-  const handleDelete = (id) => {
-    Remove(id);
-    async function Remove(id) {
-      Swal.fire({
-        title: "Bạn có muốn xóa dữ liệu này!",
-        text: "Dữ liệu này không thể khôi phục khi xóa!",
-        cancelButtonText: "Hủy",
-        icon: "error",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Xóa",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          deleteCategory(id).then((data) => {
-            if (data) {
-              toast.success("Xóa thành công");
-              setReloadData(true);
-            } else toast.error("Xóa thất bại");
-          });
-        }
-      });
-    }
   };
 
   const columns = [
@@ -85,20 +49,20 @@ const OrderManagement = () => {
       title: "Họ tên người đặt",
       dataIndex: "userName",
       key: "userName",
-      width: 250,
+      width: 400,
     },
     {
       title: "Ngày đặt",
       dataIndex: "dateOrder",
       key: "dateOrder",
-      width: 400,
+      width: 200,
       render: (dateOrder) => <span>{convertDate(dateOrder)}</span>,
     },
     {
       title: "Số lượng đặt",
       dataIndex: "quantity",
       key: "quantity",
-      width: 400,
+      width: 300,
       sorter: (a, b) => a.quantity - b.quantity,
     },
     {
@@ -114,8 +78,7 @@ const OrderManagement = () => {
       dataIndex: "status",
       key: "status",
       render: (status) => <ManageTag tag={status} />,
-
-      width: 400,
+      width: 300,
     },
     {
       title: "Phương thức thanh toán",

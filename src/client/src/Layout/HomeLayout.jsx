@@ -4,6 +4,7 @@ import Header from "../Components/user/header/Header";
 import Footer from "../Components/user/footer/Footer";
 import { ArrowUp } from "lucide-react";
 import "../styles/homeLayout.scss";
+import { Toaster } from "react-hot-toast";
 
 const HomeLayout = () => {
   const buttonRef = useRef(null);
@@ -46,6 +47,7 @@ const HomeLayout = () => {
 
   return (
     <>
+      <Toaster />
       <div className="home-layout">
         <Header />
         <div>

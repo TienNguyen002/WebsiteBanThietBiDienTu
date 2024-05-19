@@ -1,8 +1,8 @@
 import React from "react";
-import "../../styles/commonPage.scss";
 import { useNavigate } from "react-router-dom";
+import "../../styles/commonPage.scss";
 
-const NotFound = () => {
+const NotAccessPage = () => {
   const navigate = useNavigate();
 
   const handleBack = () => {
@@ -16,11 +16,11 @@ const NotFound = () => {
   return (
     <div className="common-page">
       <img
-        src="https://img.freepik.com/free-vector/404-error-with-landscape-concept-illustration_114360-7898.jpg"
-        alt="404"
+        src="https://assets.wpdeveloper.com/2022/08/image.png"
+        alt="No Access"
         className="common-page-image"
       />
-      <p className="common-page-message">Trang không tồn tại!</p>
+      <p className="common-page-message">Bạn không có quyền!</p>
       <button className="common-page-button" onClick={handleBack}>
         Quay lại trang chủ
       </button>
@@ -28,4 +28,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default NotAccessPage;

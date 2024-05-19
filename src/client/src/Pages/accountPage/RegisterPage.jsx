@@ -8,9 +8,24 @@ import {
   MoveLeft,
 } from "lucide-react";
 import "../../styles/accountPage.scss";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../../Api/AuthController";
+import toast, { Toaster } from "react-hot-toast";
 
 const RegisterPage = () => {
+  const initialState = {
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
   const [show, setShow] = useState(false);
+  const [account, setAccount] = useState(initialState);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+
+  const dispatch = useDispatch();
+  const naviagate = useNavigate();
 
   const handleShow = () => {
     setShow(!show);
@@ -20,13 +35,24 @@ const RegisterPage = () => {
     window.history.go(-1);
   };
 
+  const handleRegister = (e) => {
+    e.preventDefault();
+    let formData = new FormData(e.target);
+    if (!acceptedTerms) {
+      toast.error("Bạn phải đồng ý với điều khoản trước khi đăng ký.");
+      return;
+    } else {
+      registerUser(formData, dispatch, naviagate);
+    }
+  };
+
   return (
     <div className="wrapper">
-      {" "}
+      <Toaster />
       <div className="account-page">
         <MoveLeft className="account-page-back" onClick={goBack} />
         <div className="account-page-register">
-          <form action="" className="account-page-form">
+          <form onSubmit={handleRegister} className="account-page-form">
             <h1 className="account-page-form-title">Đăng ký</h1>
             <div className="account-page-form-input">
               <Mail className="account-page-form-input-icon" />
@@ -34,7 +60,11 @@ const RegisterPage = () => {
                 type="email"
                 placeholder="Email"
                 required
+                name="email"
                 className="account-page-form-input-box"
+                onChange={(e) =>
+                  setAccount({ ...account, email: e.target.value })
+                }
               />
             </div>
             <div className="account-page-form-input">
@@ -43,16 +73,24 @@ const RegisterPage = () => {
                 type="text"
                 placeholder="Tên đăng nhập"
                 required
+                name="name"
                 className="account-page-form-input-box"
+                onChange={(e) =>
+                  setAccount({ ...account, name: e.target.value })
+                }
               />
             </div>
             <div className="account-page-form-input">
               <Lock className="account-page-form-input-icon" />
               <input
-                type="password"
+                type={show ? "text" : "password"}
                 placeholder="Mật khẩu"
                 required
+                name="password"
                 className="account-page-form-input-box"
+                onChange={(e) =>
+                  setAccount({ ...account, password: e.target.value })
+                }
               />
               <div
                 className="account-page-form-input-show"
@@ -64,10 +102,14 @@ const RegisterPage = () => {
             <div className="account-page-form-input">
               <Lock className="account-page-form-input-icon" />
               <input
-                type="password"
+                type={show ? "text" : "password"}
                 placeholder="Mật khẩu xác nhận"
                 required
+                name="confirmPassword"
                 className="account-page-form-input-box"
+                onChange={(e) =>
+                  setAccount({ ...account, confirmPassword: e.target.value })
+                }
               />
               <div
                 className="account-page-form-input-show"
@@ -78,7 +120,11 @@ const RegisterPage = () => {
             </div>
             <div className="account-page-form-accept">
               <label>
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  checked={acceptedTerms}
+                  onChange={() => setAcceptedTerms(!acceptedTerms)}
+                />
                 Tôi đồng ý với điều khoản
               </label>
             </div>

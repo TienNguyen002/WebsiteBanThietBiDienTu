@@ -1,3 +1,5 @@
+import { jwtDecode } from "jwt-decode";
+
 export const formatVND = (number) => {
   return new Intl.NumberFormat("vi-VN", {
     style: "currency",
@@ -28,3 +30,23 @@ export const convertObjToQueryString = function (obj) {
   return str.join("&");
 };
 
+export const decodeAndSaveUserInfo = (token) => {
+  const userInfo = jwtDecode(token);
+  const user = {
+    id: userInfo[
+      "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+    ],
+    username:
+      userInfo["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
+    email:
+      userInfo[
+        "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+      ],
+    role: userInfo[
+      "http://schemas.microsoft.com/ws/2008/06/identity/claims/role"
+    ],
+  };
+  localStorage.setItem("token", token);
+  localStorage.setItem("user", JSON.stringify(user));
+  return user;
+};

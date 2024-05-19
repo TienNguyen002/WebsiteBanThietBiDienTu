@@ -442,6 +442,10 @@
   height: 30px;
 }
 
+.cart-icon {
+  color: var(--white);
+}
+
 /*=========== Navigation Bar ===========*/
 .navigation-bar {
   background: var(--white);
@@ -670,6 +674,7 @@
 
         &-dropdown {
           position: absolute;
+          z-index: 9;
           background: var(--white);
           color: var(--black);
           cursor: pointer;
@@ -738,8 +743,15 @@
   border: 2px solid var(--gray);
 }
 
-.color-square.selected {
-  border: 2px solid red;
+.color-square-selected {
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 1em;
+  border: 1px solid var(--gray);
+  cursor: pointer;
+  border: 2px solid var(--black);
 }
 
 /*=========== Image Gallery ===========*/

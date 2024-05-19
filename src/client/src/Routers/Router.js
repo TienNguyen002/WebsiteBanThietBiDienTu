@@ -10,6 +10,7 @@ import LoginPage from "../Pages/accountPage/LoginPage";
 import RegisterPage from "../Pages/accountPage/RegisterPage";
 import AdminLayout from "../Layout/AdminLayout";
 import NotFound from "../Pages/common/NotFound";
+import NotAccessPage from "../Pages/common/NotAccessPage";
 import BadRequest from "../Pages/common/BadRequest";
 import Dashboard from "../Pages/adminPage/Dashboard";
 import CategoryManagement from "../Pages/adminPage/manage/CategoryManagement";
@@ -22,6 +23,8 @@ import DiscountManagement from "../Pages/adminPage/manage/DiscountManagement";
 import SaleManagement from "../Pages/adminPage/manage/SaleManagement";
 import SeriePage from "../Pages/userPage/SeriePage";
 import ProductManagement from "../Pages/adminPage/manage/ProductManagement";
+import { useSelector } from "react-redux";
+import CartPage from "../Pages/userPage/CartPage";
 
 const Router = () => {
   return (
@@ -29,6 +32,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/detail/:slug" element={<ProductDetail />} />
           <Route path="/sale">
             <Route
@@ -251,7 +255,14 @@ const Router = () => {
           </Route>
         </Route>
         <Route path="/search" element={<SearchPage />} />
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route
+          path="/admin"
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
+        >
           <Route path="/admin" element={<Dashboard />} />
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/category" element={<CategoryManagement />} />
@@ -271,6 +282,18 @@ const Router = () => {
       </Routes>
     </BrowserRouter>
   );
+};
+
+const AdminRoute = ({ children }) => {
+  let user = useSelector((state) => state.auth.login.currentUser);
+  if (user === null) {
+    return <NotAccessPage />;
+  }
+  if (user.role === "Quản lý" || user.role === "Nhân viên") {
+    return <>{children}</>;
+  } else {
+    return <NotAccessPage />;
+  }
 };
 
 export default Router;

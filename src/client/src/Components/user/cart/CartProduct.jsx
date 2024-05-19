@@ -5,12 +5,8 @@ import Quantity from "../common/Quantity";
 //Import Function
 import { formatVND } from "../../../Common/function";
 
-const CartProduct = ({ setTotal }) => {
+const CartProduct = ({ items }) => {
   const [quantity, setQuantity] = useState(1);
-
-  useEffect(() => {
-    setTotal(formatVND(16990000 * quantity));
-  });
 
   return (
     <>

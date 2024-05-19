@@ -7,6 +7,7 @@ import Banner from "../../Components/user/common/Banner";
 import Category from "../../Components/user/common/category/Category";
 import "../../styles/homeLayout.scss";
 import ShopPrivacy from "../../Components/user/common/Privacy";
+import { Toaster } from "react-hot-toast";
 
 const HomePage = () => {
   useEffect(() => {
@@ -15,6 +16,7 @@ const HomePage = () => {
 
   return (
     <div className="home-page">
+      <Toaster />
       <TopHome />
       <FlashSale />
       <ShopPrivacy />
