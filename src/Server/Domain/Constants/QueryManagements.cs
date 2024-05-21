@@ -10,5 +10,7 @@
         /// </summary>
         public static readonly string CategoryFolder = "Category";
         public static readonly string BranchFolder = "Branch";
+        public static readonly string SerieFolder = "Serie";
+        public static readonly string ProductFolder = "Product";
     }
 }

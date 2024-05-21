@@ -17,7 +17,11 @@ const ProductTag = ({ products, tag, onClick }) => {
               onClick={() => onClick(item.urlSlug)}
             >
               <div className="product-tag-box-name">{item.shortName}</div>
-              <p className="product-tag-box-price">{formatVND(item.price)}</p>
+              <p className="product-tag-box-price">
+                {item.price === 0
+                  ? formatVND(item.orPrice)
+                  : formatVND(item.price)}
+              </p>
             </div>
           ))
         : null}

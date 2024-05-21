@@ -28,4 +28,5 @@ code {
   --dark-red: #CD184F;
   --primary: #0080FF;
   --danger: red;
+  --title: rgb(0, 102, 255);
 }

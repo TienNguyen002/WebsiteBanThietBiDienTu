@@ -1,5 +1,7 @@
 ﻿using Api.Response;
+using Domain.DTO.Category;
 using Domain.DTO.Order;
+using Domain.DTO.OrderItem;
 using Domain.DTO.Serie;
 using Domain.Interfaces.Services;
 using MapsterMapper;
@@ -35,6 +37,55 @@ namespace Api.Controllers
                 return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
             }
             return Ok(ApiResponse.Success(orders));
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<OrderDTO>> AddOrder([FromBody] OrderEditModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var orderCreate = await _service.AddOrder(model);
+            if (!orderCreate)
+            {
+                return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
+            }
+            var result = _mapper.Map<OrderDTO>(model);
+            return Ok(ApiResponse.Success(result));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<IList<OrderItemsDTO>>> GetOrderItemsByOrderIdAsync(int id)
+        {
+            var orders = await _service.GetOrderItemsByOrderIdAsync(id);
+            if (orders == null)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(orders));
+        }
+
+        [HttpPut("moveNext/{id}")]
+        public async Task<ActionResult<OrderDTO>> MoveNextStep(int id)
+        {
+            var order = await _service.MoveToNextStep(id);
+            if (!order)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(order));
+        }
+
+        [HttpPut("cancel/{id}")]
+        public async Task<ActionResult<OrderDTO>> CancelOrder(int id)
+        {
+            var order = await _service.CancelOrder(id);
+            if (!order)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(order));
         }
     }
 }

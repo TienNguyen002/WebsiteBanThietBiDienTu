@@ -38,12 +38,12 @@ namespace Infrastructure.Repositories
         /// <param name="slug"> UrlSlug want to get Color </param>
         /// <returns> Color With UrlSlug want to get </returns>
         /// <exception cref="ArgumentNullException"></exception>
-        //public async Task<Color> GetColorBySlug(string slug)
-        //{
-        //    return await _context.Set<Color>()
-        //        .Include(c => c.Products)
-        //        .Where(c => c.UrlSlug == slug)
-        //        .FirstOrDefaultAsync();
-        //}
+        public async Task<Color> GetColorByName(string name)
+        {
+            return await _context.Set<Color>()
+                .Include(c => c.Products)
+                .Where(c => c.Name == name)
+                .FirstOrDefaultAsync();
+        }
     }
 }

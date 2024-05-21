@@ -22,32 +22,31 @@ const cartSlice = createSlice({
         state.items.push(action.payload);
         state.totalAmount++;
       }
-      state.totalPrice = state.items.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0
-      );
+      state.totalPrice = state.items.reduce((acc, item) => acc + item.price, 0);
     },
     removeItem: (state, action) => {
-      state.items = state.items.filter((item) => item.id !== action.payload);
-      state.totalAmount--;
-      state.totalPrice = state.items.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0
+      const { id, color } = action.payload;
+      state.items = state.items.filter(
+        (item) => item.id !== id || item.color !== color
       );
+      state.totalAmount--;
+      state.totalPrice = state.items.reduce((acc, item) => acc + item.price, 0);
     },
     updateQuantity: (state, action) => {
       const item = state.items.find((item) => item.id === action.payload.id);
       if (item) {
         item.quantity = action.payload.quantity;
+        item.price = item.realPrice * item.quantity;
       }
-      state.totalPrice = state.items.reduce(
-        (acc, item) => acc + item.price * item.quantity,
-        0
-      );
+      state.totalPrice = state.items.reduce((acc, item) => acc + item.price, 0);
+    },
+    resetCart: (state) => {
+      return initialState;
     },
   },
 });
 
-export const { addItem, removeItem, updateQuantity } = cartSlice.actions;
+export const { addItem, removeItem, updateQuantity, resetCart } =
+  cartSlice.actions;
 
 export const cartReducer = cartSlice.reducer;

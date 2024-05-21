@@ -14,7 +14,8 @@ namespace Infrastructure.Mapping
                 .IsRequired();
 
             builder.Property(c => c.Rating)
-               .IsRequired();
+               .IsRequired()
+               .HasColumnType("float");
 
             builder.Property(c => c.CommentDate)
                 .HasColumnType("datetime");

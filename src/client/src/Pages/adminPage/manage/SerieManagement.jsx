@@ -4,12 +4,16 @@ import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
 import { Eye, Pencil, Trash } from "lucide-react";
 import { getColumnFilterProps } from "../../../Common/tableFunction";
-import { deleteCategory, getAllSerie } from "../../../Api/Controller";
-import CategoryEdit from "../edit/CategoryEdit";
+import {
+  deleteCategory,
+  deleteSerie,
+  getAllSerie,
+} from "../../../Api/Controller";
 import Swal from "sweetalert2";
 import "../../../styles/adminLayout.scss";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import SerieEdit from "../edit/SerieEdit";
 
 const SerieManagement = () => {
   const [series, setSeries] = useState([]);
@@ -67,7 +71,7 @@ const SerieManagement = () => {
         confirmButtonText: "Xóa",
       }).then((result) => {
         if (result.isConfirmed) {
-          deleteCategory(id).then((data) => {
+          deleteSerie(id).then((data) => {
             if (data) {
               toast.success("Xóa thành công");
               setReloadData(true);
@@ -123,7 +127,7 @@ const SerieManagement = () => {
             <Eye onClick={() => handleLink(`${record.urlSlug}`)} />
             <Pencil
               className="action-edit"
-              onClick={() => handleEditClick(`${record.id}`)}
+              onClick={() => handleEditClick(record.id)}
             />
             <Trash
               className="action-remove"
@@ -159,12 +163,14 @@ const SerieManagement = () => {
           />
         </Form>
       </div>
-      <Modal centered open={open} footer={null} onCancel={handleCancel}>
-        <CategoryEdit
-          id={idEdit}
-          onOk={handleOk}
-          setReloadData={setReloadData}
-        />
+      <Modal
+        centered
+        open={open}
+        footer={null}
+        onCancel={handleCancel}
+        width={1000}
+      >
+        <SerieEdit id={idEdit} onOk={handleOk} setReloadData={setReloadData} />
       </Modal>
     </div>
   );

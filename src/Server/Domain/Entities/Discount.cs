@@ -17,16 +17,13 @@ namespace Domain.Entities
         public string CodeName { get; set; } = null!;
 
         //Phần trăm giảm giá
-        public decimal DiscountPercent { get; set; }
+        public double DiscountPercent { get; set; }
 
         //Ngày bắt đầu
         public DateTime StartDate { get; set; }
 
         //Ngày kết thúc
         public DateTime EndDate { get; set; }
-
-        //Trạng thái
-        public bool Status { get; set; }
 
         //Danh sách đơn hàng
         public IList<Order> Orders { get; set; } = new List<Order>();

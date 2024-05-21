@@ -46,10 +46,21 @@ namespace Api.Controllers
         /// Get All Commentes
         /// </summary>
         /// <returns> List Of Commentes </returns>
-        [HttpGet("getByProductTag/{tag}")]
-        public async Task<ActionResult<IList<CommentDTO>>> GetAllCommentes(string tag)
+        [HttpGet("getByProductSlug/{slug}")]
+        public async Task<ActionResult<IList<CommentDTO>>> GetAllCommentes(string slug)
         {
-            var comments = await _service.GetCommentsByProductTag(tag);
+            var comments = await _service.GetCommentsByProductSlug(slug);
+            if (comments == null)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(comments));
+        }
+
+        [HttpGet("count/{slug}")]
+        public async Task<ActionResult<IList<CommentCountDTO>>> CountAllComments(string slug)
+        {
+            var comments = await _service.CountAllComment(slug);
             if (comments == null)
             {
                 return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));

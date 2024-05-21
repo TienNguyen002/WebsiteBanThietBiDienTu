@@ -79,12 +79,20 @@ const ProductItem = (props) => {
             ))}
           </div>
           <div className="product-box-detail-price">
-            <div className="product-box-detail-price-discount">
-              <p>{formatVND(current)}</p>
-            </div>
-            <div className="product-box-detail-price-current">
-              <s>{formatVND(orPrice)}</s>
-            </div>
+            {current === 0 ? (
+              <div className="top-card-product-detail-item-price-original">
+                <p>{formatVND(orPrice)}</p>
+              </div>
+            ) : (
+              <>
+                <div className="top-card-product-detail-item-price-current">
+                  <p>{formatVND(current)}</p>
+                </div>
+                <div className="top-card-product-detail-item-price-original">
+                  <s>{formatVND(orPrice)}</s>
+                </div>
+              </>
+            )}
           </div>
           <div className="product-box-info">
             <StarRating rating={star} className="product-box-info-rating" />

@@ -11,6 +11,9 @@ namespace Domain.Entities
         //Tên dòng
         public string Name { get; set; } = null!;
 
+        //Tổng đánh giá
+        public float Rating { get; set; }
+
         //Mã định danh
         public string UrlSlug { get; set; } = null!;
 

@@ -1,8 +1,10 @@
 import React from "react";
 import { Input, Button } from "antd";
+import { useSelector } from "react-redux";
 
 const SearchInput = ({ searchQuery, setSearchQuery, addClick }) => {
-  console.log(searchQuery);
+  let user = useSelector((state) => state.auth.login.currentUser);
+
   const handleSearch = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -18,7 +20,7 @@ const SearchInput = ({ searchQuery, setSearchQuery, addClick }) => {
       {/* <Button type="primary" icon={<Search />} style={{ marginLeft: 8 }}>
           Search
         </Button> */}
-      {addClick && (
+      {addClick && user.role === "Quản lý" ? (
         <Button
           type="primary"
           className="management-action-add"
@@ -26,7 +28,7 @@ const SearchInput = ({ searchQuery, setSearchQuery, addClick }) => {
         >
           Thêm mới
         </Button>
-      )}
+      ) : null}
     </div>
   );
 };

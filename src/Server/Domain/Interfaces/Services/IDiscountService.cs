@@ -5,8 +5,9 @@ namespace Domain.Interfaces.Services
     public interface IDiscountService
     {
         Task<IList<DiscountDTO>> GetAllDiscounts();
+        Task<DiscountDTO> GetDiscountByCodeName(string codeName);
         Task<DiscountDTO> GetDiscountById(int id);
         Task<bool> AddDiscount(DiscountEditModel model);
-        //Task<bool> DeleteDiscount(int id);
+        Task<bool> DeleteDiscount(int id);
     }
 }

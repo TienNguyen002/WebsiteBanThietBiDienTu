@@ -4,6 +4,7 @@ import "../../styles/accountPage.scss";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../Api/AuthController";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const initialState = {
@@ -14,11 +15,12 @@ const LoginPage = () => {
   const [account, setAccount] = useState(initialState);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
     let formData = new FormData(e.target);
-    loginUser(formData, dispatch)
+    loginUser(formData, dispatch, navigate)
       .then(() => {
         localStorage.setItem("isLoggedIn", true);
       })
@@ -85,6 +87,7 @@ const LoginPage = () => {
               <p>
                 Bạn chưa có tài khoản? <a href="/register">Đăng ký ngay!</a>
               </p>
+              <a href="/">Quay lại trang chủ</a>
             </div>
           </form>
         </div>

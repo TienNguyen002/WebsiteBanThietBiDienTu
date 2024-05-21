@@ -2,27 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   currentStep: 0,
-  cartItems: [],
 };
 
-export const cartSlice = createSlice({
-  name: "cart",
+export const stepSlice = createSlice({
+  name: "step",
   initialState,
   reducers: {
-    setCurrentStep: (state, action) => {
-      state.currentStep = action.payload;
+    setNextStep: (state) => {
+      state.currentStep += 1;
     },
-    addToCart: (state, action) => {
-      state.cartItems.push(action.payload);
+    setPrevStep: (state) => {
+      state.currentStep -= 1;
     },
-    removeFromCart: (state, action) => {
-      state.cartItems = state.cartItems.filter(
-        (item) => item.id !== action.payload
-      );
+    resetStep: (state) => {
+      state.currentStep = initialState.currentStep;
     },
   },
 });
 
-export const { setCurrentStep, addToCart, removeFromCart } = cartSlice.actions;
+export const { setNextStep, setPrevStep, resetStep } = stepSlice.actions;
 
-export default cartSlice.reducer;
+export const stepReducer = stepSlice.reducer;

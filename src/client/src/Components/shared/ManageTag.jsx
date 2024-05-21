@@ -20,7 +20,7 @@ const ManageTag = ({ tag }) => {
         <Tag color="green">{tag}</Tag>
       ) : tag === "Nhân viên" ? (
         <Tag color="magenta">{tag}</Tag>
-      ) : tag === "Admin" ? (
+      ) : tag === "Quản lý" ? (
         <Tag color="geekblue">{tag}</Tag>
       ) : null}
     </>

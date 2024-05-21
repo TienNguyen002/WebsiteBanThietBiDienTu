@@ -10,14 +10,14 @@ const Footer = () => {
         <div className="home-footer-top">
           <div className="home-footer-top-about">
             <ul className="item">
-              <h4 className="title">VỀ CHÚNG TÔI</h4>
+              <h4 className="footer-title">VỀ CHÚNG TÔI</h4>
               <li>Giới thiệu</li>
               <li>Tuyển dụng</li>
             </ul>
           </div>
           <div className="home-footer-top-policy">
             <ul className="item">
-              <h4 className="title">CHÍNH SÁCH</h4>
+              <h4 className="footer-title">CHÍNH SÁCH</h4>
               <li>Chính sách bảo hành</li>
               <li>Chính sách thanh toán</li>
               <li>Chính sách giao hàng</li>
@@ -26,7 +26,7 @@ const Footer = () => {
           </div>
           <div className="home-footer-top-information">
             <ul className="item">
-              <h4 className="title">THÔNG TIN</h4>
+              <h4 className="footer-title">THÔNG TIN</h4>
               <li>Hệ thống cửa hàng</li>
               <li>Trung tâm bảo hành</li>
               <li>Tra cứu địa chỉ bảo hành</li>
@@ -34,7 +34,7 @@ const Footer = () => {
           </div>
           <div className="home-footer-top-support">
             <ul className="item">
-              <h4 className="title">TỔNG ĐÀI HỖ TRỢ (8:00 - 21:00)</h4>
+              <h4 className="footer-title">TỔNG ĐÀI HỖ TRỢ (8:00 - 21:00)</h4>
               <li>
                 CSKH:
                 <Link className="link"> 0819104319</Link>

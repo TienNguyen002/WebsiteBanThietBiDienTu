@@ -10,11 +10,11 @@ import {
 import { decodeAndSaveUserInfo } from "../Common/function";
 import toast from "react-hot-toast";
 
-export function loginUser(user, dispatch) {
+export function loginUser(user, dispatch, navigate) {
   return new Promise((resolve, reject) => {
     dispatch(loginStart());
     axios
-      .post("https://localhost:7058/api/User/login", user)
+      .post(process.env.REACT_APP_API_LOGIN, user)
       .then((response) => {
         const data = response.data;
         if (data.flag === false) {
@@ -23,7 +23,12 @@ export function loginUser(user, dispatch) {
         }
         const userInfo = decodeAndSaveUserInfo(data.token);
         dispatch(loginSuccess(userInfo));
-        window.history.go(-1);
+        const recentRegister = localStorage.getItem("recentRegister");
+        if (recentRegister) {
+          navigate("/");
+        } else {
+          window.history.go(-1);
+        }
         toast.success("Đăng nhập thành công");
         resolve(userInfo);
       })
@@ -44,19 +49,16 @@ export function registerUser(user, dispatch, navigate) {
   return new Promise((resolve, reject) => {
     dispatch(registerStart());
     try {
-      axios
-        .post("https://localhost:7058/api/User/register", user)
-        .then((response) => {
-          const data = response.data;
-          console.log(data);
-          if (data.flag === false) {
-            toast.error("Xảy ra lỗi không thể đăng ký: " + data.message);
-            return;
-          }
-          dispatch(registerSuccess());
-          toast.success("Đăng ký tài khoản thành công");
-          navigate("/login");
-        });
+      axios.post(process.env.REACT_APP_API_REGISTER, user).then((response) => {
+        const data = response.data;
+        if (data.flag === false) {
+          toast.error("Xảy ra lỗi không thể đăng ký: " + data.message);
+          return;
+        }
+        dispatch(registerSuccess());
+        toast.success("Đăng ký tài khoản thành công");
+        navigate("/login");
+      });
     } catch (error) {
       dispatch(registerFail());
     }

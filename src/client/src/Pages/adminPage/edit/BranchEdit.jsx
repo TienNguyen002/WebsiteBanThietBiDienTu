@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../../styles/adminLayout.scss";
 import { editBranch, getBranchById } from "../../../Api/Controller";
 import { Input } from "antd";
@@ -53,8 +53,8 @@ const BranchEdit = ({ id, onOk, setReloadData }) => {
         } else toast.success("Chỉnh sửa thành công");
       } else {
         if (id === 0) {
-          toast.success("Thêm thất bại");
-        } else toast.success("Chỉnh sửa thất bại");
+          toast.error("Thêm thất bại");
+        } else toast.error("Chỉnh sửa thất bại");
       }
     });
   };

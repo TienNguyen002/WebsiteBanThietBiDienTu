@@ -18,6 +18,9 @@ namespace Infrastructure.Mapping
             builder.Property(s => s.UrlSlug)
                 .IsRequired();
 
+            builder.Property(p => p.Rating)
+                .HasColumnType("float");
+
             builder.Property(s => s.Description)
                 .IsRequired();
 

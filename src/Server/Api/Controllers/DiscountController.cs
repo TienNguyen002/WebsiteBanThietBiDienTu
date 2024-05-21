@@ -78,15 +78,26 @@ namespace Api.Controllers
         /// </summary>
         /// <param name="id"> Id Of Discount want to delete </param>
         /// <returns> Delete Discount By Id </returns>
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult> DeleteDiscount(int id)
-        //{
-        //    var result = await _service.DeleteDiscount(id);
-        //    if (!result)
-        //    {
-        //        return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
-        //    }
-        //    return Ok(ApiResponse.Success(result)); ;
-        //}
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteDiscount(int id)
+        {
+            var result = await _service.DeleteDiscount(id);
+            if (!result)
+            {
+                return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
+            }
+            return Ok(ApiResponse.Success(result)); ;
+        }
+
+        [HttpGet("byCodeName/{codeName}")]
+        public async Task<ActionResult<DiscountDTO>> GetDiscountByCodeName(string codeName)
+        {
+            var discount = await _service.GetDiscountByCodeName(codeName);
+            if (discount == null)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(discount));
+        }
     }
 }

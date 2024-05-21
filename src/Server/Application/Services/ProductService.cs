@@ -1,5 +1,6 @@
 ﻿using Application.Media;
 using Domain.Collections;
+using Domain.Constants;
 using Domain.DTO;
 using Domain.DTO.Product;
 using Domain.Entities;
@@ -14,15 +15,19 @@ namespace Application.Services
     public class ProductService : IProductService
     {
         private readonly IProductRepository _repository;
+        private readonly IColorRepository _colorRepository;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMediaManager _mediaManager;
-        public ProductService(IProductRepository repository, IMapper mapper, IUnitOfWork unitOfWork, IMediaManager mediaManager)
+        private readonly ICloundinaryService _cloundinaryService;
+        public ProductService(IProductRepository repository, IColorRepository colorRepository, IMapper mapper, IUnitOfWork unitOfWork, IMediaManager mediaManager, ICloundinaryService cloundinaryService)
         {
             _repository = repository;
+            _colorRepository = colorRepository;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
             _mediaManager = mediaManager;
+            _cloundinaryService = cloundinaryService;
         }
 
         /// <summary>
@@ -39,16 +44,40 @@ namespace Application.Services
                 product = new Product { };
             }
             product.Name = model.Name;
+            product.ShortName = model.ShortName;
             product.UrlSlug = model.Name.GenerateSlug();
-            product.ImageUrl = await _mediaManager.SaveImgFileAsync(model.ImageFile.OpenReadStream(),
-                                                                     model.ImageFile.FileName,
-                                                                     model.ImageFile.ContentType);
+            if(model.ImageFile != null)
+            {
+                product.ImageUrl = await _cloundinaryService.UploadImageAsync(model.ImageFile.OpenReadStream(), model.ImageFile.FileName, QueryManagements.ProductFolder);
+            }
+            if (model.Colors != null)
+            {
+                foreach (var color in model.Colors)
+                {
+                    var dataColor = await _colorRepository.GetColorByName(color);
+                    if(dataColor == null) {
+                        var newColor = new Color()
+                        {
+                            Name = color,
+                            UrlSlug = color.GenerateSlug()
+                        };
+                        product.Colors.Add(newColor);
+                    }
+                    else
+                    {
+                        product.Colors.Add(dataColor);
+                    }
+                }
+            }
+            product.ShortDescription = model.ShortDescription;
             product.Specification = model.Specification;
-            product.Amount = model.Amount;
-            product.Price = model.Price;
+            if (model.Price.HasValue)
+            {
+                product.Price = model.Price.Value;
+            }
             product.OrPrice = model.OrPrice;
-            //product.BranchId = model.BranchId;
-            //product.CategoryId = model.CategoryId;
+            product.SaleId = 1;
+            product.SerieId = model.SerieId;
             await _repository.AddOrUpdate(product);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
@@ -98,7 +127,7 @@ namespace Application.Services
         /// <exception cref="NotImplementedException"></exception>
         public async Task<ProductDTO> GetProductById(int id)
         {
-            var product = await _repository.GetById(id);
+            var product = await _repository.GetByIdWithInclude(id, p => p.Colors);
             return _mapper.Map<ProductDTO>(product);
         }
 
@@ -158,6 +187,25 @@ namespace Application.Services
             saleProduct.SalePrice = 0;
             saleProduct.SaleId = 1;
             await _repository.AddOrUpdate(saleProduct);
+            int saved = await _unitOfWork.Commit();
+            return saved > 0;
+        }
+
+        public async Task<bool> AddToSaleProduct(SaleAddModel model)
+        {
+            var saleProduct = await _repository.GetByIdWithInclude(model.Id, p => p.Sale);
+            saleProduct.SalePrice = model.SalePrice;
+            saleProduct.SaleId = 2;
+            await _repository.Update(saleProduct);
+            int saved = await _unitOfWork.Commit();
+            return saved > 0;
+        }
+
+        public async Task<bool> AddMoreAmount(AmountAddModel model)
+        {
+            var product = await _repository.GetById(model.Id);
+            product.Amount += model.Amount;
+            await _repository.Update(product);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
         }

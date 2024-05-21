@@ -9,6 +9,11 @@ namespace Infrastructure.Repositories
     {
         public OrderRepository(DeviceWebDbContext context) : base(context) {}
 
+        public async Task<int> CountOrders()
+        {
+            return await _context.Set<Order>().CountAsync();
+        }
+
         public async Task<IList<Order>> GetAllOrders()
         {
             return await _context.Set<Order>()
@@ -17,6 +22,15 @@ namespace Infrastructure.Repositories
                 .Include(o => o.ApplicationUser)
                 .Include(o => o.Status)
                 .Include(o => o.PaymentMethod)
+                .ToListAsync();
+        }
+
+        public async Task<IList<OrderItem>> GetOrderItemsByOrderIdAsync(int id)
+        {
+            return await _context.Set<OrderItem>()
+                .Include(x => x.Order)
+                .Include(x => x.Product)
+                .Where(order => order.Order.Id == id)
                 .ToListAsync();
         }
     }

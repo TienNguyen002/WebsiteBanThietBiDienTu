@@ -29,9 +29,10 @@ namespace Application.Services
         {
             var discount = new Discount()
             {
+                CodeName = model.CodeName,
+                DiscountPercent = model.DiscountPrice,
                 StartDate = DateTime.Now,
                 EndDate = model.EndDate,
-                Status = true,
             };
             await _repository.Add(discount);
             int saved = await _unitOfWork.Commit();
@@ -44,12 +45,12 @@ namespace Application.Services
         /// <param name="id"> Id Of Discount want to delete </param>
         /// <returns> Deleted Discount </returns>
         /// <exception cref="Exception"></exception>
-        //public async Task<bool> DeleteDiscount(int id)
-        //{
-        //    await _repository.DeleteDiscount(id);
-        //    int saved = await _unitOfWork.Commit();
-        //    return saved > 0;
-        //}
+        public async Task<bool> DeleteDiscount(int id)
+        {
+            await _repository.DeleteDiscount(id);
+            int saved = await _unitOfWork.Commit();
+            return saved > 0;
+        }
 
         /// <summary>
         /// Get All Discounts
@@ -60,6 +61,12 @@ namespace Application.Services
         {
             var discounts = await _repository.GetAll();
             return _mapper.Map<IList<DiscountDTO>>(discounts);
+        }
+
+        public async Task<DiscountDTO> GetDiscountByCodeName(string codeName)
+        {
+            var discount = await _repository.GetDiscountByCodeName(codeName);
+            return _mapper.Map<DiscountDTO>(discount);
         }
 
         /// <summary>

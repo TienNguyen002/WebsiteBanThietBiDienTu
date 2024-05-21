@@ -17,17 +17,13 @@ namespace Infrastructure.Mapping
 
             builder.Property(d => d.DiscountPercent)
                 .IsRequired()
-                .HasColumnType("decimal(18,2)"); ;
+                .HasColumnType("decimal(18,2)");
 
             builder.Property(d => d.StartDate)
-                .HasColumnType("datetime")
-                .HasDefaultValue(DateTime.Now);
+                .HasColumnType("datetime");
 
             builder.Property(d => d.EndDate)
                 .HasColumnType("datetime");
-
-            builder.Property(d => d.Status)
-                .HasDefaultValue(true);
         }
     }
 }

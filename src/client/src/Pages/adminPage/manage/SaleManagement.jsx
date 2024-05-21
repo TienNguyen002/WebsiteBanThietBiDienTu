@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, DatePicker, Form, Space } from "antd";
 import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
-import { getColumnFilterProps } from "../../../Common/tableFunction";
 import { Trash } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import "../../../styles/adminLayout.scss";
 import dayjs from "dayjs";
 import {
@@ -24,11 +22,6 @@ const SaleManagement = () => {
   const [pageSize, setPageSize] = useState(10);
   const [editable, setEditable] = useState(false);
   const [reloadData, setReloadData] = useState(false);
-  const navigate = useNavigate();
-
-  const handleLink = (link) => {
-    navigate(link);
-  };
 
   const disableDate = (current) => {
     return current && current < dayjs().startOf("day");

@@ -122,8 +122,6 @@ const BranchPage = ({ isSale, isHighRating, isNew, isTop }) => {
     }));
   };
 
-  console.log(series);
-
   return (
     <>
       <NavigationBar

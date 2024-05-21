@@ -12,7 +12,7 @@ namespace Domain.Entities
         public string Detail { get; set; } = null!;
 
         //Đánh giá
-        public decimal Rating { get; set; }
+        public float Rating { get; set; }
 
         //Ngày bình luận
         public DateTime CommentDate { get; set; }

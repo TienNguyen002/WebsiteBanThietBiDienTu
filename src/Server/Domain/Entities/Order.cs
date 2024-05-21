@@ -11,6 +11,12 @@ namespace Domain.Entities
         //Mã định dạng đơn hàng
         public string Name { get; set; }
 
+        //Địa chỉ người đặt
+        public string Address { get; set; }
+
+        //Số điện thoại người đặt
+        public string Phone { get; set; }
+
         //Ngày đặt hàng
         public DateTime DateOrder { get; set; }
 

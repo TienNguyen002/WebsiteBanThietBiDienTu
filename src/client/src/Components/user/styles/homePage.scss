@@ -1387,3 +1387,68 @@
     color: var(--black);
   }
 }
+
+/*=========== Comment ===========*/
+.comment-detail {
+  border: 1px solid var(--black);
+  margin-right: 10px;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 1em;
+  margin-bottom: 10px;
+  background: var(--white);
+  &-top {
+    display: flex;
+    gap: 20px;
+  }
+  &-middle {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+  }
+}
+
+.comment-form {
+  margin-right: 10px;
+  &-button {
+    margin-top: 10px;
+    width: 100px;
+    height: 30px;
+    background: var(--white);
+    border-radius: 1em;
+    cursor: pointer;
+  }
+  &-button:hover {
+    background: var(--light-red);
+    color: var(--white);
+  }
+}
+
+.comment-overview {
+  display: flex;
+  font-size: 20px;
+  &-total {
+    width: 30%;
+    background: var(--white);
+    border: 1px solid var(--black);
+    text-align: center;
+    padding: 20px;
+  }
+  &-rating {
+    background: var(--white);
+    margin-left: 20px;
+    border: 1px solid var(--black);
+    width: 60%;
+    text-align: center;
+    padding: 20px;
+  }
+}
+
+.star-icon {
+  color: yellow;
+}
+
+/*=========== Common ===========*/
+.title {
+  color: var(--title);
+}

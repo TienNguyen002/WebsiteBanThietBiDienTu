@@ -5,6 +5,7 @@ namespace Domain.Interfaces.Services
     public interface ICommentService
     {
         Task<bool> AddComment(CommentEditModel model);  
-        Task<IList<CommentDTO>> GetCommentsByProductTag(string tag);
+        Task<IList<CommentDTO>> GetCommentsByProductSlug(string slug);
+        Task<CommentCountDTO> CountAllComment(string slug);
     }
 }

@@ -50,3 +50,15 @@ export const decodeAndSaveUserInfo = (token) => {
   localStorage.setItem("user", JSON.stringify(user));
   return user;
 };
+
+export const generateRandomCode = () => {
+  const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const lowerCaseChars = "abcdefghijklmnopqrstuvwxyz";
+  const numbers = "0123456789";
+  const allChars = upperCaseChars + lowerCaseChars + numbers;
+  let code = "";
+  for (let i = 0; i < 14; i++) {
+    code += allChars.charAt(Math.floor(Math.random() * allChars.length));
+  }
+  return code;
+};

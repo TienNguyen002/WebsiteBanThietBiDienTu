@@ -19,5 +19,7 @@ namespace Domain.Interfaces.Services
         Task<ProductFilter> GetProductFiltersAsync(FilterQuery query);
         Task<PaginationResult<ProductDTO>> GetPagedProductsAsync(ProductQuery query, PagingModel pagingModel);
         Task<bool> RemoveSaleProduct(int id);
+        Task<bool> AddToSaleProduct(SaleAddModel model);
+        Task<bool> AddMoreAmount(AmountAddModel model);
     }
 }

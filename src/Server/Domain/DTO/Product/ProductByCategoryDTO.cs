@@ -12,6 +12,6 @@ namespace Domain.DTO.Product
         public int SalePrice { get; set; }
         public int Price { get; set; }
         public int OrPrice { get; set; }
-        public decimal Rating { get; set; }
+        public float Rating { get; set; }
     }
 }

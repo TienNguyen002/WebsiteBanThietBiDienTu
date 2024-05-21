@@ -8,6 +8,9 @@ namespace Domain.Entities
         //Mã sản phẩm
         public int Id { get; set; }
 
+        //Màu sản phẩm
+        public string Color { get; set; }
+
         //Số lượng
         public int Quantity { get; set; }
 

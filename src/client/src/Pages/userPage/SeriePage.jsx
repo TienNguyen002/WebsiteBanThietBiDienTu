@@ -80,6 +80,7 @@ const SeriePage = ({ isSale, isHighRating, isNew, isTop }) => {
     });
   }, [payload]);
 
+  console.log(products);
   const handlePageChange = (pageNumber) => {
     setPayload((prevPayload) => ({ ...prevPayload, pageNumber }));
   };

@@ -13,17 +13,18 @@
     display: flex;
     justify-content: space-between;
     &-title {
-      color: rgb(0, 102, 255);
+      color: var(--title);
     }
   }
   &-date {
     display: flex;
     gap: 30px;
     &-title {
-      color: rgb(0, 102, 255);
+      color: var(--title);
     }
     &-picker {
       height: 40px;
+      width: 430px;
       align-self: center;
       border: 1px solid var(--black);
     }
@@ -49,7 +50,7 @@
 .edit {
   padding: 10px 20px;
   &-title {
-    color: rgb(0, 102, 255);
+    color: var(--title);
     display: flex;
     justify-content: center;
   }
@@ -64,12 +65,17 @@
     }
     &-title {
       &-name {
-        color: rgb(0, 102, 255);
+        color: var(--title);
         font-weight: 600;
         font-size: 20px;
       }
       &-input {
         font-size: 20px;
+      }
+      &-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
     }
     &-button {
@@ -88,6 +94,9 @@
         cursor: pointer;
       }
     }
+    &-select {
+      width: 900px;
+    }
   }
 }
 
@@ -95,4 +104,22 @@
 .item-image {
   height: 50px;
   align-items: center;
+}
+
+/*=========== Price View ===========*/
+.total-price {
+  display: flex;
+  justify-content: flex-end;
+  &-all {
+    color: var(--red);
+  }
+}
+
+/*=========== Serie Detail ===========*/
+.manage-serie {
+  &-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 }

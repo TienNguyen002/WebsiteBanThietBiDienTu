@@ -36,6 +36,7 @@ const authSlice = createSlice({
       state.register.isFetching = false;
       state.register.error = false;
       state.register.success = true;
+      localStorage.setItem("recentRegister", true);
     },
     registerFail: (state) => {
       state.register.isFetching = false;

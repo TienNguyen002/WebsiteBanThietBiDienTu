@@ -1,31 +1,52 @@
-//Import Component Library
-import React, { useEffect, useState } from "react";
-//Import Component
-import Quantity from "../common/Quantity";
-//Import Function
+import React from "react";
+import { useSelector } from "react-redux";
 import { formatVND } from "../../../Common/function";
+import { Table } from "antd";
 
-const CartProduct = ({ items }) => {
-  const [quantity, setQuantity] = useState(1);
+const CartProduct = () => {
+  let cart = useSelector((state) => state.cart);
+
+  const columns = [
+    {
+      title: "Hình",
+      dataIndex: "imageUrl",
+      key: "imageUrl",
+      render: (imageUrl) => (
+        <img src={imageUrl} className="item-image" alt={imageUrl} />
+      ),
+      width: 100,
+    },
+    {
+      title: "Sản phẩm",
+      dataIndex: "productName",
+      key: "productName",
+      width: 500,
+    },
+    {
+      title: "Số lượng đặt",
+      dataIndex: "quantity",
+      key: "quantity",
+      width: 200,
+    },
+    {
+      title: "Màu sản phẩm",
+      dataIndex: "color",
+      key: "color",
+      width: 200,
+    },
+    {
+      title: "Tổng tiền",
+      dataIndex: "price",
+      key: "price",
+      width: 200,
+      render: (price) => <span>{formatVND(price)}</span>,
+    },
+  ];
 
   return (
-    <>
-      <div className="cart-product">
-        <div className="cart-product-item">
-          <img
-            src="https://cdn2.cellphones.com.vn/insecure/rs:fill:358:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-z-lip5_3_.png"
-            alt="img"
-            className="cart-product-item-image"
-          />
-          <p className="cart-product-item-name">Samsung Galaxy Z Flip5 256GB</p>
-          <div className="cart-product-price">
-            <p>{formatVND(16990000 * quantity)}</p>
-          </div>
-          <Quantity quantity={quantity} setQuantity={setQuantity} />
-          <button>X</button>
-        </div>
-      </div>
-    </>
+    <div>
+      <Table columns={columns} dataSource={cart.items} pagination={false} />
+    </div>
   );
 };
 

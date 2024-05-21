@@ -38,10 +38,7 @@ namespace Infrastructure.Seeders
 
             var series = AddSeries(branches, categories);
             var products = AddProducts(colors, sales, series);
-            var orders = AddOrders(users, paymentMethods, statuses, discounts);
-            var orderItems = AddOrderItems(products, orders);
             var images = AddImages(series);
-            var comments = AddComments(series, users);
         }
 
         private List<ApplicationUser> AddUsers()
@@ -243,27 +240,6 @@ namespace Infrastructure.Seeders
             return colors;
         }
 
-        private IList<Comment> AddComments(
-            IList<Serie> series,
-            IList<ApplicationUser> users)
-        {
-            var comments = new List<Comment>()
-            {
-                new()
-                {
-                    ApplicationUser = users[2],
-                    Serie = series[0],
-                    Detail = "Em rất thích sản phẩm này",
-                    Rating = 5,
-                    CommentDate = DateTime.Now,
-                    Status = true,
-                }
-            };
-            _dbContext.AddRange(comments);
-            _dbContext.SaveChanges();
-            return comments;
-        }
-
         private IList<Image> AddImages(IList<Serie> series)
         {
             var images = new List<Image>()
@@ -296,33 +272,6 @@ namespace Infrastructure.Seeders
             _dbContext.SaveChanges();
             return images;
         }
-
-        private IList<Order> AddOrders(
-            IList<ApplicationUser> users,
-            IList<PaymentMethod> paymentMethods,
-            IList<Status> statuses,
-            IList<Discount> discounts)
-        {
-            var random = new Random();
-            var orders = new List<Order>()
-            {
-                new()
-                {
-                    Name = $"#{random.Next(100000, 1000000):D6}",
-                    ApplicationUser = users[2],
-                    DateOrder = DateTime.Now,
-                    Quantity = 2,
-                    TotalPrice = 70180000,
-                    Status = statuses[0],
-                    PaymentMethod = paymentMethods[0],
-                    Discount = discounts[0]
-                }
-            };
-            _dbContext.AddRange(orders);
-            _dbContext.SaveChanges();
-            return orders;
-        }
-
         private IList<Product> AddProducts(
             IList<Color> colors,
             IList<Sale> sales,
@@ -335,7 +284,6 @@ namespace Infrastructure.Seeders
                     Name = "iPhone 15 Pro Max 256GB | Chính hãng VN/A",
                     ShortName = "256GB",
                     UrlSlug = "iphone-15-pro-max-256gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/n/vn_iphone_15_pro_black_titanium_pdp_image_position-1a_black_titanium_color.jpg",
                     ShortDescription = "Thiết kế khung viền từ titan chuẩn hàng không vũ trụ - Cực nhẹ, bền cùng viền cạnh mỏng cầm nắm thoải mái\r\nHiệu năng Pro chiến game thả ga - Chip A17 Pro mang lại hiệu năng đồ họa vô cùng sống động và chân thực\r\nThoả sức sáng tạo và quay phim chuyên nghiệp - Cụm 3 camera sau đến 48MP và nhiều chế độ tiên tiến\r\nNút tác vụ mới giúp nhanh chóng kích hoạt tính năng yêu thích của bạn",
                     Specification = "Kích thước màn hình: 6.7 inches",
@@ -359,7 +307,6 @@ namespace Infrastructure.Seeders
                     Name = "iPhone 15 Pro Max 512GB | Chính hãng VN/A",
                     ShortName = "512GB",
                     UrlSlug = "iphone-15-pro-max-512gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/n/vn_iphone_15_pro_black_titanium_pdp_image_position-1a_black_titanium_color.jpg",
                     ShortDescription = "Thiết kế khung viền từ titan chuẩn hàng không vũ trụ - Cực nhẹ, bền cùng viền cạnh mỏng cầm nắm thoải mái\r\nHiệu năng Pro chiến game thả ga - Chip A17 Pro mang lại hiệu năng đồ họa vô cùng sống động và chân thực\r\nThoả sức sáng tạo và quay phim chuyên nghiệp - Cụm 3 camera sau đến 48MP và nhiều chế độ tiên tiến\r\nNút tác vụ mới giúp nhanh chóng kích hoạt tính năng yêu thích của bạn",
                     Specification = "Kích thước màn hình: 6.7 inches",
@@ -383,7 +330,6 @@ namespace Infrastructure.Seeders
                     Name = "iPhone 15 Pro Max 1TB | Chính hãng VN/A",
                     ShortName = "1TB",
                     UrlSlug = "iphone-15-pro-max-1tb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/n/vn_iphone_15_pro_black_titanium_pdp_image_position-1a_black_titanium_color.jpg",
                     ShortDescription = "Thiết kế khung viền từ titan chuẩn hàng không vũ trụ - Cực nhẹ, bền cùng viền cạnh mỏng cầm nắm thoải mái\r\nHiệu năng Pro chiến game thả ga - Chip A17 Pro mang lại hiệu năng đồ họa vô cùng sống động và chân thực\r\nThoả sức sáng tạo và quay phim chuyên nghiệp - Cụm 3 camera sau đến 48MP và nhiều chế độ tiên tiến\r\nNút tác vụ mới giúp nhanh chóng kích hoạt tính năng yêu thích của bạn",
                     Specification = "Kích thước màn hình: 6.7 inches",
@@ -407,7 +353,6 @@ namespace Infrastructure.Seeders
                     Name = "Samsung Galaxy S24 Ultra 12GB 256GB",
                     ShortName = "12GB 256GB",
                     UrlSlug = "samsung-galaxy-s24-ultra-12gb-256gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/s/ss-s24-timultra-22_1.png",
                     ShortDescription = "Mở khoá giới hạn tiềm năng với AI - Hỗ trợ phiên dịch cuộc gọi, khoanh vùng tìm kiếm, Trợ lí Note và chình sửa anh\r\nTuyệt tác thiết kế bền bỉ và hoàn hảo - Vỏ ngoài bằng titan mới cùng màu sắc lấy cảm hứng từ chất liệu đá tự nhiên\r\nTích hợp S-Pen cực nhạy - Thoải mát viết, chạm thật chính xác trên màn hình cùng nhiều tính năng tiện ích\r\nNắm trong tay trọn bộ chi tiết chân thực nhất - Camera 200MP hỗ trợ khả năng xử lý AI cải thiện độ nét và tông màu",
                     Specification = "Kích thước màn hình 6.8 inches",
@@ -429,7 +374,6 @@ namespace Infrastructure.Seeders
                     Name = "Samsung Galaxy S24 Ultra 12GB 512GB",
                     ShortName = "12GB 512GB",
                     UrlSlug = "samsung-galaxy-s24-ultra-12gb-512gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/s/ss-s24-timultra-22_1.png",
                     ShortDescription = "Mở khoá giới hạn tiềm năng với AI - Hỗ trợ phiên dịch cuộc gọi, khoanh vùng tìm kiếm, Trợ lí Note và chình sửa anh\r\nTuyệt tác thiết kế bền bỉ và hoàn hảo - Vỏ ngoài bằng titan mới cùng màu sắc lấy cảm hứng từ chất liệu đá tự nhiên\r\nTích hợp S-Pen cực nhạy - Thoải mát viết, chạm thật chính xác trên màn hình cùng nhiều tính năng tiện ích\r\nNắm trong tay trọn bộ chi tiết chân thực nhất - Camera 200MP hỗ trợ khả năng xử lý AI cải thiện độ nét và tông màu",
                     Specification = "Kích thước màn hình 6.8 inches",
@@ -451,7 +395,6 @@ namespace Infrastructure.Seeders
                     Name = "Samsung Galaxy S24 Ultra 12GB 1TB",
                     ShortName = "12GB 1TB",
                     UrlSlug = "samsung-galaxy-s24-ultra-12gb-1tb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/s/ss-s24-timultra-22_1.png",
                     ShortDescription = "Mở khoá giới hạn tiềm năng với AI - Hỗ trợ phiên dịch cuộc gọi, khoanh vùng tìm kiếm, Trợ lí Note và chình sửa anh\r\nTuyệt tác thiết kế bền bỉ và hoàn hảo - Vỏ ngoài bằng titan mới cùng màu sắc lấy cảm hứng từ chất liệu đá tự nhiên\r\nTích hợp S-Pen cực nhạy - Thoải mát viết, chạm thật chính xác trên màn hình cùng nhiều tính năng tiện ích\r\nNắm trong tay trọn bộ chi tiết chân thực nhất - Camera 200MP hỗ trợ khả năng xử lý AI cải thiện độ nét và tông màu",
                     Specification = "Kích thước màn hình 6.8 inches",
@@ -473,7 +416,6 @@ namespace Infrastructure.Seeders
                     Name = "Macbook Pro 14 M3 Pro 18GB - 512GB | Chính hãng Apple Việt Nam",
                     ShortName = "18GB - 512GB",
                     UrlSlug = "macbook-pro-14-m3-pro-18gb-512gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/n/vn_macbook_pro_14_in_m3_pro_max_silver_pdp_image_position-1.jpg",
                     ShortDescription = "Thiết kế sang trọng, thời thượng với mặt lưng nhôm cùng trọng lượng chỉ 1.55kg\r\nXử lý moi tác vụ với con chip M3 cùng 18 nhân GPU\r\nChất lượng hiển thị hàng đầu - màn hình 14.2 inch tấm nền retina\r\nBàn phím trang bị Touch ID cho phép mở khoá chỉ với 1 chạm\r\nTận hưởng chất lượng âm thanh chân thật với hệ thống 6 loa cùng công nghệ Dolby Atmos",
                     Specification = "Loại card đồ họa 14 nhân Neural Engine 16 nhân",
@@ -495,7 +437,6 @@ namespace Infrastructure.Seeders
                     Name = "Macbook Pro 14 M3 Pro 18GB - 1TB | Chính hãng Apple Việt Nam",
                     ShortName = "18GB - 1TB",
                     UrlSlug = "macbook-pro-14-m3-pro-18gb-1tb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/n/vn_macbook_pro_14_in_m3_pro_max_silver_pdp_image_position-1.jpg",
                     ShortDescription = "Thiết kế sang trọng, thời thượng với mặt lưng nhôm cùng trọng lượng chỉ 1.55kg\r\nXử lý moi tác vụ với con chip M3 cùng 18 nhân GPU\r\nChất lượng hiển thị hàng đầu - màn hình 14.2 inch tấm nền retina\r\nBàn phím trang bị Touch ID cho phép mở khoá chỉ với 1 chạm\r\nTận hưởng chất lượng âm thanh chân thật với hệ thống 6 loa cùng công nghệ Dolby Atmos",
                     Specification = "Loại card đồ họa 14 nhân Neural Engine 16 nhân",
@@ -517,7 +458,6 @@ namespace Infrastructure.Seeders
                     Name = "Macbook Pro 14 M3 Pro 36GB - 512GB | Chính hãng Apple Việt Nam",
                     ShortName = "36GB - 512GB",
                     UrlSlug = "macbook-pro-14-m3-pro-36gb-512gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/n/vn_macbook_pro_14_in_m3_pro_max_silver_pdp_image_position-1.jpg",
                     ShortDescription = "Thiết kế sang trọng, thời thượng với mặt lưng nhôm cùng trọng lượng chỉ 1.55kg\r\nXử lý moi tác vụ với con chip M3 cùng 18 nhân GPU\r\nChất lượng hiển thị hàng đầu - màn hình 14.2 inch tấm nền retina\r\nBàn phím trang bị Touch ID cho phép mở khoá chỉ với 1 chạm\r\nTận hưởng chất lượng âm thanh chân thật với hệ thống 6 loa cùng công nghệ Dolby Atmos",
                     Specification = "Loại card đồ họa 14 nhân Neural Engine 16 nhân",
@@ -539,7 +479,6 @@ namespace Infrastructure.Seeders
                     Name = "Laptop ASUS TUF Gaming F15 FX506HF-HN078W",
                     ShortName = "i5-11260H 16GB - 512GB RTX2050",
                     UrlSlug = "laptop-asus-tuf-gaming-f15-fx506hf-hn078w",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_12__4_18.png",
                     ShortDescription = "CPU Intel Core i5 11260H đáp ứng tốt các tác vụ, mang lại trải nghiệm sử dụng tuyệt vời trong cả công việc lẫn giải trí, chiến game.\r\nCard đồ họa NVIDIA GeForce RTX 2050 đáp ứng tốt nhu cầu chơi game cấu hình cao và xử lý các file thiết kế nặng.\r\nRAM 16 GB cho bạn tận hưởng những giây phút chiến game đỉnh cao khi có thể mở nhiều ứng dụng cùng lúc.\r\nỔ cứng SSD 512 GB cho tốc độ khởi động nhanh chóng cùng khả năng tải ứng dụng mượt mà.\r\nMàn hình 15.6 inch Full HD và tần số quét 144 Hz mang lại hình ảnh sắc nét và mượt mà, cho trải nghiệm chơi game tuyệt vời,với tốc độ khung hình cao.",
                     Specification = "Loại card đồ họa NVIDIA GeForce RTX 2050 4GB GDDR6 Intel UHD Graphics",
@@ -561,7 +500,6 @@ namespace Infrastructure.Seeders
                     Name = "Laptop ASUS TUF GAMING F15 FX506HF-HN014W",
                     ShortName = "i5-11400H 8GB - 512GB RTX 2050",
                     UrlSlug = "laptop-asus-tuf-gaming-f15-fx506hf-hn014w",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_12__4_18.png",
                     ShortDescription = "CPU Intel Core i5 11260H đáp ứng tốt các tác vụ, mang lại trải nghiệm sử dụng tuyệt vời trong cả công việc lẫn giải trí, chiến game.\r\nCard đồ họa NVIDIA GeForce RTX 2050 đáp ứng tốt nhu cầu chơi game cấu hình cao và xử lý các file thiết kế nặng.\r\nRAM 16 GB cho bạn tận hưởng những giây phút chiến game đỉnh cao khi có thể mở nhiều ứng dụng cùng lúc.\r\nỔ cứng SSD 512 GB cho tốc độ khởi động nhanh chóng cùng khả năng tải ứng dụng mượt mà.\r\nMàn hình 15.6 inch Full HD và tần số quét 144 Hz mang lại hình ảnh sắc nét và mượt mà, cho trải nghiệm chơi game tuyệt vời,với tốc độ khung hình cao.",
                     Specification = "Loại card đồ họa NVIDIA GeForce RTX 2050 4GB",
@@ -583,7 +521,6 @@ namespace Infrastructure.Seeders
                     Name = "Laptop ASUS TUF Gaming F15 FX507ZC4-HN099W",
                     ShortName = "I7-12700H 8GB - 512GB RTX3050",
                     UrlSlug = "laptop-asus-tuf-gaming-f15-fx507zc4-hn099w",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/e/text_ng_n_12__4_18.png",
                     ShortDescription = "Trang bị CPU Intel Core i7-12700H dễ dàng xử lý các tác vụ nặng, chơi game AAA ở mức cấu hình cao\r\nCard rời RTX 3050 cải thiện hiệu suất xử lý đồ họa, hỗ trợ chỉnh sửa video cũng như các tác vụ đồ họa phức tạp\r\nRAM 8 GB đảm bảo hiệu suất mượt mà ngay cả khi chạy nhiều ứng dụng\r\nỔ SSD dung lượng 512 GB rút ngắn thời gian khởi động máy và lưu trữ dữ liệu nhanh chóng\r\nMàn hình 15.6 inch Full HD và tốc độ làm mới 144 Hz đem lại trải nghiệm mượt mà và sống động",
                     Specification = "Loại card đồ họa NVIDIA GeForce RTX 3050 4GB GDDR6 Intel Iris Xe Graphics",
@@ -605,7 +542,6 @@ namespace Infrastructure.Seeders
                     Name = "iPad Pro 11 inch 2022 M2 Wifi 128GB | Chính hãng Apple Việt Nam",
                     ShortName = "WIFI 128GB",
                     UrlSlug = "ipad-pro-11-inch-2022-m2-wifi-128gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/ipad-pro-13-select-wifi-silver-202210-01.jpg",
                     ShortDescription = "Thiết kế phẳng mạnh mẽ - Gia công từ kim loại bền bỉ, phong cách hiện đại, sang trọng\r\nHiệu năng mạnh mẽ với CPU thế hệ mới - chip Apple M2 trong đó có 8 lõi cùng RAM 8 GB\r\nMàn hình sáng hơn, hỗ trợ nội dung HDR tốt hơn - 11 inch LCD, 120hz\r\nThoải mái sáng tạo và thiết kế - Nhận diện bút Apple Pencil 2 siêu nhanh và nhạy",
                     Specification = "Kích thước màn hình 11 inches",
@@ -627,7 +563,6 @@ namespace Infrastructure.Seeders
                     Name = "iPad Pro 11 inch 2022 M2 Wifi 256GB | Chính hãng Apple Việt Nam",
                     ShortName = "WIFI 256GB",
                     UrlSlug = "ipad-pro-11-inch-2022-m2-wifi-256gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/ipad-pro-13-select-wifi-silver-202210-01.jpg",
                     ShortDescription = "Thiết kế phẳng mạnh mẽ - Gia công từ kim loại bền bỉ, phong cách hiện đại, sang trọng\r\nHiệu năng mạnh mẽ với CPU thế hệ mới - chip Apple M2 trong đó có 8 lõi cùng RAM 8 GB\r\nMàn hình sáng hơn, hỗ trợ nội dung HDR tốt hơn - 11 inch LCD, 120hz\r\nThoải mái sáng tạo và thiết kế - Nhận diện bút Apple Pencil 2 siêu nhanh và nhạy",
                     Specification = "Kích thước màn hình 11 inches",
@@ -649,7 +584,6 @@ namespace Infrastructure.Seeders
                     Name = "iPad Pro 11 inch 2022 M2 Wifi 512GB | Chính hãng Apple Việt Nam",
                     ShortName = "WIFI 512GB",
                     UrlSlug = "ipad-pro-11-inch-2022-m2-wifi-512gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/p/ipad-pro-13-select-wifi-silver-202210-01.jpg",
                     ShortDescription = "Thiết kế phẳng mạnh mẽ - Gia công từ kim loại bền bỉ, phong cách hiện đại, sang trọng\r\nHiệu năng mạnh mẽ với CPU thế hệ mới - chip Apple M2 trong đó có 8 lõi cùng RAM 8 GB\r\nMàn hình sáng hơn, hỗ trợ nội dung HDR tốt hơn - 11 inch LCD, 120hz\r\nThoải mái sáng tạo và thiết kế - Nhận diện bút Apple Pencil 2 siêu nhanh và nhạy",
                     Specification = "Kích thước màn hình 11 inches",
@@ -671,7 +605,6 @@ namespace Infrastructure.Seeders
                     Name = "Samsung Galaxy Tab S9 FE 5G 6GB 128GB",
                     ShortName = "Tab S9 FE 5G 128GB",
                     UrlSlug = "samsung-galaxy-tab-s9-fe-5g-6gb-128gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-tab-s9-fe-mint-13_1.jpg",
                     ShortDescription = "Sở hữu chipset Exynos cho khả năng xử lý đa nhiệm các tác vụ mượt mà hơn.\r\nMàn hình rộng 10.9 inch với độ phân giải 2K+ và hỗ trợ HDR10+ - Chất lượng hình ảnh sắc nét và chân thực.\r\nThiết kế nhỏ gọn, vuông vức và rất hợp thời trang và sang trọng.\r\nKết hợp với bút S - Pen siêu tiện lợi - Giúp người dùng tăng cường năng suất làm việc.",
                     Specification = "Kích thước màn hình 10.9 inches",
@@ -693,7 +626,6 @@ namespace Infrastructure.Seeders
                     Name = "Samsung Galaxy Tab S9 FE Plus WIFI 8GB 128GB",
                     ShortName = "Tab S9 FE Plus WIFI 8GB 128GB",
                     UrlSlug = "tab-s9-fe-plus-wifi-8gb-128gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-tab-s9-fe-mint-13_1.jpg",
                     ShortDescription = "Sở hữu chipset Exynos cho khả năng xử lý đa nhiệm các tác vụ mượt mà hơn.\r\nMàn hình rộng 10.9 inch với độ phân giải 2K+ và hỗ trợ HDR10+ - Chất lượng hình ảnh sắc nét và chân thực.\r\nThiết kế nhỏ gọn, vuông vức và rất hợp thời trang và sang trọng.\r\nKết hợp với bút S - Pen siêu tiện lợi - Giúp người dùng tăng cường năng suất làm việc.",
                     Specification = "Kích thước màn hình 10.9 inches",
@@ -715,7 +647,6 @@ namespace Infrastructure.Seeders
                     Name = "Samsung Galaxy Tab S9 FE Plus WIFI 12GB 256GB",
                     ShortName = "Tab S9 FE Plus Wifi 12GB 256GB",
                     UrlSlug = "samsung-galaxy-tab-s9-fe-plus-wifi-12gb-256gb",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-galaxy-tab-s9-fe-mint-13_1.jpg",
                     ShortDescription = "Sở hữu chipset Exynos cho khả năng xử lý đa nhiệm các tác vụ mượt mà hơn.\r\nMàn hình rộng 10.9 inch với độ phân giải 2K+ và hỗ trợ HDR10+ - Chất lượng hình ảnh sắc nét và chân thực.\r\nThiết kế nhỏ gọn, vuông vức và rất hợp thời trang và sang trọng.\r\nKết hợp với bút S - Pen siêu tiện lợi - Giúp người dùng tăng cường năng suất làm việc.",
                     Specification = "Kích thước màn hình 10.9 inches",
@@ -737,7 +668,6 @@ namespace Infrastructure.Seeders
                     Name = "Tai nghe Bluetooth Apple AirPods Pro 2 2023 USB-C",
                     ShortName = "USB-C",
                     UrlSlug = "tai-nghe-bluetooth-apple-airpods-pro-2-2023-usb-c",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/a/p/apple-airpods-pro-2-usb-c_8_.png",
                     ShortDescription = "Tích hợp chip Apple H2 mang đến chất âm sống động cùng khả năng tái tạo âm thanh 3 chiều vượt trội\r\nCông nghệ Bluetooth 5.3 kết nối ổn định, mượt mà, tiêu thụ năng lượng thấp, giúp tiết kiệm pin đáng kể\r\nChống ồn chủ động loại bỏ tiếng ồn hiệu quả gấp đôi thế hệ trước, giúp nâng cao trải nghiệm nghe nhạc\r\nChống nước chuẩn IP54 trên tai nghe và hộp sạc, giúp bạn thỏa sức tập luyện không cần lo thấm mồ hôi",
                     Specification = "Thời lượng pin Tai nghe: Dùng 6 giờ Hộp sạc: Dùng 30 giờ",
@@ -759,7 +689,6 @@ namespace Infrastructure.Seeders
                     Name = "Tai nghe Bluetooth Apple AirPods Pro 2022",
                     ShortName = "Lightning",
                     UrlSlug = "tai-nghe-bluetooth-apple-airpods-pro-2-2022",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/a/p/apple-airpods-pro-2-usb-c_8_.png",
                     ShortDescription = "Tích hợp chip Apple H2 mang đến chất âm sống động cùng khả năng tái tạo âm thanh 3 chiều vượt trội\r\nCông nghệ Bluetooth 5.3 kết nối ổn định, mượt mà, tiêu thụ năng lượng thấp, giúp tiết kiệm pin đáng kể\r\nChống ồn chủ động loại bỏ tiếng ồn hiệu quả gấp đôi thế hệ trước, giúp nâng cao trải nghiệm nghe nhạc\r\nChống nước chuẩn IP54 trên tai nghe và hộp sạc, giúp bạn thỏa sức tập luyện không cần lo thấm mồ hôi",
                     Specification = "Thời lượng pin Tai nghe: Dùng 6 giờ Hộp sạc: Dùng 30 giờ",
@@ -781,7 +710,6 @@ namespace Infrastructure.Seeders
                     Name = "Tai nghe Bluetooth True Wireless JBL Wave Beam",
                     ShortName = "Wave Beam",
                     UrlSlug = "tai-nghe-bluetooth-true-wireless-jbl-wave-beam",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam_4_.png",
                     ShortDescription = "Công nghệ JBL Deep Bass Sound và driver 8mm cho chất âm vượt trội\r\nTổng thời lượng nghe lên đến 32 giờ cho trải nghiệm không lo gián đoạn\r\nKháng nước chuẩn IPX2 cho hộp sạc và kháng nước IP54 cho tai nghe\b\r\nĐiều khiển qua ứng dụng JBL Headphones App giúp bạn thao tác dễ dàng",
                     Specification = "Thời lượng pin Tai nghe: 8 giờ Hộp sạc: 24 giờ",
@@ -803,7 +731,6 @@ namespace Infrastructure.Seeders
                     Name = "Tai nghe Bluetooth True Wireless JBL Tune Flex",
                     ShortName = "Tune Flex",
                     UrlSlug = "tai-nghe-bluetooth-true-wireless-jbl-tune-flex",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam_4_.png",
                     ShortDescription = "Công nghệ JBL Deep Bass Sound và driver 8mm cho chất âm vượt trội\r\nTổng thời lượng nghe lên đến 32 giờ cho trải nghiệm không lo gián đoạn\r\nKháng nước chuẩn IPX2 cho hộp sạc và kháng nước IP54 cho tai nghe\b\r\nĐiều khiển qua ứng dụng JBL Headphones App giúp bạn thao tác dễ dàng",
                     Specification = "Thời lượng pin Tai nghe: 8 giờ Hộp sạc: 24 giờ",
@@ -825,7 +752,6 @@ namespace Infrastructure.Seeders
                     Name = "Tai nghe Bluetooth True Wireless JBL Tune Beam",
                     ShortName = "Tune Beam",
                     UrlSlug = "tai-nghe-bluetooth-true-wireless-jbl-tune-beam",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/a/tai-nghe-khong-day-jbl-wave-beam_4_.png",
                     ShortDescription = "Công nghệ JBL Deep Bass Sound và driver 8mm cho chất âm vượt trội\r\nTổng thời lượng nghe lên đến 32 giờ cho trải nghiệm không lo gián đoạn\r\nKháng nước chuẩn IPX2 cho hộp sạc và kháng nước IP54 cho tai nghe\b\r\nĐiều khiển qua ứng dụng JBL Headphones App giúp bạn thao tác dễ dàng",
                     Specification = "Thời lượng pin Tai nghe: 8 giờ Hộp sạc: 24 giờ",
@@ -847,7 +773,6 @@ namespace Infrastructure.Seeders
                     Name = "Apple Watch Series 9 45mm (GPS) viền nhôm dây cao su",
                     ShortName = "45mm",
                     UrlSlug = "apple-watch-series-9-45mm",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/n/vn_apple_watch_series_9_gps_41mm_pink_aluminum_light_pink_sport_band_pdp_image_position-1_1_2.jpg",
                     ShortDescription = "Trang bị chip S9 SiP mạnh mẽ hỗ trợ xử lý mọi tác vụ nhanh chóng với nhiều tiện ích\r\nDễ dàng kết nối, nghe gọi, trả lời tin nhắn ngay trên cổ tay\r\nTrang bị nhiều tính năng sức khỏe như: Đo nhịp tim, điện tâm đồ, đo chu kỳ kinh nguyệt,...\r\nĐộ sáng tối đa lên tới 2000 nit, dễ xem màn hình ngay dưới ánh nắng gắt\r\nTích hợp nhiều chế độ tập luyện với các môn thể thao như: Bơi lội, chạy bộ, đạp xe,...",
                     Specification = "Công nghệ màn hình Retina",
@@ -869,7 +794,6 @@ namespace Infrastructure.Seeders
                     Name = "Apple Watch Series 9 41mm (GPS) viền nhôm dây vải | Chính hãng Apple Việt Nam",
                     ShortName = "41mm dây vải",
                     UrlSlug = "apple-watch-series-9-41mm-gps-vien-nhom-day-vai",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/n/vn_apple_watch_series_9_gps_41mm_pink_aluminum_light_pink_sport_band_pdp_image_position-1_1_2.jpg",
                     ShortDescription = "Trang bị chip S9 SiP mạnh mẽ hỗ trợ xử lý mọi tác vụ nhanh chóng với nhiều tiện ích\r\nDễ dàng kết nối, nghe gọi, trả lời tin nhắn ngay trên cổ tay\r\nTrang bị nhiều tính năng sức khỏe như: Đo nhịp tim, điện tâm đồ, đo chu kỳ kinh nguyệt,...\r\nĐộ sáng tối đa lên tới 2000 nit, dễ xem màn hình ngay dưới ánh nắng gắt\r\nTích hợp nhiều chế độ tập luyện với các môn thể thao như: Bơi lội, chạy bộ, đạp xe,...",
                     Specification = "Công nghệ màn hình Retina",
@@ -891,7 +815,6 @@ namespace Infrastructure.Seeders
                     Name = "Apple Watch Series 9 41mm (GPS) viền nhôm dây cao su | Chính hãng Apple Việt Nam",
                     ShortName = "41mm dây cao su",
                     UrlSlug = "apple-watch-series-9-41mm-gps-vien-nhom-day-cao-su",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/v/n/vn_apple_watch_series_9_gps_41mm_pink_aluminum_light_pink_sport_band_pdp_image_position-1_1_2.jpg",
                     ShortDescription = "Trang bị chip S9 SiP mạnh mẽ hỗ trợ xử lý mọi tác vụ nhanh chóng với nhiều tiện ích\r\nDễ dàng kết nối, nghe gọi, trả lời tin nhắn ngay trên cổ tay\r\nTrang bị nhiều tính năng sức khỏe như: Đo nhịp tim, điện tâm đồ, đo chu kỳ kinh nguyệt,...\r\nĐộ sáng tối đa lên tới 2000 nit, dễ xem màn hình ngay dưới ánh nắng gắt\r\nTích hợp nhiều chế độ tập luyện với các môn thể thao như: Bơi lội, chạy bộ, đạp xe,...",
                     Specification = "Công nghệ màn hình Retina",
@@ -913,7 +836,6 @@ namespace Infrastructure.Seeders
                     Name = "Samsung Galaxy Watch6 40mm Bluetooth",
                     ShortName = "Watch6 40mm Bluetooth",
                     UrlSlug = "samsung-galaxy-watch6-40mm-bluetooth",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/m/sm-r930_002_front2_graphite_1.png",
                     ShortDescription = "Tính năng theo dõi giấc ngủ giúp bạn có thể phân tích và hiểu rõ hơn về thói quen ngủ của mình\r\nĐột phá công nghệ theo dõi sức khoẻ với khả năng phân tích thành phần cơ thể, đo huyết áp\r\nCảm biến hiện đại với khả năng đo và cảnh báo nhịp tim bất thường\r\nThiết kế hoàn hảo với viền benzel siêu mỏng, kích thước màn hình tăng 20%",
                     Specification = "Công nghệ màn hình Super Amoled",
@@ -935,7 +857,6 @@ namespace Infrastructure.Seeders
                     Name = "Samsung Galaxy Watch6 Classic 43mm Bluetooth",
                     ShortName = "Classic 43mm Bluetooth",
                     UrlSlug = "samsung-galaxy-watch6-classic-43mm-bluetooth",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/m/sm-r930_002_front2_graphite_1.png",
                     ShortDescription = "Tính năng theo dõi giấc ngủ giúp bạn có thể phân tích và hiểu rõ hơn về thói quen ngủ của mình\r\nĐột phá công nghệ theo dõi sức khoẻ với khả năng phân tích thành phần cơ thể, đo huyết áp\r\nCảm biến hiện đại với khả năng đo và cảnh báo nhịp tim bất thường\r\nThiết kế hoàn hảo với viền benzel siêu mỏng, kích thước màn hình tăng 20%",
                     Specification = "Công nghệ màn hình Super Amoled",
@@ -957,7 +878,6 @@ namespace Infrastructure.Seeders
                     Name = "Samsung Galaxy Watch6 Classic 47mm Bluetooth",
                     ShortName = "Classic 47mm Bluetooth",
                     UrlSlug = "samsung-galaxy-watch6-classic-47mm-bluetooth",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/m/sm-r930_002_front2_graphite_1.png",
                     ShortDescription = "Tính năng theo dõi giấc ngủ giúp bạn có thể phân tích và hiểu rõ hơn về thói quen ngủ của mình\r\nĐột phá công nghệ theo dõi sức khoẻ với khả năng phân tích thành phần cơ thể, đo huyết áp\r\nCảm biến hiện đại với khả năng đo và cảnh báo nhịp tim bất thường\r\nThiết kế hoàn hảo với viền benzel siêu mỏng, kích thước màn hình tăng 20%",
                     Specification = "Công nghệ màn hình Super Amoled",
@@ -979,7 +899,6 @@ namespace Infrastructure.Seeders
                     Name = "Camera GoPro Hero 11",
                     ShortName = "Gopro Hero 11",
                     UrlSlug = "camera-gopro-hero-11",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/c/a/camera-hanh-trinh-gopro-hero-11_3_.png",
                     ShortDescription = "Camera độ phân giải đến 27MP cho những bức ảnh mượt mà, tuyệt đẹp với màu sắc sống động\r\nHệ thống chống rung hình ảnh Hyper Smooth 5.0 cho chất lượng ảnh và video mượt mà, ổn định\r\nChống nước độ sâu lên đến 10m, thích hợp để quay dưới nước hoặc trong điều kiện thời tiết xấu\r\nTrang bị màn hình LCD kép giúp thuận tiện hơn trong việc theo dõi và căn chỉnh sao cho phù hợp",
                     Specification = "Dòng camera Camera hành động",
@@ -1001,7 +920,6 @@ namespace Infrastructure.Seeders
                     Name = "Camera GoPro Hero 11 Creator Edition",
                     ShortName = "GoPro Hero 11 Creator Edition",
                     UrlSlug = "camera-gopro-hero-11-creator-edition",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/c/a/camera-hanh-trinh-gopro-hero-11_3_.png",
                     ShortDescription = "Camera độ phân giải đến 27MP cho những bức ảnh mượt mà, tuyệt đẹp với màu sắc sống động\r\nHệ thống chống rung hình ảnh Hyper Smooth 5.0 cho chất lượng ảnh và video mượt mà, ổn định\r\nChống nước độ sâu lên đến 10m, thích hợp để quay dưới nước hoặc trong điều kiện thời tiết xấu\r\nTrang bị màn hình LCD kép giúp thuận tiện hơn trong việc theo dõi và căn chỉnh sao cho phù hợp",
                     Specification = "Dòng camera Camera hành động",
@@ -1023,7 +941,6 @@ namespace Infrastructure.Seeders
                     Name = "Camera GoPro Hero 11 Mini",
                     ShortName = "Gopro Hero 11 Mini",
                     UrlSlug = "camera-gopro-hero-11-mini",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/c/a/camera-hanh-trinh-gopro-hero-11_3_.png",
                     ShortDescription = "Camera độ phân giải đến 27MP cho những bức ảnh mượt mà, tuyệt đẹp với màu sắc sống động\r\nHệ thống chống rung hình ảnh Hyper Smooth 5.0 cho chất lượng ảnh và video mượt mà, ổn định\r\nChống nước độ sâu lên đến 10m, thích hợp để quay dưới nước hoặc trong điều kiện thời tiết xấu\r\nTrang bị màn hình LCD kép giúp thuận tiện hơn trong việc theo dõi và căn chỉnh sao cho phù hợp",
                     Specification = "Dòng camera Camera hành động",
@@ -1045,7 +962,6 @@ namespace Infrastructure.Seeders
                     Name = "Camera Xiaomi MI Home Security C200 (BHR6766GL)",
                     ShortName = "Home Security C200",
                     UrlSlug = "camera-xiaomi-mi-home-security-c200-bhr6766gl",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/i/m/image_277.png",
                     ShortDescription = "Quan sát bao quát tốt với góc quay 360 độ theo chiều ngang và 106 độ theo chiều dọc\r\nCung cấp hình ảnh quan sát sắc nét với độ phân giải Full HD (1080P)\r\nĐèn hồng ngoại 940mm cho tầm nhìn lên tới 9m\r\nHỗ trợ đàm thoại 2 chiều để trò chuyện qua camera tiện lợi\r\nQuản lý hoạt động qua ứng dụng Mi Home",
                     Specification = "Độ phân giải 1920×1080 Full HD",
@@ -1067,7 +983,6 @@ namespace Infrastructure.Seeders
                     Name = "Dịch vụ AppleCare+ cho iPad Pro 12.9 icnh 2020",
                     ShortName = "AppleCare+ cho iPad Pro",
                     UrlSlug = "dich-vu-applecare-cho-ipad-pro-129-icnh-2020",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/a/p/apple-care_1_1_1_1_1_2_1_1_1_1_1_1_1_1_1_1_2_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1_1.jpeg",
                     ShortDescription = "Chỉ áp dụng cho máy đã được kích hoạt trong vòng 7 ngày\r\nThêm 1 năm bảo hành chính hãng (tổng 2 năm)\r\nBảo hành rơi vỡ, rớt nước không giới hạn\r\nBảo hành phần cứng tất cả các lỗi NSX\r\nBảo hành cả phụ kiện đi kèm máy\r\nƯu tiên hỗ trợ kỹ thuật qua tổng đài 24/7",
                     Specification = "Hãng sản xuất Apple Chính hãng",
@@ -1084,7 +999,6 @@ namespace Infrastructure.Seeders
                     Name = "Gói 2 năm Samsung Care+ điện thoại Samsung Galaxy A14",
                     ShortName = "Samsung Care+ Samsung Galaxy A14",
                     UrlSlug = "samsung-care-djien-thoai-samsung-galaxy-a14",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/s/a/samsung-care-heart-mobile_4_1_2_1_1_1_1_1_1_1_1_1_1_2.png",
                     ShortDescription = "Được bán kèm trong vòng 55 ngày kể từ ngày mua thiết bị\r\nGia hạn thêm 2 năm bảo hành chính hãng cho điện thoại Galaxy A14\r\nBảo vệ rơi vỡ, vào nước với dịch vụ và linh kiện hoàn toàn chính hãng\r\nNhận thiết bị hoàn toàn khi chi phí sửa chữa lớn hơn hoặc bằng 85%\r\nBảo vệ lên đến 55 ngày tại các trung tâm chăm sóc khách hàng Samsung Care+ toàn cầu",
                     Specification = "Hãng sản xuất Samsung Chính hãng",
@@ -1101,7 +1015,6 @@ namespace Infrastructure.Seeders
                     Name = "CPU Intel Core i5 12400F",
                     ShortName = "i5 12400F",
                     UrlSlug = "cpu-intel-core-i5-12400f",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/c/p/cpu-intel-core-i5-12400f.jpg",
                     ShortDescription = "CPU Intel Core i5 12400F là một trong những dòng chip Intel được tích hợp một hiệu năng mạnh mẽ cùng với bộ nhớ đệm lớn góp phần đáp ứng đầy đủ các tác vụ nặng, các tác vụ quan trọng cho người dùng",
                     Specification = "Chipset Intel",
@@ -1118,7 +1031,6 @@ namespace Infrastructure.Seeders
                     Name = "Mainboard ASRock B450M HDV R4",
                     ShortName = "ASRock B450M",
                     UrlSlug = "mainboard-asrock-b450m-hdv-r4",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/b/4/b450m-hdv_r4.0m1.png",
                     ShortDescription = "Tốc độ truyền nhanh chóng",
                     Specification = "Chipset AMD",
@@ -1135,7 +1047,6 @@ namespace Infrastructure.Seeders
                     Name = "Màn hình Gaming ASUS TUF VG246H1A 24 inch",
                     ShortName = "ASUS TUF VG246H1A",
                     UrlSlug = "man-hinh-gaming-asus-tuf-vg246h1a-24-inch",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/man-hinh-asus-tuf-gaming-vg246h1a-24-inch-1.png",
                     ShortDescription = "Trang bị tấm nền IPS với kích thước 24 inch FHD cho góc nhìn rộng\r\nPhản xạ cực nhanh trước đối thủ khi chơi game với tốc độ chỉ 0.5ms\r\nĐộ phủ màu sRGB 110% tái hiện chính xác màu sắc của mọi nội dung\r\nTần số 100Hz + AMD FreeSync cho hình ảnh chuyển động liền mạch",
                     Specification = "Tần số quét 100 Hz",
@@ -1157,7 +1068,6 @@ namespace Infrastructure.Seeders
                     Name = "Màn hình Samsung LU28R550UQEXXV 28 inch",
                     ShortName = "Samsung 28 inch",
                     UrlSlug = "man-hinh-samsung-lu28r550uqexxv-28-inch",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/m/a/man-hinh-samsung-28-inch-lu28r550uqexxv-7_2.jpg",
                     ShortDescription = "Tận hưởng từng chi tiết khung hình với chất lượng 4K Ultra HD ấn tượng\r\nTấm nền IPS siêu việt giúp tái hiện hình ảnh rõ ràng với sắc màu sống động\r\nCông nghệ HDR ưu việt giúp hình ảnh trở nên rõ ràng, sắc nét đến từng chi tiết phức tạp nhất\r\nTính năng hạn chế tối đa phát xạ ánh sáng xanh dễ gây ra tình trạng mỏi mắt\r\nCông nghệ AMD FreeSync chuyển động mượt mà sắc nét, nâng tầm giải trí\r\nThiết kế 3 cạnh không viền thời thượng mở rộng tối đa không gian",
                     Specification = "Tần số quét 60 Hz",
@@ -1179,7 +1089,6 @@ namespace Infrastructure.Seeders
                     Name = "Smart Tivi Samsung Crystal UHD 4K 50 inch UA50AU7700KXXV",
                     ShortName = "50 inch",
                     UrlSlug = "smart-tivi-samsung-crystal-uhd-4k-50-inch-ua50au7700kxxv",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/4/0/40_1_31.jpg",
                     ShortDescription = "Khung hình rực rỡ, ấn tượng với dải màu rộng từ công nghệ PurColor\r\nTăng cường tương phản, hình ảnh sâu thẳm chân thực nhờ công nghệ HDR10+ và Contrast Enhancer\r\nHình ảnh chuyển động mượt mà với công nghệ Motion Xcelerator\r\nÂm thanh bùng nổ cùng Dolby Digital Plus, lan tỏa mạnh mẽ qua công nghệ Q-Symphony",
                     Specification = "Kích cỡ màn hình 50 inch",
@@ -1201,7 +1110,6 @@ namespace Infrastructure.Seeders
                     Name = "Smart Tivi Khung Tranh The Frame 4K Samsung LTV 55 inch 55LS03BA",
                     ShortName = "55 inch",
                     UrlSlug = "smart-tivi-khung-tranh-the-frame-4k-samsung-ltv-55-inch-55ls03ba",
-                    Rating = 5,
                     ImageUrl = "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/4/0/40_1_31.jpg",
                     ShortDescription = "Khả năng hiển thị màu sắc và ánh sáng được tối ưu, truyền tải trọn vẹn hình ảnh với công nghệ Quantum Dot\r\nThiết kế sáng tạo đem lại cảm giác trải nghiệm khác biệt, hướng đến nghệ thuật\r\nÂm thanh được tinh chỉnh nhờ công nghệ Adaptive Sound phù hợp với nội dung giải trí\r\nTích hợp trợ lý ảo Google Tiếng Việt, Bixby và Tìm kiếm bằng giọng nói Tiếng Việt trên YouTube",
                     Specification = "Kích cỡ màn hình 55 inch",
@@ -1258,7 +1166,7 @@ namespace Infrastructure.Seeders
                 },
                 new()
                 {
-                    Name = "Thàng công",
+                    Name = "Thành công",
                     UrlSlug = "thanh-cong",
                 },
                 new()
@@ -1641,10 +1549,16 @@ namespace Infrastructure.Seeders
                 new()
                 {
                     CodeName = "Fki0umx3Dpg5eqR",
-                    DiscountPercent = 10,
+                    DiscountPercent = 0,
                     StartDate = DateTime.Now,
                     EndDate = (DateTime.Now).AddDays(7),
-                    Status = true,
+                },
+                new()
+                {
+                    CodeName = "FIRST_ORDER",
+                    DiscountPercent = 0.2,
+                    StartDate = DateTime.Now,
+                    EndDate = (DateTime.Now).AddDays(20),
                 },
             };
             var discountAdd = new List<Discount>();
@@ -1658,28 +1572,6 @@ namespace Infrastructure.Seeders
             _dbContext.AddRange(discountAdd);
             _dbContext.SaveChanges();
             return discounts;
-        }
-
-        private IList<OrderItem> AddOrderItems(IList<Product> products, IList<Order> orders)
-        {
-            var r = new Random();
-            var orderItems = new List<OrderItem>();
-            for (int i = 0; i < orders.Count; i++)
-            {
-                foreach (var item in products)
-                {
-                    orderItems.Add(new OrderItem()
-                    {
-                        OrderId = orders[i].Id,
-                        ProductId = item.Id,
-                        Quantity = i + r.Next(1, 10),
-                        Price = item.Price + r.Next(2900000, 3200000),
-                    });
-                }
-            };
-            _dbContext.AddRange(orderItems);
-            _dbContext.SaveChanges();
-            return orderItems;
         }
 
         private IList<PaymentMethod> AddPaymentMethods()

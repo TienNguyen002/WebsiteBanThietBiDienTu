@@ -12,7 +12,7 @@
         public int MinPrice { get; set; }
         public int MaxPrice { get; set; }
         public string? Serie { get; set; }
-        public decimal Rating { get; set; }
+        public float Rating { get; set; }
         public string? Color { get; set; }
     }
 }

@@ -14,13 +14,16 @@ namespace Infrastructure.Mapping
 
             builder.Property(o => o.Name);
 
+            builder.Property(o => o.Address);
+
+            builder.Property(o => o.Phone);
+
             builder.Property(o => o.DateOrder)
                 .HasColumnType("datetime");
 
             builder.Property(o => o.Quantity);
 
-            builder.Property(o => o.TotalPrice)
-                .HasColumnType("decimal(18,2)");
+            builder.Property(o => o.TotalPrice);
 
             builder.HasOne(o => o.Status)
                 .WithMany(s => s.Orders)

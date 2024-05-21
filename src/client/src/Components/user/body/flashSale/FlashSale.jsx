@@ -117,7 +117,7 @@ const FlashSale = () => {
                     image={item.imageUrl}
                     slug={item.urlSlug}
                     salePrice={item.salePrice}
-                    current={item.price}
+                    current={item.price === 0 ? item.orPrice : item.price}
                     star={item.rating}
                     color={item.colors}
                   />

@@ -17,9 +17,6 @@ namespace Domain.Entities
         //Mã định danh sản phẩm
         public string UrlSlug { get; set; } = null!;
 
-        //Tổng đánh giá
-        public decimal Rating { get; set; }
-
         //Hình ảnh của sản phẩm
         public string? ImageUrl { get; set; }
 

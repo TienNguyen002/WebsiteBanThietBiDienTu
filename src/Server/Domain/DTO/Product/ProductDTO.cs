@@ -9,14 +9,16 @@ namespace Domain.DTO.Product
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
+        public string ShortName { get; set; } = null!;
         public string UrlSlug { get; set; } = null!;
         public string ImageUrl { get; set; } = null!;
         public string ShortDescription { get; set; } = null!;
+        public string Specification { get; set; } = null!;
         public IList<ProductColorDTO> Colors { get; set; } = new List<ProductColorDTO>();
         public int SalePrice { get; set; }
         public int Price { get; set; }
         public int OrPrice { get; set; }
-        public decimal Rating { get; set; }
+        public float Rating { get; set; }
         public ShortSerieDTO Serie { get; set; } = null!;
         public CategoryDTO Category { get; set; } = null!;
         public BranchDTO Branch { get; set; } = null!;

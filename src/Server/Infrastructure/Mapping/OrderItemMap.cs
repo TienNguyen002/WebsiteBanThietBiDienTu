@@ -12,12 +12,13 @@ namespace Infrastructure.Mapping
 
             builder.HasKey(o => o.Id);
 
+            builder.Property(o => o.Color);
+
             builder.Property(o => o.Quantity)
                 .IsRequired();
 
             builder.Property(o => o.Price)
-                .IsRequired()
-                .HasColumnType("decimal(18,2)"); ;
+                .IsRequired();
 
             builder.HasOne(o => o.Order)
                 .WithMany(o => o.OrderItems)

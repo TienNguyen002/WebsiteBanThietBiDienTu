@@ -2,9 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import "../styles/homePage.scss";
 import banner from "../../../Shared/images/banner-top.jpg";
 import logo from "../../../Shared/images/logo-4.png";
-import { UserRound, Search, UserRoundPlus, LogIn } from "lucide-react";
+import {
+  UserRound,
+  Search,
+  UserRoundPlus,
+  LogIn,
+  ShoppingCart,
+} from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import CartDrawer from "../cart/CartDrawer";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../Redux/Account";
 import { Badge } from "antd";
@@ -17,11 +22,16 @@ const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let cart = useSelector((state) => state.cart);
-  console.log(cart);
+
   const handleLogout = async () => {
     await dispatch(logout());
     navigate(`/`);
     window.location.reload();
+  };
+
+  const handleLink = () => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+    navigate("/cart");
   };
 
   useEffect(() => {
@@ -124,7 +134,7 @@ const Header = () => {
                 showZero
                 className="cart-icon"
               >
-                <CartDrawer className="cart-icon" />
+                <ShoppingCart onClick={handleLink} />
               </Badge>
             </div>
           </div>

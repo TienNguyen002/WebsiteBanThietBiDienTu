@@ -34,6 +34,19 @@ namespace Infrastructure.Repositories
             }
         }
 
+        public async Task<bool> Update(T entity)
+        {
+            try
+            {
+                _context.Update(entity);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         /// <summary>
         /// Add Entity If Model Has No Id / Update Entity If Model Has Id
         /// </summary>

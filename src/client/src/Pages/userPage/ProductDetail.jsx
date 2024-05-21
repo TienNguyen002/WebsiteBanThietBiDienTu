@@ -11,11 +11,14 @@ import { Tabs } from "antd";
 import TabPane from "antd/es/tabs/TabPane";
 import "../../styles/productDetail.scss";
 import Quantity from "../../Components/user/common/Quantity";
-import { getProductDetail } from "../../Api/Controller";
-import Loading from "./../../Components/shared/Loading";
+import { countAllComment, getProductDetail } from "../../Api/Controller";
 import { useDispatch, useSelector } from "react-redux";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { addItem } from "../../Redux/Cart";
+import CommentOverview from "../../Components/user/common/comment/CommentOverview";
+import CommentBox from "../../Components/user/common/comment/CommentBox";
+import CommentList from "../../Components/user/common/comment/CommentList";
+import DOMPurify from "dompurify";
 
 const ProductDetail = () => {
   const navigate = useNavigate();
@@ -26,6 +29,7 @@ const ProductDetail = () => {
   const [serie, setSerie] = useState({});
   const [reload, setReload] = useState(false);
   const [colorSelect, setColorSelect] = useState("");
+  const [total, setTotal] = useState();
   const params = useParams();
   const { slug } = params;
   const dispatch = useDispatch();
@@ -42,6 +46,12 @@ const ProductDetail = () => {
       } else {
         setProduct([]);
       }
+    });
+
+    countAllComment(slug).then((data) => {
+      if (data) {
+        setTotal(data);
+      } else setTotal();
     });
   }, [reload]);
 
@@ -62,6 +72,7 @@ const ProductDetail = () => {
   };
 
   const handleTagClick = (newSlug) => {
+    setColorSelect("");
     navigate(`/detail/${newSlug}`);
     setReload(true);
   };
@@ -73,29 +84,37 @@ const ProductDetail = () => {
       if (product.colors.length > 0 && colorSelect === "") {
         toast.error("Vui lòng chọn màu của sản phẩm");
       } else {
-        dispatch(
-          addItem({
-            id: product.id,
-            productName: product.name,
-            price: product.price,
-            imageUrl: product.imageUrl,
-            color: colorSelect,
-            quantity: quantity,
-          })
-        );
-        toast.success("Đã thêm sản phẩm vào giỏ hàng");
+        if (product.amount === 0) {
+          toast.error("Hiện tại sản phẩm đã hết hàng");
+        } else {
+          dispatch(
+            addItem({
+              id: product.id,
+              productName: product.name,
+              price:
+                product.price === 0
+                  ? product.orPrice * quantity
+                  : product.price * quantity,
+              realPrice: product.price === 0 ? product.orPrice : product.price,
+              imageUrl: product.imageUrl,
+              color: colorSelect,
+              quantity: quantity,
+            })
+          );
+          toast.success("Đã thêm sản phẩm vào giỏ hàng");
+        }
       }
     }
   };
 
   const clickImage = (colorName) => {
-    console.log("hello", colorName);
     setColorSelect(colorName);
   };
   // const parts = window.location.pathname.split("/");
 
   return (
     <>
+      <Toaster />
       <NavigationBar
         category={category.name}
         categorySlug={category.urlSlug}
@@ -127,9 +146,9 @@ const ProductDetail = () => {
             <h2 className="product-information-item-box-name">
               {product.name}
             </h2>
-            {product.rating ? (
+            {serie.rating ? (
               <StarRating
-                rating={product.rating}
+                rating={serie.rating}
                 className="product-information-item-box-rating"
               />
             ) : null}
@@ -155,12 +174,20 @@ const ProductDetail = () => {
               ) : null}
             </div>
             <div className="product-information-item-box-price">
-              <div className="product-information-item-box-price-discount">
-                <p>{formatVND(product.price)}</p>
-              </div>
-              <div className="product-information-item-box-price-current">
-                <s>{formatVND(product.orPrice)}</s>
-              </div>
+              {product.price === 0 ? (
+                <div className="top-card-product-detail-item-price-original">
+                  <p>{formatVND(product.orPrice)}</p>
+                </div>
+              ) : (
+                <>
+                  <div className="top-card-product-detail-item-price-current">
+                    <p>{formatVND(product.price)}</p>
+                  </div>
+                  <div className="top-card-product-detail-item-price-original">
+                    <s>{formatVND(product.orPrice)}</s>
+                  </div>
+                </>
+              )}
             </div>
             <div className="product-information-item-box-status">
               <p className="product-information-item-box-status-title">
@@ -191,7 +218,11 @@ const ProductDetail = () => {
               <p className="product-information-item-box-special-title">
                 Đặc điểm nổi bật
               </p>
-              {product.shortDescription}
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(product.shortDescription),
+                }}
+              ></p>
             </div>
             <div className="product-information-item-box-action">
               <div className="product-information-item-box-action-cart">
@@ -223,7 +254,11 @@ const ProductDetail = () => {
                 key="1"
                 className="product-information-body-tab-content product-information-body-tab-content-desc"
               >
-                {serie.description}
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(serie.description),
+                  }}
+                ></p>
               </TabPane>
               <TabPane
                 tab={
@@ -234,7 +269,11 @@ const ProductDetail = () => {
                 key="2"
                 className="product-information-body-tab-content product-information-body-tab-content-speci"
               >
-                {product.specification}
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(product.specification),
+                  }}
+                ></p>
               </TabPane>
               <TabPane
                 tab={
@@ -245,7 +284,9 @@ const ProductDetail = () => {
                 key="3"
                 className="product-information-body-tab-content product-information-body-tab-content-comment"
               >
-                Bình luận
+                <CommentOverview rating={serie.rating} total={total} />
+                <CommentBox slug={slug} setReload={setReload} reload={reload} />
+                <CommentList className="comment-list" reload={reload} />
               </TabPane>
             </Tabs>
           </div>

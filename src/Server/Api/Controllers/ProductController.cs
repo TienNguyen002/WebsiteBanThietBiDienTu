@@ -91,7 +91,7 @@ namespace Api.Controllers
         /// <param name="model"> Model to add/update </param>
         /// <returns> Added/Updated Product </returns>
         [HttpPost]
-        public async Task<ActionResult<ProductDTO>> AddOrUpdateProduct([FromForm] ProductEditModel model)
+        public async Task<ActionResult<bool>> AddOrUpdateProduct([FromForm] ProductEditModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -102,8 +102,7 @@ namespace Api.Controllers
             {
                 return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
             }
-            var result = _mapper.Map<ProductDTO>(model);
-            return Ok(ApiResponse.Success(result));
+            return Ok(ApiResponse.Success(productCreate));
         }
 
         /// <summary>
@@ -185,6 +184,20 @@ namespace Api.Controllers
         public async Task<ActionResult<ProductDTO>> RemoveSaleProduct(int id)
         {
             var result = await _service.RemoveSaleProduct(id);
+            return Ok(ApiResponse.Success(result));
+        }
+
+        [HttpPut("addSale")]
+        public async Task<ActionResult<ProductDTO>> AddToSaleProduct([FromForm] SaleAddModel model)
+        {
+            var result = await _service.AddToSaleProduct(model);
+            return Ok(ApiResponse.Success(result));
+        }
+
+        [HttpPut("addAmount")]
+        public async Task<ActionResult<ProductDTO>> AddMoreAmount([FromForm] AmountAddModel model)
+        {
+            var result = await _service.AddMoreAmount(model);
             return Ok(ApiResponse.Success(result));
         }
     }

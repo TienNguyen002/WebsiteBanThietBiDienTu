@@ -57,6 +57,7 @@ namespace Api.Extensions
             builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
             builder.Services.AddScoped<IStatusRepository, StatusRepository>();
             builder.Services.AddScoped<IStatusService, StatusService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IUserService, UserService>();
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<IProductService, ProductService>();
@@ -70,6 +71,9 @@ namespace Api.Extensions
             builder.Services.AddScoped<ISerieService, SerieService>();
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<IOrderService, OrderService>();
+            builder.Services.AddScoped<IOrderItemRepository, OrderItemRepository>();
+            builder.Services.AddScoped<IOtherRepository, OtherRepository>();
+            builder.Services.AddScoped<IOtherService, OtherService>();
             builder.Services.AddScoped<ICloundinaryService, CloudinaryService>();
 
             return builder;

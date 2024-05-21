@@ -105,7 +105,7 @@ namespace Infrastructure.Repositories
         {
             return await _context.Set<Product>()
                .Include(p => p.Colors)
-               .OrderBy(p => p.Rating)
+               .OrderBy(p => p.Serie.Rating)
                .Take(limit)
                .ToListAsync();
         }
@@ -125,7 +125,7 @@ namespace Infrastructure.Repositories
             }
             if (query.IsHighRating)
             {
-                productQuery = productQuery.Where(i => i.Rating >= 4).OrderBy(p => p.Rating);
+                productQuery = productQuery.Where(i => i.Serie.Rating >= 4).OrderBy(p => p.Serie.Rating);
             }
             if (query.IsNew)
             {
@@ -180,7 +180,7 @@ namespace Infrastructure.Repositories
             }
             if (query.Rating > 0)
             {
-                productQuery = productQuery.Where(p => p.Rating == query.Rating);
+                productQuery = productQuery.Where(p => p.Serie.Rating >= query.Rating && p.Serie.Rating < query.Rating + 1);
             }
             if (!string.IsNullOrWhiteSpace(query.Color))
             {
@@ -213,11 +213,11 @@ namespace Infrastructure.Repositories
             }
             if (query.IsHighRating)
             {
-                productQuery = productQuery.Where(i => i.Rating >= 4).OrderBy(p => p.Rating);
+                productQuery = productQuery.Where(i => i.Serie.Rating >= 4).OrderBy(p => p.Serie.Rating);
             }
             if (query.IsNew)
             {
-                productQuery = productQuery.Where(i => i.Rating == null).OrderByDescending(p => p.Id);
+                productQuery = productQuery.Where(i => i.Serie.Rating == null).OrderByDescending(p => p.Id);
             }
             if (query.IsTop)
             {

@@ -3,7 +3,7 @@ import StarRating from "../../../product/starRating/StarRating";
 import { Award } from "lucide-react";
 import { formatVND } from "../../../../../Common/function";
 import "../../../styles/homePage.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const TopCard = (props) => {
   const { title, isNew, products, isHighRating, isTop } = props;
@@ -59,12 +59,20 @@ const TopCard = (props) => {
                       {item.name}
                     </h3>
                     <div className="top-card-product-detail-item-price">
-                      <div className="top-card-product-detail-item-price-current">
-                        <p>{formatVND(item.price)}</p>
-                      </div>
-                      <div className="top-card-product-detail-item-price-original">
-                        <s>{formatVND(item.orPrice)}</s>
-                      </div>
+                      {item.price === 0 ? (
+                        <div className="top-card-product-detail-item-price-original">
+                          <p>{formatVND(item.orPrice)}</p>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="top-card-product-detail-item-price-current">
+                            <p>{formatVND(item.price)}</p>
+                          </div>
+                          <div className="top-card-product-detail-item-price-original">
+                            <s>{formatVND(item.orPrice)}</s>
+                          </div>
+                        </>
+                      )}
                     </div>
                     {isNew ? null : (
                       <StarRating

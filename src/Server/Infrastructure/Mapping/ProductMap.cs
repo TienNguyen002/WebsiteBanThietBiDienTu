@@ -21,9 +21,6 @@ namespace Infrastructure.Mapping
             builder.Property(p => p.UrlSlug)
                 .IsRequired();
 
-            builder.Property(p => p.Rating)
-                .HasColumnType("decimal(18,2)");
-
             builder.Property(p => p.ImageUrl)
                .HasMaxLength(1000);
 
@@ -36,15 +33,12 @@ namespace Infrastructure.Mapping
             builder.Property(p => p.Amount)
                 .HasMaxLength(500);
 
-            builder.Property(p => p.SalePrice)
-               .HasColumnType("decimal(18,2)");
+            builder.Property(p => p.SalePrice);
 
-            builder.Property(p => p.Price)
-                .HasColumnType("decimal(18,2)");
+            builder.Property(p => p.Price);
 
             builder.Property(p => p.OrPrice)
-                .IsRequired()
-                .HasColumnType("decimal(18,2)");
+                .IsRequired();
 
             builder.Property(p => p.SoldQuantity);
 

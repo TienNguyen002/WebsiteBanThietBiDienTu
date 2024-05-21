@@ -4,12 +4,12 @@ import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
 import { Eye } from "lucide-react";
 import { getAllOrders } from "../../../Api/Controller";
-import CategoryEdit from "../edit/CategoryEdit";
 import "../../../styles/adminLayout.scss";
 import { Toaster } from "react-hot-toast";
 import { convertDate, formatVND } from "../../../Common/function";
 import ManageTag from "../../../Components/shared/ManageTag";
 import OrderButton from "../../../Components/admin/common/OrderButton";
+import OrderItemsView from "../view/OrderItemsView";
 
 const OrderManagement = () => {
   const [orders, setOrders] = useState([]);
@@ -17,7 +17,8 @@ const OrderManagement = () => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
   const [open, setOpen] = useState(false);
-  const [idEdit, setIdEdit] = useState(0);
+  const [orderId, setOrderId] = useState();
+  const [total, setTotal] = useState();
   const [reloadData, setReloadData] = useState(false);
 
   useEffect(() => {
@@ -29,13 +30,14 @@ const OrderManagement = () => {
     });
   }, [reloadData]);
 
-  const handleOk = () => {
-    setOpen(false);
+  const handleView = (id, totalPrice) => {
+    setOpen(true);
+    setOrderId(id);
+    setTotal(totalPrice);
   };
 
   const handleCancel = () => {
     setOpen(false);
-    setIdEdit(0);
   };
 
   const columns = [
@@ -84,7 +86,7 @@ const OrderManagement = () => {
       title: "Phương thức thanh toán",
       dataIndex: "paymentMethod",
       key: "paymentMethod",
-      width: 400,
+      width: 500,
     },
     {
       title: "Chức năng",
@@ -94,8 +96,12 @@ const OrderManagement = () => {
       render: (_, record) => (
         <Space size="middle">
           <div className="action">
-            <Eye />
-            <OrderButton status={record.status} />
+            <Eye onClick={() => handleView(record.id, record.totalPrice)} />
+            <OrderButton
+              status={record.status}
+              id={record.id}
+              setReloadData={setReloadData}
+            />
           </div>
         </Space>
       ),
@@ -125,12 +131,14 @@ const OrderManagement = () => {
           />
         </Form>
       </div>
-      <Modal centered open={open} footer={null} onCancel={handleCancel}>
-        <CategoryEdit
-          id={idEdit}
-          onOk={handleOk}
-          setReloadData={setReloadData}
-        />
+      <Modal
+        centered
+        open={open}
+        footer={null}
+        onCancel={handleCancel}
+        width={1000}
+      >
+        <OrderItemsView id={orderId} total={total} />
       </Modal>
     </div>
   );

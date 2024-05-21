@@ -22,6 +22,7 @@ namespace Infrastructure.Contexts
         public DbSet<Serie> Series { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public DeviceWebDbContext(DbContextOptions options) : base(options)
         {
@@ -41,6 +42,7 @@ namespace Infrastructure.Contexts
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CommentMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(DiscountMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ImageMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(NotificationMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderItemMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PaymentMethodMap).Assembly);
