@@ -18,16 +18,39 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../Redux/Account";
 import { Badge } from "antd";
 import DropDownItem from "../../shared/DropDownItem";
+import { getUserById } from "../../../Api/Controller";
 
 const Header = () => {
+  const initialState = {
+    id: 0,
+    imageUrl: "",
+    name: "",
+    email: "",
+    address: "",
+    phoneNumber: "",
+  };
   const navbarRef = useRef(null);
   const userRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const [userInfo, setUserInfo] = useState(initialState);
   const [query, setQuery] = useState("");
   let user = useSelector((state) => state.auth.login.currentUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   let cart = useSelector((state) => state.cart);
+
+  const editImageFrame =
+    "https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/3da39-no-user-image-icon-27.png?fit=500%2C500&ssl=1";
+
+  useEffect(() => {
+    if (user !== null) {
+      getUserById(user.id).then((data) => {
+        if (data) {
+          setUserInfo(data);
+        } else setUserInfo(initialState);
+      });
+    }
+  }, []);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -100,7 +123,32 @@ const Header = () => {
           </div>
           <div className="home-header-navbar-end">
             <div className="home-header-navbar-end-user" ref={userRef}>
-              <UserRound className="user-icon" onClick={() => setOpen(!open)} />
+              {user !== null ? (
+                <div className="home-header-navbar-end-user-icon">
+                  {userInfo.imageUrl === "" || userInfo.imageUrl === null ? (
+                    <img
+                      src={editImageFrame}
+                      alt={userInfo.name}
+                      onClick={() => setOpen(!open)}
+                    />
+                  ) : (
+                    <img
+                      src={userInfo.imageUrl}
+                      alt={userInfo.name}
+                      onClick={() => setOpen(!open)}
+                    />
+                  )}
+                </div>
+              ) : (
+                <div className="home-header-navbar-end-user-icon">
+                  <img
+                    src={editImageFrame}
+                    alt="Hinh"
+                    onClick={() => setOpen(!open)}
+                  />
+                </div>
+              )}
+
               {open && user === null ? (
                 <div className="home-header-navbar-end-user-dropdown">
                   <ul>

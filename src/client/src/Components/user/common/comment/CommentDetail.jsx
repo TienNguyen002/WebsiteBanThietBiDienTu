@@ -2,7 +2,6 @@ import React from "react";
 import { convertDate } from "../../../../Common/function";
 import StarRating from "../../product/starRating/StarRating";
 import "../../styles/homePage.scss";
-import { User2Icon } from "lucide-react";
 
 const CommentDetail = ({ image, name, detail, rating, commentDate }) => {
   const editImageFrame =
