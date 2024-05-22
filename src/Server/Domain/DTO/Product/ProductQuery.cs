@@ -6,6 +6,7 @@
         public bool IsHighRating { get; set; }
         public bool IsNew { get; set; }
         public bool IsTop { get; set; }
+        public string? Keyword { get; set; }
         public string? SortOrder { get; set; }
         public string? Category { get; set; }
         public string? Branch { get; set; }

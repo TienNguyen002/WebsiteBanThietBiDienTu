@@ -36,6 +36,7 @@ const ProductDetail = () => {
   let user = useSelector((state) => state.auth.login.currentUser);
 
   useEffect(() => {
+    document.title = "Trang chi tiết";
     setReload(false);
     getProductDetail(slug).then((data) => {
       if (data) {

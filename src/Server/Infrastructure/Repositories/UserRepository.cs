@@ -35,16 +35,5 @@ namespace Infrastructure.Repositories
                 .ThenInclude(x => x.Status)
                 .ToListAsync();
         }
-
-        public async Task<IList<Order>> GetOrdersByUserIdAsync(string userId)
-        {
-            return await _context.Set<Order>()
-                .Include(x => x.OrderItems)
-                .Include(x => x.Status)
-                .Include(x => x.PaymentMethod)
-                .Include(x => x.Discount)
-                .Where(order => order.ApplicationUserId == userId)
-                .ToListAsync();
-        }
     }
 }

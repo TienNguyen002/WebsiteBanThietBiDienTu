@@ -34,6 +34,8 @@ const ProductManagement = () => {
   let { slug } = param;
 
   useEffect(() => {
+    document.title = "Quản lý sản phẩm";
+
     setReloadData(false);
     getSerieBySlug(slug).then((data) => {
       if (data) {

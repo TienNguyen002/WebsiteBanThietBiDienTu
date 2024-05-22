@@ -19,6 +19,8 @@ const CategoryManagement = () => {
   const [reloadData, setReloadData] = useState(false);
 
   useEffect(() => {
+    document.title = "Quản lý danh mục";
+
     setReloadData(false);
     getAllCategory().then((data) => {
       if (data) {

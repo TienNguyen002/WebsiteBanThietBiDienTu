@@ -13,5 +13,7 @@ namespace Domain.Interfaces.Repositories
         Task<bool> AddNofication(Notification notification);
         Task<bool> AddFeedback(Feedback feedback);
         Task<ProductFilter> GetProductFiltersAsync();
+        Task<bool> DeleteFeedback(int id);
+        Task<IList<Feedback>> GetAllFeedbacks();
     }
 }

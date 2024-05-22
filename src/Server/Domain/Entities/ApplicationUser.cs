@@ -4,6 +4,7 @@ namespace Domain.Entities
 {
     public class ApplicationUser : IdentityUser
     {
+        public string? ImageUrl { get; set; }
         public string? Name { get; set; }
         public string? Address { get; set; }
         public IList<Comment> Comments { get; set; }

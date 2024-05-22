@@ -3,67 +3,85 @@ import { Form, Space, Modal } from "antd";
 import SearchInput from "../../../Components/admin/management/SearchInput";
 import DataTable from "../../../Components/admin/management/DataTable";
 import { Trash } from "lucide-react";
-import { getAllOrders } from "../../../Api/Controller";
+import {
+  deleteFeedback,
+  getAllFeedbacks,
+  getAllOrders,
+} from "../../../Api/Controller";
 import CategoryEdit from "../edit/CategoryEdit";
 import "../../../styles/adminLayout.scss";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { convertDate, formatVND } from "../../../Common/function";
+import Swal from "sweetalert2";
 
 const FeedbackManagement = () => {
-  const [orders, setOrders] = useState([]);
+  const [feedbacks, setFeedbacks] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);
-  const [open, setOpen] = useState(false);
-  const [idEdit, setIdEdit] = useState(0);
   const [reloadData, setReloadData] = useState(false);
 
   useEffect(() => {
+    document.title = "Quản lý feedback";
+
     setReloadData(false);
-    getAllOrders().then((data) => {
+    getAllFeedbacks().then((data) => {
       if (data) {
-        setOrders(data);
-      } else setOrders([]);
+        setFeedbacks(data);
+      } else setFeedbacks([]);
     });
   }, [reloadData]);
 
-  const handleOk = () => {
-    setOpen(false);
-  };
-
-  const handleCancel = () => {
-    setOpen(false);
-    setIdEdit(0);
+  const handleDelete = (id) => {
+    Remove(id);
+    async function Remove(id) {
+      Swal.fire({
+        title: "Bạn có muốn xóa dữ liệu này!",
+        text: "Dữ liệu này không thể khôi phục khi xóa!",
+        cancelButtonText: "Hủy",
+        icon: "error",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Xóa",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteFeedback(id).then((data) => {
+            if (data) {
+              toast.success("Xóa thành công");
+              setReloadData(true);
+            } else toast.error("Xóa thất bại");
+          });
+        }
+      });
+    }
   };
 
   const columns = [
     {
       title: "Tên người gửi",
-      dataIndex: "userName",
-      key: "userName",
+      dataIndex: "username",
+      key: "username",
       width: 400,
     },
     {
       title: "Tiêu đề",
-      dataIndex: "dateOrder",
-      key: "dateOrder",
+      dataIndex: "title",
+      key: "title",
       width: 200,
-      render: (dateOrder) => <span>{convertDate(dateOrder)}</span>,
     },
     {
       title: "Nội dung",
-      dataIndex: "quantity",
-      key: "quantity",
+      dataIndex: "description",
+      key: "description",
       width: 300,
-      sorter: (a, b) => a.quantity - b.quantity,
     },
     {
       title: "Ngày gửi",
-      dataIndex: "totalPrice",
-      key: "totalPrice",
+      dataIndex: "createdDate",
+      key: "createdDate",
       width: 400,
-      render: (totalPrice) => <span>{formatVND(totalPrice)}</span>,
-      sorter: (a, b) => a.totalPrice - b.totalPrice,
+      render: (createdDate) => <span>{convertDate(createdDate)}</span>,
     },
     {
       title: "Chức năng",
@@ -75,7 +93,7 @@ const FeedbackManagement = () => {
           <div className="action">
             <Trash
               className="action-remove"
-              // onClick={() => handleDelete(`${record.id}`)}
+              onClick={() => handleDelete(`${record.id}`)}
             />
           </div>
         </Space>
@@ -97,7 +115,7 @@ const FeedbackManagement = () => {
         <Form>
           <DataTable
             columns={columns}
-            dataSource={orders}
+            dataSource={feedbacks}
             searchQuery={searchQuery}
             page={page}
             pageSize={pageSize}
@@ -106,13 +124,6 @@ const FeedbackManagement = () => {
           />
         </Form>
       </div>
-      <Modal centered open={open} footer={null} onCancel={handleCancel}>
-        <CategoryEdit
-          id={idEdit}
-          onOk={handleOk}
-          setReloadData={setReloadData}
-        />
-      </Modal>
     </div>
   );
 };

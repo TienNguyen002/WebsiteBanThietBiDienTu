@@ -26,6 +26,8 @@ const SerieManagement = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = "Quản lý dòng sản phẩm";
+
     setReloadData(false);
     getAllSerie().then((data) => {
       if (data) {

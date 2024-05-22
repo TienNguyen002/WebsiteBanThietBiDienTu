@@ -13,6 +13,9 @@ const Footer = () => {
               <h4 className="footer-title">VỀ CHÚNG TÔI</h4>
               <li>Giới thiệu</li>
               <li>Tuyển dụng</li>
+              <Link className="link" to={"/feedback"}>
+                <li>Liên hệ</li>
+              </Link>
             </ul>
           </div>
           <div className="home-footer-top-policy">

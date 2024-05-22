@@ -3,6 +3,7 @@
     public class CommentDTO
     {
         public int Id { get; set; }
+        public string ImageUrl { get; set; }
         public string Username { get; set; }
         public string Detail { get; set; } = null!;
         public float Rating { get; set; }

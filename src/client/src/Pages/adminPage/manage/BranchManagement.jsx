@@ -19,6 +19,7 @@ const BranchManagement = () => {
   const [reloadData, setReloadData] = useState(false);
 
   useEffect(() => {
+    document.title = "Quản lý thương hiệu";
     setReloadData(false);
     getAllBranch().then((data) => {
       if (data) {

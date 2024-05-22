@@ -42,16 +42,29 @@ const ListPage = ({ isSale, isHighRating, isNew, isTop }) => {
   useEffect(() => {
     if (isSale) {
       setNaviBar("Ưu đãi");
+      document.title = "Trang ưu đãi";
     }
     if (isHighRating) {
       setNaviBar("Sản phẩm đánh giá cao");
+      document.title = "Trang sản phẩm đánh giá cao";
     }
     if (isNew) {
       setNaviBar("Sản phẩm mới");
+      document.title = "Trang sản phẩm mới";
     }
     if (isTop) {
       setNaviBar("Sản phẩm bán chạy");
+      document.title = "Trang sản phẩm bán chạy";
     }
+    if (
+      isSale === false &&
+      isHighRating === false &&
+      isNew === false &&
+      isTop === false
+    ) {
+      document.title = "Danh sách sản phẩm";
+    }
+
     getProductFilter(filterPayload).then((data) => {
       if (data) {
         setBranches(data.branches);

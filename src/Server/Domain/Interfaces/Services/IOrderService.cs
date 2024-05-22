@@ -8,6 +8,7 @@ namespace Domain.Interfaces.Services
         Task<IList<OrderDTO>> GetAllOrders();
         Task<bool> AddOrder(OrderEditModel model);
         Task<IList<OrderItemsDTO>> GetOrderItemsByOrderIdAsync(int id);
+        Task<IList<OrderDTO>> GetAllOrdersByUserId(string userId);
         Task<bool> MoveToNextStep(int id);
         Task<bool> CancelOrder(int id);
     }

@@ -25,6 +25,7 @@ const CommentList = ({ reload }) => {
             ? comments.map((item, index) => (
                 <div key={index}>
                   <CommentDetail
+                    image={item.imageUrl}
                     name={item.username}
                     detail={item.detail}
                     rating={item.rating}

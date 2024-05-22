@@ -19,6 +19,8 @@ const DiscountManagement = () => {
   const [reloadData, setReloadData] = useState(false);
 
   useEffect(() => {
+    document.title = "Quản lý mã giảm giá";
+
     setReloadData(false);
     getAllDiscounts().then((data) => {
       if (data) {

@@ -10,6 +10,5 @@ namespace Domain.Interfaces.Repositories
     public interface IUserRepository 
     {
         Task<IList<ApplicationUser>> GetAllUsers();
-        Task<IList<Order>> GetOrdersByUserIdAsync(string userId);
     }
 }

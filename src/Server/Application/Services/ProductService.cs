@@ -9,6 +9,7 @@ using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using MapsterMapper;
 using SlugGenerator;
+using System.Collections.Generic;
 
 namespace Application.Services
 {

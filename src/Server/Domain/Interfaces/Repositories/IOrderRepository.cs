@@ -6,6 +6,7 @@ namespace Domain.Interfaces.Repositories
     {
         Task<IList<Order>> GetAllOrders();
         Task<int> CountOrders();
-        Task<IList<OrderItem>> GetOrderItemsByOrderIdAsync(int id);
+        Task<IList<Order>> GetOrdersByUserIdAsync(string userId);
+
     }
 }

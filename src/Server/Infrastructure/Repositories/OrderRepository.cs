@@ -25,12 +25,14 @@ namespace Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IList<OrderItem>> GetOrderItemsByOrderIdAsync(int id)
+        public async Task<IList<Order>> GetOrdersByUserIdAsync(string userId)
         {
-            return await _context.Set<OrderItem>()
-                .Include(x => x.Order)
-                .Include(x => x.Product)
-                .Where(order => order.Order.Id == id)
+            return await _context.Set<Order>()
+                .Include(x => x.OrderItems)
+                .Include(x => x.Status)
+                .Include(x => x.PaymentMethod)
+                .Include(x => x.Discount)
+                .Where(order => order.ApplicationUserId == userId)
                 .ToListAsync();
         }
     }

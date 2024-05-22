@@ -74,9 +74,6 @@ const SerieEdit = ({ id, onOk, setReloadData }) => {
           ...prevState,
           images: [...prevState.images, { imageUrl: imageInfo.secure_url }],
         }));
-        {
-          console.log(imageInfo.secure_url);
-        }
         onSuccess("OK");
       } else {
         onError("Error: Invalid image URL");
@@ -99,7 +96,6 @@ const SerieEdit = ({ id, onOk, setReloadData }) => {
     formData.set("Description", editor.current.value || serie.description);
     formData.set("CategoryId", serie.categoryId);
     formData.set("BranchId", serie.branchId);
-    console.log(serie.images);
     serie.images.forEach((image, index) => {
       formData.append(`Images[${index}]`, image.imageUrl);
     });

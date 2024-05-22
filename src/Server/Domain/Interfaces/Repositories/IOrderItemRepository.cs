@@ -9,5 +9,6 @@ namespace Domain.Interfaces.Repositories
 {
     public interface IOrderItemRepository : IGenericRepository<OrderItem>
     {
+        Task<IList<OrderItem>> GetOrderItemsByOrderIdAsync(int id);
     }
 }

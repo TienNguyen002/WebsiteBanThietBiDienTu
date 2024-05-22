@@ -158,13 +158,45 @@
     font-size: 2em;
     color: var(--title);
   }
-  &-nofication {
+  &-notification {
     display: flex;
     gap: 20px;
     align-self: center;
     font-size: 2em;
     &-user {
-      cursor: pointer;
+      position: relative;
+      .user-icon {
+        cursor: pointer;
+      }
+      &-dropdown {
+        position: absolute;
+        z-index: 9;
+        background: var(--white);
+        color: var(--black);
+        cursor: pointer;
+        right: -30px;
+        top: 70px;
+        width: 220px;
+        border: 1px solid var(--gray);
+        border-radius: 1em;
+      }
+
+      &-dropdown::before {
+        content: "";
+        position: absolute;
+        background: var(--white);
+        top: -0.7rem;
+        left: 10.5rem;
+        width: 20px;
+        height: 20px;
+        transform: rotate(45deg);
+        border-left: 1px solid var(--gray);
+        border-top: 1px solid var(--gray);
+      }
+
+      ul {
+        padding: 0px 10px;
+      }
     }
     &-bell {
       cursor: pointer;
@@ -193,3 +225,4 @@
     margin-left: 5px;
   }
 }
+

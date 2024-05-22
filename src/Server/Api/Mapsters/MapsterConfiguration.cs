@@ -41,6 +41,7 @@ namespace Api.Mapsters
                 .Map(desc => desc.Products, src => src.Series.Select(s => s.Products));
 
             config.NewConfig<Comment, CommentDTO>()
+                .Map(desc => desc.ImageUrl, src => src.ApplicationUser.ImageUrl)
                 .Map(desc => desc.Username, src => src.ApplicationUser.Name);
 
             config.NewConfig<Order, OrderDTO>()

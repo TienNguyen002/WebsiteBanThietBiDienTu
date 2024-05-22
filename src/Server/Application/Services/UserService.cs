@@ -1,4 +1,5 @@
-﻿using Domain.DTO.Order;
+﻿using Domain.Constants;
+using Domain.DTO.Order;
 using Domain.DTO.User;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
@@ -21,13 +22,17 @@ namespace Application.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserRepository _repository;
+        private readonly IOrderRepository _orderRepository;
+        private readonly ICloundinaryService _cloundinaryService;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
-        public UserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IUserRepository repository, IConfiguration configuration, IMapper mapper)
+        public UserService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IUserRepository repository, IOrderRepository orderRepository, ICloundinaryService cloundinaryService, IConfiguration configuration, IMapper mapper)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _repository = repository;
+            _orderRepository = orderRepository;
+            _cloundinaryService = cloundinaryService;
             _configuration = configuration;
             _mapper = mapper;
         }
@@ -107,7 +112,7 @@ namespace Application.Services
             foreach (var user in users)
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
-                var userOrders = await _repository.GetOrdersByUserIdAsync(user.Id);
+                var userOrders = await _orderRepository.GetOrdersByUserIdAsync(user.Id);
 
                 var userWithRolesAndOrders = new ListUserDTO
                 {
@@ -151,7 +156,10 @@ namespace Application.Services
             var user = await _userManager.FindByIdAsync(model.Id);
             if (user == null)
                 return new GeneralResponse(false, "Không tìm thấy người dùng");
-
+            if (model.ImageFile != null)
+            {
+                user.ImageUrl = await _cloundinaryService.UploadImageAsync(model.ImageFile.OpenReadStream(), model.ImageFile.FileName, QueryManagements.UserFolder);
+            }
             user.Name = model.Name;
             user.Email = model.Email;
             user.Address = model.Address;

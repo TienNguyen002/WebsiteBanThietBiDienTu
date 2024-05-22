@@ -90,3 +90,14 @@
     justify-content: center;
   }
 }
+
+.space {
+  height: 100px;
+  &-500 {
+    height: 400px;
+  }
+}
+
+.search-page {
+  margin: 10px 8% 0;
+}

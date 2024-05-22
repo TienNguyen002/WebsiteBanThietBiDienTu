@@ -98,9 +98,15 @@ namespace Application.Services
             return _mapper.Map<IList<OrderDTO>>(orders);
         }
 
+        public async Task<IList<OrderDTO>> GetAllOrdersByUserId(string userId)
+        {
+            var orders = await _repository.GetOrdersByUserIdAsync(userId);
+            return _mapper.Map<IList<OrderDTO>>(orders);
+        }
+
         public async Task<IList<OrderItemsDTO>> GetOrderItemsByOrderIdAsync(int id)
         {
-            var orders = await _repository.GetOrderItemsByOrderIdAsync(id);
+            var orders = await _itemRepository.GetOrderItemsByOrderIdAsync(id);
             return _mapper.Map<IList<OrderItemsDTO>>(orders);
         }
 

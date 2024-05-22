@@ -12,5 +12,7 @@ namespace Domain.Interfaces.Services
     {
         Task<bool> AddFeedback(FeedbackEditModel model);
         Task<ProductFilter> GetProductFiltersAsync();
+        Task<bool> DeleteFeedback(int id);
+        Task<IList<FeedbackDTO>> GetAllFeedbacks();
     }
 }

@@ -214,3 +214,19 @@ export function addAmount(formData) {
 export function getProductById(id) {
   return get_api(process.env.REACT_APP_API_PRODUCT + `${id}`);
 }
+
+export function getAllFeedbacks() {
+  return get_api(process.env.REACT_APP_API_ALL_FEEDBACKS);
+}
+
+export function deleteFeedback(id) {
+  return delete_api(process.env.REACT_APP_API_DELETE_FEEDBACK + `${id}`);
+}
+
+export function sendFeedback(formData) {
+  return post_api(process.env.REACT_APP_API_SEND_FEEDBACK, formData);
+}
+
+export function getOrdersByUserId(id) {
+  return get_api(process.env.REACT_APP_API_ORDERS_USER + `${id}`);
+}

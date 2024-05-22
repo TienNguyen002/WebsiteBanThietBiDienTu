@@ -25,6 +25,9 @@ import SeriePage from "../Pages/userPage/SeriePage";
 import ProductManagement from "../Pages/adminPage/manage/ProductManagement";
 import { useSelector } from "react-redux";
 import CartPage from "../Pages/userPage/CartPage";
+import ProfilePage from "../Pages/common/ProfilePage";
+import Feedback from "../Pages/common/Feedback";
+import OrderPage from "../Pages/userPage/OrderPage";
 
 const Router = () => {
   return (
@@ -32,6 +35,22 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<HomeLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route
+            path="/profile"
+            element={
+              <UserRoute>
+                <ProfilePage />
+              </UserRoute>
+            }
+          ></Route>
+          <Route
+            path="/order"
+            element={
+              <LoginRoute>
+                <OrderPage />
+              </LoginRoute>
+            }
+          ></Route>
           <Route path="/cart" element={<CartPage />} />
           <Route path="/detail/:slug" element={<ProductDetail />} />
           <Route path="/sale">
@@ -253,8 +272,9 @@ const Router = () => {
               }
             />
           </Route>
+          <Route path="/feedback" element={<Feedback />} />
+          <Route path="/search" element={<SearchPage />} />
         </Route>
-        <Route path="/search" element={<SearchPage />} />
         <Route
           path="/admin"
           element={
@@ -274,6 +294,7 @@ const Router = () => {
           <Route path="/admin/discount" element={<DiscountManagement />} />
           <Route path="/admin/user" element={<UserManagement />} />
           <Route path="/admin/feedback" element={<FeedbackManagement />} />
+          <Route path="/admin/profile" element={<ProfilePage />} />
         </Route>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -290,6 +311,34 @@ const AdminRoute = ({ children }) => {
     return <NotAccessPage />;
   }
   if (user.role === "Quản lý" || user.role === "Nhân viên") {
+    return <>{children}</>;
+  } else {
+    return <NotAccessPage />;
+  }
+};
+
+const LoginRoute = ({ children }) => {
+  let user = useSelector((state) => state.auth.login.currentUser);
+  if (user === null) {
+    return <NotAccessPage />;
+  }
+  if (
+    user.role === "Quản lý" ||
+    user.role === "Nhân viên" ||
+    user.role === "Người dùng"
+  ) {
+    return <>{children}</>;
+  } else {
+    return <NotAccessPage />;
+  }
+};
+
+const UserRoute = ({ children }) => {
+  let user = useSelector((state) => state.auth.login.currentUser);
+  if (user === null) {
+    return <NotAccessPage />;
+  }
+  if (user.role === "Người dùng") {
     return <>{children}</>;
   } else {
     return <NotAccessPage />;

@@ -1,9 +1,12 @@
 ﻿using Api.Response;
+using Domain.DTO.Category;
+using Domain.DTO.Other;
 using Domain.DTO.Product;
 using Domain.Interfaces.Services;
 using MapsterMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Api.Controllers
 {
@@ -26,6 +29,39 @@ namespace Api.Controllers
         {
             var result = await _service.GetProductFiltersAsync();
             return Ok(ApiResponse.Success(result));
+        }
+
+        [HttpGet("allFeedback")]
+        public async Task<ActionResult<FeedbackDTO>> GetAllFeedbacks()
+        {
+            var result = await _service.GetAllFeedbacks();
+            return Ok(ApiResponse.Success(result));
+        }
+
+        [HttpPost("addFeedback")]
+        public async Task<ActionResult<bool>> AddFeedback([FromForm] FeedbackEditModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var feedbackCreate = await _service.AddFeedback(model);
+            if (!feedbackCreate)
+            {
+                return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
+            }
+            return Ok(ApiResponse.Success(feedbackCreate));
+        }
+
+        [HttpDelete("deleteFeedback/{id}")]
+        public async Task<ActionResult> DeleteFeedback(int id)
+        {
+            var result = await _service.DeleteFeedback(id);
+            if (!result)
+            {
+                return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
+            }
+            return Ok(ApiResponse.Success(result)); ;
         }
     }
 }

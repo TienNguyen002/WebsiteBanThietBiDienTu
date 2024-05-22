@@ -1,4 +1,5 @@
-﻿using Domain.DTO.Other;
+﻿using Domain.DTO.Category;
+using Domain.DTO.Other;
 using Domain.DTO.Product;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -39,6 +40,19 @@ namespace Application.Services
             await _repository.AddFeedback(feedback);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
+        }
+
+        public async Task<bool> DeleteFeedback(int id)
+        {
+            await _repository.DeleteFeedback(id);
+            int saved = await _unitOfWork.Commit();
+            return saved > 0;
+        }
+
+        public async Task<IList<FeedbackDTO>> GetAllFeedbacks()
+        {
+            var feedbacks = await _repository.GetAllFeedbacks();
+            return _mapper.Map<IList<FeedbackDTO>>(feedbacks);
         }
 
         public async Task<ProductFilter> GetProductFiltersAsync()

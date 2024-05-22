@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Form, Space, Modal } from "antd";
-import SearchInput from "../../../Components/admin/management/SearchInput";
-import DataTable from "../../../Components/admin/management/DataTable";
-import { Eye } from "lucide-react";
-import { getAllOrders } from "../../../Api/Controller";
-import "../../../styles/adminLayout.scss";
+import { Form, Modal, Space } from "antd";
+import SearchInput from "../../Components/admin/management/SearchInput";
+import DataTable from "../../Components/admin/management/DataTable";
+import { getOrdersByUserId } from "../../Api/Controller";
+import "../../styles/homeLayout.scss";
 import { Toaster } from "react-hot-toast";
-import { convertDate, formatVND } from "../../../Common/function";
-import ManageTag from "../../../Components/shared/ManageTag";
-import OrderButton from "../../../Components/admin/common/OrderButton";
-import OrderItemsView from "../view/OrderItemsView";
-import { getColumnFilterProps } from "../../../Common/tableFunction";
+import { convertDate, formatVND } from "../../Common/function";
+import ManageTag from "../../Components/shared/ManageTag";
+import OrderItemsView from "../../Pages/adminPage/view/OrderItemsView";
+import { useSelector } from "react-redux";
+import { Eye } from "lucide-react";
 
-const OrderManagement = () => {
+const OrderPage = () => {
   const [orders, setOrders] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [page, setPage] = useState(1);
@@ -21,12 +20,13 @@ const OrderManagement = () => {
   const [orderId, setOrderId] = useState();
   const [total, setTotal] = useState();
   const [reloadData, setReloadData] = useState(false);
+  let user = useSelector((state) => state.auth.login.currentUser);
 
   useEffect(() => {
     document.title = "Quản lý đơn hàng";
 
     setReloadData(false);
-    getAllOrders().then((data) => {
+    getOrdersByUserId(user.id).then((data) => {
       if (data) {
         setOrders(data);
       } else setOrders([]);
@@ -49,12 +49,6 @@ const OrderManagement = () => {
       dataIndex: "name",
       key: "name",
       width: 250,
-    },
-    {
-      title: "Họ tên người đặt",
-      dataIndex: "userName",
-      key: "userName",
-      width: 400,
     },
     {
       title: "Ngày đặt",
@@ -92,7 +86,7 @@ const OrderManagement = () => {
       width: 500,
     },
     {
-      title: "Chức năng",
+      title: "Xem lại sản phẩm",
       key: "operation",
       fixed: "right",
       width: 200,
@@ -100,11 +94,6 @@ const OrderManagement = () => {
         <Space size="middle">
           <div className="action">
             <Eye onClick={() => handleView(record.id, record.totalPrice)} />
-            <OrderButton
-              status={record.status}
-              id={record.id}
-              setReloadData={setReloadData}
-            />
           </div>
         </Space>
       ),
@@ -115,7 +104,7 @@ const OrderManagement = () => {
     <div className="management">
       <Toaster />
       <div className="management-top">
-        <h1 className="management-top-title">Quản lý đơn hàng</h1>
+        <h1 className="management-top-title">Danh sách đơn hàng của bạn</h1>
         <SearchInput
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -134,6 +123,7 @@ const OrderManagement = () => {
           />
         </Form>
       </div>
+      <div className="space"> </div>
       <Modal
         centered
         open={open}
@@ -147,4 +137,4 @@ const OrderManagement = () => {
   );
 };
 
-export default OrderManagement;
+export default OrderPage;

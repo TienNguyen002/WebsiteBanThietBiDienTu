@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/commonPage.scss";
 
 const BadRequest = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Lỗi hệ thống!!";
+  }, []);
 
   const handleBack = () => {
     navigate("/");

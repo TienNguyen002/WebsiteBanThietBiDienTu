@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Table, Space, Button, Input, Radio, Modal } from "antd";
 import CartProcessing from "../../Components/user/cart/CartProcessing";
 import { formatVND } from "../../Common/function";
-import { removeItem, resetCart, updateQuantity } from "../../Redux/Cart";
+import {
+  applyDiscount,
+  removeItem,
+  resetCart,
+  updateQuantity,
+} from "../../Redux/Cart";
 import toast, { Toaster } from "react-hot-toast";
 import "../../styles/homeLayout.scss";
 import { Trash } from "lucide-react";
@@ -37,6 +42,7 @@ const CartPage = () => {
   const [paymentMethod, setPaymentMethod] = useState(0);
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState("");
+  const [apply, setApply] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -95,7 +101,6 @@ const CartPage = () => {
     setStatus(e.target.value);
     setUserInfo({ ...userInfo, paymentMethod: e.target.value });
   };
-  console.log(userInfo.address);
 
   const handleShippingStep = () => {
     if (cart.items.length === 0) {
@@ -115,9 +120,10 @@ const CartPage = () => {
       userInfo.phone !== null
     ) {
       moveToNextStep();
+      setApply(true);
     }
   };
-  console.log(cart.items);
+
   const handleApplyDiscount = () => {
     getDiscountByCodeName(discount.name).then((data) => {
       if (data) {
@@ -129,8 +135,12 @@ const CartPage = () => {
           discountId: data.id,
         });
         setDiscount({ percent: data.discountPrice });
+        dispatch(applyDiscount({ percent: data.discountPrice }));
+        setApply(false);
+        toast.success("Áp dụng mã thành công");
       } else {
-        setUserInfo(initialState);
+        toast.error("Lỗi");
+        // setUserInfo(initialState);
         setDiscount({ percent: 1 });
       }
     });
@@ -385,7 +395,13 @@ const CartPage = () => {
                       setDiscount({ ...discount, name: e.target.value })
                     }
                   ></Input>
-                  <Button onClick={handleApplyDiscount}>Áp dụng</Button>
+                  {apply ? (
+                    <Button onClick={handleApplyDiscount}>Áp dụng</Button>
+                  ) : (
+                    <Button disabled onClick={handleApplyDiscount}>
+                      Áp dụng
+                    </Button>
+                  )}
                 </div>
               </div>
             </div>

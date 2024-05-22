@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   CircleUserRound,
   Lock,
@@ -26,6 +26,10 @@ const RegisterPage = () => {
 
   const dispatch = useDispatch();
   const naviagate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Đăng ký";
+  }, []);
 
   const handleShow = () => {
     setShow(!show);

@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../styles/commonPage.scss";
 import { useNavigate } from "react-router-dom";
 
 const NotFound = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Không tìm thấy trang này";
+  }, []);
 
   const handleBack = () => {
     navigate("/");

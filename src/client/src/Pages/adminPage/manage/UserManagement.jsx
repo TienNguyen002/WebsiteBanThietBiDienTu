@@ -26,6 +26,8 @@ const UserManagement = () => {
   let user = useSelector((state) => state.auth.login.currentUser);
 
   useEffect(() => {
+    document.title = "Quản lý người dùng";
+
     setReloadData(false);
     getAllUsers().then((data) => {
       if (data) {

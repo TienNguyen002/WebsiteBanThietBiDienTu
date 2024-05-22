@@ -12,5 +12,6 @@
         public static readonly string BranchFolder = "Branch";
         public static readonly string SerieFolder = "Serie";
         public static readonly string ProductFolder = "Product";
+        public static readonly string UserFolder = "User";
     }
 }

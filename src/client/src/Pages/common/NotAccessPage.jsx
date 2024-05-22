@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/commonPage.scss";
 
 const NotAccessPage = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Bạn không có quyền truy cập vào trang này!";
+  }, []);
 
   const handleBack = () => {
     navigate("/");
@@ -20,7 +24,9 @@ const NotAccessPage = () => {
         alt="No Access"
         className="common-page-image"
       />
-      <p className="common-page-message">Bạn không có quyền!</p>
+      <p className="common-page-message">
+        Bạn không có quyền truy cập vào trang này!
+      </p>
       <button className="common-page-button" onClick={handleBack}>
         Quay lại trang chủ
       </button>

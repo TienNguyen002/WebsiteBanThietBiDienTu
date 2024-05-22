@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Lock, Eye, EyeOff, Mail, MoveLeft } from "lucide-react";
 import "../../styles/accountPage.scss";
 import { useDispatch } from "react-redux";
@@ -16,6 +16,10 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Đăng nhập";
+  }, []);
 
   const handleLogin = (e) => {
     e.preventDefault();

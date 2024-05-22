@@ -7,3 +7,21 @@
   height: 500px;
   font-size: 3em;
 }
+
+.link {
+  text-decoration: none;
+  color: var(--black);
+}
+
+.drop-down {
+  display: flex;
+  font-size: 17px;
+  padding: 0;
+  gap: 20px;
+  border-radius: 10px;
+}
+
+.drop-down:hover {
+  background: var(--light-red);
+  color: var(--white);
+}

@@ -87,5 +87,16 @@ namespace Api.Controllers
             }
             return Ok(ApiResponse.Success(order));
         }
+
+        [HttpGet("byUser/{userId}")]
+        public async Task<ActionResult<IList<OrderDTO>>> GetAllOrdersByUserId(string userId)
+        {
+            var orders = await _service.GetAllOrdersByUserId(userId);
+            if (orders == null)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(orders));
+        }
     }
 }

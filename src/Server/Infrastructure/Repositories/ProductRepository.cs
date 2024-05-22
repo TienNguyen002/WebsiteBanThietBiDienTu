@@ -151,6 +151,10 @@ namespace Infrastructure.Repositories
             {
                 productQuery = productQuery.Where(p => p.Serie.UrlSlug == query.Serie);
             }
+            if (!string.IsNullOrEmpty(query.Keyword))
+            {
+                productQuery = productQuery.Where(p => p.Name.Contains(query.Keyword) || p.UrlSlug.Contains(query.Keyword));
+            }
             if (!string.IsNullOrWhiteSpace(query.SortOrder))
             {
                 switch (query.SortOrder.ToUpper())

@@ -49,6 +49,25 @@ namespace Infrastructure.Repositories
             }
         }
 
+        public async Task<bool> DeleteFeedback(int id)
+        {
+            var feedback = await _context.Set<Feedback>().FirstOrDefaultAsync();
+            try
+            {
+                _context.Remove(feedback);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public async Task<IList<Feedback>> GetAllFeedbacks()
+        {
+            return await _context.Set<Feedback>().ToListAsync();
+        }
+
         public async Task<ProductFilter> GetProductFiltersAsync()
         {
             var category = await _context.Set<Category>().ToListAsync();
@@ -93,5 +112,7 @@ namespace Infrastructure.Repositories
                 Colors = colors,
             };
         }
+
+
     }
 }

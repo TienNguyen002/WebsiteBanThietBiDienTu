@@ -69,6 +69,8 @@ const SaleManagement = () => {
   };
 
   useEffect(() => {
+    document.title = "Quản lý ưu đãi";
+
     setReloadData(false);
     getAllSale().then((data) => {
       if (data) {
