@@ -9,30 +9,11 @@ namespace Infrastructure.Repositories
     {
         public DiscountRepository(DeviceWebDbContext context) : base(context) { }
 
-        /// <summary>
-        /// Add Discount If Model Has No Id / Update Discount If Model Has Id
-        /// </summary>
-        /// <param name="discount"> Model to add/update </param>
-        /// <returns> Added/Updated Discount </returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<bool> AddDiscount(Discount discount)
+        public async Task<Discount> GetDiscountByCodeName(string codeName)
         {
-            try
-            {
-                if (discount.Id > 0)
-                {
-                    _context.Update(discount);
-                }
-                else
-                {
-                    _context.Add(discount);
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            return await _context.Set<Discount>()
+                .Where(d => d.CodeName == codeName)
+                .FirstOrDefaultAsync();
         }
 
         /// <summary>
@@ -44,7 +25,6 @@ namespace Infrastructure.Repositories
         public async Task<bool> DeleteDiscount(int id)
         {
             var discountToDelete = await _context.Set<Discount>()
-                .Include(c => c.Product)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
             try
@@ -57,5 +37,7 @@ namespace Infrastructure.Repositories
                 return false;
             }
         }
+
+
     }
 }

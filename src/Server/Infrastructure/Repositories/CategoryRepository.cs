@@ -10,32 +10,6 @@ namespace Infrastructure.Repositories
         public CategoryRepository(DeviceWebDbContext context) : base(context) { }
 
         /// <summary>
-        /// Add Category If Model Has No Id / Update Category If Model Has Id
-        /// </summary>
-        /// <param name="category"> Model to add/update </param>
-        /// <returns> Added/Updated Category </returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<bool> AddOrUpdateCategory(Category category)
-        {
-            try
-            {
-                if (category.Id > 0)
-                {
-                    _context.Update(category);
-                }
-                else
-                {
-                    _context.Add(category);
-                }
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Delete Category By Id
         /// </summary>
         /// <param name="id"> Id Of Category want to delete </param>
@@ -44,7 +18,7 @@ namespace Infrastructure.Repositories
         public async Task<bool> DeleteCategory(int id)
         {
             var categoryToDelete = await _context.Set<Category>()
-                .Include(c => c.Products)
+                .Include(c => c.Series)
                 .Where(c => c.Id == id)
                 .FirstOrDefaultAsync();
             try
@@ -59,6 +33,28 @@ namespace Infrastructure.Repositories
         }
 
         /// <summary>
+        /// Get All Categories
+        /// </summary>
+        /// <returns> A List Of Categories </returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task<IList<Category>> GetAllCategories()
+        {
+            return await _context.Set<Category>()
+                .Include(c => c.Series)
+                .ThenInclude(s => s.Products)
+                .ToListAsync();
+        }
+
+        public async Task<Category> GetCategoryById(int id)
+        {
+            return await _context.Set<Category>()
+                .Include(c => c.Series)
+                .ThenInclude(s => s.Products)
+                .Where(c => c.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        /// <summary>
         /// Get Category By Slug
         /// </summary>
         /// <param name="slug"> UrlSlug want to get Category </param>
@@ -67,7 +63,8 @@ namespace Infrastructure.Repositories
         public async Task<Category> GetCategoryBySlug(string slug)
         {
             return await _context.Set<Category>()
-                .Include(c => c.Products)
+                .Include(c => c.Series)
+                .ThenInclude(s => s.Products)
                 .Where(c => c.UrlSlug == slug)
                 .FirstOrDefaultAsync();
         }

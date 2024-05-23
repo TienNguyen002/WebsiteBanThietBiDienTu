@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Mappings
+namespace Infrastructure.Mapping
 {
     public class OrderMap : IEntityTypeConfiguration<Order>
     {
@@ -12,13 +12,18 @@ namespace Infrastructure.Mappings
 
             builder.HasKey(o => o.Id);
 
+            builder.Property(o => o.Name);
+
+            builder.Property(o => o.Address);
+
+            builder.Property(o => o.Phone);
+
             builder.Property(o => o.DateOrder)
                 .HasColumnType("datetime");
 
             builder.Property(o => o.Quantity);
 
-            builder.Property(o => o.TotalPrice)
-                .HasColumnType("decimal(18,2)"); ;
+            builder.Property(o => o.TotalPrice);
 
             builder.HasOne(o => o.Status)
                 .WithMany(s => s.Orders)
@@ -26,9 +31,9 @@ namespace Infrastructure.Mappings
                 .HasConstraintName("FK_Statuses_Orders")
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(o => o.User)
+            builder.HasOne(o => o.ApplicationUser)
                 .WithMany(u => u.Orders)
-                .HasForeignKey(o => o.UserId)
+                .HasForeignKey(o => o.ApplicationUserId)
                 .HasConstraintName("FK_Users_Orders")
                 .OnDelete(DeleteBehavior.Cascade);
 
@@ -37,6 +42,12 @@ namespace Infrastructure.Mappings
                 .HasForeignKey(o => o.PaymentMethodId)
                 .HasConstraintName("FK_Orders_PaymentMethods")
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(o => o.Discount)
+               .WithMany(d => d.Orders)
+               .HasForeignKey(o => o.DiscountId)
+               .HasConstraintName("FK_Orders_Discounts")
+               .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

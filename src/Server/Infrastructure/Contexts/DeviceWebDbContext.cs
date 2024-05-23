@@ -1,10 +1,12 @@
 ﻿using Domain.Entities;
-using Infrastructure.Mappings;
+using Infrastructure.Mapping;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Contexts
 {
-    public class DeviceWebDbContext : DbContext
+    public class DeviceWebDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -16,12 +18,15 @@ namespace Infrastructure.Contexts
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Product> Products { get; set; }
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<Sale> Sales { get; set; }
+        public DbSet<Serie> Series { get; set; }
         public DbSet<Status> Statuses { get; set; }
-        public DbSet<Tag> Tags { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
-        public DeviceWebDbContext(DbContextOptions<DeviceWebDbContext> options) : base(options) { }
+        public DeviceWebDbContext(DbContextOptions options) : base(options)
+        {
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -30,7 +35,27 @@ namespace Infrastructure.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(BranchMap).Assembly);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(CategoryMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ColorMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CommentMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(DiscountMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ImageMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(NotificationMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderItemMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(OrderMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PaymentMethodMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ProductMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SaleMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(SerieMap).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(StatusMap).Assembly);
+
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new IdentityRole { Id = "1", Name = "Quản lý", NormalizedName = "QUẢN LÝ" },
+                new IdentityRole { Id = "2", Name = "Nhân viên", NormalizedName = "NHÂN VIÊN" },
+                new IdentityRole { Id = "3", Name = "Người dùng", NormalizedName = "NGƯỜI DÙNG" }
+            );
         }
     }
 }

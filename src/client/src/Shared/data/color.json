@@ -1,0 +1,28 @@
+{
+    "result": [
+      {
+        "id": 1,
+        "color": "red"
+      },
+      {
+        "id": 1,
+        "color": "yellow"
+      },
+      {
+        "id": 1,
+        "color": "green"
+      },
+      {
+        "id": 1,
+        "color": "orange"
+      },
+      {
+        "id": 1,
+        "color": "blue"
+      },
+      {
+        "id": 1,
+        "color": "black"
+      }
+    ]
+  }

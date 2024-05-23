@@ -1,16 +1,26 @@
-﻿namespace Domain.DTO.Product
+﻿using Domain.DTO.Branch;
+using Domain.DTO.Category;
+using Domain.DTO.Color;
+using Domain.DTO.Serie;
+
+namespace Domain.DTO.Product
 {
     public class ProductDTO
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
+        public string ShortName { get; set; } = null!;
         public string UrlSlug { get; set; } = null!;
-        public string? ImageUrl { get; set; }
-        public string Description { get; set; } = null!;
+        public string ImageUrl { get; set; } = null!;
+        public string ShortDescription { get; set; } = null!;
         public string Specification { get; set; } = null!;
-        public int Amount { get; set; }
-        public bool Status { get; set; }
-        public decimal Price { get; set; }
-        public decimal OrPrice { get; set; }
+        public IList<ProductColorDTO> Colors { get; set; } = new List<ProductColorDTO>();
+        public int SalePrice { get; set; }
+        public int Price { get; set; }
+        public int OrPrice { get; set; }
+        public float Rating { get; set; }
+        public ShortSerieDTO Serie { get; set; } = null!;
+        public CategoryDTO Category { get; set; } = null!;
+        public BranchDTO Branch { get; set; } = null!;
     }
 }

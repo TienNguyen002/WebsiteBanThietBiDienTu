@@ -10,23 +10,20 @@ namespace Infrastructure.Repositories
         public BranchRepository(DeviceWebDbContext context) : base(context) { }
 
         /// <summary>
-        /// Add Branch If Model Has No Id / Update Branch If Model Has Id
+        /// Delete Branch By Id
         /// </summary>
-        /// <param name="branch"> Model to add/update </param>
-        /// <returns> Added/Updated Branch </returns>
+        /// <param name="id"> Id Of Branch want to delete </param>
+        /// <returns> Deleted Branch </returns>
         /// <exception cref="Exception"></exception>
-        public async Task<bool> AddOrUpdateBranch(Branch branch)
+        public async Task<bool> DeleteBranch(int id)
         {
+            var branchToDelete = await _context.Set<Branch>()
+                .Include(b => b.Series)
+                .Where(b => b.Id == id)
+                .FirstOrDefaultAsync();
             try
             {
-                if(branch.Id > 0)
-                {
-                    _context.Update(branch);
-                }
-                else
-                {
-                    _context.Add(branch);
-                }
+                _context.Remove(branchToDelete);
                 return true;
             }
             catch (Exception)
@@ -36,26 +33,21 @@ namespace Infrastructure.Repositories
         }
 
         /// <summary>
-        /// Delete Branch By Id
+        /// Get All Branches
         /// </summary>
-        /// <param name="id"> Id Of Branch want to delete </param>
-        /// <returns> Deleted Branch </returns>
-        /// <exception cref="Exception"></exception>
-        public async Task<bool> DeleteBranch(int id)
+        /// <returns> A List Of Branches </returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        public async Task<IList<Branch>> GetAllBranchesAsync()
         {
-            var branchToDelete = await _context.Set<Branch>()
-                .Include(b => b.Products)
-                .Where(b => b.Id == id)
-                .FirstOrDefaultAsync();
-            try
-            {
-                _context.Remove(branchToDelete);
-                return true;
-            }
-            catch(Exception)
-            {
-                return false;
-            }
+            return await _context.Set<Branch>()
+               .Include(c => c.Series)
+               .ThenInclude(s => s.Products)
+               .ToListAsync();
+        }
+
+        public Task<Branch> GetBranchByIdAsync(int id)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -67,9 +59,20 @@ namespace Infrastructure.Repositories
         public async Task<Branch> GetBranchBySlug(string slug)
         {
             return await _context.Set<Branch>()
-                .Include(b => b.Products)
+                .Include(b => b.Series)
+                .ThenInclude(s => s.Products)
                 .Where(b => b.UrlSlug == slug)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<IList<Branch>> GetLimitBranchByCategory(int limit, string category)
+        {
+            return await _context.Set<Branch>()
+                .Include(p => p.Series)
+                .ThenInclude(s => s.Products)
+                .Where(p => p.Series.Any(p => p.Category.UrlSlug.Contains(category)))
+                .Take(limit)
+                .ToListAsync();
         }
     }
 }

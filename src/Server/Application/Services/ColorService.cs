@@ -1,11 +1,9 @@
-﻿using Domain.DTO.Category;
-using Domain.DTO.Color;
+﻿using Domain.DTO.Color;
 using Domain.Entities;
 using Domain.Interfaces;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using MapsterMapper;
-using SlugGenerator;
 
 namespace Application.Services
 {
@@ -35,8 +33,7 @@ namespace Application.Services
                 color = new Color { };
             }
             color.Name = model.Name;
-            color.UrlSlug = model.Name.GenerateSlug();
-            await _repository.AddOrUpdateColor(color);
+            await _repository.AddOrUpdate(color);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
         }
@@ -83,10 +80,10 @@ namespace Application.Services
         /// <param name="slug"> UrlSlug want to get Color </param>
         /// <returns> Color With UrlSlug want to get </returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public async Task<ColorDTO> GetColorBySlug(string slug)
-        {
-            var color = await _repository.GetColorBySlug(slug);
-            return _mapper.Map<ColorDTO>(color);
-        }
+        //public async Task<ColorDTO> GetColorBySlug(string slug)
+        //{
+        //    var color = await _repository.GetColorBySlug(slug);
+        //    return _mapper.Map<ColorDTO>(color);
+        //}
     }
 }

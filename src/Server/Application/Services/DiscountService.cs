@@ -29,13 +29,12 @@ namespace Application.Services
         {
             var discount = new Discount()
             {
-                DiscountPrice = model.DiscountPrice,
+                CodeName = model.CodeName,
+                DiscountPercent = model.DiscountPrice,
                 StartDate = DateTime.Now,
                 EndDate = model.EndDate,
-                ProductId = model.ProductId,
-                Status = true,
             };
-            await _repository.AddDiscount(discount);
+            await _repository.Add(discount);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
         }
@@ -60,8 +59,14 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<IList<DiscountDTO>> GetAllDiscounts()
         {
-            var discounts = await _repository.GetAllWithInclude(d => d.Product);
+            var discounts = await _repository.GetAll();
             return _mapper.Map<IList<DiscountDTO>>(discounts);
+        }
+
+        public async Task<DiscountDTO> GetDiscountByCodeName(string codeName)
+        {
+            var discount = await _repository.GetDiscountByCodeName(codeName);
+            return _mapper.Map<DiscountDTO>(discount);
         }
 
         /// <summary>
@@ -72,7 +77,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<DiscountDTO> GetDiscountById(int id)
         {
-            var discount = await _repository.GetByIdWithInclude(id, d => d.Product);
+            var discount = await _repository.GetById(id);
             return _mapper.Map<DiscountDTO>(discount);
         }
     }

@@ -1,0 +1,29 @@
+{
+    "result": [
+      {
+        "id": 1,
+        "name": "Apple",
+        "logo": "https://w7.pngwing.com/pngs/186/863/png-transparent-apple-logo-apple-logo-computer-wallpaper-silhouette.png"
+      },
+      {
+        "id": 2,
+        "name": "Samsung",
+        "logo": "https://w7.pngwing.com/pngs/176/171/png-transparent-samsung-galaxy-gurugram-faridabad-logo-samsung-blue-text-logo.png"
+      },
+      {
+        "id": 3,
+        "name": "Xiaomi",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUKMHvPSxA8e1dOlTmnrZILv2xYfBiXHzekV8H5uUWaw&s"
+      },
+      {
+        "id": 3,
+        "name": "OPPO",
+        "logo": "https://w7.pngwing.com/pngs/854/175/png-transparent-oppo-logo-phone-identity-green.png"
+      },
+      {
+        "id": 3,
+        "name": "ASUS",
+        "logo": "https://w7.pngwing.com/pngs/110/633/png-transparent-laptop-asus-dell-logo-%E5%8D%8E%E7%A1%95-laptop-angle-electronics-text.png"
+      }
+    ]
+  }

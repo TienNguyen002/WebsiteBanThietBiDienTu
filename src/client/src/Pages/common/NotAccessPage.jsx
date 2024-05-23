@@ -1,0 +1,37 @@
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "../../styles/commonPage.scss";
+
+const NotAccessPage = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "Bạn không có quyền truy cập vào trang này!";
+  }, []);
+
+  const handleBack = () => {
+    navigate("/");
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
+
+  return (
+    <div className="common-page">
+      <img
+        src="https://assets.wpdeveloper.com/2022/08/image.png"
+        alt="No Access"
+        className="common-page-image"
+      />
+      <p className="common-page-message">
+        Bạn không có quyền truy cập vào trang này!
+      </p>
+      <button className="common-page-button" onClick={handleBack}>
+        Quay lại trang chủ
+      </button>
+    </div>
+  );
+};
+
+export default NotAccessPage;

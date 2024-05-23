@@ -13,8 +13,11 @@ namespace Domain.Entities
         //Mã giảm giá
         public int Id { get; set; }
 
-        //Giá giảm giá
-        public decimal DiscountPrice { get; set; }
+        //Code giảm giá
+        public string CodeName { get; set; } = null!;
+
+        //Phần trăm giảm giá
+        public double DiscountPercent { get; set; }
 
         //Ngày bắt đầu
         public DateTime StartDate { get; set; }
@@ -22,13 +25,7 @@ namespace Domain.Entities
         //Ngày kết thúc
         public DateTime EndDate { get; set; }
 
-        //Trạng thái
-        public bool Status { get; set; }
-
-        //Mã sản phẩm
-        public int ProductId { get; set; }
-
-        //Sản phẩm
-        public Product? Product { get; set; }
+        //Danh sách đơn hàng
+        public IList<Order> Orders { get; set; } = new List<Order>();
     }
 }

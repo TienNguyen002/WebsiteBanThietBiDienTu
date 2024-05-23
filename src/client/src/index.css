@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +11,22 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+:root{
+  --white: white;
+  --black: black;
+  --gray: gray;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-600: #718096;
+  --light-gray: #d3d3d3;
+  --red: red;
+  --light-red:#E84476;
+  --light-pink:#ff89ad;
+  --yellow: yellow;
+  --dark-red: #CD184F;
+  --primary: #0080FF;
+  --danger: red;
+  --title: rgb(0, 102, 255);
 }

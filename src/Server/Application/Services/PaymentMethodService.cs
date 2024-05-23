@@ -32,7 +32,7 @@ namespace Application.Services
                 Name = model.Name,
                 Description = model.Description,
             };
-            await _repository.AddPaymentMethod(paymentMethod);
+            await _repository.Add(paymentMethod);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
         }

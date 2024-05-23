@@ -8,6 +8,7 @@ namespace Domain.Interfaces.Services
         Task<BranchDTO> GetBranchById(int id);
         Task<BranchDTO> GetBranchBySlug(string slug);
         Task<bool> AddOrUpdateBranch(BranchEditModel model);
-        Task<bool> DeleteBranch(int id);    
+        Task<bool> DeleteBranch(int id);
+        Task<IList<BranchProductDTO>> GetLimitBranchByCategory(int limit, string category);
     }
 }

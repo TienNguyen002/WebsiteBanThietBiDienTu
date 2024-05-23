@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Mappings
+namespace Infrastructure.Mapping
 {
     public class ImageMap : IEntityTypeConfiguration<Image>
     {
@@ -15,10 +15,10 @@ namespace Infrastructure.Mappings
             builder.Property(i => i.ImageUrl)
                 .HasMaxLength(1000);
 
-            builder.HasOne(i => i.Product)
-                .WithMany(p => p.Images)
-                .HasForeignKey(i => i.ProductId)
-                .HasConstraintName("FK_Images_Products")
+            builder.HasOne(i => i.Serie)
+                .WithMany(s => s.Images)
+                .HasForeignKey(i => i.SerieId)
+                .HasConstraintName("FK_Images_Series")
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

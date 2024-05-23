@@ -5,17 +5,21 @@ using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using MapsterMapper;
 using SlugGenerator;
+using Domain.Constants;
+using Domain.Interfaces.Services;
 
 namespace Application.Services
 {
     public class CategoryService : ICategoryService
     {
         private readonly ICategoryRepository _repository;
+        private readonly ICloundinaryService _cloundinaryService;
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        public CategoryService(ICategoryRepository repository, IMapper mapper, IUnitOfWork unitOfWork)
+        public CategoryService(ICategoryRepository repository, ICloundinaryService cloundinaryService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _repository = repository;
+            _cloundinaryService = cloundinaryService;
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
@@ -35,7 +39,11 @@ namespace Application.Services
             }
             category.Name = model.Name;
             category.UrlSlug = model.Name.GenerateSlug();
-            await _repository.AddOrUpdateCategory(category);
+            if (model.ImageFile != null)
+            {
+                category.ImageUrl = await _cloundinaryService.UploadImageAsync(model.ImageFile.OpenReadStream(), model.ImageFile.FileName, QueryManagements.CategoryFolder);
+            }
+            await _repository.AddOrUpdate(category);
             int saved = await _unitOfWork.Commit();
             return saved > 0;
         }
@@ -60,7 +68,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<IList<CategoryDTO>> GetAllCategories()
         {
-            var categories = await _repository.GetAllWithInclude(c => c.Products);
+            var categories = await _repository.GetAllCategories();
             return _mapper.Map<IList<CategoryDTO>>(categories);
         }
 
@@ -72,7 +80,7 @@ namespace Application.Services
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<CategoryDTO> GetCategoryById(int id)
         {
-            var category = await _repository.GetByIdWithInclude(id, c => c.Products);
+            var category = await _repository.GetCategoryById(id);
             return _mapper.Map<CategoryDTO>(category);
         }
 

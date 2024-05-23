@@ -8,6 +8,15 @@ namespace Domain.Entities
         //Mã đơn hàng
         public int Id { get; set; }
 
+        //Mã định dạng đơn hàng
+        public string Name { get; set; }
+
+        //Địa chỉ người đặt
+        public string Address { get; set; }
+
+        //Số điện thoại người đặt
+        public string Phone { get; set; }
+
         //Ngày đặt hàng
         public DateTime DateOrder { get; set; }
 
@@ -15,7 +24,7 @@ namespace Domain.Entities
         public int Quantity { get; set; }
 
         //Tổng tiền
-        public decimal TotalPrice { get; set; }
+        public int TotalPrice { get; set; }
 
         //Mã trạng thái
         public int StatusId { get; set; }
@@ -24,16 +33,22 @@ namespace Domain.Entities
         public Status? Status { get; set; }
 
         //Mã người dùng
-        public int UserId { get; set; }
+        public string? ApplicationUserId { get; set; }
 
         //Người dùng
-        public User? User { get; set; }
+        public ApplicationUser? ApplicationUser { get; set; }
 
         //Mã phương thức
         public int PaymentMethodId { get; set; }
 
         //Phương thức
         public PaymentMethod? PaymentMethod { get; set; }
+
+        //Mã giảm giá
+        public int DiscountId { get; set; }
+
+        //Giảm giá
+        public Discount? Discount { get; set; }
 
         //Danh sách sản phẩm
         public IList<OrderItem> OrderItems { get; set; } = new List<OrderItem>();

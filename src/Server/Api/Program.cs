@@ -8,12 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
         .ConfigureServices()
         .ConfigureMapster()
         .ConfigureSwaggerOpenApi()
-        .ConfigureLogging();
+        .ConfigureLogging()
+        .ConfigureIdentityJWT();
 }
 
 var app = builder.Build();
 {
     app.UseMiddleware<ErrorHandlingMiddleware>();
+    app.UseAuthentication();
     app.SetupRequestPipeline();
     app.UseDataSeeder();
     app.MapControllers();

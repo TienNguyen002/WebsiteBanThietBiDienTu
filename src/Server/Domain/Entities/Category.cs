@@ -14,7 +14,10 @@ namespace Domain.Entities
         //Mã định danh
         public string UrlSlug { get; set; } = null!;
 
-        //Danh sách sản phẩm
-        public IList<Product> Products { get; set; } = new List<Product>();
+        //Hình ảnh
+        public string? ImageUrl { get; set; }
+
+        //Danh sách dòng sản phẩm
+        public IList<Serie> Series { get; set; } = new List<Serie>();
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Mappings
+namespace Infrastructure.Mapping
 {
     public class BranchMap : IEntityTypeConfiguration<Branch>
     {
@@ -17,6 +17,8 @@ namespace Infrastructure.Mappings
 
             builder.Property(b => b.UrlSlug)
                 .IsRequired();
+
+            builder.Property(b => b.ImageUrl);
         }
     }
 }

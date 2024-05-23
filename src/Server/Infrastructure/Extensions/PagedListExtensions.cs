@@ -7,20 +7,20 @@ namespace Infrastructure.Extensions
 {
     public static class PagedListExtensions
     {
-        public static string GetOrderExpression(
-            this IPagingParams pagingParams,
-            string defaultColumn = "Id")
-        {
-            var column = string.IsNullOrWhiteSpace(pagingParams.SortColumn)
-                ? defaultColumn
-                : pagingParams.SortColumn;
+        //public static string GetOrderExpression(
+        //    this IPagingParams pagingParams,
+        //    string defaultColumn = "Id")
+        //{
+        //    var column = string.IsNullOrWhiteSpace(pagingParams.SortColumn)
+        //        ? defaultColumn
+        //        : pagingParams.SortColumn;
 
-            var order = "ASC".Equals(
-                pagingParams.SortOrder, StringComparison.OrdinalIgnoreCase)
-                ? pagingParams.SortOrder : "DESC";
+        //    var order = "ASC".Equals(
+        //        pagingParams.SortOrder, StringComparison.OrdinalIgnoreCase)
+        //        ? pagingParams.SortOrder : "DESC";
 
-            return $"{column} {order}";
-        }
+        //    return $"{column} {order}";
+        //}
 
         public static async Task<IPagedList<T>> ToPagedListAsync<T>(
             this IQueryable<T> source,
@@ -29,7 +29,7 @@ namespace Infrastructure.Extensions
         {
             var totalCount = await source.CountAsync(cancellationToken);
             var items = await source
-                .OrderBy(pagingParams.GetOrderExpression())
+                //.OrderBy(pagingParams.GetOrderExpression())
                 .Skip((pagingParams.PageNumber - 1) * pagingParams.PageSize)
                 .Take(pagingParams.PageSize)
                 .ToListAsync(cancellationToken);

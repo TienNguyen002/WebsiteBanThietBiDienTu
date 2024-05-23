@@ -11,10 +11,10 @@ namespace Domain.Entities
         //Đường dẫn tập tin hình ảnh
         public string ImageUrl { get; set; } = null!;
 
-        //Mã sản phẩm
-        public int ProductId { get; set; }
+        //Mã dòng sản phẩm
+        public int SerieId { get; set; }
 
-        //Sản phẩm
-        public Product? Product { get; set; }
+        //Dòng sản phẩm
+        public Serie? Serie { get; set; }
     }
 }

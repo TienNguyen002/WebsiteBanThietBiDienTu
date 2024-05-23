@@ -88,5 +88,16 @@ namespace Api.Controllers
             }
             return Ok(ApiResponse.Success(result)); ;
         }
+
+        [HttpGet("byCodeName/{codeName}")]
+        public async Task<ActionResult<DiscountDTO>> GetDiscountByCodeName(string codeName)
+        {
+            var discount = await _service.GetDiscountByCodeName(codeName);
+            if (discount == null)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(discount));
+        }
     }
 }

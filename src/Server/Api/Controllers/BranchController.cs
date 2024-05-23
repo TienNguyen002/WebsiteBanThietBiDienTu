@@ -2,6 +2,7 @@
 using Domain.DTO.Branch;
 using Domain.Interfaces.Services;
 using MapsterMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -29,7 +30,7 @@ namespace Api.Controllers
         public async Task<ActionResult<IList<BranchDTO>>> GetAllBranches()
         {
             var branches = await _service.GetAllBranches();
-            if(branches == null)
+            if (branches == null)
             {
                 return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
             }
@@ -103,6 +104,17 @@ namespace Api.Controllers
                 return BadRequest(ApiResponse.Fail(HttpStatusCode.BadRequest));
             }
             return Ok(ApiResponse.Success(result)); ;
+        }
+
+        [HttpGet("{limit}/{category}")]
+        public async Task<ActionResult<BranchProductDTO>> GetLimitBranchByCategory(int limit, string category)
+        {
+            var branches = await _service.GetLimitBranchByCategory(limit, category);
+            if (branches == null)
+            {
+                return NotFound(ApiResponse.Fail(HttpStatusCode.NotFound));
+            }
+            return Ok(ApiResponse.Success(branches));
         }
     }
 }

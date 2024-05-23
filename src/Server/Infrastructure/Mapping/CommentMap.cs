@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Infrastructure.Mappings
+namespace Infrastructure.Mapping
 {
     public class CommentMap : IEntityTypeConfiguration<Comment>
     {
@@ -13,19 +13,26 @@ namespace Infrastructure.Mappings
             builder.Property(c => c.Detail)
                 .IsRequired();
 
+            builder.Property(c => c.Rating)
+               .IsRequired()
+               .HasColumnType("float");
+
             builder.Property(c => c.CommentDate)
                 .HasColumnType("datetime");
 
-            builder.HasOne(c => c.User)
+            builder.Property(c => c.Status)
+                .HasDefaultValue(false);
+
+            builder.HasOne(c => c.ApplicationUser)
                 .WithMany(u => u.Comments)
-                .HasForeignKey(c => c.UserId)
+                .HasForeignKey(c => c.ApplicationUserId)
                 .HasConstraintName("FK_Comments_Users")
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(c => c.Product)
-                .WithMany(p => p.Comments)
-                .HasForeignKey(c => c.ProductId)
-                .HasConstraintName("FK_Comments_Products")
+            builder.HasOne(c => c.Serie)
+                .WithMany(s => s.Comments)
+                .HasForeignKey(c => c.SerieId)
+                .HasConstraintName("FK_Comments_Series")
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }
