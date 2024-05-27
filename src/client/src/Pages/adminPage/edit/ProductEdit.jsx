@@ -30,6 +30,9 @@ const ProductEdit = ({ id, serieId, onOk, setReloadData }) => {
 
   const [product, setProduct] = useState(initialState);
   const [colors, setColors] = useState([]);
+  const [selectedColors, setSelectedColors] = useState(
+    product.colors.map((color) => color.id)
+  );
   const editImageFrame =
     "https://t4.ftcdn.net/jpg/04/81/13/43/360_F_481134373_0W4kg2yKeBRHNEklk4F9UXtGHdub3tYk.jpg";
 
@@ -72,8 +75,8 @@ const ProductEdit = ({ id, serieId, onOk, setReloadData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let formData = new FormData(e.target);
-    product.colors.forEach((color) => {
-      formData.set("Colors", color.name);
+    product.colors.forEach((selectedColors) => {
+      formData.set("Colors", selectedColors.name);
     });
     editProduct(formData).then((data) => {
       if (data) {
@@ -92,10 +95,7 @@ const ProductEdit = ({ id, serieId, onOk, setReloadData }) => {
   };
 
   const handleChange = (selectedColors) => {
-    const selectedColorObjects = colors.filter((color) =>
-      selectedColors.includes(color.id)
-    );
-    setProduct({ ...product, colors: selectedColorObjects });
+    setSelectedColors(selectedColors);
   };
 
   const resetState = () => {
@@ -129,6 +129,18 @@ const ProductEdit = ({ id, serieId, onOk, setReloadData }) => {
     },
   };
 
+  const handleRemove = (removedTag) => {
+    const newSelectedColors = selectedColors.filter(
+      (colorId) => colorId !== removedTag
+    );
+    setSelectedColors(newSelectedColors);
+    setProduct({
+      ...product,
+      colors: product.colors.filter((color) => color.id !== removedTag),
+    });
+  };
+
+  console.log(product.colors);
   const imageUpload = async (editor) => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");
@@ -152,6 +164,16 @@ const ProductEdit = ({ id, serieId, onOk, setReloadData }) => {
       `<img src="${image.secure_url}" alt="${image.original_filename}" />`
     );
     editor.selection.insertNode(imgNode);
+  };
+
+  const handleInputKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const newColor = { id: Date.now(), name: e.target.value };
+      setColors([...colors, newColor]);
+      setProduct({ ...product, colors: [...product.colors, newColor] });
+      e.target.value = "";
+    }
   };
 
   return (
@@ -289,6 +311,11 @@ const ProductEdit = ({ id, serieId, onOk, setReloadData }) => {
               value={product.colors.map((color) => color.id)}
               onChange={handleChange}
               options={colorOptions}
+              onInputKeyDown={handleInputKeyDown}
+              filterOption={(input, option) =>
+                option.label.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+              onDeselect={handleRemove}
             />
           </div>
           <div className="edit-form-button">

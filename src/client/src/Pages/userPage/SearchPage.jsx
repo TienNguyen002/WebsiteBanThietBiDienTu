@@ -31,18 +31,18 @@ const SearchPage = () => {
   }, [query]);
 
   useEffect(() => {
-    if (queryChanged || payload.pageNumber || payload.sortOrder) {
+    if (queryChanged) {
       getPagedProduct(payload).then((data) => {
         if (data) {
           setProducts(data.items);
           setMetadata(data.metadata);
+          setQueryChanged(false);
         } else {
           setProducts([]);
           setMetadata(null);
         }
       });
     }
-    setQueryChanged(false);
   }, [payload]);
 
   const handlePageChange = (pageNumber) => {

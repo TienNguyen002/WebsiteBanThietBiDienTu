@@ -4,10 +4,8 @@ using Domain.DTO.User;
 using Domain.Entities;
 using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
-using Infrastructure.Repositories;
 using MapsterMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -184,7 +182,7 @@ namespace Application.Services
             if (!await _userManager.CheckPasswordAsync(user, model.OldPassword))
                 return new GeneralResponse(false, "Mật khẩu cũ không chính xác");
 
-            user.PasswordHash = model.Password;
+            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.Password);
 
             var result = await _userManager.UpdateAsync(user);
             if (!result.Succeeded)

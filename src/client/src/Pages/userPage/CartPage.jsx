@@ -68,7 +68,7 @@ const CartPage = () => {
     quantity: cart.totalAmount,
     totalPrice: cart.totalPrice,
     statusId: status,
-    userId: userInfo.id,
+    userId: user.id,
     paymentMethodId: userInfo.paymentMethod,
     discountId: userInfo.discountId,
     orderItems: cart.items.map((item) => ({

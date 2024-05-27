@@ -50,7 +50,7 @@ const Header = () => {
         } else setUserInfo(initialState);
       });
     }
-  }, []);
+  }, [user]);
 
   const handleLogout = () => {
     dispatch(logout());

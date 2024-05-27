@@ -9,7 +9,6 @@ using Domain.Interfaces.Repositories;
 using Domain.Interfaces.Services;
 using MapsterMapper;
 using SlugGenerator;
-using System.Collections.Generic;
 
 namespace Application.Services
 {
@@ -47,7 +46,7 @@ namespace Application.Services
             product.Name = model.Name;
             product.ShortName = model.ShortName;
             product.UrlSlug = model.Name.GenerateSlug();
-            if(model.ImageFile != null)
+            if (model.ImageFile != null)
             {
                 product.ImageUrl = await _cloundinaryService.UploadImageAsync(model.ImageFile.OpenReadStream(), model.ImageFile.FileName, QueryManagements.ProductFolder);
             }
@@ -56,7 +55,8 @@ namespace Application.Services
                 foreach (var color in model.Colors)
                 {
                     var dataColor = await _colorRepository.GetColorByName(color);
-                    if(dataColor == null) {
+                    if (dataColor == null)
+                    {
                         var newColor = new Color()
                         {
                             Name = color,
